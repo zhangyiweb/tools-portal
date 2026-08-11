@@ -33,7 +33,7 @@
       background: var(--bg0);
       color: var(--text);
       font-family: "Rajdhani", system-ui, sans-serif;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     body::before {
@@ -86,9 +86,83 @@
     .wrap {
       position: relative;
       z-index: 1;
-      width: min(1680px, calc(100% - 48px));
+      width: min(1980px, calc(100% - 24px));
       margin: 0 auto;
       padding: 36px 0 80px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 168px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 96px;
+      z-index: 50;
+      align-self: start;
+      padding: 16px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(12, 22, 38, 0.92);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      animation: rise 0.8s 0.05s ease both;
+      will-change: transform;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    }
+
+    .toc.is-stuck {
+      border-color: rgba(0, 229, 255, 0.35);
+      background: rgba(10, 20, 36, 0.96);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.5), 0 0 28px rgba(0, 229, 255, 0.1);
+    }
+
+    .toc-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--cyan);
+      margin-bottom: 12px;
+      padding: 0 6px;
+      flex: 0 0 auto;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow: visible;
+      padding-right: 0;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid transparent;
+      transition: color 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+    }
+
+    .toc-list a:hover {
+      color: var(--text);
+      background: rgba(0, 229, 255, 0.06);
+      border-color: rgba(0, 229, 255, 0.15);
+    }
+
+    .main-col {
+      min-width: 0;
     }
 
     /* —— Header —— */
@@ -254,8 +328,8 @@
     /* —— Grid —— */
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
     }
 
     .card {
@@ -272,6 +346,7 @@
       animation: rise 0.7s ease both;
       --i: 0;
       animation-delay: calc(0.1s + var(--i) * 0.06s);
+      scroll-margin-top: 24px;
     }
 
     .card::before {
@@ -298,6 +373,31 @@
     }
 
     .card:hover::before { opacity: 1; }
+
+    .card.flash {
+      animation: cardFlash 0.85s ease-in-out 3;
+      border-color: #ffb020;
+      background: linear-gradient(160deg, rgba(60, 40, 8, 0.95), rgba(20, 14, 6, 0.98));
+      box-shadow: 0 0 0 2px rgba(255, 176, 32, 0.9), 0 0 28px rgba(255, 176, 32, 0.55), 0 20px 50px rgba(0, 0, 0, 0.55);
+    }
+
+    .card.flash::before {
+      opacity: 1;
+      background: linear-gradient(135deg, rgba(255, 176, 32, 0.95), transparent 40%, rgba(255, 80, 40, 0.7));
+    }
+
+    @keyframes cardFlash {
+      0%, 100% {
+        border-color: #ffb020;
+        box-shadow: 0 0 0 2px rgba(255, 176, 32, 0.7), 0 0 18px rgba(255, 176, 32, 0.35), 0 16px 40px rgba(0, 0, 0, 0.45);
+        filter: brightness(1.05);
+      }
+      50% {
+        border-color: #ffd56a;
+        box-shadow: 0 0 0 3px #ffb020, 0 0 56px rgba(255, 176, 32, 0.85), 0 0 90px rgba(255, 120, 0, 0.45);
+        filter: brightness(1.22);
+      }
+    }
 
     .card-media {
       position: relative;
@@ -395,10 +495,47 @@
       flex: 1;
     }
 
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
     .card-title {
+      font-family: "Orbitron", sans-serif;
       font-size: 1.05rem;
       font-weight: 700;
       letter-spacing: 0.06em;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .tip-btn {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 176, 32, 0.45);
+      background: rgba(255, 176, 32, 0.12);
+      color: var(--amber);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .tip-btn:hover,
+    .tip-btn[aria-expanded="true"] {
+      background: rgba(255, 176, 32, 0.28);
+      border-color: var(--amber);
+      box-shadow: 0 0 16px rgba(255, 176, 32, 0.35);
+      transform: scale(1.06);
     }
 
     .card-desc {
@@ -407,30 +544,6 @@
       line-height: 1.45;
       font-weight: 500;
       flex: 1;
-    }
-
-    .card-start {
-      margin-top: 2px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px dashed rgba(0, 229, 255, 0.28);
-      background: rgba(0, 229, 255, 0.05);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.78rem;
-      line-height: 1.55;
-      color: #9edff0;
-      letter-spacing: 0.01em;
-    }
-
-    .card-start strong {
-      display: block;
-      margin-bottom: 4px;
-      font-family: "Rajdhani", sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--amber);
-      text-transform: uppercase;
     }
 
     .tags {
@@ -609,11 +722,31 @@
     }
 
     @media (max-width: 1400px) {
-      .grid { grid-template-columns: repeat(3, 1fr); }
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 1100px) {
+      .layout { grid-template-columns: 1fr; }
+      .toc {
+        position: sticky;
+        top: 72px;
+        z-index: 50;
+        transform: none !important;
+      }
+      .toc-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow: visible;
+        gap: 6px;
+      }
+      .toc-list a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+      }
     }
 
     @media (max-width: 1000px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 720px) {
@@ -704,6 +837,74 @@
       border-color: var(--line-strong);
       box-shadow: 0 0 16px rgba(0, 229, 255, 0.25);
     }
+
+    /* —— Start tip popover —— */
+    .tip-popover {
+      position: fixed;
+      z-index: 21000;
+      width: min(360px, calc(100vw - 24px));
+      padding: 14px 16px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 176, 32, 0.4);
+      background: rgba(10, 16, 28, 0.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 176, 32, 0.15);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+
+    .tip-popover.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .tip-popover-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .tip-popover-head strong {
+      font-family: "Rajdhani", sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .tip-popover-close {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    .tip-popover-close:hover { color: var(--text); }
+
+    .tip-popover-body {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #9edff0;
+      word-break: break-word;
+    }
+
+    .tip-popover-name {
+      margin-bottom: 8px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
   </style>
 </head>
 <body>
@@ -712,39 +913,48 @@
   <div class="scanline"></div>
 
   <div class="wrap">
-    <header class="hero">
-      <div class="brand-block">
-        <div class="eyebrow">LOCAL TOOLKIT // 0xDEV</div>
-        <h1 class="brand">工具门户</h1>
-        <p class="tagline">本地开发工具集合 · 预览说明与启动方式</p>
-      </div>
-      <div class="hud">
-        <div class="hud-chip" id="clockChip">--:--:--</div>
-        <div class="hud-chip"><span id="countChip">-- PROJECTS</span></div>
-      </div>
-    </header>
+    <div class="layout">
+      <aside class="toc" aria-label="项目目录">
+        <div class="toc-title">目录</div>
+        <ul class="toc-list" id="tocList"></ul>
+      </aside>
 
-    <div class="toolbar">
-      <div class="filters" id="filters">
-        <button class="filter-btn active" data-filter="all">全部</button>
-        <button class="filter-btn" data-filter="web">Web</button>
-        <button class="filter-btn" data-filter="electron">桌面</button>
-        <button class="filter-btn" data-filter="docs">文档</button>
-      </div>
-      <div class="search">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8aa0b8" stroke-width="2">
-          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
-        </svg>
-        <input id="searchInput" type="search" placeholder="搜索工具…" autocomplete="off" />
+      <div class="main-col">
+        <header class="hero">
+          <div class="brand-block">
+            <div class="eyebrow">LOCAL TOOLKIT // 0xDEV</div>
+            <h1 class="brand">工具门户</h1>
+            <p class="tagline">本地开发工具集合 · 预览说明与启动方式</p>
+          </div>
+          <div class="hud">
+            <div class="hud-chip" id="clockChip">--:--:--</div>
+            <div class="hud-chip"><span id="countChip">-- PROJECTS</span></div>
+          </div>
+        </header>
+
+        <div class="toolbar">
+          <div class="filters" id="filters">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="electron">桌面</button>
+            <button class="filter-btn" data-filter="docs">文档</button>
+          </div>
+          <div class="search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8aa0b8" stroke-width="2">
+              <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
+            </svg>
+            <input id="searchInput" type="search" placeholder="搜索工具…" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="grid" id="projectGrid"></div>
+
+        <footer>
+          <span>DEV ARSENAL · PORTAL v1.0</span>
+          <span>点击截图放大 · 名称旁 ? 查看启动方式</span>
+        </footer>
       </div>
     </div>
-
-    <div class="grid" id="projectGrid"></div>
-
-    <footer>
-      <span>DEV ARSENAL · PORTAL v1.0</span>
-      <span>点击截图放大 · 卡片内含启动提示</span>
-    </footer>
   </div>
 
   <div class="lightbox" id="lightbox" hidden>
@@ -753,6 +963,15 @@
       <img id="lightboxImg" alt="" />
       <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
+  </div>
+
+  <div class="tip-popover" id="tipPopover" role="dialog" aria-label="如何启动" hidden>
+    <div class="tip-popover-head">
+      <strong>如何启动</strong>
+      <button type="button" class="tip-popover-close" id="tipPopoverClose" aria-label="关闭">×</button>
+    </div>
+    <div class="tip-popover-name" id="tipPopoverName"></div>
+    <div class="tip-popover-body" id="tipPopoverBody"></div>
   </div>
 
   <script>
@@ -841,15 +1060,73 @@
     ];
 
     const grid = document.getElementById('projectGrid');
+    const tocList = document.getElementById('tocList');
     const filters = document.getElementById('filters');
     const searchInput = document.getElementById('searchInput');
+    const tipPopover = document.getElementById('tipPopover');
+    const tipPopoverName = document.getElementById('tipPopoverName');
+    const tipPopoverBody = document.getElementById('tipPopoverBody');
     let activeFilter = 'all';
     let renderedOnce = false;
+    let activeTipBtn = null;
 
     function catLabel(cat) {
       if (cat === 'electron') return { text: 'DESKTOP', cls: 'electron' };
       if (cat === 'docs') return { text: 'DOCS', cls: 'docs' };
       return { text: 'WEB', cls: 'web' };
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function closeTip() {
+      tipPopover.classList.remove('open');
+      tipPopover.hidden = true;
+      if (activeTipBtn) {
+        activeTipBtn.setAttribute('aria-expanded', 'false');
+        activeTipBtn = null;
+      }
+    }
+
+    function openTip(btn, project) {
+      if (activeTipBtn === btn && tipPopover.classList.contains('open')) {
+        closeTip();
+        return;
+      }
+      tipPopoverName.textContent = project.name;
+      tipPopoverBody.textContent = project.start;
+      tipPopover.hidden = false;
+
+      const rect = btn.getBoundingClientRect();
+      const width = Math.min(360, window.innerWidth - 24);
+      let left = rect.left;
+      let top = rect.bottom + 10;
+      if (left + width > window.innerWidth - 12) left = window.innerWidth - width - 12;
+      if (left < 12) left = 12;
+      if (top + 160 > window.innerHeight) top = Math.max(12, rect.top - 160);
+
+      tipPopover.style.width = width + 'px';
+      tipPopover.style.left = left + 'px';
+      tipPopover.style.top = top + 'px';
+
+      if (activeTipBtn) activeTipBtn.setAttribute('aria-expanded', 'false');
+      activeTipBtn = btn;
+      btn.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(() => tipPopover.classList.add('open'));
+    }
+
+    function renderToc(list) {
+      tocList.innerHTML = list
+        .map(
+          (p) =>
+            `<li><a href="#project-${p.id}" data-id="${p.id}">${escapeHtml(p.name)}</a></li>`
+        )
+        .join('');
     }
 
     function render() {
@@ -867,24 +1144,28 @@
 
       const animate = !renderedOnce;
       renderedOnce = true;
+      closeTip();
+      renderToc(list);
 
       grid.innerHTML = list
         .map((p, i) => {
           const cat = catLabel(p.category);
           return `
-          <article class="card" style="${animate ? `--i:${i}` : 'animation:none'}" data-id="${p.id}">
-            <div class="card-media" data-preview="${encodeURI(p.image)}" data-title="${p.name}" title="点击放大">
-              <img src="${encodeURI(p.image)}" alt="${p.name}" loading="lazy" decoding="async" />
+          <article class="card" style="${animate ? `--i:${i}` : 'animation:none'}" id="project-${p.id}" data-id="${p.id}">
+            <div class="card-media" data-preview="${encodeURI(p.image)}" data-title="${escapeHtml(p.name)}" title="点击放大">
+              <img src="${encodeURI(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" decoding="async" />
               <div class="shine"></div>
               <div class="badge-row">
                 <span class="badge ${cat.cls}">${cat.text}</span>
               </div>
             </div>
             <div class="card-body">
-              <h2 class="card-title">${p.name}</h2>
-              <p class="card-desc">${p.desc}</p>
-              <div class="card-start"><strong>如何启动</strong>${p.start}</div>
-              <div class="tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join('')}</div>
+              <div class="card-title-row">
+                <h2 class="card-title">${escapeHtml(p.name)}</h2>
+                <button type="button" class="tip-btn" data-tip-id="${p.id}" aria-label="如何启动" aria-expanded="false" title="如何启动">?</button>
+              </div>
+              <p class="card-desc">${escapeHtml(p.desc)}</p>
+              <div class="tags">${p.tags.map((t) => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
             </div>
           </article>`;
         })
@@ -900,6 +1181,32 @@
     });
 
     searchInput.addEventListener('input', render);
+
+    let flashTimer = null;
+    tocList.addEventListener('click', (e) => {
+      const link = e.target.closest('a[data-id]');
+      if (!link) return;
+      e.preventDefault();
+      const card = document.getElementById(`project-${link.dataset.id}`);
+      if (!card) return;
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      document.querySelectorAll('.card.flash').forEach((el) => {
+        el.classList.remove('flash');
+        el.style.animation = 'none';
+      });
+      if (flashTimer) clearTimeout(flashTimer);
+
+      requestAnimationFrame(() => {
+        card.style.animation = '';
+        card.classList.add('flash');
+        flashTimer = setTimeout(() => {
+          card.classList.remove('flash');
+          card.style.animation = 'none';
+          flashTimer = null;
+        }, 3000);
+      });
+    });
 
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -926,17 +1233,36 @@
     }
 
     grid.addEventListener('click', (e) => {
+      const tipBtn = e.target.closest('.tip-btn');
+      if (tipBtn) {
+        e.stopPropagation();
+        const project = PROJECTS.find((p) => p.id === tipBtn.dataset.tipId);
+        if (project) openTip(tipBtn, project);
+        return;
+      }
       const media = e.target.closest('.card-media');
       if (!media) return;
       openLightbox(media.dataset.preview, media.dataset.title);
     });
+
+    document.getElementById('tipPopoverClose').addEventListener('click', closeTip);
+    document.addEventListener('click', (e) => {
+      if (!tipPopover.classList.contains('open')) return;
+      if (e.target.closest('.tip-popover') || e.target.closest('.tip-btn')) return;
+      closeTip();
+    });
+    window.addEventListener('scroll', () => {
+      if (tipPopover.classList.contains('open')) closeTip();
+    }, { passive: true });
 
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox || e.target.id === 'lightboxClose') closeLightbox();
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+      if (e.key !== 'Escape') return;
+      if (tipPopover.classList.contains('open')) closeTip();
+      else if (lightbox.classList.contains('open')) closeLightbox();
     });
 
     function tickClock() {
@@ -1002,6 +1328,52 @@
     tickClock();
     setInterval(tickClock, 1000);
     document.getElementById('countChip').textContent = `${PROJECTS.length} PROJECTS`;
+
+    (function tocMotion() {
+      const toc = document.querySelector('.toc');
+      if (!toc) return;
+      let current = 0;
+      let target = 0;
+      let lastScroll = window.scrollY;
+      let running = false;
+
+      function canFloat() {
+        return window.matchMedia('(min-width: 1101px)').matches;
+      }
+
+      function animate() {
+        running = true;
+        current += (target - current) * 0.16;
+        target *= 0.88;
+        if (Math.abs(target) < 0.08) target = 0;
+        if (Math.abs(current) < 0.08 && target === 0) {
+          current = 0;
+          toc.style.transform = '';
+          running = false;
+          return;
+        }
+        toc.style.transform = `translate3d(0, ${current.toFixed(2)}px, 0)`;
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          const y = window.scrollY;
+          toc.classList.toggle('is-stuck', y > 80);
+          if (!canFloat()) {
+            toc.style.transform = '';
+            return;
+          }
+          const dy = y - lastScroll;
+          lastScroll = y;
+          target = Math.max(-32, Math.min(32, target + dy * 0.42));
+          if (!running) requestAnimationFrame(animate);
+        },
+        { passive: true }
+      );
+    })();
+
     render();
   </script>
 </body>
