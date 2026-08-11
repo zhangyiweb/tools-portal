@@ -97,10 +97,12 @@ npm run dev
 
 **用途：** 本地 glTF/GLB 处理与转换相关工具（按版本目录组织）。
 
-**如何启动：** 进入对应版本目录后执行：
+**如何启动：**
 
 ```bash
-node service.js
+cd gltf-transform/3.0/frontend
+npm install
+node server.js
 ```
 
 ### [Three.js 中文文档](./three.js_185_CN) · Docs
