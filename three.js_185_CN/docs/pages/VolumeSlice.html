@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>VolumeSlice - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">VolumeSlice</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类用于保存体数据的一个切片。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">VolumeSlice</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { VolumeSlice } from 'three/addons/misc/VolumeSlice.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="VolumeSlice" translate="no">new <a href="#VolumeSlice">VolumeSlice</a><span class="signature">( volume : <span class="param-type"><a href="Volume.html">Volume</a></span>, index : <span class="param-type">number</span>, axis : <span class="param-type">'x' | 'y' | 'z'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的体数据切片。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">volume</strong>
+									</td>
+									<td class="description last">
+										<p>关联的体数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>切片的索引。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">axis</strong>
+									</td>
+									<td class="description last">
+										<p>目前仅支持 <code>'x'</code>、<code>'y'</code> 或 <code>'z'</code>，后续可能改为法向量。</p>
+										<p>默认值为 <code>'z'</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-see">参见：</dt>
+							<dd class="tag-see">
+								<ul>
+									<li><a href="Volume.html">Volume</a></li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="axis" translate="no">.<a href="#axis">axis</a><span class="type-signature"> : 'x' | 'y' | 'z'</span> </h3>
+					<div class="description">
+						<p>法线轴。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="canvas" translate="no">.<a href="#canvas">canvas</a><span class="type-signature"> : HTMLCanvasElement</span> </h3>
+					<div class="description">
+						<p>用于纹理的最终 canvas。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="canvasBuffer" translate="no">.<a href="#canvasBuffer">canvasBuffer</a><span class="type-signature"> : HTMLCanvasElement</span> </h3>
+					<div class="description">
+						<p>用于绘制数据的中间 canvas。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="ctx" translate="no">.<a href="#ctx">ctx</a><span class="type-signature"> : CanvasRenderingContext2D</span> </h3>
+					<div class="description">
+						<p>canvas 的渲染上下文。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="ctxBuffer" translate="no">.<a href="#ctxBuffer">ctxBuffer</a><span class="type-signature"> : CanvasRenderingContext2D</span> </h3>
+					<div class="description">
+						<p>canvas 缓冲区的渲染上下文。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="geometryNeedsUpdate" translate="no">.<a href="#geometryNeedsUpdate">geometryNeedsUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设为 <code>true</code>，下次 repaint 时将触发 <code>updateGeometry()</code>。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iLength" translate="no">.<a href="#iLength">iLength</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>切片在原始坐标系中的宽度，对应缓冲区 canvas 的宽度。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="index" translate="no">.<a href="#index">index</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>切片的索引，若更改，将在下次 repaint 时自动调用 updateGeometry。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="jLength" translate="no">.<a href="#jLength">jLength</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>切片在原始坐标系中的高度，对应缓冲区 canvas 的高度。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mesh" translate="no">.<a href="#mesh">mesh</a><span class="type-signature"> : <a href="Mesh.html">Mesh</a></span> </h3>
+					<div class="description">
+						<p>可直接用于场景的网格。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sliceAccess" translate="no">.<a href="#sliceAccess">sliceAccess</a><span class="type-signature"> : function</span> </h3>
+					<div class="description">
+						<p>允许切片访问正确数据的函数。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-see">参见：</dt>
+							<dd class="tag-see">
+								<ul>
+									<li><a href="Volume.html#extractPerpendicularPlane">Volume#extractPerpendicularPlane</a></li>
+								</ul>
+							</dd>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="volume" translate="no">.<a href="#volume">volume</a><span class="type-signature"> : <a href="Volume.html">Volume</a></span> </h3>
+					<div class="description">
+						<p>关联的体数据。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="repaint" translate="no">.<a href="#repaint">repaint</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>刷新纹理；若 geometryNeedsUpdate 设为 <code>true</code>，则同时刷新几何体。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="updateGeometry" translate="no">.<a href="#updateGeometry">updateGeometry</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据 axis 和 index 刷新几何体。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-see">参见：</dt>
+							<dd class="tag-see">
+								<ul>
+									<li><a href="Volume.html#extractPerpendicularPlane">Volume#extractPerpendicularPlane</a></li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/misc/VolumeSlice.js" translate="no" target="_blank" rel="noopener">examples/jsm/misc/VolumeSlice.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

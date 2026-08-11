@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Rhino3dmLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">Rhino3dmLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载 Rhinoceros 3D 文件和对象的加载器。</p>
+<p>Rhinoceros 是一款 3D 建模软件，用于创建、编辑、分析、记录、渲染、
+动画化以及转换 NURBS 曲线、曲面、Brep、拉伸体、点云，
+以及多边形网格和 SubD 对象。<code>rhino3dm.js</code> 由开源几何库 <code>openNURBS</code> 编译为 WebAssembly。
+此加载器当前使用 <code>rhino3dm.js 8.4.0</code>。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new Rhino3dmLoader();
+loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@8.17.0/' );
+const object = await loader.loadAsync( 'models/3dm/Rhino_Logo.3dm' );
+scene.add( object );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">Rhino3dmLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { Rhino3dmLoader } from 'three/addons/loaders/3DMLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Rhino3dmLoader" translate="no">new <a href="#Rhino3dmLoader">Rhino3dmLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 Rhino 3DM 加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="debug" translate="no">.<a href="#debug">debug</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向浏览器控制台打印调试信息。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="decodeObjects" translate="no">.<a href="#decodeObjects">decodeObjects</a><span class="signature">( buffer : <span class="param-type">ArrayBuffer</span>, url : <span class="param-type">string</span> )</span><span class="type-signature"> : Promise.&lt;<a href="Object3D.html">Object3D</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用 Web Worker 解码 3DM 资源数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">buffer</strong>
+									</td>
+									<td class="description last">
+										<p>原始 3DM 资源数据 ArrayBuffer。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>资源 URL。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后以解码后的 3D 对象兑现的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放内部资源。不再需要此加载器时应调用本方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的 3DM 资源
+传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( data : <span class="param-type">ArrayBuffer</span>, onLoad : <span class="param-type">function</span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 3DM 数据，并将加载完成的 3DM 资源
+传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>原始 3DM 资源数据 ArrayBuffer。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setLibraryPath" translate="no">.<a href="#setLibraryPath">setLibraryPath</a><span class="signature">( path : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Rhino3dmLoader.html">Rhino3dmLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>包含 JS 和 WASM 库的文件夹路径。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的库路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setWorkerLimit" translate="no">.<a href="#setWorkerLimit">setWorkerLimit</a><span class="signature">( workerLimit : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Rhino3dmLoader.html">Rhino3dmLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置解码期间使用的 Web Worker 最大数量。
+若 Worker 在应用中还需承担其他任务，
+可适当降低此限制。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">workerLimit</strong>
+									</td>
+									<td class="description last">
+										<p>Worker 数量上限。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/3DMLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/3DMLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

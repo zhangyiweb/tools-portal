@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>StereoCompositePassNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="TempNode.html">TempNode</a> → <a href="PassNode.html">PassNode</a> → </p>
+	<h1 translate="no">StereoCompositePassNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一种特殊的（抽象）渲染通道节点，将场景渲染为立体图像。与 <a href="StereoPassNode.html">StereoPassNode</a> 不同，此节点将左右眼的图像合并为单张图像。红蓝立体（Anaglyph）或视差屏障（parallax barrier）等效果需要此节点。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">StereoCompositePassNode</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { StereoCompositePassNode } from 'three/addons/tsl/display/StereoCompositePassNode.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="StereoCompositePassNode" translate="no">new <a href="#StereoCompositePassNode">StereoCompositePassNode</a><span class="signature">( scene : <span class="param-type"><a href="Scene.html">Scene</a></span>, camera : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的立体合成通道节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scene</strong>
+									</td>
+									<td class="description last">
+										<p>要渲染的场景。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>用于渲染场景的相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isStereoCompositePassNode" translate="no">.<a href="#isStereoCompositePassNode">isStereoCompositePassNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stereo" translate="no">.<a href="#stereo">stereo</a><span class="type-signature"> : <a href="StereoCamera.html">StereoCamera</a></span> </h3>
+					<div class="description">
+						<p>用于渲染场景的内部立体相机。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放内部资源。当通道不再使用时，应调用此方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="PassNode.html#dispose">PassNode#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置通道的尺寸。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>通道的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>通道的高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="PassNode.html#setSize">PassNode#setSize</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateBefore" translate="no">.<a href="#updateBefore">updateBefore</a><span class="signature">( frame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法用于每帧渲染一次效果。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frame</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点帧。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="PassNode.html#updateBefore">PassNode#updateBefore</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateStereoCamera" translate="no">.<a href="#updateStereoCamera">updateStereoCamera</a><span class="signature">( coordinateSystem : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新内部立体相机。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">coordinateSystem</strong>
+									</td>
+									<td class="description last">
+										<p>当前的坐标系。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/tsl/display/StereoCompositePassNode.js" translate="no" target="_blank" rel="noopener">examples/jsm/tsl/display/StereoCompositePassNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

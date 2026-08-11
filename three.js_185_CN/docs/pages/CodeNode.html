@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>CodeNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → </p>
+	<h1 translate="no">CodeNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类表示原生代码片段。它是 <a href="FunctionNode.html">FunctionNode</a> 等模块的基类，
+用于使用原生着色器语言实现函数。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="CodeNode" translate="no">new <a href="#CodeNode">CodeNode</a><span class="signature">( code : <span class="param-type">string</span>, includes : <span class="param-type">Array.&lt;<a href="Node.html">Node</a>></span>, language : <span class="param-type">'js' | 'wgsl' | 'glsl'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的代码节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">code</strong>
+									</td>
+									<td class="description last">
+										<p>原生代码。</p>
+										<p>默认值为 <code>''</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">includes</strong>
+									</td>
+									<td class="description last">
+										<p>包含项数组。</p>
+										<p>默认值为 <code>[]</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">language</strong>
+									</td>
+									<td class="description last">
+										<p>所使用的语言。</p>
+										<p>默认值为 <code>''</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="code" translate="no">.<a href="#code">code</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>原生代码。</p>
+						<p>默认值为 <code>''</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="global" translate="no">.<a href="#global">global</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>此标志用于全局缓存。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#global">Node#global</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="includes" translate="no">.<a href="#includes">includes</a><span class="type-signature"> : Array.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>包含项数组</p>
+						<p>默认值为 <code>[]</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isCodeNode" translate="no">.<a href="#isCodeNode">isCodeNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="language" translate="no">.<a href="#language">language</a><span class="type-signature"> : 'js' | 'wgsl' | 'glsl'</span> </h3>
+					<div class="description">
+						<p>所使用的语言。</p>
+						<p>默认值为 <code>''</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="getIncludes" translate="no">.<a href="#getIncludes">getIncludes</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : Array.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回此代码节点的包含项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含项。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setIncludes" translate="no">.<a href="#setIncludes">setIncludes</a><span class="signature">( includes : <span class="param-type">Array.&lt;<a href="Node.html">Node</a>></span> )</span><span class="type-signature"> : <a href="CodeNode.html">CodeNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置此代码节点的包含项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">includes</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的包含项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/code/CodeNode.js" translate="no" target="_blank" rel="noopener">src/nodes/code/CodeNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

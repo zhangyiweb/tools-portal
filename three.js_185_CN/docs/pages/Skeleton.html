@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Skeleton - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Skeleton</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于表示 <code>three.js</code> 中骨骼结构的类。骨架
+由骨骼层级定义。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const bones = [];
+const shoulder = new THREE.Bone();
+const elbow = new THREE.Bone();
+const hand = new THREE.Bone();
+shoulder.add( elbow );
+elbow.add( hand );
+bones.push( shoulder , elbow, hand);
+shoulder.position.y = -5;
+elbow.position.y = 0;
+hand.position.y = 5;
+const armSkeleton = new THREE.Skeleton( bones );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Skeleton" translate="no">new <a href="#Skeleton">Skeleton</a><span class="signature">( bones : <span class="param-type">Array.&lt;<a href="Bone.html">Bone</a>></span>, boneInverses : <span class="param-type">Array.&lt;<a href="Matrix4.html">Matrix4</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的骨架。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">bones</strong>
+									</td>
+									<td class="description last">
+										<p>骨骼数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">boneInverses</strong>
+									</td>
+									<td class="description last">
+										<p>骨骼逆矩阵数组。
+若未提供，这些矩阵将通过 <a href="Skeleton.html#calculateInverses">Skeleton#calculateInverses</a> 自动计算。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="boneInverses" translate="no">.<a href="#boneInverses">boneInverses</a><span class="type-signature"> : Array.&lt;<a href="Matrix4.html">Matrix4</a>></span> </h3>
+					<div class="description">
+						<p>骨骼逆矩阵数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="boneMatrices" translate="no">.<a href="#boneMatrices">boneMatrices</a><span class="type-signature"> : Float32Array</span> </h3>
+					<div class="description">
+						<p>保存骨骼数据的数组缓冲区。
+作为 <a href="Skeleton.html#boneTexture">Skeleton#boneTexture</a> 的输入数据。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="boneTexture" translate="no">.<a href="#boneTexture">boneTexture</a><span class="type-signature"> : <a href="DataTexture.html">DataTexture</a></span> </h3>
+					<div class="description">
+						<p>保存骨骼数据的纹理，供
+顶点着色器使用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bones" translate="no">.<a href="#bones">bones</a><span class="type-signature"> : Array.&lt;<a href="Bone.html">Bone</a>></span> </h3>
+					<div class="description">
+						<p>定义骨架的骨骼数组。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="calculateInverses" translate="no">.<a href="#calculateInverses">calculateInverses</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算骨骼逆矩阵。此方法会重置 <a href="Skeleton.html#boneInverses">Skeleton#boneInverses</a>
+并用新的矩阵填充它。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="Skeleton.html">Skeleton</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个从此实例复制值的新骨架。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="computeBoneTexture" translate="no">.<a href="#computeBoneTexture">computeBoneTexture</a><span class="signature">()</span><span class="type-signature"> : <a href="Skeleton.html">Skeleton</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算用于将骨骼数据传递给顶点着色器的数据纹理。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放此实例分配的与 GPU 相关的资源。当应用中
+不再使用此实例时，应调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="fromJSON" translate="no">.<a href="#fromJSON">fromJSON</a><span class="signature">( json : <span class="param-type">Object</span>, bones : <span class="param-type">Object.&lt;string, <a href="Bone.html">Bone</a>></span> )</span><span class="type-signature"> : <a href="Skeleton.html">Skeleton</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的 JSON 和骨骼设置骨架。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">json</strong>
+									</td>
+									<td class="description last">
+										<p>序列化为 JSON 的骨架数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bones</strong>
+									</td>
+									<td class="description last">
+										<p>骨骼数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBoneByName" translate="no">.<a href="#getBoneByName">getBoneByName</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Bone.html">Bone</a> | undefined</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在骨架的骨骼数组中搜索，并返回第一个名称匹配的骨骼。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>骨骼名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 找到的骨骼。若未找到则返回 <code>undefined</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="init" translate="no">.<a href="#init">init</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>初始化骨架。此方法会由构造函数自动调用，
+但根据骨架的创建方式，有时可能需要手动调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="pose" translate="no">.<a href="#pose">pose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将骨架重置为基础姿势。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">()</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将骨架序列化为 JSON。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-see">参见：</dt>
+							<dd class="tag-see">
+								<ul>
+									<li><a href="ObjectLoader.html#parse">ObjectLoader#parse</a></li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示序列化骨架的 JSON 对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将骨架重置为基础姿势。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Skeleton.js" translate="no" target="_blank" rel="noopener">src/objects/Skeleton.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

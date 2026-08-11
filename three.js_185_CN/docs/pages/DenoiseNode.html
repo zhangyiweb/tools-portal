@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>DenoiseNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="TempNode.html">TempNode</a> → </p>
+	<h1 translate="no">DenoiseNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于对原始屏幕空间环境光遮蔽（AO）输出等数据进行降噪的后处理节点。
+降噪可以显著提升环境光遮蔽的质量，但也会给后处理管线带来相当大的
+额外开销。最好将其设为可选功能（例如通过图形设置控制）。</p>
+<p>参考：<a href="https://openaccess.thecvf.com/content/WACV2021/papers/Khademi_Self-Supervised_Poisson-Gaussian_Denoising_WACV_2021_paper.pdf" target="_blank" rel="noopener">https://openaccess.thecvf.com/content/WACV2021/papers/Khademi_Self-Supervised_Poisson-Gaussian_Denoising_WACV_2021_paper.pdf</a>。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">DenoiseNode</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { denoise } from 'three/addons/tsl/display/DenoiseNode.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="DenoiseNode" translate="no">new <a href="#DenoiseNode">DenoiseNode</a><span class="signature">( textureNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, depthNode : <span class="param-type"><a href="Node.html">Node</a>.&lt;float></span>, normalNode : <span class="param-type"><a href="Node.html">Node</a>.&lt;vec3></span>, camera : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的降噪节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">textureNode</strong>
+									</td>
+									<td class="description last">
+										<p>表示效果输入的纹理节点（例如 AO）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depthNode</strong>
+									</td>
+									<td class="description last">
+										<p>表示场景深度的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">normalNode</strong>
+									</td>
+									<td class="description last">
+										<p>表示场景法线的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>用于渲染场景的相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="depthNode" translate="no">.<a href="#depthNode">depthNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>表示场景深度的节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthPhi" translate="no">.<a href="#depthPhi">depthPhi</a><span class="type-signature"> : <a href="UniformNode.html">UniformNode</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>深度 Phi 值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="index" translate="no">.<a href="#index">index</a><span class="type-signature"> : <a href="UniformNode.html">UniformNode</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>索引。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lumaPhi" translate="no">.<a href="#lumaPhi">lumaPhi</a><span class="type-signature"> : <a href="UniformNode.html">UniformNode</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>亮度 Phi 值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="noiseNode" translate="no">.<a href="#noiseNode">noiseNode</a><span class="type-signature"> : <a href="TextureNode.html">TextureNode</a></span> </h3>
+					<div class="description">
+						<p>表示内部噪声纹理的节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalNode" translate="no">.<a href="#normalNode">normalNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>表示场景法线的节点。若未向构造函数传入法线（因为 MRT 不可用），
+可在着色器中从深度值自动重建法线。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalPhi" translate="no">.<a href="#normalPhi">normalPhi</a><span class="type-signature"> : <a href="UniformNode.html">UniformNode</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>法线 Phi 值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="radius" translate="no">.<a href="#radius">radius</a><span class="type-signature"> : <a href="UniformNode.html">UniformNode</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>半径。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="textureNode" translate="no">.<a href="#textureNode">textureNode</a><span class="type-signature"> : <a href="TextureNode.html">TextureNode</a></span> </h3>
+					<div class="description">
+						<p>表示效果输入的纹理节点（例如 AO）。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateBeforeType" translate="no">.<a href="#updateBeforeType">updateBeforeType</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p><code>updateBeforeType</code> 设置为 <code>NodeUpdateType.FRAME</code>，因为该节点在 <code>updateBefore()</code> 中每帧更新一次内部 uniform。</p>
+						<p>默认值为 <code>'frame'</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#updateBeforeType">TempNode#updateBeforeType</a></dt>
+						</dl>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setup" translate="no">.<a href="#setup">setup</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : ShaderCallNodeInternal</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用于设置效果的 TSL 代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#setup">TempNode#setup</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateBefore" translate="no">.<a href="#updateBefore">updateBefore</a><span class="signature">( frame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用于每帧更新一次内部 uniform。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frame</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点帧。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#updateBefore">TempNode#updateBefore</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/tsl/display/DenoiseNode.js" translate="no" target="_blank" rel="noopener">examples/jsm/tsl/display/DenoiseNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

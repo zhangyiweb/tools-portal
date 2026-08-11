@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TextGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="BufferGeometry.html">BufferGeometry</a> → <a href="ExtrudeGeometry.html">ExtrudeGeometry</a> → </p>
+	<h1 translate="no">TextGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于将文本生成为单一几何体的类。通过提供文本字符串以及一组参数（包括已加载的字体和拉伸设置）来构造。</p>
+<p>更多详情请参阅 <a href="FontLoader.html">FontLoader</a> 页面。</p>
+<p><code>TextGeometry</code> 使用 <a href="http://gero3.github.io/facetype.js/" target="_blank" rel="noopener">typeface.json</a> 生成的字体。部分现有字体位于 <code>/examples/fonts</code>。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new FontLoader();
+const font = await loader.loadAsync( 'fonts/helvetiker_regular.typeface.json' );
+const geometry = new TextGeometry( 'Hello three.js!', {
+	font: font,
+	size: 80,
+	depth: 5,
+	curveSegments: 12
+} );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TextGeometry</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TextGeometry" translate="no">new <a href="#TextGeometry">TextGeometry</a><span class="signature">( text : <span class="param-type">string</span>, parameters : <span class="param-type"><a href="TextGeometry.html#~Options">TextGeometry~Options</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的文本几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">text</strong>
+									</td>
+									<td class="description last">
+										<p>应转换为几何体的文本。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>文本设置。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Options" translate="no">.<a href="#~Options">Options</a> </h3>
+					<div class="description">
+						<p>表示该几何体构造函数的 <code>options</code> 类型。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>font</strong>
+						<br>
+<span class="param-type"><a href="Font.html">Font</a></span>
+				</td>
+			<td class="description last">
+				<p>字体。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>size</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>文字大小。</p>
+						<p>默认值为 <code>100</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>depth</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>拉伸形状的深度。</p>
+						<p>默认值为 <code>50</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>curveSegments</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>曲线上的点数。</p>
+						<p>默认值为 <code>12</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>steps</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>沿拉伸样条深度方向细分分段所用的点数。</p>
+						<p>默认值为 <code>1</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelEnabled</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否对形状进行斜角处理。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelThickness</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角切入原始形状的深度。</p>
+						<p>默认值为 <code>10</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelSize</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角从形状轮廓向外延伸的距离。</p>
+						<p>默认值为 <code>8</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelOffset</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角从形状轮廓开始的距离。</p>
+						<p>默认值为 <code>0</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelSegments</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角层数。</p>
+						<p>默认值为 <code>3</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>direction</strong>
+						<br>
+<span class="param-type">string</span>
+				</td>
+			<td class="description last">
+				<p>字符方向：ltr（从左到右）、rtl（从右到左）和 tb（从上到下）。</p>
+						<p>默认值为 <code>'ltr'</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>extrudePath</strong>
+						<br>
+<span class="param-type"><a href="Curve.html">Curve</a></span>
+				</td>
+			<td class="description last">
+				<p>形状应沿其拉伸的三维样条路径。路径拉伸不支持斜角。</p>
+						<p>默认值为 <code>null</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>UVGenerator</strong>
+						<br>
+<span class="param-type">Object</span>
+				</td>
+			<td class="description last">
+				<p>提供 UV 生成函数以进行自定义 UV 生成的对象。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/geometries/TextGeometry.js" translate="no" target="_blank" rel="noopener">examples/jsm/geometries/TextGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

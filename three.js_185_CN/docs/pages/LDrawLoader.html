@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LDrawLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">LDrawLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>LDraw 格式的加载器。</p>
+<p><a href="https://ldraw.org/" target="_blank" rel="noopener">LDraw</a>（LEGO Draw）是一种<a href="https://ldraw.org/article/218.html" target="_blank" rel="noopener">开放格式规范</a>，
+用于描述 LEGO 及其他积木类 3D 模型。</p>
+<p>LDraw 资源（通常是扩展名为 .ldr、.dat 或 .txt 的文本文件）可以仅描述单个积木零件，
+也可以描述整个模型。对于模型，LDraw 文件可以引用其他 LDraw 文件，这些文件会从通过
+<code>setPartsLibraryPath</code> 设置的库路径加载。通常需要下载 LDraw 官方零件库，
+解压到某个文件夹，并将 setPartsLibraryPath 指向该文件夹。</p>
+<p>库零件会在子文件夹 'parts'、'p' 和 'models' 中通过试错方式加载。这些文件访问方式
+对 Web 环境并不理想，因此提供了一个脚本工具，可将 LDraw 文件及其所有依赖项
+打包为单个文件，加载速度更快。参见「Packing LDraw models」章节。LDrawLoader 示例
+加载了多个打包文件。由于体积较大，官方零件库未包含在内。</p>
+<p><code>LDrawLoader</code> 支持以下扩展：</p>
+<ul>
+<li>!COLOUR：颜色和表面处理声明。</li>
+<li>BFC：背面剔除规范。</li>
+<li>!CATEGORY：模型/零件类别声明。</li>
+<li>!KEYWORDS：模型/零件关键词声明。</li>
+</ul></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new LDrawLoader();
+loader.setConditionalLineMaterial( LDrawConditionalLineMaterial ); // the type of line material depends on the used renderer
+const object = await loader.loadAsync( 'models/ldraw/officialLibrary/models/car.ldr_Packed.mpd' );
+scene.add( object );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">LDrawLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { LDrawLoader } from 'three/addons/loaders/LDrawLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LDrawLoader" translate="no">new <a href="#LDrawLoader">LDrawLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 LDraw 加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addDefaultMaterials" translate="no">.<a href="#addDefaultMaterials">addDefaultMaterials</a><span class="signature">()</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用默认材质初始化加载器。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addMaterial" translate="no">.<a href="#addMaterial">addMaterial</a><span class="signature">( material : <span class="param-type"><a href="Material.html">Material</a></span> )</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向加载器的材质库添加单个材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addMaterials" translate="no">.<a href="#addMaterials">addMaterials</a><span class="signature">( materials : <span class="param-type">Array.&lt;<a href="Material.html">Material</a>></span> )</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向加载器的材质库添加材质列表。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">materials</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clearMaterials" translate="no">.<a href="#clearMaterials">clearMaterials</a><span class="signature">()</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>清空加载器的材质库。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMainEdgeMaterial" translate="no">.<a href="#getMainEdgeMaterial">getMainEdgeMaterial</a><span class="signature">()</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 LDraw 主边缘颜色的材质。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 材质。如果未找到材质则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMainMaterial" translate="no">.<a href="#getMainMaterial">getMainMaterial</a><span class="signature">()</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 LDraw 主颜色的材质。</p>
+<p>对于已加载的 LDraw 资源，返回与主颜色代码关联的材质。
+此方法可用于修改暴露主材质的模型或零件。</p>
+<p>主颜色代码是为 LDraw 零件着色的标准方式。三角形为 '16'，
+边缘为 '24'。通常完整模型不会暴露主颜色（即顶层没有零件
+使用代码 '16'，因为它们会被分配其他特定颜色）。而 LDraw
+零件文件则会暴露代码 '16' 以供着色，并可能包含其他固定颜色。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 材质。如果未找到材质则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMaterial" translate="no">.<a href="#getMaterial">getMaterial</a><span class="signature">( colorCode : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定颜色代码对应的材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorCode</strong>
+									</td>
+									<td class="description last">
+										<p>颜色代码。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 材质。如果未找到材质则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载的 LDraw 资源
+传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( text : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 LDraw 数据并返回生成的组。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">text</strong>
+									</td>
+									<td class="description last">
+										<p>作为字符串的原始 VRML 数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载/解析完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="preloadMaterials" translate="no">.<a href="#preloadMaterials">preloadMaterials</a><span class="signature">( url : <span class="param-type">string</span> )</span><span class="type-signature"> : Promise</span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>此异步方法从单个 LDraw 文件预加载材质。在官方
+零件库中有一个特殊文件会始终首先加载（LDConfig.ldr），
+其中包含所有标准颜色代码。此方法适用于未打包的文件，
+例如在编辑器中预加载材质并按需加载零件的场景。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>LDraw 材质资源的路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 预加载完成时 resolve 的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setConditionalLineMaterial" translate="no">.<a href="#setConditionalLineMaterial">setConditionalLineMaterial</a><span class="signature">( type : <span class="param-type">LDrawConditionalLineMaterial.constructor | LDrawConditionalLineNodeMaterial.constructor</span> )</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置条件线材质类型，其取决于所使用的渲染器。
+使用 <code>WebGLRenderer</code> 时请使用 <a href="LDrawConditionalLineMaterial.html">LDrawConditionalLineMaterial</a>，
+使用 <code>WebGPURenderer</code> 时请使用 LDrawConditionalLineNodeMaterial。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>条件线材质类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFileMap" translate="no">.<a href="#setFileMap">setFileMap</a><span class="signature">( fileMap : <span class="param-type">Object.&lt;string, string></span> )</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置将引用的库文件名映射到新文件名的映射表。
+如果未指定 fileMap（默认情况），库零件会在子文件夹
+'parts'、'p' 和 'models' 中通过试错方式访问。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">fileMap</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的文件映射。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setMaterials" translate="no">.<a href="#setMaterials">setMaterials</a><span class="signature">( materials : <span class="param-type">Array.&lt;<a href="Material.html">Material</a>></span> )</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置加载器的材质库。此方法会清除现有的
+材质定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">materials</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setPartsLibraryPath" translate="no">.<a href="#setPartsLibraryPath">setPartsLibraryPath</a><span class="signature">( path : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="LDrawLoader.html">LDrawLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>除非要加载的模型不引用库零件（通常是将所有零件
+打包在单个文件中的模型），否则必须在调用 <code>load()</code> 之前调用此方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>用于加载引用零件的库零件文件路径。
+这与 Loader.setPath 不同，后者表示加载主资源的路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/LDrawLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/LDrawLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ExtrudeGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="BufferGeometry.html">BufferGeometry</a> → </p>
+	<h1 translate="no">ExtrudeGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>根据路径形状创建拉伸几何体。</p></div>
+				<iframe id="viewer" src="../scenes/geometry-browser.html#ExtrudeGeometry"></iframe>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const length = 12, width = 8;
+const shape = new THREE.Shape();
+shape.moveTo( 0,0 );
+shape.lineTo( 0, width );
+shape.lineTo( length, width );
+shape.lineTo( length, 0 );
+shape.lineTo( 0, 0 );
+const geometry = new THREE.ExtrudeGeometry( shape );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const mesh = new THREE.Mesh( geometry, material ) ;
+scene.add( mesh );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ExtrudeGeometry" translate="no">new <a href="#ExtrudeGeometry">ExtrudeGeometry</a><span class="signature">( shapes : <span class="param-type"><a href="Shape.html">Shape</a> | Array.&lt;<a href="Shape.html">Shape</a>></span>, options : <span class="param-type"><a href="ExtrudeGeometry.html#~Options">ExtrudeGeometry~Options</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的拉伸几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shapes</strong>
+									</td>
+									<td class="description last">
+										<p>一个形状或形状数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>拉伸设置。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="parameters" translate="no">.<a href="#parameters">parameters</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>保存用于生成该几何体的构造函数参数。实例化后的任何修改都不会改变几何体。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".fromJSON" translate="no">.<a href="#.fromJSON">fromJSON</a><span class="signature">( data : <span class="param-type">Object</span>, shapes : <span class="param-type">Array.&lt;<a href="Shape.html">Shape</a>></span> )</span><span class="type-signature"> : <a href="ExtrudeGeometry.html">ExtrudeGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>工厂方法，根据给定的 JSON 对象创建该类的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>表示已序列化几何体的 JSON 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shapes</strong>
+									</td>
+									<td class="description last">
+										<p>形状数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新实例。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Options" translate="no">.<a href="#~Options">Options</a> </h3>
+					<div class="description">
+						<p>表示该几何体构造函数的 <code>options</code> 类型。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>curveSegments</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>曲线上的点数。</p>
+						<p>默认值为 <code>12</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>steps</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>沿拉伸样条深度方向细分分段所用的点数。</p>
+						<p>默认值为 <code>1</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>depth</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>拉伸形状的深度。</p>
+						<p>默认值为 <code>1</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelEnabled</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否对形状进行斜角处理。</p>
+						<p>默认值为 <code>true</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelThickness</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角切入原始形状的深度。</p>
+						<p>默认值为 <code>0.2</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelSize</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角从形状轮廓向外延伸的距离。</p>
+						<p>默认值为 <code>bevelThickness-0.1</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelOffset</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角从形状轮廓开始的距离。</p>
+						<p>默认值为 <code>0</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bevelSegments</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>斜角层数。</p>
+						<p>默认值为 <code>3</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>extrudePath</strong>
+						<br>
+<span class="param-type"><a href="Curve.html">Curve</a></span>
+				</td>
+			<td class="description last">
+				<p>形状应沿其拉伸的三维样条路径。路径拉伸不支持斜角。</p>
+						<p>默认值为 <code>null</code>.</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>UVGenerator</strong>
+						<br>
+<span class="param-type">Object</span>
+				</td>
+			<td class="description last">
+				<p>提供 UV 生成函数以进行自定义 UV 生成的对象。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/ExtrudeGeometry.js" translate="no" target="_blank" rel="noopener">src/geometries/ExtrudeGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

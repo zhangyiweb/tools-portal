@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ColorUtils - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">ColorUtils</h1>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ColorUtils</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import * as ColorUtils from 'three/addons/utils/ColorUtils.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="~setKelvin" translate="no">.<a href="#~setKelvin">setKelvin</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span>, kelvin : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>根据开尔文色温设置给定颜色。</p>
+<p>使用 Tanner Helland 的算法将相关色温（CTT）转换为近似的 sRGB 颜色。
+适用于基于物理的光照设置 — 例如蜡烛火焰（约 1900K）、钨丝灯泡（约 3200K）、日光
+（约 6500K）或晴朗蓝天（约 10000K）。超出 [1000, 40000] 范围的值会被钳制。</p>
+<p>参考：https://tannerhelland.com/2012/09/18/convert-temperature-rgb-algorithm-code.html</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">kelvin</strong>
+									</td>
+									<td class="description last">
+										<p>开尔文色温。[1000, 40000] 范围内会被钳制。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 更新后的颜色。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/ColorUtils.js" translate="no" target="_blank" rel="noopener">examples/jsm/utils/ColorUtils.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

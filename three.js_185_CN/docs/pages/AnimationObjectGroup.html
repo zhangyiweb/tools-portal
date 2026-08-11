@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>AnimationObjectGroup - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">AnimationObjectGroup</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>共享同一动画状态的一组对象。</p>
+<p>用法：</p>
+<ul>
+<li>将原本作为 'root' 传给 AnimationMixer 构造函数或 .clipAction 方法的对象添加进来。</li>
+<li>改为将此对象作为 'root' 传入。</li>
+<li>混合器运行期间也可以后续添加和移除对象。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>对此混合器而言，该类的对象表现为单个对象，因此各对象的缓存控制必须在组级别进行。</li>
+</ul>
+<p>限制：</p>
+<ul>
+<li>组内所有对象的动画属性必须兼容。</li>
+<li>单个属性只能通过目标组或直接控制，不能同时使用两种方式。</li>
+</ul></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="AnimationObjectGroup" translate="no">new <a href="#AnimationObjectGroup">AnimationObjectGroup</a><span class="signature">( &hellip;arguments : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的动画组。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">arguments</strong>
+									</td>
+									<td class="description last">
+										<p>共享同一动画状态的任意数量 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isAnimationObjectGroup" translate="no">.<a href="#isAnimationObjectGroup">isAnimationObjectGroup</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uuid" translate="no">.<a href="#uuid">uuid</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>3D 对象的 UUID。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="add" translate="no">.<a href="#add">add</a><span class="signature">( &hellip;arguments : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向该动画组添加任意数量的对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">arguments</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="remove" translate="no">.<a href="#remove">remove</a><span class="signature">( &hellip;arguments : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从该动画组移除任意数量的对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">arguments</strong>
+									</td>
+									<td class="description last">
+										<p>要移除的 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="uncache" translate="no">.<a href="#uncache">uncache</a><span class="signature">( &hellip;arguments : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放该动画组中传入 3D 对象占用的所有内存资源。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">arguments</strong>
+									</td>
+									<td class="description last">
+										<p>要清除缓存的 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationObjectGroup.js" translate="no" target="_blank" rel="noopener">src/animation/AnimationObjectGroup.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

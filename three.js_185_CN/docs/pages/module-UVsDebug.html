@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>UVsDebug - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">UVsDebug</h1>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">UVsDebug</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { UVsDebug } from 'three/addons/utils/UVsDebug.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="~UVsDebug" translate="no">.<a href="#~UVsDebug">UVsDebug</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, size : <span class="param-type">number</span> )</span><span class="type-signature"> : HTMLCanvasElement</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>用于「展开」和调试 three.js 几何体 UV 映射的函数。</p>
+<pre><code class="language-js">document.body.appendChild( UVsDebug( new THREE.SphereGeometry() ) );
+</code></pre>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>需要检查 uv 坐标的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">size</strong>
+									</td>
+									<td class="description last">
+										<p>调试画布的尺寸。</p>
+										<p>默认值为 <code>1024</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 带有可视化 uv 坐标的 canvas 元素。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/UVsDebug.js" translate="no" target="_blank" rel="noopener">examples/jsm/utils/UVsDebug.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

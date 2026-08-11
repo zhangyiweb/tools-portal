@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SubgroupFunctionNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="TempNode.html">TempNode</a> → </p>
+	<h1 translate="no">SubgroupFunctionNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类表示一组内置的 WGSL 着色器函数，可在工作组内
+的计算或片元着色器调用的子组（subgroup，或称 'warp'）中
+同步执行操作。通常，这些函数会使用子组内所有活动调用的数据
+同步执行操作，然后将结果广播给所有活动调用。在其他图形 API 中，
+子组函数也称为 wave 内建函数（DirectX/HLSL）或 warp 内建函数（CUDA）。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SubgroupFunctionNode" translate="no">new <a href="#SubgroupFunctionNode">SubgroupFunctionNode</a><span class="signature">( method : <span class="param-type">string</span>, aNode : <span class="param-type"><a href="Node.html">Node</a></span>, bNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的函数节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">method</strong>
+									</td>
+									<td class="description last">
+										<p>要构造的子组/wave 内建方法。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aNode</strong>
+									</td>
+									<td class="description last">
+										<p>该方法的第一个参数。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bNode</strong>
+									</td>
+									<td class="description last">
+										<p>该方法的第二个参数。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="aNode" translate="no">.<a href="#aNode">aNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>该方法的第一个参数。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bNode" translate="no">.<a href="#bNode">bNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>该方法的第二个参数。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="method" translate="no">.<a href="#method">method</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>要构造的子组/wave 内建方法。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/gpgpu/SubgroupFunctionNode.js" translate="no" target="_blank" rel="noopener">src/nodes/gpgpu/SubgroupFunctionNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>BypassNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → </p>
+	<h1 translate="no">BypassNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>该类会生成给定节点的代码，但在输出中返回另一个节点。
+可用于调用不返回值（即类型为 <code>void</code>）的方法或节点，
+而输入处又要求返回值的场景。例如：</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">material.colorNode = myColor.bypass( runVoidFn() )
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="BypassNode" translate="no">new <a href="#BypassNode">BypassNode</a><span class="signature">( outputNode : <span class="param-type"><a href="Node.html">Node</a></span>, callNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的旁路节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">outputNode</strong>
+									</td>
+									<td class="description last">
+										<p>输出节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">callNode</strong>
+									</td>
+									<td class="description last">
+										<p>调用节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="callNode" translate="no">.<a href="#callNode">callNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>调用节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isBypassNode" translate="no">.<a href="#isBypassNode">isBypassNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>该标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="outputNode" translate="no">.<a href="#outputNode">outputNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>输出节点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/core/BypassNode.js" translate="no" target="_blank" rel="noopener">src/nodes/core/BypassNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

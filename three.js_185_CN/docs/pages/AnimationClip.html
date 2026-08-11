@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>AnimationClip - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">AnimationClip</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一组可复用的关键帧轨道，用于表示一个动画。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="AnimationClip" translate="no">new <a href="#AnimationClip">AnimationClip</a><span class="signature">( name : <span class="param-type">string</span>, duration : <span class="param-type">number</span>, tracks : <span class="param-type">Array.&lt;<a href="KeyframeTrack.html">KeyframeTrack</a>></span>, blendMode : <span class="param-type"><a href="global.html#NormalAnimationBlendMode">NormalAnimationBlendMode</a> | <a href="global.html#AdditiveAnimationBlendMode">AdditiveAnimationBlendMode</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的动画片段。</p>
+<p>注意：除了直接使用构造函数实例化 AnimationClip 外，也可以使用该类的静态接口创建片段。不过在大多数情况下，导入带动画的 3D 资源时，加载器会自动创建动画片段。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>片段名称。</p>
+										<p>默认值为 <code>''</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>片段持续时间（秒）。若传入负值，
+将根据传入的关键帧自动计算持续时间。</p>
+										<p>默认值为 <code>-1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tracks</strong>
+									</td>
+									<td class="description last">
+										<p>关键帧轨道数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">blendMode</strong>
+									</td>
+									<td class="description last">
+										<p>定义当两个或多个动画同时播放时，
+动画如何混合/组合。</p>
+										<p>默认值为 <code>NormalAnimationBlendMode</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="blendMode" translate="no">.<a href="#blendMode">blendMode</a><span class="type-signature"> : <a href="global.html#NormalAnimationBlendMode">NormalAnimationBlendMode</a> | <a href="global.html#AdditiveAnimationBlendMode">AdditiveAnimationBlendMode</a></span> </h3>
+					<div class="description">
+						<p>定义当两个或多个动画同时播放时，动画如何混合/组合。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="duration" translate="no">.<a href="#duration">duration</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>片段持续时间（秒）。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="name" translate="no">.<a href="#name">name</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>片段名称。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="tracks" translate="no">.<a href="#tracks">tracks</a><span class="type-signature"> : Array.&lt;<a href="KeyframeTrack.html">KeyframeTrack</a>></span> </h3>
+					<div class="description">
+						<p>关键帧轨道数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="userData" translate="no">.<a href="#userData">userData</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>可用于存储动画片段自定义数据的对象。
+不应保存函数引用，因为函数不会被克隆。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uuid" translate="no">.<a href="#uuid">uuid</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>动画片段的 UUID。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个复制了当前实例值的新动画片段。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="optimize" translate="no">.<a href="#optimize">optimize</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过移除等效的连续关键帧（在变形目标序列中很常见）来优化每条轨道。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画片段的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="resetDuration" translate="no">.<a href="#resetDuration">resetDuration</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将该片段的持续时间设置为其最长关键帧轨道的持续时间。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画片段的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">()</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将该动画片段序列化为 JSON。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> JSON 对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="trim" translate="no">.<a href="#trim">trim</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将所有轨道裁剪到片段的持续时间范围内。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画片段的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="validate" translate="no">.<a href="#validate">validate</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>对片段中的每条轨道执行最小验证。若所有轨道均有效，则返回 <code>true</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 片段的关键帧是否有效。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".CreateClipsFromMorphTargetSequences" translate="no">.<a href="#.CreateClipsFromMorphTargetSequences">CreateClipsFromMorphTargetSequences</a><span class="signature">( morphTargets : <span class="param-type">Array.&lt;Object></span>, fps : <span class="param-type">number</span>, noLoop : <span class="param-type">boolean</span> )</span><span class="type-signature"> : Array.&lt;<a href="AnimationClip.html">AnimationClip</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从几何体的变形目标序列创建新的 AnimationClip 数组，尝试将变形目标名称按动画组模式排序，例如 "Walk_001, Walk_002, Run_001, Run_002..."。</p>
+<p>请参阅 <a href="MD2Loader.html#parse">MD2Loader#parse</a> 了解该方法的使用示例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">morphTargets</strong>
+									</td>
+									<td class="description last">
+										<p>变形目标序列。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">fps</strong>
+									</td>
+									<td class="description last">
+										<p>每秒帧数（FPS）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">noLoop</strong>
+									</td>
+									<td class="description last">
+										<p>片段是否不循环播放。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新动画片段数组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".CreateFromMorphTargetSequence" translate="no">.<a href="#.CreateFromMorphTargetSequence">CreateFromMorphTargetSequence</a><span class="signature">( name : <span class="param-type">string</span>, morphTargetSequence : <span class="param-type">Array.&lt;Object></span>, fps : <span class="param-type">number</span>, noLoop : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从几何体的变形目标数组创建新的动画片段，需指定名称和每秒帧数。</p>
+<p>注意：fps 参数是必需的，但可通过 <a href="AnimationAction.html#setDuration">AnimationAction#setDuration</a> 覆盖动画播放速度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>动画片段名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">morphTargetSequence</strong>
+									</td>
+									<td class="description last">
+										<p>变形目标序列。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">fps</strong>
+									</td>
+									<td class="description last">
+										<p>每秒帧数（FPS）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">noLoop</strong>
+									</td>
+									<td class="description last">
+										<p>片段是否不循环播放。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新的动画片段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".findByName" translate="no">.<a href="#.findByName">findByName</a><span class="signature">( objectOrClipArray : <span class="param-type">Array.&lt;<a href="AnimationClip.html">AnimationClip</a>> | <a href="Object3D.html">Object3D</a></span>, name : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>按名称搜索动画片段。第一个参数可以是片段数组，或包含名为 "animations" 属性的网格/几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">objectOrClipArray</strong>
+									</td>
+									<td class="description last">
+										<p>要搜索的数组或对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>要搜索的名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 找到的动画片段。若未找到则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".parse" translate="no">.<a href="#.parse">parse</a><span class="signature">( json : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定 JSON 创建动画片段的工厂方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">json</strong>
+									</td>
+									<td class="description last">
+										<p>序列化后的动画片段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新的动画片段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".toJSON" translate="no">.<a href="#.toJSON">toJSON</a><span class="signature">( clip : <span class="param-type"><a href="AnimationClip.html">AnimationClip</a></span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定动画片段序列化为 JSON。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">clip</strong>
+									</td>
+									<td class="description last">
+										<p>要序列化的动画片段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> JSON 对象。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationClip.js" translate="no" target="_blank" rel="noopener">src/animation/AnimationClip.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Points - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → </p>
+	<h1 translate="no">Points</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于显示点或点云的类。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Points" translate="no">new <a href="#Points">Points</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, material : <span class="param-type"><a href="Material.html">Material</a> | Array.&lt;<a href="Material.html">Material</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的点云。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>点几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>点材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="geometry" translate="no">.<a href="#geometry">geometry</a><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> </h3>
+					<div class="description">
+						<p>点几何体。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isPoints" translate="no">.<a href="#isPoints">isPoints</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>该标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="material" translate="no">.<a href="#material">material</a><span class="type-signature"> : <a href="Material.html">Material</a> | Array.&lt;<a href="Material.html">Material</a>></span> </h3>
+					<div class="description">
+						<p>点材质。</p>
+						<p>默认值为 <code>PointsMaterial</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="morphTargetDictionary" translate="no">.<a href="#morphTargetDictionary">morphTargetDictionary</a><span class="type-signature"> : Object.&lt;string, number> | undefined</span> </h3>
+					<div class="description">
+						<p>表示几何体中变形目标的字典。键为变形目标名称，
+值为其属性索引。该成员默认值为 <code>undefined</code>，
+仅在几何体中检测到变形目标时才会被设置。</p>
+						<p>默认值为 <code>undefined</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="morphTargetInfluences" translate="no">.<a href="#morphTargetInfluences">morphTargetInfluences</a><span class="type-signature"> : Array.&lt;number> | undefined</span> </h3>
+					<div class="description">
+						<p>权重数组，通常取值范围为 <code>[0,1]</code>，用于指定变形的应用程度。
+该成员默认值为 <code>undefined</code>，仅在几何体中检测到变形目标时才会被设置。</p>
+						<p>默认值为 <code>undefined</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="raycast" translate="no">.<a href="#raycast">raycast</a><span class="signature">( raycaster : <span class="param-type"><a href="Raycaster.html">Raycaster</a></span>, intersects : <span class="param-type">Array.&lt;Object></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算投射光线与该点云之间的交点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">raycaster</strong>
+									</td>
+									<td class="description last">
+										<p>光线投射器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">intersects</strong>
+									</td>
+									<td class="description last">
+										<p>用于保存交点的目标数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Object3D.html#raycast">Object3D#raycast</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateMorphTargets" translate="no">.<a href="#updateMorphTargets">updateMorphTargets</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置 <a href="Points.html#morphTargetDictionary">Points#morphTargetDictionary</a> 和 <a href="Points.html#morphTargetInfluences">Points#morphTargetInfluences</a>
+的值，以确保现有变形目标能够影响该 3D 对象。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/Points.js" translate="no" target="_blank" rel="noopener">src/objects/Points.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Timer - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Timer</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>该类是 <a href="Clock.html">Clock</a> 的替代方案，采用不同的 API 设计与行为。
+其目标是避免 <code>Clock</code> 随时间推移暴露出的概念性缺陷。</p>
+<ul>
+<li><code>Timer</code> 具有 <code>update()</code> 方法用于更新内部状态，因此可在每个模拟步骤中多次调用 <code>getDelta()</code> 和 <code>getElapsed()</code> 而不会得到不同值。</li>
+<li>该类可利用 Page Visibility API，在应用处于非活动状态（例如切换标签页或浏览器隐藏）时避免出现过大的时间增量。</li>
+</ul></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const timer = new Timer();
+timer.connect( document ); // use Page Visibility API
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Timer" translate="no">new <a href="#Timer">Timer</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的计时器。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="connect" translate="no">.<a href="#connect">connect</a><span class="signature">( document : <span class="param-type">Document</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将计时器连接到给定文档。调用此方法并非使用计时器的必要条件，但可启用 Page Visibility API 以避免出现过大的时间增量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">document</strong>
+									</td>
+									<td class="description last">
+										<p>文档对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="disconnect" translate="no">.<a href="#disconnect">disconnect</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将计时器与 DOM 断开连接，并禁用 Page Visibility API 的使用。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放所有内部资源。当不再需要计时器实例时通常应调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="getDelta" translate="no">.<a href="#getDelta">getDelta</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回时间增量（秒）。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 时间增量（秒）。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getElapsed" translate="no">.<a href="#getElapsed">getElapsed</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回经过的时间（秒）。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 经过的时间（秒）。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTimescale" translate="no">.<a href="#getTimescale">getTimescale</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回时间缩放因子。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 时间缩放因子。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="reset" translate="no">.<a href="#reset">reset</a><span class="signature">()</span><span class="type-signature"> : <a href="Timer.html">Timer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>重置当前模拟步骤的时间计算。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该计时器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setTimescale" translate="no">.<a href="#setTimescale">setTimescale</a><span class="signature">( timescale : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Timer.html">Timer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定的时间缩放因子，用于在 <code>update()</code> 中缩放时间增量计算。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">timescale</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的时间缩放因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该计时器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( timestamp : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Timer.html">Timer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新计时器的内部状态。每个模拟步骤应调用一次此方法，并在查询计时器（例如通过 <code>getDelta()</code>）之前调用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">timestamp</strong>
+									</td>
+									<td class="description last">
+										<p>当前时间（毫秒）。可从 <code>requestAnimationFrame</code> 回调参数获取。若未提供，将使用 <code>performance.now</code> 确定当前时间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该计时器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Timer.js" translate="no" target="_blank" rel="noopener">src/core/Timer.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

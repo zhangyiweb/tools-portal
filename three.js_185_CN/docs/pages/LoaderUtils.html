@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LoaderUtils - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">LoaderUtils</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>提供加载器工具函数的类。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LoaderUtils" translate="no">new <a href="#LoaderUtils">LoaderUtils</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".extractUrlBase" translate="no">.<a href="#.extractUrlBase">extractUrlBase</a><span class="signature">( url : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定 URL 中提取基础 URL。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要从中提取基础 URL 的 URL。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 提取出的基础 URL。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".resolveURL" translate="no">.<a href="#.resolveURL">resolveURL</a><span class="signature">( url : <span class="param-type">string</span>, path : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>相对于给定路径解析相对 URL。绝对路径、data URL
+和 blob URL 将原样返回。无效 URL 将返回空字符串。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要解析的 URL。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>相对 URL 要相对于其解析的基础路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的 URL。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/LoaderUtils.js" translate="no" target="_blank" rel="noopener">src/loaders/LoaderUtils.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

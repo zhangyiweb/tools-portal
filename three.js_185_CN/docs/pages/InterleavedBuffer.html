@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>InterleavedBuffer - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">InterleavedBuffer</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>「交错」（Interleaved）表示多个属性（可能类型不同，例如 position、normal、uv、color）被打包到单个 ArrayBuffer 中。</p>
+<p>关于交错数组的介绍可参阅：<a href="https://blog.tojicode.com/2011/05/interleaved-array-basics.html" target="_blank" rel="noopener">Interleaved array basics</a></p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="InterleavedBuffer" translate="no">new <a href="#InterleavedBuffer">InterleavedBuffer</a><span class="signature">( array : <span class="param-type">TypedArray</span>, stride : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的交错缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储属性数据的共享缓冲类型化数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">stride</strong>
+									</td>
+									<td class="description last">
+										<p>每个顶点的类型化数组元素数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="array" translate="no">.<a href="#array">array</a><span class="type-signature"> : TypedArray</span> </h3>
+					<div class="description">
+						<p>用于存储属性数据的共享缓冲类型化数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="count" translate="no">.<a href="#count">count</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>数组中的元素总数。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isInterleavedBuffer" translate="no">.<a href="#isInterleavedBuffer">isInterleavedBuffer</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="needsUpdate" translate="no">.<a href="#needsUpdate">needsUpdate</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>指示该属性已更改并应重新发送到 GPU 的标志。当你修改数组的值时，将此属性设置为 <code>true</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stride" translate="no">.<a href="#stride">stride</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>每个顶点的类型化数组元素数量。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateRanges" translate="no">.<a href="#updateRanges">updateRanges</a><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="description">
+						<p>可用于仅更新所存储向量的部分分量（例如，仅与颜色相关的分量）。使用 <code>addUpdateRange()</code> 函数向该数组添加更新范围。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="usage" translate="no">.<a href="#usage">usage</a><span class="type-signature"> : <a href="global.html#StaticDrawUsage">StaticDrawUsage</a> | <a href="global.html#DynamicDrawUsage">DynamicDrawUsage</a> | <a href="global.html#StreamDrawUsage">StreamDrawUsage</a> | <a href="global.html#StaticReadUsage">StaticReadUsage</a> | <a href="global.html#DynamicReadUsage">DynamicReadUsage</a> | <a href="global.html#StreamReadUsage">StreamReadUsage</a> | <a href="global.html#StaticCopyUsage">StaticCopyUsage</a> | <a href="global.html#DynamicCopyUsage">DynamicCopyUsage</a> | <a href="global.html#StreamCopyUsage">StreamCopyUsage</a></span> </h3>
+					<div class="description">
+						<p>定义数据存储的预期使用模式，以进行优化。</p>
+<p>注意：缓冲在首次使用后，其 usage 无法更改。应改为实例化一个新的缓冲，并在下次渲染前设置所需的 usage。</p>
+						<p>默认值为 <code>StaticDrawUsage</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uuid" translate="no">.<a href="#uuid">uuid</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>该交错缓冲的 UUID。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="version" translate="no">.<a href="#version">version</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>版本号，每次将 <code>needsUpdate</code> 设置为 <code>true</code> 时递增。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addUpdateRange" translate="no">.<a href="#addUpdateRange">addUpdateRange</a><span class="signature">( start : <span class="param-type">number</span>, count : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加数据数组中需要在 GPU 上更新的数据范围。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">start</strong>
+									</td>
+									<td class="description last">
+										<p>开始更新的位置。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的分量数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="clearUpdateRanges" translate="no">.<a href="#clearUpdateRanges">clearUpdateRanges</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>清除更新范围。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">( data : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="InterleavedBuffer.html">InterleavedBuffer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个从当前实例复制值的新交错缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>包含共享 ArrayBuffer 的对象，用于保留共享结构。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( source : <span class="param-type"><a href="InterleavedBuffer.html">InterleavedBuffer</a></span> )</span><span class="type-signature"> : <a href="InterleavedBuffer.html">InterleavedBuffer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定交错缓冲的值复制到当前实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的交错缓冲。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copyAt" translate="no">.<a href="#copyAt">copyAt</a><span class="signature">( index1 : <span class="param-type">number</span>, interleavedBuffer : <span class="param-type"><a href="InterleavedBuffer.html">InterleavedBuffer</a></span>, index2 : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="InterleavedBuffer.html">InterleavedBuffer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定交错缓冲复制一个向量到当前缓冲。属性缓冲中的起始位置和目标位置由给定索引表示。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index1</strong>
+									</td>
+									<td class="description last">
+										<p>当前交错缓冲中的目标索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">interleavedBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的源交错缓冲。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">index2</strong>
+									</td>
+									<td class="description last">
+										<p>给定交错缓冲中的源索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="onUpload" translate="no">.<a href="#onUpload">onUpload</a><span class="signature">( callback : <span class="param-type">function</span> )</span><span class="type-signature"> : <a href="InterleavedBuffer.html">InterleavedBuffer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定回调函数，该函数在 Renderer 将数组数据传输到 GPU 后执行。可在上传完成后、CPU 端不再需要数据时执行清理操作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">callback</strong>
+									</td>
+									<td class="description last">
+										<p><code>onUpload()</code> 回调。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="onUploadCallback" translate="no">.<a href="#onUploadCallback">onUploadCallback</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在渲染器将属性数组数据传输到 GPU 后执行的回调函数。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( value : <span class="param-type">TypedArray | Array</span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="InterleavedBuffer.html">InterleavedBuffer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在交错缓冲中设置给定数组数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的数组数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>当前交错缓冲数组中的偏移量。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setUsage" translate="no">.<a href="#setUsage">setUsage</a><span class="signature">( value : <span class="param-type"><a href="global.html#StaticDrawUsage">StaticDrawUsage</a> | <a href="global.html#DynamicDrawUsage">DynamicDrawUsage</a> | <a href="global.html#StreamDrawUsage">StreamDrawUsage</a> | <a href="global.html#StaticReadUsage">StaticReadUsage</a> | <a href="global.html#DynamicReadUsage">DynamicReadUsage</a> | <a href="global.html#StreamReadUsage">StreamReadUsage</a> | <a href="global.html#StaticCopyUsage">StaticCopyUsage</a> | <a href="global.html#DynamicCopyUsage">DynamicCopyUsage</a> | <a href="global.html#StreamCopyUsage">StreamCopyUsage</a></span> )</span><span class="type-signature"> : <a href="InterleavedBuffer.html">InterleavedBuffer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置当前交错缓冲的 usage。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 usage。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该交错缓冲的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">( data : <span class="param-type">Object</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将交错缓冲序列化为 JSON。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>可选值，用于保存有关序列化的元信息。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示已序列化交错缓冲的 JSON 对象。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBuffer.js" translate="no" target="_blank" rel="noopener">src/core/InterleavedBuffer.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

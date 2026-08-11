@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ForestGenerator - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">ForestGenerator</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>在 <a href="TerrainGenerator.html">TerrainGenerator</a>（或任何暴露 <code>sampleHeight</code>、
+<code>sampleSlope</code>、<code>minY</code>、<code>maxY</code> 和 <code>parameters.size</code> 的对象）上铺满一片森林，
+用单次绘制调用渲染数十万棵树。</p>
+<p>每棵树都是仍能辨认为树的最简形态：约 20 面的二十面体球被压成锥状泪滴，
+再叠一点噪声，并带有预烘焙的底部暗、顶部亮渐变。每棵仅数十个三角形，
+因此五十万棵树组成的单个 THREE.InstancedMesh 只需一次绘制调用。树木
+通过拒绝采样按生态规则放置——海拔上下限（雾层之上、雪线以下）、坡度限制（悬崖上不种）
+以及打开空地的低频密度遮罩——再在偏航、倾斜与（平方偏置的）缩放上抖动，
+使林分不会读起来像复制粘贴。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const forest = new ForestGenerator( { count: 500000 } );
+scene.add( forest.build( terrain ) );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ForestGenerator" translate="no">new <a href="#ForestGenerator">ForestGenerator</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/generators/ForestGenerator.js" translate="no" target="_blank" rel="noopener">examples/jsm/generators/ForestGenerator.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

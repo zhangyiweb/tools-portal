@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>EffectComposer - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">EffectComposer</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于在 three.js 中实现后期处理效果。
+该类管理一系列后期处理通道，以生成最终的视觉结果。
+后期处理通道按其添加/插入的顺序执行。
+最后一个通道会自动渲染到屏幕。</p>
+<p>此模块只能与 <a href="WebGLRenderer.html">WebGLRenderer</a> 一起使用。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const composer = new EffectComposer( renderer );
+// adding some passes
+const renderPass = new RenderPass( scene, camera );
+composer.addPass( renderPass );
+const glitchPass = new GlitchPass();
+composer.addPass( glitchPass );
+const outputPass = new OutputPass()
+composer.addPass( outputPass );
+function animate() {
+	composer.render(); // instead of renderer.render()
+}
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">EffectComposer</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="EffectComposer" translate="no">new <a href="#EffectComposer">EffectComposer</a><span class="signature">( renderer : <span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span>, renderTarget : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的效果合成器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderTarget</strong>
+									</td>
+									<td class="description last">
+										<p>此渲染目标及其克隆将用作内部的读取和写入缓冲区。
+若未提供，合成器会自动创建这些缓冲区。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="passes" translate="no">.<a href="#passes">passes</a><span class="type-signature"> : Array.&lt;<a href="Pass.html">Pass</a>></span> </h3>
+					<div class="description">
+						<p>表示（有序）后期处理通道链的数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="readBuffer" translate="no">.<a href="#readBuffer">readBuffer</a><span class="type-signature"> : <a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span> </h3>
+					<div class="description">
+						<p>内部读取缓冲区的引用。通道通常从此缓冲区读取上一通道的渲染结果。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderToScreen" translate="no">.<a href="#renderToScreen">renderToScreen</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>最终通道是否渲染到屏幕（默认帧缓冲）。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderer" translate="no">.<a href="#renderer">renderer</a><span class="type-signature"> : <a href="WebGLRenderer.html">WebGLRenderer</a></span> </h3>
+					<div class="description">
+						<p>渲染器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="writeBuffer" translate="no">.<a href="#writeBuffer">writeBuffer</a><span class="type-signature"> : <a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span> </h3>
+					<div class="description">
+						<p>内部写入缓冲区的引用。通道通常将其结果写入此缓冲区。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addPass" translate="no">.<a href="#addPass">addPass</a><span class="signature">( pass : <span class="param-type"><a href="Pass.html">Pass</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定通道添加到通道链中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">pass</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的通道。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放该实例分配的 GPU 相关资源。当应用中不再需要此合成器时，应调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="insertPass" translate="no">.<a href="#insertPass">insertPass</a><span class="signature">( pass : <span class="param-type"><a href="Pass.html">Pass</a></span>, index : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在给定索引处插入通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">pass</strong>
+									</td>
+									<td class="description last">
+										<p>要插入的通道。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>通道链中的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="isLastEnabledPass" translate="no">.<a href="#isLastEnabledPass">isLastEnabledPass</a><span class="signature">( passIndex : <span class="param-type">number</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若给定索引处的通道是通道链中最后一个启用的通道，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">passIndex</strong>
+									</td>
+									<td class="description last">
+										<p>通道索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定索引处的通道是否为通道链中的最后一个通道。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="removePass" translate="no">.<a href="#removePass">removePass</a><span class="signature">( pass : <span class="param-type"><a href="Pass.html">Pass</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从通道链中移除给定通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">pass</strong>
+									</td>
+									<td class="description last">
+										<p>要移除的通道。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="render" translate="no">.<a href="#render">render</a><span class="signature">( deltaTime : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>按顺序执行所有启用的后期处理通道，以生成最终帧。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">deltaTime</strong>
+									</td>
+									<td class="description last">
+										<p>时间增量（秒）。若未提供，合成器将自行计算时间增量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="reset" translate="no">.<a href="#reset">reset</a><span class="signature">( renderTarget : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>重置 EffectComposer 的内部状态。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderTarget</strong>
+									</td>
+									<td class="description last">
+										<p>此渲染目标的用途与构造函数中的相同。若已设置，则用于配置读取和写入缓冲区。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setPixelRatio" translate="no">.<a href="#setPixelRatio">setPixelRatio</a><span class="signature">( pixelRatio : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置设备像素比。通常用于 HiDPI 设备，以避免输出模糊。
+设置像素比会自动调整合成器的尺寸。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">pixelRatio</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的像素比。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>调整内部读取、写入缓冲区以及所有通道的尺寸。与 <a href="WebGLRenderer.html#setSize">WebGLRenderer#setSize</a> 类似，
+此方法会遵循当前的像素比。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>逻辑像素宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>逻辑像素高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="swapBuffers" translate="no">.<a href="#swapBuffers">swapBuffers</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>交换内部的读取/写入缓冲区。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/postprocessing/EffectComposer.js" translate="no" target="_blank" rel="noopener">examples/jsm/postprocessing/EffectComposer.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

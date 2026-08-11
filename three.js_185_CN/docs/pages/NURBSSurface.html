@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NURBSSurface - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">NURBSSurface</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类表示一个 NURBS 曲面。</p>
+<p>实现基于带权重 <code>w=weight</code> 的控制点 <code>(x, y [, z=0 [, w=1]])</code>。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">NURBSSurface</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { NURBSSurface } from 'three/addons/curves/NURBSSurface.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="NURBSSurface" translate="no">new <a href="#NURBSSurface">NURBSSurface</a><span class="signature">( degree1 : <span class="param-type">number</span>, degree2 : <span class="param-type">number</span>, knots1 : <span class="param-type">Array.&lt;number></span>, knots2 : <span class="param-type">Array.&lt;number></span>, controlPoints : <span class="param-type">Array.&lt;Array.&lt;(<a href="Vector2.html">Vector2</a>|<a href="Vector3.html">Vector3</a>|<a href="Vector4.html">Vector4</a>)>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 NURBS 曲面。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">degree1</strong>
+									</td>
+									<td class="description last">
+										<p>第一维 NURBS 阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">degree2</strong>
+									</td>
+									<td class="description last">
+										<p>第二维 NURBS 阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">knots1</strong>
+									</td>
+									<td class="description last">
+										<p>第一维节点，以数字平铺数组表示。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">knots2</strong>
+									</td>
+									<td class="description last">
+										<p>第二维节点，以数字平铺数组表示。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">controlPoints</strong>
+									</td>
+									<td class="description last">
+										<p>保存控制点的二维数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="controlPoints" translate="no">.<a href="#controlPoints">controlPoints</a><span class="type-signature"> : Array.&lt;Array.&lt;(<a href="Vector2.html">Vector2</a>|<a href="Vector3.html">Vector3</a>|<a href="Vector4.html">Vector4</a>)>></span> </h3>
+					<div class="description">
+						<p>保存控制点数组的数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="degree1" translate="no">.<a href="#degree1">degree1</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>第一维 NURBS 阶数。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="degree2" translate="no">.<a href="#degree2">degree2</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>第二维 NURBS 阶数。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="knots1" translate="no">.<a href="#knots1">knots1</a><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="description">
+						<p>第一维节点，以数字平铺数组表示。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="knots2" translate="no">.<a href="#knots2">knots2</a><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="description">
+						<p>第二维节点，以数字平铺数组表示。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="getPoint" translate="no">.<a href="#getPoint">getPoint</a><span class="signature">( t1 : <span class="param-type">number</span>, t2 : <span class="param-type">number</span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法根据给定的插值因子返回三维空间中的向量。该向量位于 NURBS 曲面上。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">t1</strong>
+									</td>
+									<td class="description last">
+										<p>表示曲面上 <code>u</code> 位置的第一插值因子，必须在 <code>[0,1]</code> 范围内。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">t2</strong>
+									</td>
+									<td class="description last">
+										<p>表示曲面上 <code>v</code> 位置的第二插值因子，必须在 <code>[0,1]</code> 范围内。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>结果写入的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/curves/NURBSSurface.js" translate="no" target="_blank" rel="noopener">examples/jsm/curves/NURBSSurface.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

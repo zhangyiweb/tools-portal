@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TileShadowNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="ShadowBaseNode.html">ShadowBaseNode</a> → </p>
+	<h1 translate="no">TileShadowNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>扩展 <code>ShadowBaseNode</code> 以实现瓦片化阴影贴图的类。
+它允许将阴影贴图拆分为多个瓦片，每个瓦片拥有独立的光源和相机，
+从而提升大型场景的阴影质量与性能。</p>
+<p>注意：此类目前不支持 <code>VSMShadowMap</code>。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TileShadowNode</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TileShadowNode } from 'three/addons/tsl/shadows/TileShadowNode.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TileShadowNode" translate="no">new <a href="#TileShadowNode">TileShadowNode</a><span class="signature">( light : <span class="param-type"><a href="Light.html">Light</a></span>, options : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>创建 <code>TileShadowNode</code> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">light</strong>
+									</td>
+									<td class="description last">
+										<p>用于阴影贴图的原始光源。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>瓦片化阴影节点的配置选项。</p>
+										<p>默认值为 <code>{}</code>。</p>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">tilesX</strong>
+									</td>
+									<td class="description last">
+										<p>X 轴方向的瓦片数量。</p>
+										<p>默认值为 <code>2</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tilesY</strong>
+									</td>
+									<td class="description last">
+										<p>Y 轴方向的瓦片数量。</p>
+										<p>默认值为 <code>2</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">resolution</strong>
+									</td>
+									<td class="description last">
+										<p>阴影贴图的分辨率。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">debug</strong>
+									</td>
+									<td class="description last">
+										<p>是否启用调试模式。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="disposeLightsAndNodes" translate="no">.<a href="#disposeLightsAndNodes">disposeLightsAndNodes</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>辅助方法，用于移除光源及关联的节点/目标。
+在 dispose 和可能的重新初始化过程中内部使用。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="generateTiles" translate="no">.<a href="#generateTiles">generateTiles</a><span class="signature">( tilesX : <span class="param-type">number</span>, tilesY : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据指定的 X、Y 轴瓦片数量生成阴影贴图的瓦片。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">tilesX</strong>
+									</td>
+									<td class="description last">
+										<p>X 轴方向的瓦片数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tilesY</strong>
+									</td>
+									<td class="description last">
+										<p>Y 轴方向的瓦片数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 瓦片对象数组，每个对象包含瓦片的边界与索引。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="init" translate="no">.<a href="#init">init</a><span class="signature">( builder : <span class="param-type">Builder</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>初始化瓦片化阴影节点，为每个瓦片创建光源、相机和阴影贴图。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>用于创建渲染目标及其他资源的构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setup" translate="no">.<a href="#setup">setup</a><span class="signature">( builder : <span class="param-type">Builder</span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置阴影节点以进行渲染。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>用于设置阴影节点的构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ShadowBaseNode.html#setup">ShadowBaseNode#setup</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示阴影值的节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="syncLightTransformation" translate="no">.<a href="#syncLightTransformation">syncLightTransformation</a><span class="signature">( lwLight : <span class="param-type">LwLight</span>, sourceLight : <span class="param-type"><a href="Light.html">Light</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将瓦片光源的变换与源光源同步。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">lwLight</strong>
+									</td>
+									<td class="description last">
+										<p>要同步的瓦片光源。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">sourceLight</strong>
+									</td>
+									<td class="description last">
+										<p>要复制变换的源光源。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新每个瓦片的光源变换与阴影相机。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ShadowBaseNode.html#update">ShadowBaseNode#update</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateBefore" translate="no">.<a href="#updateBefore">updateBefore</a><span class="signature">( frame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此实现在必要时更新阴影贴图。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frame</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点帧的引用。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ShadowBaseNode.html#updateBefore">ShadowBaseNode#updateBefore</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateLightDirection" translate="no">.<a href="#updateLightDirection">updateLightDirection</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据光源的目标位置更新初始光照方向。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="updateShadow" translate="no">.<a href="#updateShadow">updateShadow</a><span class="signature">( frame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新阴影贴图渲染。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frame</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点帧的引用。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/tsl/shadows/TileShadowNode.js" translate="no" target="_blank" rel="noopener">examples/jsm/tsl/shadows/TileShadowNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

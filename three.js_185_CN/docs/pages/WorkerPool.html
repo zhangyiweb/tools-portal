@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>WorkerPool - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">WorkerPool</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于管理 Web Worker 的简单池。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">WorkerPool</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { WorkerPool } from 'three/addons/utils/WorkerPool.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="WorkerPool" translate="no">new <a href="#WorkerPool">WorkerPool</a><span class="signature">( pool : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 Worker 池。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">pool</strong>
+									</td>
+									<td class="description last">
+										<p>池的大小。</p>
+										<p>默认值为 <code>4</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">类</h2>
+				<dl>
+					<dt><a href="WorkerPool.html">WorkerPool</a></dt>
+					<dd></dd>
+				</dl>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="pool" translate="no">.<a href="#pool">pool</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>池的大小。</p>
+						<p>默认值为 <code>4</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="queue" translate="no">.<a href="#queue">queue</a><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="description">
+						<p>消息队列。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="workerCreator" translate="no">.<a href="#workerCreator">workerCreator</a><span class="type-signature"> : function</span> </h3>
+					<div class="description">
+						<p>用于创建 Worker 的工厂函数。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="workerStatus" translate="no">.<a href="#workerStatus">workerStatus</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>当前 Worker 状态。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="workers" translate="no">.<a href="#workers">workers</a><span class="type-signature"> : Array.&lt;Worker></span> </h3>
+					<div class="description">
+						<p>Worker 数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="workersResolve" translate="no">.<a href="#workersResolve">workersResolve</a><span class="type-signature"> : Array.&lt;function()></span> </h3>
+					<div class="description">
+						<p>用于消息 resolve 函数的数组。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>终止此池中所有 Worker。当应用中不再使用此
+Worker 池时请调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="postMessage" translate="no">.<a href="#postMessage">postMessage</a><span class="signature">( msg : <span class="param-type">Object</span>, transfer : <span class="param-type">Array.&lt;ArrayBuffer></span> )</span><span class="type-signature"> : Promise</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向空闲 Worker 发送消息。如果没有可用的 Worker，
+消息会被推入消息队列以待后续处理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">msg</strong>
+									</td>
+									<td class="description last">
+										<p>消息。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">transfer</strong>
+									</td>
+									<td class="description last">
+										<p>用于数据传输的 ArrayBuffer 数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 消息处理完成后 resolve 的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setWorkerCreator" translate="no">.<a href="#setWorkerCreator">setWorkerCreator</a><span class="signature">( workerCreator : <span class="param-type">function</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置负责创建 Worker 的函数。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">workerCreator</strong>
+									</td>
+									<td class="description last">
+										<p>Worker 创建函数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setWorkerLimit" translate="no">.<a href="#setWorkerLimit">setWorkerLimit</a><span class="signature">( pool : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置 Worker 上限。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">pool</strong>
+									</td>
+									<td class="description last">
+										<p>池的大小。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/WorkerPool.js" translate="no" target="_blank" rel="noopener">examples/jsm/utils/WorkerPool.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

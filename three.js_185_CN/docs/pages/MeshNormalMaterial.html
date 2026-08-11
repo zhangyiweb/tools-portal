@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MeshNormalMaterial - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Material.html">Material</a> → </p>
+	<h1 translate="no">MeshNormalMaterial</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>将法线向量映射为 RGB 颜色的材质。</p></div>
+				<iframe id="viewer" src="../scenes/material-browser.html#MeshNormalMaterial"></iframe>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MeshNormalMaterial" translate="no">new <a href="#MeshNormalMaterial">MeshNormalMaterial</a><span class="signature">( parameters : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 mesh normal 材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>包含一个或多个定义材质外观属性的对象。材质的任何属性（包括继承材质的任何属性）都可在此传入。颜色值可以是 <a href="Color.html#set">Color#set</a> 接受的任意类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="bumpMap" translate="no">.<a href="#bumpMap">bumpMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>用于创建凹凸贴图的纹理。黑白值映射为相对于光照的感知深度。凹凸实际上不会改变物体的几何形状，只影响光照。若已定义法线贴图，则此贴图会被忽略。</p>
+<p><code>bumpMap</code> 表示非颜色数据。所赋纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bumpScale" translate="no">.<a href="#bumpScale">bumpScale</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>凹凸贴图对材质的影响程度。典型范围为 <code>[0,1]</code>。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="displacementBias" translate="no">.<a href="#displacementBias">displacementBias</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>位移贴图像素值在网格顶点上的偏移量。
+该偏置会加到经缩放的位移贴图采样值上。
+未设置位移贴图时，此值不会生效。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="displacementMap" translate="no">.<a href="#displacementMap">displacementMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>位移贴图会影响网格顶点的位置。与仅影响材质明暗的其他贴图不同，被位移的顶点可以投射阴影、遮挡其他物体，并在其他方面表现得像真实几何体。位移纹理是一幅图像，其中每个像素的值（白色最高）会映射并重新定位网格顶点。为获得最佳效果，请将位移贴图与匹配的法线贴图配对使用，因为渲染器无法根据位移后的顶点重新计算表面法线。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="displacementScale" translate="no">.<a href="#displacementScale">displacementScale</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>位移贴图对网格的影响程度（黑色表示无位移，白色表示最大位移）。未设置位移贴图时，此值不会生效。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="flatShading" translate="no">.<a href="#flatShading">flatShading</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>材质是否以平面着色方式渲染。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMeshNormalMaterial" translate="no">.<a href="#isMeshNormalMaterial">isMeshNormalMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalMap" translate="no">.<a href="#normalMap">normalMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>用于创建法线贴图的纹理。RGB 值会影响每个像素片段的表面法线，并改变颜色的受光方式。法线贴图不会改变表面的实际形状，只影响光照。若材质的法线贴图按左手坐标系编写，则应将 <code>normalScale</code> 的 <code>y</code> 分量取反，以补偿手性差异。</p>
+<p><code>normalMap</code> 表示非颜色数据。所赋纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalMapType" translate="no">.<a href="#normalMapType">normalMapType</a><span class="type-signature"> : <a href="global.html#TangentSpaceNormalMap">TangentSpaceNormalMap</a> | <a href="global.html#ObjectSpaceNormalMap">ObjectSpaceNormalMap</a></span> </h3>
+					<div class="description">
+						<p>法线贴图的类型。</p>
+						<p>默认值为 <code>TangentSpaceNormalMap</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalScale" translate="no">.<a href="#normalScale">normalScale</a><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="description">
+						<p>法线贴图对材质的影响程度。典型取值范围为 <code>[0,1]</code>。</p>
+						<p>默认值为 <code>(1,1)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wireframe" translate="no">.<a href="#wireframe">wireframe</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>将几何体渲染为线框。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wireframeLinewidth" translate="no">.<a href="#wireframeLinewidth">wireframeLinewidth</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>控制线框的粗细。</p>
+<p>WebGL 和 WebGPU 会忽略此属性，始终渲染
+1 像素宽的线条。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshNormalMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/MeshNormalMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

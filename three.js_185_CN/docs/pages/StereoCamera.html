@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>StereoCamera - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">StereoCamera</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一种特殊相机，使用两个带立体投影的透视相机。可用于渲染立体效果，例如 <a href="https://en.wikipedia.org/wiki/Anaglyph_3D" target="_blank" rel="noopener">3D 红蓝立体（Anaglyph）</a> 或 <a href="https://en.wikipedia.org/wiki/parallax_barrier" target="_blank" rel="noopener">视差屏障（Parallax Barrier）</a>。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="StereoCamera" translate="no">new <a href="#StereoCamera">StereoCamera</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的立体相机。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="aspect" translate="no">.<a href="#aspect">aspect</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>宽高比。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="cameraL" translate="no">.<a href="#cameraL">cameraL</a><span class="type-signature"> : <a href="PerspectiveCamera.html">PerspectiveCamera</a></span> </h3>
+					<div class="description">
+						<p>表示左眼的相机。该相机被添加到图层 <code>1</code>，因此需要由左相机渲染的物体也必须添加到该图层。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="cameraR" translate="no">.<a href="#cameraR">cameraR</a><span class="type-signature"> : <a href="PerspectiveCamera.html">PerspectiveCamera</a></span> </h3>
+					<div class="description">
+						<p>表示右眼的相机。该相机被添加到图层 <code>2</code>，因此需要由右相机渲染的物体也必须添加到该图层。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="eyeSep" translate="no">.<a href="#eyeSep">eyeSep</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>眼间距，表示左右相机之间的距离。</p>
+						<p>默认值为 <code>0.064</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="type" translate="no">.<a href="#type">type</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>type 属性用于在序列化/反序列化上下文中检测对象类型。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( camera : <span class="param-type"><a href="PerspectiveCamera.html">PerspectiveCamera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的透视相机更新立体相机。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>透视相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/cameras/StereoCamera.js" translate="no" target="_blank" rel="noopener">src/cameras/StereoCamera.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

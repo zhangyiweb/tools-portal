@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SSRPass - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Pass.html">Pass</a> → </p>
+	<h1 translate="no">SSRPass</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于实现基础 SSR 效果的通道。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const ssrPass = new SSRPass( {
+	renderer,
+	scene,
+	camera,
+	width: innerWidth,
+	height: innerHeight
+} );
+composer.addPass( ssrPass );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">SSRPass</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { SSRPass } from 'three/addons/postprocessing/SSRPass.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SSRPass" translate="no">new <a href="#SSRPass">SSRPass</a><span class="signature">( options : <span class="param-type"><a href="SSRPass.html#~Options">SSRPass~Options</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 SSR 通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>通道选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="blur" translate="no">.<a href="#blur">blur</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否对反射进行模糊。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bouncing" translate="no">.<a href="#bouncing">bouncing</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否启用弹跳反射。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="camera" translate="no">.<a href="#camera">camera</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>相机。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clear" translate="no">.<a href="#clear">clear</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>被重写为默认执行清除操作。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#clear">Pass#clear</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="distanceAttenuation" translate="no">.<a href="#distanceAttenuation">distanceAttenuation</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否使用距离衰减。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fresnel" translate="no">.<a href="#fresnel">fresnel</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否使用菲涅尔效果。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="groundReflector" translate="no">.<a href="#groundReflector">groundReflector</a><span class="type-signature"> : <a href="ReflectorForSSRPass.html">ReflectorForSSRPass</a></span> </h3>
+					<div class="description">
+						<p>地面反射器。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="height" translate="no">.<a href="#height">height</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>效果的高度。</p>
+						<p>默认值为 <code>512</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="infiniteThick" translate="no">.<a href="#infiniteThick">infiniteThick</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否使用无限厚度。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxDistance" translate="no">.<a href="#maxDistance">maxDistance</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>控制片元可反射的最远距离。</p>
+						<p>默认值为 <code>180</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="opacity" translate="no">.<a href="#opacity">opacity</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>不透明度。</p>
+						<p>默认值为 <code>0.5</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="output" translate="no">.<a href="#output">output</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>输出配置。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderer" translate="no">.<a href="#renderer">renderer</a><span class="type-signature"> : <a href="WebGLRenderer.html">WebGLRenderer</a></span> </h3>
+					<div class="description">
+						<p>渲染器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="resolutionScale" translate="no">.<a href="#resolutionScale">resolutionScale</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>分辨率缩放。有效值范围为
+<code>[0,1]</code>。<code>1</code> 表示最佳质量，但计算开销也更大。
+设为 <code>0.5</code> 表示以半分辨率计算效果。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scene" translate="no">.<a href="#scene">scene</a><span class="type-signature"> : <a href="Scene.html">Scene</a></span> </h3>
+					<div class="description">
+						<p>要渲染的场景。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="selective" translate="no">.<a href="#selective">selective</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>通道是否为选择性模式。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="selects" translate="no">.<a href="#selects">selects</a><span class="type-signature"> : Array.&lt;<a href="Object3D.html">Object3D</a>></span> </h3>
+					<div class="description">
+						<p>应受 SSR 影响的 3D 对象。若未设置，则影响整个场景。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="thickness" translate="no">.<a href="#thickness">thickness</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>控制判定为可能反射命中与否的截止阈值。</p>
+						<p>默认值为 <code>.018</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="width" translate="no">.<a href="#width">width</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>效果的宽度。</p>
+						<p>默认值为 <code>512</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放该实例分配的 GPU 相关资源。当应用中不再需要此通道时，应调用此方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#dispose">Pass#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="render" translate="no">.<a href="#render">render</a><span class="signature">( renderer : <span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span>, writeBuffer : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span>, readBuffer : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span>, deltaTime : <span class="param-type">number</span>, maskActive : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>执行 SSR 通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">writeBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>写入缓冲区。该缓冲区作为通道的渲染目标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">readBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>读取缓冲区。通道可从此缓冲区获取上一通道的渲染结果。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">deltaTime</strong>
+									</td>
+									<td class="description last">
+										<p>时间增量（秒）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maskActive</strong>
+									</td>
+									<td class="description last">
+										<p>遮罩是否处于激活状态。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#render">Pass#render</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置通道的尺寸。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#setSize">Pass#setSize</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Options" translate="no">.<a href="#~Options">Options</a> </h3>
+					<div class="description">
+						<p><code>SSRPass</code> 的构造函数选项。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>renderer</strong>
+						<br>
+<span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span>
+				</td>
+			<td class="description last">
+				<p>渲染器。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>scene</strong>
+						<br>
+<span class="param-type"><a href="Scene.html">Scene</a></span>
+				</td>
+			<td class="description last">
+				<p>要渲染的场景。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>camera</strong>
+						<br>
+<span class="param-type"><a href="Camera.html">Camera</a></span>
+				</td>
+			<td class="description last">
+				<p>相机。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>width</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>效果的宽度。</p>
+						<p>默认值为 <code>512</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>height</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>效果的高度。</p>
+						<p>默认值为 <code>512</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>selects</strong>
+						<br>
+<span class="param-type">Array.&lt;<a href="Object3D.html">Object3D</a>></span>
+				</td>
+			<td class="description last">
+				<p>应受 SSR 影响的 3D 对象。若未设置，则影响整个场景。</p>
+						<p>默认值为 <code>null</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>bouncing</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否启用弹跳反射。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>groundReflector</strong>
+						<br>
+<span class="param-type"><a href="ReflectorForSSRPass.html">ReflectorForSSRPass</a></span>
+				</td>
+			<td class="description last">
+				<p>地面反射器。</p>
+						<p>默认值为 <code>null</code>。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/postprocessing/SSRPass.js" translate="no" target="_blank" rel="noopener">examples/jsm/postprocessing/SSRPass.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

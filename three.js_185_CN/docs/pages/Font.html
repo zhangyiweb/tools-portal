@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Font - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Font</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示字体的类。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Font" translate="no">new <a href="#Font">Font</a><span class="signature">( data : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的字体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>作为 JSON 的字体数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="data" translate="no">.<a href="#data">data</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>作为 JSON 的字体数据。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isFont" translate="no">.<a href="#isFont">isFont</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="generateShapes" translate="no">.<a href="#generateShapes">generateShapes</a><span class="signature">( text : <span class="param-type">string</span>, size : <span class="param-type">number</span>, direction : <span class="param-type">string</span> )</span><span class="type-signature"> : Array.&lt;<a href="Shape.html">Shape</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的文本和大小生成几何形状。此方法的返回结果
+应与 <a href="ShapeGeometry.html">ShapeGeometry</a> 配合使用以生成实际的几何体数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">text</strong>
+									</td>
+									<td class="description last">
+										<p>文本。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">size</strong>
+									</td>
+									<td class="description last">
+										<p>文本大小。</p>
+										<p>默认值为 <code>100</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">direction</strong>
+									</td>
+									<td class="description last">
+										<p>字符方向：ltr（从左到右）、rtl（从右到左）和 tb（从上到下）。</p>
+										<p>默认值为 <code>'ltr'</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示文本的形状数组。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/FontLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/FontLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MaterialLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">MaterialLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载材质的类。文件在内部通过
+<a href="FileLoader.html">FileLoader</a> 加载。</p>
+<p>此加载器不支持节点材质。请改用 <a href="NodeMaterialLoader.html">NodeMaterialLoader</a>。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new THREE.MaterialLoader();
+const material = await loader.loadAsync( 'material.json' );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MaterialLoader" translate="no">new <a href="#MaterialLoader">MaterialLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的材质加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="textures" translate="no">.<a href="#textures">textures</a><span class="type-signature"> : Object.&lt;string, <a href="Texture.html">Texture</a>></span> </h3>
+					<div class="description">
+						<p>保存材质所用纹理的字典。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="createMaterialFromType" translate="no">.<a href="#createMaterialFromType">createMaterialFromType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定类型创建材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>材质类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新的材质。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的材质传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( json : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 JSON 对象并返回材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">json</strong>
+									</td>
+									<td class="description last">
+										<p>序列化后的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的材质。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setTextures" translate="no">.<a href="#setTextures">setTextures</a><span class="signature">( value : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="MaterialLoader.html">MaterialLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>纹理不会嵌入在材质 JSON 中，因此必须在
+加载过程开始前注入。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>保存材质属性所用纹理的字典。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此材质加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".createMaterialFromType" translate="no">.<a href="#.createMaterialFromType">createMaterialFromType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定类型创建材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>材质类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新的材质。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".registerMaterial" translate="no">.<a href="#.registerMaterial">registerMaterial</a><span class="signature">( type : <span class="param-type">string</span>, materialClass : <span class="param-type">Material.constructor</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定材质注册到内部
+材质库中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>材质类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">materialClass</strong>
+									</td>
+									<td class="description last">
+										<p>材质类。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/MaterialLoader.js" translate="no" target="_blank" rel="noopener">src/loaders/MaterialLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>FSR1Node - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="TempNode.html">TempNode</a> → </p>
+	<h1 translate="no">FSR1Node</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于应用 AMD FidelityFX Super Resolution 1（FSR 1）的后处理节点。</p>
+<p>包含两个通道：</p>
+<ul>
+<li><strong>EASU</strong>（Edge-Adaptive Spatial Upsampling，边缘自适应空间上采样）：以十字形采样 12 个纹理样本检测局部边缘方向，再将近似 Lanczos2 核塑造成与检测到的边缘对齐的椭圆。</li>
+<li><strong>RCAS</strong>（Robust Contrast-Adaptive Sharpening，鲁棒对比度自适应锐化）：使用 5 点十字形采样进行对比度感知锐化，并自动按像素限制强度以避免伪影。</li>
+</ul>
+<p>注意：仅当你的应用受片段着色器性能限制、无法负担全分辨率渲染时才应使用 FSR 1。FSR 1 本身也会带来额外开销，因此着色简单的场景以原生分辨率渲染反而更快。此外，FSR 1 应始终配合已抗锯齿的源图像使用。</p>
+<p>参考：<a href="https://gpuopen.com/fidelityfx-superresolution/" target="_blank" rel="noopener">https://gpuopen.com/fidelityfx-superresolution/</a>。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">FSR1Node</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { fsr1 } from 'three/addons/tsl/display/fsr1/FSR1Node.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="FSR1Node" translate="no">new <a href="#FSR1Node">FSR1Node</a><span class="signature">( textureNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, sharpness : <span class="param-type"><a href="Node.html">Node</a>.&lt;float></span>, denoise : <span class="param-type"><a href="Node.html">Node</a>.&lt;bool></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 FSR 1 节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">textureNode</strong>
+									</td>
+									<td class="description last">
+										<p>表示效果输入的纹理节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">sharpness</strong>
+									</td>
+									<td class="description last">
+										<p>RCAS 锐化强度。0 表示最大锐化，2 表示不锐化。</p>
+										<p>默认值为 <code>0.2</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">denoise</strong>
+									</td>
+									<td class="description last">
+										<p>是否在噪声区域减弱 RCAS 锐化。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="denoise" translate="no">.<a href="#denoise">denoise</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;bool></span> </h3>
+					<div class="description">
+						<p>是否在噪声区域减弱 RCAS 锐化。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sharpness" translate="no">.<a href="#sharpness">sharpness</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>RCAS 锐化强度。0 表示最大锐化，2 表示不锐化。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="textureNode" translate="no">.<a href="#textureNode">textureNode</a><span class="type-signature"> : <a href="TextureNode.html">TextureNode</a></span> </h3>
+					<div class="description">
+						<p>表示效果输入的纹理节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateBeforeType" translate="no">.<a href="#updateBeforeType">updateBeforeType</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p><code>updateBeforeType</code> 设置为 <code>NodeUpdateType.FRAME</code>，因为该节点会在 <code>updateBefore()</code> 中每帧渲染一次效果。</p>
+						<p>默认值为 <code>'frame'</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#updateBeforeType">TempNode#updateBeforeType</a></dt>
+						</dl>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放内部资源。当不再需要该效果时应调用此方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#dispose">TempNode#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTextureNode" translate="no">.<a href="#getTextureNode">getTextureNode</a><span class="signature">()</span><span class="type-signature"> : <a href="PassTextureNode.html">PassTextureNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将效果结果作为纹理节点返回。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示效果结果的纹理节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置效果的输出尺寸。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>宽度（像素）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>高度（像素）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setup" translate="no">.<a href="#setup">setup</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="PassTextureNode.html">PassTextureNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用于设置效果的 TSL 代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#setup">TempNode#setup</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateBefore" translate="no">.<a href="#updateBefore">updateBefore</a><span class="signature">( frame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用于每帧渲染一次效果。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frame</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点帧。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#updateBefore">TempNode#updateBefore</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/tsl/display/FSR1Node.js" translate="no" target="_blank" rel="noopener">examples/jsm/tsl/display/FSR1Node.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

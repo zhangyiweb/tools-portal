@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MRTNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="OutputStructNode.html">OutputStructNode</a> → </p>
+	<h1 translate="no">MRTNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此节点可用于为渲染设置 MRT 上下文。以下是典型的用于后期处理的 MRT 设置：</p>
+<p>MRT 输出定义为字典。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const mrtNode = mrt( {
+  output: output,
+  normal: normalView
+} ) ;
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MRTNode" translate="no">new <a href="#MRTNode">MRTNode</a><span class="signature">( outputNodes : <span class="param-type">Object.&lt;string, <a href="Node.html">Node</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的输出结构节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">outputNodes</strong>
+									</td>
+									<td class="description last">
+										<p>MRT 输出。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="blendModes" translate="no">.<a href="#blendModes">blendModes</a><span class="type-signature"> : Object.&lt;string, <a href="BlendMode.html">BlendMode</a>></span> </h3>
+					<div class="description">
+						<p>存储每个输出混合模式的字典。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMRTNode" translate="no">.<a href="#isMRTNode">isMRTNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="outputNodes" translate="no">.<a href="#outputNodes">outputNodes</a><span class="type-signature"> : Object.&lt;string, <a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>表示 MRT 输出的字典。键是输出的名称，
+值是产生输出结果的节点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="get" translate="no">.<a href="#get">get</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定名称的输出节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>输出的名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 输出节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBlendMode" translate="no">.<a href="#getBlendMode">getBlendMode</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="BlendMode.html">BlendMode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定输出名称的混合模式。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>输出的名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 混合模式。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="has" translate="no">.<a href="#has">has</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="NodeBuilder.html">NodeBuilder</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果 MRT 节点具有给定名称的输出，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>输出的名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> MRT 节点是否具有给定名称的输出。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="merge" translate="no">.<a href="#merge">merge</a><span class="signature">( mrtNode : <span class="param-type"><a href="MRTNode.html">MRTNode</a></span> )</span><span class="type-signature"> : <a href="MRTNode.html">MRTNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定 MRT 节点的输出与此节点的输出合并。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">mrtNode</strong>
+									</td>
+									<td class="description last">
+										<p>要合并的 MRT。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 具有合并输出的新 MRT 节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setBlendMode" translate="no">.<a href="#setBlendMode">setBlendMode</a><span class="signature">( name : <span class="param-type">string</span>, blend : <span class="param-type"><a href="BlendMode.html">BlendMode</a></span> )</span><span class="type-signature"> : <a href="MRTNode.html">MRTNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定输出名称设置混合模式。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>输出的名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">blend</strong>
+									</td>
+									<td class="description last">
+										<p>混合模式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前的 MRT 节点。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/core/MRTNode.js" translate="no" target="_blank" rel="noopener">src/nodes/core/MRTNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

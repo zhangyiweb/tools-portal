@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>CSMShadowNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="ShadowBaseNode.html">ShadowBaseNode</a> → </p>
+	<h1 translate="no">CSMShadowNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>级联阴影贴图（CSM）的一种实现。</p>
+<p>此模块只能与 <a href="WebGPURenderer.html">WebGPURenderer</a> 一起使用。使用 <a href="WebGLRenderer.html">WebGLRenderer</a> 时，请改用 <a href="CSM.html">CSM</a>。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">CSMShadowNode</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { CSMShadowNode } from 'three/addons/csm/CSMShadowNode.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="CSMShadowNode" translate="no">new <a href="#CSMShadowNode">CSMShadowNode</a><span class="signature">( light : <span class="param-type"><a href="DirectionalLight.html">DirectionalLight</a></span>, data : <span class="param-type"><a href="CSMShadowNode.html#~Data">CSMShadowNode~Data</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 CSM 阴影节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">light</strong>
+									</td>
+									<td class="description last">
+										<p>CSM 光源。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>CSM 数据。</p>
+										<p>默认值为 <code>{}</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="breaks" translate="no">.<a href="#breaks">breaks</a><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="description">
+						<p>取值范围为 <code>[0,1]</code> 的数字数组，用于定义如何分割主 CSM 视锥体。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="camera" translate="no">.<a href="#camera">camera</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>场景的相机。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="cascades" translate="no">.<a href="#cascades">cascades</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>级联数量。</p>
+						<p>默认值为 <code>3</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="customSplitsCallback" translate="no">.<a href="#customSplitsCallback">customSplitsCallback</a><span class="type-signature"> : function</span> </h3>
+					<div class="description">
+						<p>当使用 <code>mode='custom'</code> 时的自定义分割回调。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fade" translate="no">.<a href="#fade">fade</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否在级联之间淡入淡出。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="frustums" translate="no">.<a href="#frustums">frustums</a><span class="type-signature"> : Array.&lt;<a href="CSMFrustum.html">CSMFrustum</a>></span> </h3>
+					<div class="description">
+						<p>表示各级联的视锥体数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lightMargin" translate="no">.<a href="#lightMargin">lightMargin</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>光源边距。</p>
+						<p>默认值为 <code>200</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lights" translate="no">.<a href="#lights">lights</a><span class="type-signature"> : Array.&lt;<a href="DirectionalLight.html">DirectionalLight</a>></span> </h3>
+					<div class="description">
+						<p>为不同级联投射阴影的平行光数组。每个级联对应一盏平行光。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mainFrustum" translate="no">.<a href="#mainFrustum">mainFrustum</a><span class="type-signature"> : <a href="CSMFrustum.html">CSMFrustum</a></span> </h3>
+					<div class="description">
+						<p>主视锥体。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxFar" translate="no">.<a href="#maxFar">maxFar</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>最大远裁剪面值。</p>
+						<p>默认值为 <code>100000</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mode" translate="no">.<a href="#mode">mode</a><span class="type-signature"> : 'practical' | 'uniform' | 'logarithmic' | 'custom'</span> </h3>
+					<div class="description">
+						<p>视锥体分割模式。</p>
+						<p>默认值为 <code>'practical'</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放该实例分配的 GPU 相关资源。当应用中不再使用此实例时，请调用此方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ShadowBaseNode.html#dispose">ShadowBaseNode#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateFrustums" translate="no">.<a href="#updateFrustums">updateFrustums</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>每当更改相机或 CSM 设置时，应用必须调用此方法。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Data" translate="no">.<a href="#~Data">Data</a> </h3>
+					<div class="description">
+						<p><code>CSMShadowNode</code> 的构造函数数据。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>cascades</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>级联数量。</p>
+						<p>默认值为 <code>3</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>maxFar</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>最大远裁剪面值。</p>
+						<p>默认值为 <code>100000</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>mode</strong>
+						<br>
+<span class="param-type">'practical'</span>
+|
+<span class="param-type">'uniform'</span>
+|
+<span class="param-type">'logarithmic'</span>
+|
+<span class="param-type">'custom'</span>
+				</td>
+			<td class="description last">
+				<p>视锥体分割模式。</p>
+						<p>默认值为 <code>'practical'</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>customSplitsCallback</strong>
+						<br>
+<span class="param-type">function</span>
+				</td>
+			<td class="description last">
+				<p>当使用 <code>mode='custom'</code> 时的自定义分割回调。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>lightMargin</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>光源边距。</p>
+						<p>默认值为 <code>200</code>。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/csm/CSMShadowNode.js" translate="no" target="_blank" rel="noopener">examples/jsm/csm/CSMShadowNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>BufferGeometryUtils - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">BufferGeometryUtils</h1>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">BufferGeometryUtils</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="~computeMikkTSpaceTangents" translate="no">.<a href="#~computeMikkTSpaceTangents">computeMikkTSpaceTangents</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, MikkTSpace : <span class="param-type">Object</span>, negateSign : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>使用 MikkTSpace 算法计算顶点切线。MikkTSpace 能稳定生成一致的切线，大多数建模工具和法线贴图烘焙器都会使用它。对于带有法线贴图的材质，应使用 MikkTSpace，因为不一致的切线可能导致法线贴图出现细微的视觉问题，尤其是在镜像 UV 接缝附近。</p>
+<p>与此方法相比，<a href="BufferGeometry.html#computeTangents">BufferGeometry#computeTangents</a>（自定义算法）生成的切线很可能与其他软件中的切线不匹配。自定义算法对于配合自定义材质的一般用途已经足够，且可能比 MikkTSpace 更快。</p>
+<p>返回原始 BufferGeometry。已索引的几何体将被去索引。需要 position、normal 和 uv 属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>要计算切线的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">MikkTSpace</strong>
+									</td>
+									<td class="description last">
+										<p><code>examples/jsm/libs/mikktspace.module.js</code> 的实例，或 <code>mikktspace</code> npm 包。
+使用前请等待 <code>MikkTSpace.ready</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">negateSign</strong>
+									</td>
+									<td class="description last">
+										<p>是否对每个切线的符号分量（.w）取反。
+某些格式的法线贴图约定需要此参数，包括 glTF。</p>
+										<p>默认值为 <code>true</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 更新后的几何体。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~computeMorphedAttributes" translate="no">.<a href="#~computeMorphedAttributes">computeMorphedAttributes</a><span class="signature">( object : <span class="param-type"><a href="Mesh.html">Mesh</a> | <a href="Line.html">Line</a> | <a href="Points.html">Points</a></span> )</span><span class="type-signature"> : Object</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算变形/蒙皮 BufferGeometry 的变形属性。</p>
+<p>有助于光线追踪或贴花（例如，将 <code>DecalGeometry</code> 应用于带有 <code>BufferGeometry</code> 的变形对象时，会使用原始 <code>BufferGeometry</code>，而非变形/蒙皮后的几何体，从而产生错误结果。
+使用此函数创建影子 <code>Object3</code>D，即可正确生成 <code>DecalGeometry</code>）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>要计算变形属性的 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含原始 position/normal 属性和变形后属性的对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~deepCloneAttribute" translate="no">.<a href="#~deepCloneAttribute">deepCloneAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>对给定的 buffer attribute 执行深克隆。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>要克隆的属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 克隆后的属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~deinterleaveAttribute" translate="no">.<a href="#~deinterleaveAttribute">deinterleaveAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="InterleavedBufferAttribute.html">InterleavedBufferAttribute</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定属性的新的非交错版本。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>交错属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 非交错属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~deinterleaveGeometry" translate="no">.<a href="#~deinterleaveGeometry">deinterleaveGeometry</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span> )</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>对给定几何体上的所有属性进行去交错。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>要去交错的几何体。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="~estimateBytesUsed" translate="no">.<a href="#~estimateBytesUsed">estimateBytesUsed</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span> )</span><span class="type-signature"> : number</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回所有属性表示该几何体所使用的字节数。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>该几何体。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 估算使用的字节数。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~interleaveAttributes" translate="no">.<a href="#~interleaveAttributes">interleaveAttributes</a><span class="signature">( attributes : <span class="param-type">Array.&lt;<a href="BufferAttribute.html">BufferAttribute</a>></span> )</span><span class="type-signature"> : Array.&lt;<a href="InterleavedBufferAttribute.html">InterleavedBufferAttribute</a>></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>交错一组属性，并返回共享单个 <a href="InterleavedBuffer.html">InterleavedBuffer</a> 实例的对应属性新数组。所有属性必须具有兼容的类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attributes</strong>
+									</td>
+									<td class="description last">
+										<p>要交错的属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 交错属性数组。如果交错不成功，该方法返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~mergeAttributes" translate="no">.<a href="#~mergeAttributes">mergeAttributes</a><span class="signature">( attributes : <span class="param-type">Array.&lt;<a href="BufferAttribute.html">BufferAttribute</a>></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>将一组属性合并为单个实例。所有属性必须具有兼容的属性和类型。
+不支持 <a href="InterleavedBufferAttribute.html">InterleavedBufferAttribute</a> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attributes</strong>
+									</td>
+									<td class="description last">
+										<p>要合并的属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 合并后的属性。如果合并不成功，则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~mergeGeometries" translate="no">.<a href="#~mergeGeometries">mergeGeometries</a><span class="signature">( geometries : <span class="param-type">Array.&lt;<a href="BufferGeometry.html">BufferGeometry</a>></span>, useGroups : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>将一组几何体合并为单个实例。所有几何体必须具有兼容的属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometries</strong>
+									</td>
+									<td class="description last">
+										<p>要合并的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">useGroups</strong>
+									</td>
+									<td class="description last">
+										<p>是否使用分组。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 合并后的几何体。如果合并不成功，则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~mergeGroups" translate="no">.<a href="#~mergeGroups">mergeGroups</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>合并给定几何体的 <a href="BufferGeometry.html#groups">BufferGeometry#groups</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>要修改的几何体。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> <ul>
+<li>更新后的几何体</li>
+</ul></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~mergeVertices" translate="no">.<a href="#~mergeVertices">mergeVertices</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, tolerance : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个新几何体，其中所有相似顶点属性（在容差范围内）的顶点已被合并。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>要合并顶点的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tolerance</strong>
+									</td>
+									<td class="description last">
+										<p>容差值。</p>
+										<p>默认值为 <code>1e-4</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> <ul>
+<li>合并顶点后的新几何体。</li>
+</ul></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~toCreasedNormals" translate="no">.<a href="#~toCreasedNormals">toCreasedNormals</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, creaseAngle : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>如果提供的几何体是非索引的，则修改它；否则创建一个新的非索引几何体。返回的几何体除夹角大于折痕角的面之外，各处都具有平滑法线。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>要修改的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">creaseAngle</strong>
+									</td>
+									<td class="description last">
+										<p>折痕角（弧度）。</p>
+										<p>默认值为 <code>Math.PI/3</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> <ul>
+<li>更新后的几何体</li>
+</ul></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~toTrianglesDrawMode" translate="no">.<a href="#~toTrianglesDrawMode">toTrianglesDrawMode</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, drawMode : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>基于 <code>TrianglesDrawMode</code> 绘制模式返回一个新的索引几何体。
+此模式对应于 WebGL 中的 <code>gl.TRIANGLES</code> 图元。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>要转换的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">drawMode</strong>
+									</td>
+									<td class="description last">
+										<p>当前的绘制模式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 使用 <code>TrianglesDrawMode</code> 的新几何体。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/BufferGeometryUtils.js" translate="no" target="_blank" rel="noopener">examples/jsm/utils/BufferGeometryUtils.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

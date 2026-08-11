@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LOD - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → </p>
+	<h1 translate="no">LOD</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于提供基本细节层次（LOD）机制的组件。</p>
+<p>每个 LOD 级别都关联一个对象，可在指定距离处在它们之间切换渲染。
+通常你会创建例如三个网格：一个用于远处（低细节）、一个用于中距离（中等细节）、
+一个用于近距离（高细节）。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const lod = new THREE.LOD();
+const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+//Create spheres with 3 levels of detail and create new LOD levels for them
+for( let i = 0; i &lt; 3; i++ ) {
+	const geometry = new THREE.IcosahedronGeometry( 10, 3 - i );
+	const mesh = new THREE.Mesh( geometry, material );
+	lod.addLevel( mesh, i * 75 );
+}
+scene.add( lod );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LOD" translate="no">new <a href="#LOD">LOD</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 LOD。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="autoUpdate" translate="no">.<a href="#autoUpdate">autoUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>LOD 对象是否由渲染器每帧自动更新。
+若设为 <code>false</code>，则必须在渲染循环中自行调用
+<a href="LOD.html#update">LOD#update</a>。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isLOD" translate="no">.<a href="#isLOD">isLOD</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="levels" translate="no">.<a href="#levels">levels</a><span class="type-signature"> : Array.&lt;{object:Object3D, distance:number, hysteresis:number}></span> </h3>
+					<div class="description">
+						<p>此数组保存 LOD 级别。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addLevel" translate="no">.<a href="#addLevel">addLevel</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, distance : <span class="param-type">number</span>, hysteresis : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="LOD.html">LOD</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加一个将在特定距离及更远处显示的网格。通常距离越远，
+网格的细节越低。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>要在此级别显示的 3D 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">distance</strong>
+									</td>
+									<td class="description last">
+										<p>显示此细节层次的距离。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">hysteresis</strong>
+									</td>
+									<td class="description last">
+										<p>用于避免 LOD 边界闪烁的阈值，为距离的分数。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCurrentLevel" translate="no">.<a href="#getCurrentLevel">getCurrentLevel</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前激活的 LOD 级别索引。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前激活的 LOD 级别索引。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getObjectForDistance" translate="no">.<a href="#getObjectForDistance">getObjectForDistance</a><span class="signature">( distance : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回第一个大于给定距离的 3D 对象的引用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">distance</strong>
+									</td>
+									<td class="description last">
+										<p>LOD 距离。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 找到的 3D 对象。若未找到则为 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="raycast" translate="no">.<a href="#raycast">raycast</a><span class="signature">( raycaster : <span class="param-type"><a href="Raycaster.html">Raycaster</a></span>, intersects : <span class="param-type">Array.&lt;Object></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算投射光线与此 LOD 之间的交点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">raycaster</strong>
+									</td>
+									<td class="description last">
+										<p>光线投射器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">intersects</strong>
+									</td>
+									<td class="description last">
+										<p>保存交点的目标数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Object3D.html#raycast">Object3D#raycast</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="removeLevel" translate="no">.<a href="#removeLevel">removeLevel</a><span class="signature">( distance : <span class="param-type">number</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据与相机的距离移除现有级别。
+成功移除时返回 <code>true</code>，否则返回 <code>false</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">distance</strong>
+									</td>
+									<td class="description last">
+										<p>要移除的级别的距离。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 该级别是否已被移除。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( camera : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过根据给定相机的当前距离计算应可见的 LOD 级别来更新 LOD。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>用于渲染场景的相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/LOD.js" translate="no" target="_blank" rel="noopener">src/objects/LOD.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nginx 可视化管理</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="title">Nginx 可视化管理</div>
+        <div class="actions">
+          <button id="btnAdd" class="btn">导入项目</button>
+          <button id="btnNginxToggle" class="btn primary" disabled>加载中…</button>
+          <button id="btnFirewallToggle" class="btn primary" disabled>加载中…</button>
+          <button id="btnOpenData" class="btn">打开数据目录</button>
+        </div>
+      </header>
+
+      <section class="status">
+        <div class="status-pills">
+          <div class="pill stopped" id="nginxStatus">
+            <span class="status-dot"></span>
+            <span class="status-text">状态：加载中…</span>
+          </div>
+          <div class="pill stopped" id="firewallStatus">
+            <span class="status-dot"></span>
+            <span class="status-text">专用网络防火墙：加载中…</span>
+          </div>
+        </div>
+        <div class="hint" id="accessHint">提示：每个项目一个端口，打开后用浏览器访问对应地址</div>
+      </section>
+
+      <main class="content">
+        <div class="card">
+          <div class="card-title">项目列表</div>
+          <div id="projectList" class="list"></div>
+          <div class="empty" id="emptyTip">还没有项目。点击「导入项目」添加一个。</div>
+        </div>
+      </main>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>

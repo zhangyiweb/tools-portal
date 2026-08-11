@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ImageUtils - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">ImageUtils</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>包含图像处理实用函数的类。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".getDataURL" translate="no">.<a href="#.getDataURL">getDataURL</a><span class="signature">( image : <span class="param-type">HTMLImageElement | HTMLCanvasElement</span>, type : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回包含给定图像表示的 data URI。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">image</strong>
+									</td>
+									<td class="description last">
+										<p>图像对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>指示图像格式。</p>
+										<p>默认值为 <code>'image/png'</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> data URI。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".sRGBToLinear" translate="no">.<a href="#.sRGBToLinear">sRGBToLinear</a><span class="signature">( image : <span class="param-type">HTMLImageElement | HTMLCanvasElement | ImageBitmap | Object</span> )</span><span class="type-signature"> : HTMLCanvasElement | Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的 sRGB 图像数据转换为线性颜色空间。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">image</strong>
+									</td>
+									<td class="description last">
+										<p>图像对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 转换后的图像。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/extras/ImageUtils.js" translate="no" target="_blank" rel="noopener">src/extras/ImageUtils.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

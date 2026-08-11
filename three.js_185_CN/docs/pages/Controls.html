@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Controls - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → </p>
+	<h1 translate="no">Controls</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>控制器的抽象基类。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Controls" translate="no">new <a href="#Controls">Controls</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, domElement : <span class="param-type">HTMLElement</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的控制器实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>由控制器管理的对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">domElement</strong>
+									</td>
+									<td class="description last">
+										<p>用于事件监听的 HTML 元素。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="domElement" translate="no">.<a href="#domElement">domElement</a><span class="type-signature"> : HTMLElement</span> </h3>
+					<div class="description">
+						<p>用于事件监听的 HTML 元素。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="enabled" translate="no">.<a href="#enabled">enabled</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>控制器是否响应用户输入。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="keys" translate="no">.<a href="#keys">keys</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>定义控制器键盘输入的对象。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mouseButtons" translate="no">.<a href="#mouseButtons">mouseButtons</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>定义将何种操作分配给可用鼠标按钮的对象。具体支持哪些鼠标按钮和操作取决于控制器的实现。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="object" translate="no">.<a href="#object">object</a><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="description">
+						<p>由控制器管理的对象。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="state" translate="no">.<a href="#state">state</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>控制器的内部状态。</p>
+						<p>默认值为 <code>-1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="touches" translate="no">.<a href="#touches">touches</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>定义将何种操作分配给何种触摸交互的对象。具体支持哪些触摸交互和操作取决于控制器的实现。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="connect" translate="no">.<a href="#connect">connect</a><span class="signature">( element : <span class="param-type">HTMLElement</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将控制器连接到 DOM。此方法具有所谓的“副作用”，因为它会将模块的事件监听器添加到 DOM。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">element</strong>
+									</td>
+									<td class="description last">
+										<p>要连接的 DOM 元素。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="disconnect" translate="no">.<a href="#disconnect">disconnect</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将控制器从 DOM 断开连接。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若不再需要使用该控制器，请调用此方法。它会释放所有内部资源并移除所有事件监听器。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( delta : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若控制器需要在每个模拟步骤更新其内部状态，应实现此方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">delta</strong>
+									</td>
+									<td class="description last">
+										<p>时间增量（秒）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/extras/Controls.js" translate="no" target="_blank" rel="noopener">src/extras/Controls.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

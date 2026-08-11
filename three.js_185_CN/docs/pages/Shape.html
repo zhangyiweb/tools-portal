@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Shape - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Curve.html">Curve</a> → <a href="CurvePath.html">CurvePath</a> → <a href="Path.html">Path</a> → </p>
+	<h1 translate="no">Shape</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>使用路径（可含可选孔洞）定义任意二维平面形状。可与 <a href="ExtrudeGeometry.html">ExtrudeGeometry</a>、<a href="ShapeGeometry.html">ShapeGeometry</a> 配合使用，用于获取点，或获取三角化面。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const heartShape = new THREE.Shape();
+heartShape.moveTo( 25, 25 );
+heartShape.bezierCurveTo( 25, 25, 20, 0, 0, 0 );
+heartShape.bezierCurveTo( - 30, 0, - 30, 35, - 30, 35 );
+heartShape.bezierCurveTo( - 30, 55, - 10, 77, 25, 95 );
+heartShape.bezierCurveTo( 60, 77, 80, 55, 80, 35 );
+heartShape.bezierCurveTo( 80, 35, 80, 0, 50, 0 );
+heartShape.bezierCurveTo( 35, 0, 25, 25, 25, 25 );
+const extrudeSettings = {
+	depth: 8,
+	bevelEnabled: true,
+	bevelSegments: 2,
+	steps: 2,
+	bevelSize: 1,
+	bevelThickness: 1
+};
+const geometry = new THREE.ExtrudeGeometry( heartShape, extrudeSettings );
+const mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial() );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Shape" translate="no">new <a href="#Shape">Shape</a><span class="signature">( points : <span class="param-type">Array.&lt;<a href="Vector2.html">Vector2</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新形状。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>定义该形状的二维点数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="holes" translate="no">.<a href="#holes">holes</a><span class="type-signature"> : Array.&lt;<a href="Path.html">Path</a>></span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>定义形状中的孔洞。孔洞定义必须使用与外形相反的绕序（CW/CCW）。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uuid" translate="no">.<a href="#uuid">uuid</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>该形状的 UUID。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="extractPoints" translate="no">.<a href="#extractPoints">extractPoints</a><span class="signature">( divisions : <span class="param-type">number</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个对象，其中包含该形状及其孔洞的轮廓数据（以二维点数组形式）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">divisions</strong>
+									</td>
+									<td class="description last">
+										<p>结果的精细度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含轮廓数据的对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getPointsHoles" translate="no">.<a href="#getPointsHoles">getPointsHoles</a><span class="signature">( divisions : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;Array.&lt;<a href="Vector2.html">Vector2</a>>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个数组，其中每个元素表示一个孔洞轮廓的二维点列表。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">divisions</strong>
+									</td>
+									<td class="description last">
+										<p>结果的精细度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 以一系列二维点表示的孔洞。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Shape.js" translate="no" target="_blank" rel="noopener">src/extras/core/Shape.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

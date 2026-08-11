@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ClusteredLightsNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="LightsNode.html">LightsNode</a> → </p>
+	<h1 translate="no">ClusteredLightsNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><code>LightsNode</code> 的自定义版本，实现 Forward+ 集群着色：
+视锥体被细分为 3D 集群网格（X × Y 屏幕图块
+乘以指数间隔的 Z 深度切片），每个集群仅包含
+与其相交的点光源球体。在着色时，每个片段
+查找其所属集群并仅遍历该集群的光源。与 2D 平铺
+光照不同，集群着色会剔除共享屏幕像素但位于
+不同深度的光源——适用于具有真实深度复杂度的 3D 场景。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ClusteredLightsNode</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { clusteredLights } from 'three/addons/tsl/lighting/ClusteredLightsNode.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ClusteredLightsNode" translate="no">new <a href="#ClusteredLightsNode">ClusteredLightsNode</a><span class="signature">( maxLights : <span class="param-type">number</span>, tileSize : <span class="param-type">number</span>, zSlices : <span class="param-type">number</span>, maxLightsPerCluster : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的集群光源节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxLights</strong>
+									</td>
+									<td class="description last">
+										<p>点光源的最大数量。</p>
+										<p>默认值为 <code>1024</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tileSize</strong>
+									</td>
+									<td class="description last">
+										<p>屏幕图块大小（像素），即集群 XY 尺寸。</p>
+										<p>默认值为 <code>32</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">zSlices</strong>
+									</td>
+									<td class="description last">
+										<p>指数深度切片数量。</p>
+										<p>默认值为 <code>24</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxLightsPerCluster</strong>
+									</td>
+									<td class="description last">
+										<p>每个集群的光源列表容量。</p>
+										<p>默认值为 <code>64</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/tsl/lighting/ClusteredLightsNode.js" translate="no" target="_blank" rel="noopener">examples/jsm/tsl/lighting/ClusteredLightsNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

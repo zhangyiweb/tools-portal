@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>PhysicalLightingModel - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="LightingModel.html">LightingModel</a> → </p>
+	<h1 translate="no">PhysicalLightingModel</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示 PBR 材质的光照模型。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="PhysicalLightingModel" translate="no">new <a href="#PhysicalLightingModel">PhysicalLightingModel</a><span class="signature">( clearcoat : <span class="param-type">boolean</span>, sheen : <span class="param-type">boolean</span>, iridescence : <span class="param-type">boolean</span>, anisotropy : <span class="param-type">boolean</span>, transmission : <span class="param-type">boolean</span>, dispersion : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的物理光照模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">clearcoat</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持清漆。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">sheen</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持光泽。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">iridescence</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持虹彩。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">anisotropy</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持各向异性。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">transmission</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持透射。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">dispersion</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持色散。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="anisotropy" translate="no">.<a href="#anisotropy">anisotropy</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否支持各向异性。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clearcoat" translate="no">.<a href="#clearcoat">clearcoat</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否支持清漆。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clearcoatRadiance" translate="no">.<a href="#clearcoatRadiance">clearcoatRadiance</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>清漆辐射度。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clearcoatSpecularDirect" translate="no">.<a href="#clearcoatSpecularDirect">clearcoatSpecularDirect</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>清漆直接镜面反射。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clearcoatSpecularIndirect" translate="no">.<a href="#clearcoatSpecularIndirect">clearcoatSpecularIndirect</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>清漆间接镜面反射。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="dispersion" translate="no">.<a href="#dispersion">dispersion</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否支持色散。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescence" translate="no">.<a href="#iridescence">iridescence</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否支持虹彩。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescenceF0" translate="no">.<a href="#iridescenceF0">iridescenceF0</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>虹彩 F0。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescenceF0Dielectric" translate="no">.<a href="#iridescenceF0Dielectric">iridescenceF0Dielectric</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>虹彩 F0 电介质。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescenceF0Metallic" translate="no">.<a href="#iridescenceF0Metallic">iridescenceF0Metallic</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>虹彩 F0 金属。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescenceFresnel" translate="no">.<a href="#iridescenceFresnel">iridescenceFresnel</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>虹彩 Fresnel。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sheen" translate="no">.<a href="#sheen">sheen</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否支持光泽。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sheenSpecularDirect" translate="no">.<a href="#sheenSpecularDirect">sheenSpecularDirect</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>光泽直接镜面反射。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sheenSpecularIndirect" translate="no">.<a href="#sheenSpecularIndirect">sheenSpecularIndirect</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>光泽间接镜面反射。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="transmission" translate="no">.<a href="#transmission">transmission</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否支持透射。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="ambientOcclusion" translate="no">.<a href="#ambientOcclusion">ambientOcclusion</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>实现环境光遮蔽项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LightingModel.html#ambientOcclusion">LightingModel#ambientOcclusion</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="direct" translate="no">.<a href="#direct">direct</a><span class="signature">( lightData : <span class="param-type">Object</span>, builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>实现直接光照。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">lightData</strong>
+									</td>
+									<td class="description last">
+										<p>灯光数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LightingModel.html#direct">LightingModel#direct</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="directRectArea" translate="no">.<a href="#directRectArea">directRectArea</a><span class="signature">( input : <span class="param-type">Object</span>, builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法用于为矩形区域光节点实现直接光照项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">input</strong>
+									</td>
+									<td class="description last">
+										<p>输入数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LightingModel.html#directRectArea">LightingModel#directRectArea</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="finish" translate="no">.<a href="#finish">finish</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据所请求的特性执行最终光照累积。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LightingModel.html#finish">LightingModel#finish</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="indirect" translate="no">.<a href="#indirect">indirect</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>实现间接光照。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LightingModel.html#indirect">LightingModel#indirect</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="indirectDiffuse" translate="no">.<a href="#indirectDiffuse">indirectDiffuse</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>实现间接漫反射项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="indirectSpecular" translate="no">.<a href="#indirectSpecular">indirectSpecular</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>实现间接镜面反射项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="start" translate="no">.<a href="#start">start</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据所请求的特性，此方法准备后续用于光照计算的特定节点变量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LightingModel.html#start">LightingModel#start</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/functions/PhysicalLightingModel.js" translate="no" target="_blank" rel="noopener">src/nodes/functions/PhysicalLightingModel.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

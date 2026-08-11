@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>CCDIKSolver - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">CCDIKSolver</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类使用 <a href="https://web.archive.org/web/20221206080850/https://sites.google.com/site/auraliusproject/ccd-algorithm" target="_blank" rel="noopener">CCD 算法</a> 求解逆向运动学（IK）问题。</p>
+<p><code>CCDIKSolver</code> 设计用于与 <a href="SkinnedMesh.html">SkinnedMesh</a> 实例配合使用。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">CCDIKSolver</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { CCDIKSolver } from 'three/addons/animation/CCDIKSolver.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="CCDIKSolver" translate="no">new <a href="#CCDIKSolver">CCDIKSolver</a><span class="signature">( mesh : <span class="param-type"><a href="SkinnedMesh.html">SkinnedMesh</a></span>, iks : <span class="param-type">Array.&lt;<a href="CCDIKSolver.html#~IK">CCDIKSolver~IK</a>></span> )</span> </h3>
+					<div class="method">
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">mesh</strong>
+									</td>
+									<td class="description last">
+										<p>蒙皮网格。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">iks</strong>
+									</td>
+									<td class="description last">
+										<p>IK 对象数组。</p>
+										<p>默认值为 <code>[]</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="iks" translate="no">.<a href="#iks">iks</a><span class="type-signature"> : Array.&lt;<a href="CCDIKSolver.html#~IK">CCDIKSolver~IK</a>></span> </h3>
+					<div class="description">
+						<p>IK 对象数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mesh" translate="no">.<a href="#mesh">mesh</a><span class="type-signature"> : <a href="SkinnedMesh.html">SkinnedMesh</a></span> </h3>
+					<div class="description">
+						<p>蒙皮网格。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="createHelper" translate="no">.<a href="#createHelper">createHelper</a><span class="signature">( sphereSize : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="CCDIKHelper.html">CCDIKHelper</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>创建用于可视化 CCDIK 的辅助对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sphereSize</strong>
+									</td>
+									<td class="description last">
+										<p>球体大小。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 创建的辅助对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( globalBlendFactor : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="CCDIKSolver.html">CCDIKSolver</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过求解 CCD 算法更新所有 IK 骨骼。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">globalBlendFactor</strong>
+									</td>
+									<td class="description last">
+										<p>若 IK 链未定义自身的 <code>blendFactor</code>，则应用此混合因子。</p>
+										<p>默认值为 <code>1.0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateOne" translate="no">.<a href="#updateOne">updateOne</a><span class="signature">( ik : <span class="param-type"><a href="CCDIKSolver.html#~IK">CCDIKSolver~IK</a></span>, overrideBlend : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="CCDIKSolver.html">CCDIKSolver</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过求解 CCD 算法更新单个 IK 骨骼。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">ik</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的 IK。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">overrideBlend</strong>
+									</td>
+									<td class="description last">
+										<p>若 IK 对象未定义 <code>blendFactor</code>，则使用此值。</p>
+										<p>默认值为 <code>1.0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此实例的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~BoneLink" translate="no">.<a href="#~BoneLink">BoneLink</a> </h3>
+					<div class="description">
+						<p>此类型表示骨骼链接。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>index</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>链接骨骼的索引，对应 <code>Skeleton.bones</code> 数组中的骨骼。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>limitation</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>旋转轴。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>rotationMin</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>旋转下限。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>rotationMax</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>旋转上限。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>enabled</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>该链接是否启用。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~IK" translate="no">.<a href="#~IK">IK</a> </h3>
+					<div class="description">
+						<p>此类型表示 IK 配置对象。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>target</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>目标骨骼索引，对应 <code>Skeleton.bones</code> 数组中的骨骼。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>effector</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>效应器骨骼索引，对应 <code>Skeleton.bones</code> 数组中的骨骼。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>links</strong>
+						<br>
+<span class="param-type">Array.&lt;<a href="CCDIKSolver.html#~BoneLink">CCDIKSolver~BoneLink</a>></span>
+				</td>
+			<td class="description last">
+				<p>骨骼链接数组。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>iteration</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>计算迭代次数。数值越小速度越快，但精度越低。</p>
+						<p>默认值为 <code>1</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>minAngle</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>单步最小旋转角（弧度）。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>maxAngle</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>单步最大旋转角（弧度）。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>blendFactor</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>混合因子。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/animation/CCDIKSolver.js" translate="no" target="_blank" rel="noopener">examples/jsm/animation/CCDIKSolver.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

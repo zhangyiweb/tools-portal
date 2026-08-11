@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>PropertyNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → </p>
+	<h1 translate="no">PropertyNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类表示着色器属性。可用于
+显式定义属性并为其赋值。</p>
+<p><code>PropertyNode</code> 被引擎用于为 TSL 代码
+预定义常见的材质属性。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const threshold = property( 'float', 'threshold' ).assign( THRESHOLD );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="PropertyNode" translate="no">new <a href="#PropertyNode">PropertyNode</a><span class="signature">( nodeType : <span class="param-type">string</span>, name : <span class="param-type">string</span>, varying : <span class="param-type">boolean</span>, placeholderNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的属性节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">nodeType</strong>
+									</td>
+									<td class="description last">
+										<p>节点的类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>着色器中属性的名称。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">varying</strong>
+									</td>
+									<td class="description last">
+										<p>此属性是否为 varying。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">placeholderNode</strong>
+									</td>
+									<td class="description last">
+										<p>未赋值时使用的占位节点。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="global" translate="no">.<a href="#global">global</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>此标志用于全局缓存。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#global">Node#global</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isPropertyNode" translate="no">.<a href="#isPropertyNode">isPropertyNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="name" translate="no">.<a href="#name">name</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>着色器中属性的名称。若未定义名称，
+节点系统会自动生成一个。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#name">Node#name</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="placeholderNode" translate="no">.<a href="#placeholderNode">placeholderNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>属性未赋值时的占位节点。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="varying" translate="no">.<a href="#varying">varying</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>此属性是否为 varying。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/core/PropertyNode.js" translate="no" target="_blank" rel="noopener">src/nodes/core/PropertyNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

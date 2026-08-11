@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TerrainGenerator - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">TerrainGenerator</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>将程序化山脉烘焙进单个 THREE.BufferGeometry，
+并返回可直接加入场景的 <code>THREE.Group</code>。</p>
+<p>高度场是导数阻尼的分形求和（Quilez 的假侵蚀）：每一
+倍频在当前坡度已陡峭处被抑制，细节集中到风化的脊线上，
+低频域扭曲则让这些脊线蜿蜒。再经过若干次热力（岩屑）侵蚀，
+松弛超过休止角的坡度，把分形的针状尖峰沉降成真实山脊。</p>
+<p>网格用交替的四边形对角线三角化（菱形图案），使粗糙网格
+也能保持轮廓而不出现单向纹理感。表面在 TSL 中按海拔与坡度自着色——
+草地、森林、岩石、岩屑与积雪，并带细节法线与大气透视——因此无需材质或纹理。</p>
+<p>烘焙后的高度网格通过 TerrainGenerator#sampleHeight 暴露，
+以便散布的森林（或其他对象）能精确坐落在表面上。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const terrain = new TerrainGenerator( { seed: 1 } );
+scene.add( terrain.build() );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TerrainGenerator" translate="no">new <a href="#TerrainGenerator">TerrainGenerator</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/generators/TerrainGenerator.js" translate="no" target="_blank" rel="noopener">examples/jsm/generators/TerrainGenerator.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

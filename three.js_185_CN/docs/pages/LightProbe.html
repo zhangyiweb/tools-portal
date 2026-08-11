@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LightProbe - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Light.html">Light</a> → </p>
+	<h1 translate="no">LightProbe</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>光照探针是向 3D 场景添加光照的另一种方式。与经典光源
+（例如平行光、点光源或聚光灯）不同，光照探针本身不发光。
+它们存储穿过 3D 空间的光照信息。在渲染过程中，
+击中 3D 物体的光照会通过使用光照探针中的数据来近似计算。</p>
+<p>光照探针通常由（辐射）环境贴图创建。
+类 <a href="LightProbeGenerator.html">LightProbeGenerator</a> 可用于从立方体贴图或渲染目标创建光照探针。
+不过，光照估计数据也可以以其他形式提供，例如通过 WebXR。
+这使得能够渲染对真实世界光照做出响应的增强现实内容。</p>
+<p>three.js 中当前的探针实现支持所谓的漫反射光照探针。
+这类光照探针在功能上等效于辐照度环境贴图。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LightProbe" translate="no">new <a href="#LightProbe">LightProbe</a><span class="signature">( sh : <span class="param-type"><a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span>, intensity : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的光照探针。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sh</strong>
+									</td>
+									<td class="description last">
+										<p>表示编码光照信息的球谐函数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">intensity</strong>
+									</td>
+									<td class="description last">
+										<p>光源强度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isLightProbe" translate="no">.<a href="#isLightProbe">isLightProbe</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sh" translate="no">.<a href="#sh">sh</a><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="description">
+						<p>光照探针使用球谐函数来编码光照信息。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/LightProbe.js" translate="no" target="_blank" rel="noopener">src/lights/LightProbe.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

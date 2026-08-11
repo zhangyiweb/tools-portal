@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>WireframeGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="BufferGeometry.html">BufferGeometry</a> → </p>
+	<h1 translate="no">WireframeGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>可用作辅助对象，以线框形式可视化几何体。</p>
+<p>注意：目前尚无法对该类的实例进行序列化/反序列化。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const geometry = new THREE.SphereGeometry();
+const wireframe = new THREE.WireframeGeometry( geometry );
+const line = new THREE.LineSegments( wireframe );
+line.material.depthWrite = false;
+line.material.opacity = 0.25;
+line.material.transparent = true;
+scene.add( line );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="WireframeGeometry" translate="no">new <a href="#WireframeGeometry">WireframeGeometry</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的线框几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>几何体。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="parameters" translate="no">.<a href="#parameters">parameters</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>保存用于生成该几何体的构造函数参数。实例化后的任何修改都不会改变几何体。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/WireframeGeometry.js" translate="no" target="_blank" rel="noopener">src/geometries/WireframeGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

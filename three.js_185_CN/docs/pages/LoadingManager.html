@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LoadingManager - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">LoadingManager</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>处理并跟踪已加载与待加载的数据。若不手动提供，
+会创建一个默认的全局实例供加载器使用。</p>
+<p>一般情况下这已足够，但有时使用单独的加载管理器会很有用——
+例如当你希望为对象和纹理显示不同的加载进度条时。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const manager = new THREE.LoadingManager();
+manager.onLoad = () => console.log( 'Loading complete!' );
+const loader1 = new OBJLoader( manager );
+const loader2 = new ColladaLoader( manager );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LoadingManager" translate="no">new <a href="#LoadingManager">LoadingManager</a><span class="signature">( onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type">function</span>, onError : <span class="param-type">function</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>创建一个新的加载管理器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>所有项目加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>单个项目加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="abortController" translate="no">.<a href="#abortController">abortController</a><span class="type-signature"> : AbortController</span> </h3>
+					<div class="description">
+						<p>用于中止使用此管理器的加载器中正在进行的请求。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="onError" translate="no">.<a href="#onError">onError</a><span class="type-signature"> : function | undefined</span> </h3>
+					<div class="description">
+						<p>发生错误时执行。</p>
+						<p>默认值为 <code>undefined</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="onLoad" translate="no">.<a href="#onLoad">onLoad</a><span class="type-signature"> : function | undefined</span> </h3>
+					<div class="description">
+						<p>所有项目加载完成时执行。</p>
+						<p>默认值为 <code>undefined</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="onProgress" translate="no">.<a href="#onProgress">onProgress</a><span class="type-signature"> : function | undefined</span> </h3>
+					<div class="description">
+						<p>单个项目加载完成时执行。</p>
+						<p>默认值为 <code>undefined</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="onStart" translate="no">.<a href="#onStart">onStart</a><span class="type-signature"> : function | undefined</span> </h3>
+					<div class="description">
+						<p>项目开始加载时执行。</p>
+						<p>默认值为 <code>undefined</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="abort" translate="no">.<a href="#abort">abort</a><span class="signature">()</span><span class="type-signature"> : <a href="LoadingManager.html">LoadingManager</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>可用于中止使用此管理器的加载器中正在进行的加载请求。
+仅当加载器实现了 <a href="Loader.html#abort">Loader#abort</a>，且浏览器支持 <code>AbortSignal.any()</code> 时，中止才会生效。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载管理器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addHandler" translate="no">.<a href="#addHandler">addHandler</a><span class="signature">( regex : <span class="param-type">string</span>, loader : <span class="param-type"><a href="Loader.html">Loader</a></span> )</span><span class="type-signature"> : <a href="LoadingManager.html">LoadingManager</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用给定正则表达式注册加载器。可用于定义应使用哪个加载器来加载特定文件。
+典型用例是覆盖纹理的默认加载器。</p>
+<pre><code class="language-js">// add handler for TGA textures
+manager.addHandler( /\.tga$/i, new TGALoader() );
+</code></pre>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">regex</strong>
+									</td>
+									<td class="description last">
+										<p>正则表达式。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">loader</strong>
+									</td>
+									<td class="description last">
+										<p>应处理匹配情况的加载器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载管理器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getHandler" translate="no">.<a href="#getHandler">getHandler</a><span class="signature">( file : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Loader.html">Loader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>可用于检索给定文件路径已注册的加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">file</strong>
+									</td>
+									<td class="description last">
+										<p>文件路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 已注册的加载器。若未找到加载器则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="itemEnd" translate="no">.<a href="#itemEnd">itemEnd</a><span class="signature">( url : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用此管理器的任何加载器在结束加载某个项目时应调用此方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>已加载项目的 URL。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="itemError" translate="no">.<a href="#itemError">itemError</a><span class="signature">( url : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用此管理器的任何加载器在加载某个项目时遇到错误应调用此方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>产生错误的项目的 URL。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="itemStart" translate="no">.<a href="#itemStart">itemStart</a><span class="signature">( url : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用此管理器的任何加载器在开始加载某个项目时应调用此方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的 URL。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="removeHandler" translate="no">.<a href="#removeHandler">removeHandler</a><span class="signature">( regex : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="LoadingManager.html">LoadingManager</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>移除给定正则表达式对应的加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">regex</strong>
+									</td>
+									<td class="description last">
+										<p>正则表达式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载管理器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="resolveURL" translate="no">.<a href="#resolveURL">resolveURL</a><span class="signature">( url : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>给定一个 URL，使用 URL 修饰回调（若有）并返回解析后的 URL。
+若未设置 URL 修饰器，则返回原始 URL。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的 URL。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的 URL。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setURLModifier" translate="no">.<a href="#setURLModifier">setURLModifier</a><span class="signature">( transform : <span class="param-type">function</span> )</span><span class="type-signature"> : <a href="LoadingManager.html">LoadingManager</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若提供回调，则在发送请求之前，每个资源 URL 都会传给该回调。
+回调可以返回原始 URL，或返回新 URL 以覆盖加载行为。
+此行为可用于从 .ZIP 文件、拖放 API 和 Data URI 加载资源。</p>
+<pre><code class="language-js">const blobs = {'fish.gltf': blob1, 'diffuse.png': blob2, 'normal.png': blob3};
+const manager = new THREE.LoadingManager();
+// Initialize loading manager with URL callback.
+const objectURLs = [];
+manager.setURLModifier( ( url ) => {
+	url = URL.createObjectURL( blobs[ url ] );
+	objectURLs.push( url );
+	return url;
+} );
+// Load as usual, then revoke the blob URLs.
+const loader = new GLTFLoader( manager );
+loader.load( 'fish.gltf', (gltf) => {
+	scene.add( gltf.scene );
+	objectURLs.forEach( ( url ) => URL.revokeObjectURL( url ) );
+} );
+</code></pre>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">transform</strong>
+									</td>
+									<td class="description last">
+										<p>URL 修饰回调。接收一个 URL，必须返回解析后的 URL。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载管理器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/LoadingManager.js" translate="no" target="_blank" rel="noopener">src/loaders/LoadingManager.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

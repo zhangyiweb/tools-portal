@@ -1,0 +1,20 @@
+{
+  "name": "polyhaven-hdri-viewer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --base=/",
+    "build:pages": "vite build",
+    "preview": "vite preview",
+    "preview:pages": "vite preview --base=/polyhaven-hdri-viewer/"
+  },
+  "dependencies": {
+    "lil-gui": "^0.21.0",
+    "three": "0.184.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.7"
+  }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>QuadraticBezierCurve3 - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Curve.html">Curve</a> → </p>
+	<h1 translate="no">QuadraticBezierCurve3</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示三维二次贝塞尔曲线的曲线。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="QuadraticBezierCurve3" translate="no">new <a href="#QuadraticBezierCurve3">QuadraticBezierCurve3</a><span class="signature">( v0 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v1 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v2 : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一条新的二次贝塞尔曲线。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v0</strong>
+									</td>
+									<td class="description last">
+										<p>起点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v1</strong>
+									</td>
+									<td class="description last">
+										<p>控制点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v2</strong>
+									</td>
+									<td class="description last">
+										<p>终点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isQuadraticBezierCurve3" translate="no">.<a href="#isQuadraticBezierCurve3">isQuadraticBezierCurve3</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="v0" translate="no">.<a href="#v0">v0</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>起点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="v1" translate="no">.<a href="#v1">v1</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>控制点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="v2" translate="no">.<a href="#v2">v2</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>终点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="getPoint" translate="no">.<a href="#getPoint">getPoint</a><span class="signature">( t : <span class="param-type">number</span>, optionalTarget : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回曲线上的一个点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">t</strong>
+									</td>
+									<td class="description last">
+										<p>表示曲线上位置的插值因子，必须在 <code>[0,1]</code> 范围内。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">optionalTarget</strong>
+									</td>
+									<td class="description last">
+										<p>可选的目标向量，结果将写入其中。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Curve.html#getPoint">Curve#getPoint</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 曲线上的位置。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/extras/curves/QuadraticBezierCurve3.js" translate="no" target="_blank" rel="noopener">src/extras/curves/QuadraticBezierCurve3.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>HDRCubeTextureLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">HDRCubeTextureLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载 HDR 立方体贴图的加载器。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new HDRCubeTextureLoader();
+loader.setPath( 'textures/cube/pisaHDR/' );
+const cubeTexture = await loader.loadAsync( [ 'px.hdr', 'nx.hdr', 'py.hdr', 'ny.hdr', 'pz.hdr', 'nz.hdr' ] );
+scene.background = cubeTexture;
+scene.environment = cubeTexture;
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">HDRCubeTextureLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { HDRCubeTextureLoader } from 'three/addons/loaders/HDRCubeTextureLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="HDRCubeTextureLoader" translate="no">new <a href="#HDRCubeTextureLoader">HDRCubeTextureLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 HDR 立方体贴图加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="hdrLoader" translate="no">.<a href="#hdrLoader">hdrLoader</a><span class="type-signature"> : <a href="HDRLoader.html">HDRLoader</a></span> </h3>
+					<div class="description">
+						<p>内部 HDR 加载器，用于加载每个立方体面的单独纹理。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="type" translate="no">.<a href="#type">type</a><span class="type-signature"> : <a href="global.html#HalfFloatType">HalfFloatType</a> | <a href="global.html#FloatType">FloatType</a></span> </h3>
+					<div class="description">
+						<p>纹理类型。</p>
+						<p>默认值为 <code>HalfFloatType</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( urls : <span class="param-type">Array.&lt;string></span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span><span class="type-signature"> : <a href="CubeTexture.html">CubeTexture</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的 HDR 立方体贴图传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">urls</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> HDR 立方体贴图。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setDataType" translate="no">.<a href="#setDataType">setDataType</a><span class="signature">( value : <span class="param-type"><a href="global.html#HalfFloatType">HalfFloatType</a> | <a href="global.html#FloatType">FloatType</a></span> )</span><span class="type-signature"> : <a href="HDRCubeTextureLoader.html">HDRCubeTextureLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置纹理类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的纹理类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/HDRCubeTextureLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/HDRCubeTextureLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

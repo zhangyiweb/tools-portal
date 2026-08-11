@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>预览器</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <aside id="sidebar">
+        <header class="sidebar-header">
+          <h1>HDRI 浏览器</h1>
+          <p class="subtitle">数据来自 <a href="https://polyhaven.com/zh" target="_blank" rel="noopener">Poly Haven</a>，无需下载即可预览</p>
+        </header>
+
+        <div class="filters">
+          <input type="search" id="search" placeholder="搜索名称或标签…" autocomplete="off" />
+          <select id="category">
+            <option value="">全部分类</option>
+          </select>
+        </div>
+
+        <div id="status" class="status">正在加载 HDRI 列表…</div>
+        <div class="grid-scroll">
+          <div id="grid" class="grid"></div>
+        </div>
+      </aside>
+
+      <main id="viewport">
+        <canvas id="canvas"></canvas>
+        <div id="hdri-placeholder" class="hdri-placeholder">
+          <div class="placeholder-icon" aria-hidden="true"></div>
+          <p class="placeholder-title">开始预览</p>
+          <p class="placeholder-desc">从左侧点击 HDR 图添加环境</p>
+          <p class="placeholder-desc">或点击左下角「导入 GLB 模型」添加模型</p>
+        </div>
+        <div id="loading" class="loading hidden">
+          <div class="spinner"></div>
+          <span>正在加载环境贴图…</span>
+        </div>
+        <div class="viewport-panel">
+          <div id="info" class="info">
+            <span id="current-name">未选择 HDRI</span>
+            <select id="resolution-select" class="res-select" title="HDR 分辨率">
+              <option value="1k">1k</option>
+              <option value="2k" selected>2k</option>
+              <option value="4k">4k</option>
+              <option value="8k">8k</option>
+              <option value="16k">16k</option>
+            </select>
+            <button type="button" id="download-btn" class="btn-download" disabled>下载 HDR</button>
+          </div>
+          <div class="env-controls">
+            <label class="toggle">
+              <input type="checkbox" id="toggle-environment" checked />
+              <span>环境光照</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="toggle-background" checked />
+              <span>背景</span>
+            </label>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button type="button" id="import-btn" class="btn-primary">导入 GLB 模型</button>
+          <button type="button" id="export-btn" class="btn-secondary" disabled>导出 GLB 模型</button>
+          <input type="file" id="file-input" accept=".glb,.gltf" multiple hidden />
+          <ul id="model-list" class="model-list"></ul>
+        </div>
+        <div class="controls-hint">拖拽旋转 · 滚轮缩放 · 右键平移 · 左键点击模型编辑材质</div>
+        <aside id="material-panel" class="material-panel hidden">
+          <header class="material-panel-header">
+            <h2>材质编辑</h2>
+            <button type="button" id="material-panel-close" class="panel-close" aria-label="关闭">×</button>
+          </header>
+          <div id="material-panel-info" class="material-panel-info"></div>
+          <div id="material-panel-gui" class="material-panel-gui"></div>
+        </aside>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

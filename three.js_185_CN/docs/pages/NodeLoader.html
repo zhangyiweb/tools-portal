@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NodeLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">NodeLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于以 three.js JSON Object/Scene 格式加载节点对象的加载器。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="NodeLoader" translate="no">new <a href="#NodeLoader">NodeLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的节点加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器的引用。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="nodes" translate="no">.<a href="#nodes">nodes</a><span class="type-signature"> : Object.&lt;string, Node.constructor></span> </h3>
+					<div class="description">
+						<p>表示节点类型的字典。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="textures" translate="no">.<a href="#textures">textures</a><span class="type-signature"> : Object.&lt;string, <a href="Texture.html">Texture</a>></span> </h3>
+					<div class="description">
+						<p>表示纹理的字典。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="createNodeFromType" translate="no">.<a href="#createNodeFromType">createNodeFromType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定类型创建节点对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>节点类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 创建的节点实例。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type">function</span>, onError : <span class="param-type">function</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 加载节点定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时调用。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时调用。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>加载过程中抛出错误时调用。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( json : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定的 JSON 解析节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">json</strong>
+									</td>
+									<td class="description last">
+										<p>JSON 定义</p>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>节点类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">uuid</strong>
+									</td>
+									<td class="description last">
+										<p>节点 UUID。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">nodes</strong>
+									</td>
+									<td class="description last">
+										<p>节点依赖项。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">meta</strong>
+									</td>
+									<td class="description last">
+										<p>元数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parseNodes" translate="no">.<a href="#parseNodes">parseNodes</a><span class="signature">( json : <span class="param-type">Array.&lt;Object></span> )</span><span class="type-signature"> : Object.&lt;string, <a href="Node.html">Node</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析已加载节点的节点依赖项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">json</strong>
+									</td>
+									<td class="description last">
+										<p>JSON 定义</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含节点依赖项的字典。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setNodes" translate="no">.<a href="#setNodes">setNodes</a><span class="signature">( value : <span class="param-type">Object.&lt;string, Node.constructor></span> )</span><span class="type-signature"> : <a href="NodeLoader.html">NodeLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义节点类型的字典。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>以 <code>&lt;classname,class&gt;</code> 形式定义的节点库。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setTextures" translate="no">.<a href="#setTextures">setTextures</a><span class="signature">( value : <span class="param-type">Object.&lt;string, <a href="Texture.html">Texture</a>></span> )</span><span class="type-signature"> : <a href="NodeLoader.html">NodeLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义纹理的字典。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>以 <code>&lt;uuid,texture&gt;</code> 形式定义的纹理库。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/nodes/NodeLoader.js" translate="no" target="_blank" rel="noopener">src/loaders/nodes/NodeLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

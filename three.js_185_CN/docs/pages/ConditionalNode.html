@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ConditionalNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → </p>
+	<h1 translate="no">ConditionalNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示逻辑上的 <code>if/else</code> 语句。可用作
+<code>If()</code>/<code>Else()</code> 语法的替代方案。</p>
+<p><code>select()</code> 方法以链式方式在条件上调用。<code>select()</code> 的参数节点
+决定整个语句的结果。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">velocity = position.greaterThanEqual( limit ).select( velocity.negate(), velocity );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ConditionalNode" translate="no">new <a href="#ConditionalNode">ConditionalNode</a><span class="signature">( condNode : <span class="param-type"><a href="Node.html">Node</a></span>, ifNode : <span class="param-type"><a href="Node.html">Node</a></span>, elseNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的条件节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">condNode</strong>
+									</td>
+									<td class="description last">
+										<p>定义条件的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">ifNode</strong>
+									</td>
+									<td class="description last">
+										<p>条件为 <code>true</code> 时求值的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">elseNode</strong>
+									</td>
+									<td class="description last">
+										<p>条件为 <code>false</code> 时求值的节点。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="condNode" translate="no">.<a href="#condNode">condNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>定义条件的节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="elseNode" translate="no">.<a href="#elseNode">elseNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>条件为 <code>false</code> 时求值的节点。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="ifNode" translate="no">.<a href="#ifNode">ifNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>条件为 <code>true</code> 时求值的节点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="generateNodeType" translate="no">.<a href="#generateNodeType">generateNodeType</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法被重写，因为节点类型由 if/else
+节点推断。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#generateNodeType">Node#generateNodeType</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点类型。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/math/ConditionalNode.js" translate="no" target="_blank" rel="noopener">src/nodes/math/ConditionalNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

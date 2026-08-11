@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>XRHandModel - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → </p>
+	<h1 translate="no">XRHandModel</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示一个 XR 手部模型。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="XRHandModel" translate="no">new <a href="#XRHandModel">XRHandModel</a><span class="signature">( controller : <span class="param-type"><a href="Group.html">Group</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 XR 手部模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">controller</strong>
+									</td>
+									<td class="description last">
+										<p>手部控制器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="controller" translate="no">.<a href="#controller">controller</a><span class="type-signature"> : <a href="Group.html">Group</a></span> </h3>
+					<div class="description">
+						<p>手部控制器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="envMap" translate="no">.<a href="#envMap">envMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>控制器的环境贴图。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mesh" translate="no">.<a href="#mesh">mesh</a><span class="type-signature"> : <a href="Mesh.html">Mesh</a></span> </h3>
+					<div class="description">
+						<p>模型网格。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="motionController" translate="no">.<a href="#motionController">motionController</a><span class="type-signature"> : MotionController</span> </h3>
+					<div class="description">
+						<p>运动控制器。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="updateMatrixWorld" translate="no">.<a href="#updateMatrixWorld">updateMatrixWorld</a><span class="signature">( force : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用自定义实现重写。确保运动控制器更新网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">force</strong>
+									</td>
+									<td class="description last">
+										<p>设为 <code>true</code> 时，即使 <a href="Object3D.html#matrixWorldAutoUpdate">Object3D#matrixWorldAutoUpdate</a> 为 <code>false</code>，也会强制重新计算世界矩阵。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Object3D.html#updateMatrixWorld">Object3D#updateMatrixWorld</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/webxr/XRHandModelFactory.js" translate="no" target="_blank" rel="noopener">examples/jsm/webxr/XRHandModelFactory.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

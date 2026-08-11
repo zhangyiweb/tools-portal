@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ArrayCamera - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Camera.html">Camera</a> → <a href="PerspectiveCamera.html">PerspectiveCamera</a> → </p>
+	<h1 translate="no">ArrayCamera</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类相机可用于通过预定义的一组相机高效渲染场景。这对渲染 VR 场景的性能至关重要。</p>
+<p><code>ArrayCamera</code> 实例始终包含一组子相机。必须为每个子相机定义 <code>viewport</code> 属性，以确定该相机渲染视口的哪一部分。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ArrayCamera" translate="no">new <a href="#ArrayCamera">ArrayCamera</a><span class="signature">( array : <span class="param-type">Array.&lt;<a href="PerspectiveCamera.html">PerspectiveCamera</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的数组相机。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>透视子相机数组。</p>
+										<p>默认值为 <code>[]</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="cameras" translate="no">.<a href="#cameras">cameras</a><span class="type-signature"> : Array.&lt;<a href="PerspectiveCamera.html">PerspectiveCamera</a>></span> </h3>
+					<div class="description">
+						<p>透视子相机数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isArrayCamera" translate="no">.<a href="#isArrayCamera">isArrayCamera</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMultiViewCamera" translate="no">.<a href="#isMultiViewCamera">isMultiViewCamera</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>该相机是否用于多视图渲染。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/cameras/ArrayCamera.js" translate="no" target="_blank" rel="noopener">src/cameras/ArrayCamera.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

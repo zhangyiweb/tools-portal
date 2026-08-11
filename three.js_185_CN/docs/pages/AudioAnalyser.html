@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>AudioAnalyser - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">AudioAnalyser</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于分析音频数据的类。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">// create an AudioListener and add it to the camera
+const listener = new THREE.AudioListener();
+camera.add( listener );
+// create an Audio source
+const sound = new THREE.Audio( listener );
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new THREE.AudioLoader();
+audioLoader.load( 'sounds/ambient.ogg', function( buffer ) {
+	sound.setBuffer( buffer );
+	sound.setLoop(true);
+	sound.setVolume(0.5);
+	sound.play();
+});
+// create an AudioAnalyser, passing in the sound and desired fftSize
+const analyser = new THREE.AudioAnalyser( sound, 32 );
+// get the average frequency of the sound
+const data = analyser.getAverageFrequency();
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="AudioAnalyser" translate="no">new <a href="#AudioAnalyser">AudioAnalyser</a><span class="signature">( audio : <span class="param-type"><a href="Audio.html">Audio</a></span>, fftSize : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的音频分析器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">audio</strong>
+									</td>
+									<td class="description last">
+										<p>要分析的音频。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">fftSize</strong>
+									</td>
+									<td class="description last">
+										<p>执行快速傅里叶变换（FFT）获取频域数据时使用的窗口大小（采样数）。</p>
+										<p>默认值为 <code>2048</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="analyser" translate="no">.<a href="#analyser">analyser</a><span class="type-signature"> : AnalyserNode</span> </h3>
+					<div class="description">
+						<p>分析器节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="data" translate="no">.<a href="#data">data</a><span class="type-signature"> : Uint8Array</span> </h3>
+					<div class="description">
+						<p>存储分析后的数据。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="getAverageFrequency" translate="no">.<a href="#getAverageFrequency">getAverageFrequency</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 <a href="AudioAnalyser.html#getFrequencyData">AudioAnalyser#getFrequencyData</a> 所返回频率的平均值。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 平均频率。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getFrequencyData" translate="no">.<a href="#getFrequencyData">getFrequencyData</a><span class="signature">()</span><span class="type-signature"> : Uint8Array</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回音频的频域数据数组。</p>
+<p>数组中每个元素表示特定频率的分贝值。
+频率从 0 到采样率的一半线性分布。
+例如，对于 48000 采样率，数组最后一个元素表示 24000 Hz 的分贝值。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 频域数据。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/audio/AudioAnalyser.js" translate="no" target="_blank" rel="noopener">src/audio/AudioAnalyser.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>StorageBufferAttribute - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="BufferAttribute.html">BufferAttribute</a> → </p>
+	<h1 translate="no">StorageBufferAttribute</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>这种特殊类型的缓冲属性用于计算着色器。
+在早期的 three.js 版本中，只能通过 JavaScript 在 CPU 上更新属性数据，
+然后再将数据上传到 GPU。借助新的材质系统和渲染器，现在可以使用计算着色器
+在 GPU 上更高效地计算属性数据。</p>
+<p>用法是创建此类的实例，并将其作为输入提供给
+<a href="StorageBufferNode.html">StorageBufferNode</a>。</p>
+<p>注意：此类型缓冲属性只能与 <code>WebGPURenderer</code> 一起使用。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="StorageBufferAttribute" translate="no">new <a href="#StorageBufferAttribute">StorageBufferAttribute</a><span class="signature">( count : <span class="param-type">number | TypedArray</span>, itemSize : <span class="param-type">number</span>, typeClass : <span class="param-type">TypedArray.constructor</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的存储缓冲属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>元素数量。也可以将类型化数组作为参数传入。
+此时后续参数将不再需要。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">itemSize</strong>
+									</td>
+									<td class="description last">
+										<p>每个元素的分量数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">typeClass</strong>
+									</td>
+									<td class="description last">
+										<p>类型化数组构造函数。</p>
+										<p>默认值为 <code>Float32Array</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isStorageBufferAttribute" translate="no">.<a href="#isStorageBufferAttribute">isStorageBufferAttribute</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/common/StorageBufferAttribute.js" translate="no" target="_blank" rel="noopener">src/renderers/common/StorageBufferAttribute.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

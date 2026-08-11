@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>RapierHelper - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Line.html">Line</a> → <a href="LineSegments.html">LineSegments</a> → </p>
+	<h1 translate="no">RapierHelper</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类以轮廓线形式显示所有 Rapier 碰撞体。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">RapierHelper</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { RapierHelper } from 'three/addons/helpers/RapierHelper.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="RapierHelper" translate="no">new <a href="#RapierHelper">RapierHelper</a><span class="signature">( world : <span class="param-type">RAPIER.world</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 Rapier 调试辅助对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">world</strong>
+									</td>
+									<td class="description last">
+										<p>要可视化的 Rapier 世界。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="world" translate="no">.<a href="#world">world</a><span class="type-signature"> : RAPIER.world</span> </h3>
+					<div class="description">
+						<p>要可视化的 Rapier 世界。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放此实例分配的 GPU 相关资源。
+当应用中不再使用此实例时，请调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在渲染循环中调用此方法以更新轮廓线。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/helpers/RapierHelper.js" translate="no" target="_blank" rel="noopener">examples/jsm/helpers/RapierHelper.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

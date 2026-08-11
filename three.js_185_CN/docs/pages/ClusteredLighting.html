@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ClusteredLighting - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Lighting.html">Lighting</a> → </p>
+	<h1 translate="no">ClusteredLighting</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>基于 Forward+ 分簇着色（Clustered Shading）的自定义光照实现，
+会覆盖 <a href="WebGPURenderer.html">WebGPURenderer</a> 中的默认光照系统。适合
+拥有大量点光源且具有真实深度复杂度的 3D 场景——视锥体被划分为
+三维簇网格，因此每个片元只会计算实际影响到它的光源。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const lighting = new ClusteredLighting();
+renderer.lighting = lighting; // set lighting system
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ClusteredLighting</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { ClusteredLighting } from 'three/addons/lighting/ClusteredLighting.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ClusteredLighting" translate="no">new <a href="#ClusteredLighting">ClusteredLighting</a><span class="signature">( maxLights : <span class="param-type">number</span>, tileSize : <span class="param-type">number</span>, zSlices : <span class="param-type">number</span>, maxLightsPerCluster : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的分簇光照系统。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxLights</strong>
+									</td>
+									<td class="description last">
+										<p>点光源的最大数量。</p>
+										<p>默认值为 <code>1024</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tileSize</strong>
+									</td>
+									<td class="description last">
+										<p>屏幕分块大小（像素），即簇的 XY 尺寸。</p>
+										<p>默认值为 <code>32</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">zSlices</strong>
+									</td>
+									<td class="description last">
+										<p>指数深度切片的数量。</p>
+										<p>默认值为 <code>24</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxLightsPerCluster</strong>
+									</td>
+									<td class="description last">
+										<p>每个簇的光源列表容量。</p>
+										<p>默认值为 <code>64</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">类</h2>
+				<dl>
+					<dt><a href="ClusteredLighting.html">ClusteredLighting</a></dt>
+					<dd></dd>
+				</dl>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="createNode" translate="no">.<a href="#createNode">createNode</a><span class="signature">( lights : <span class="param-type">Array.&lt;<a href="Light.html">Light</a>></span> )</span><span class="type-signature"> : <a href="ClusteredLightsNode.html">ClusteredLightsNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定的光源数组创建一个新的分簇光源节点。</p>
+<p>此方法由渲染器内部调用，所有自定义光照实现都必须重写该方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">lights</strong>
+									</td>
+									<td class="description last">
+										<p>光源列表。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Lighting.html#createNode">Lighting#createNode</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 分簇光源节点。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/lighting/ClusteredLighting.js" translate="no" target="_blank" rel="noopener">examples/jsm/lighting/ClusteredLighting.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:;" />
+  <title>NVM 可视化管理</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <h1>NVM</h1>
+          <p class="tagline">Node 版本可视化管理</p>
+        </div>
+      </div>
+      <div class="top-right">
+        <div class="nvm-actions">
+          <button type="button" class="btn btn-primary" id="btnInstallNvm" hidden>安装 NVM</button>
+          <button type="button" class="btn btn-ghost" id="btnUpdateNvm" hidden>更新 NVM</button>
+        </div>
+        <div class="status-pill" id="statusPill">
+          <span class="dot" id="statusDot"></span>
+          <span id="statusText">检测中…</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="nvm-missing" id="nvmMissing" hidden>
+      <h2>尚未安装 NVM</h2>
+      <p>本工具依赖 nvm-windows。点击下方按钮下载并运行官方安装程序，完成后点击「刷新」。</p>
+      <button type="button" class="btn btn-primary" id="btnInstallNvmHero">安装 nvm-windows</button>
+    </section>
+
+    <section class="hero-bar">
+      <div class="current-block">
+        <span class="label">当前使用</span>
+        <div class="current-value">
+          <span id="currentVersion">—</span>
+          <span class="arch" id="currentArch"></span>
+        </div>
+      </div>
+      <div class="quick-actions">
+        <div class="custom-install">
+          <input type="text" id="customVersion" placeholder="例如 22.14.0" spellcheck="false" />
+          <button type="button" class="btn btn-primary" id="btnInstallCustom">安装</button>
+        </div>
+        <button type="button" class="btn btn-ghost" id="btnInstallLts">安装 LTS</button>
+        <button type="button" class="btn btn-ghost" id="btnInstallLatest">Latest</button>
+        <button type="button" class="btn btn-ghost" id="btnRefresh" title="刷新">刷新</button>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab active" data-tab="installed" role="tab">已安装</button>
+        <button type="button" class="tab" data-tab="available" role="tab">可安装</button>
+      </div>
+      <div class="search-wrap">
+        <input type="search" id="searchInput" placeholder="搜索版本号…" autocomplete="off" />
+      </div>
+      <div class="filter-wrap" id="ltsFilterWrap" hidden>
+        <label class="check">
+          <input type="checkbox" id="ltsOnly" />
+          <span>仅 LTS</span>
+        </label>
+      </div>
+    </div>
+
+    <main class="list-panel" id="listPanel">
+      <div class="list-empty" id="listEmpty">加载中…</div>
+      <ul class="version-list" id="versionList" hidden></ul>
+    </main>
+
+    <footer class="toast-area" id="toastArea" aria-live="polite"></footer>
+  </div>
+
+  <div class="busy-overlay" id="busyOverlay" hidden>
+    <div class="busy-card">
+      <div class="spinner"></div>
+      <p id="busyText">处理中…</p>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

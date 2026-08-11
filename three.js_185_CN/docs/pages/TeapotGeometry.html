@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TeapotGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="BufferGeometry.html">BufferGeometry</a> → </p>
+	<h1 translate="no">TeapotGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>将 Martin Newell 著名的犹他茶壶数据细分（tessellate）为三角形。</p>
+<p>茶壶通常应作为双面对象渲染，因为某些曲面片的两侧都可见，例如盖子周围的缝隙以及壶嘴内部。</p>
+<p>分段数 <code>n</code> 决定输出的三角形数量。总三角形数 = 32<em>2</em>n<em>n - 8</em>n（顶部和底部尖点处的退化三角形已删除）。</p>
+<p>代码基于 <a href="http://tog.acm.org/resources/SPD/" target="_blank" rel="noopener">SPD software</a>，为 Udacity 课程 <a href="http://bit.ly/ericity" target="_blank" rel="noopener">Interactive Rendering</a> 创建。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const geometry = new TeapotGeometry( 50, 18 );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const teapot = new THREE.Mesh( geometry, material );
+scene.add( teapot );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TeapotGeometry</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TeapotGeometry } from 'three/addons/geometries/TeapotGeometry.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TeapotGeometry" translate="no">new <a href="#TeapotGeometry">TeapotGeometry</a><span class="signature">( size : <span class="param-type">number</span>, segments : <span class="param-type">number</span>, bottom : <span class="param-type">boolean</span>, lid : <span class="param-type">boolean</span>, body : <span class="param-type">boolean</span>, fitLid : <span class="param-type">boolean</span>, blinn : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的茶壶几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">size</strong>
+									</td>
+									<td class="description last">
+										<p>茶壶的相对缩放。</p>
+										<p>默认值为 <code>50</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">segments</strong>
+									</td>
+									<td class="description last">
+										<p>细分每个曲面片边的线段数量。</p>
+										<p>默认值为 <code>10</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bottom</strong>
+									</td>
+									<td class="description last">
+										<p>是否生成茶壶底部。</p>
+										<p>默认值为 <code>true</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">lid</strong>
+									</td>
+									<td class="description last">
+										<p>是否生成盖子。</p>
+										<p>默认值为 <code>true</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">body</strong>
+									</td>
+									<td class="description last">
+										<p>是否生成壶身。</p>
+										<p>默认值为 <code>true</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">fitLid</strong>
+									</td>
+									<td class="description last">
+										<p>是否略微拉伸盖子以防止壶身与盖子之间出现缝隙。</p>
+										<p>默认值为 <code>true</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">blinn</strong>
+									</td>
+									<td class="description last">
+										<p>是否对茶壶进行垂直缩放以获得更好的视觉效果。</p>
+										<p>默认值为 <code>true</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/geometries/TeapotGeometry.js" translate="no" target="_blank" rel="noopener">examples/jsm/geometries/TeapotGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

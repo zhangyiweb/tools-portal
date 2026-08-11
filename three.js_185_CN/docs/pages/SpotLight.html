@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SpotLight - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Light.html">Light</a> → </p>
+	<h1 translate="no">SpotLight</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>该光源从单个点沿一个方向发射，形成锥形光柱，
+且离光源越远锥体越大。</p>
+<p>此光源可投射阴影——详情参见 <a href="SpotLightShadow.html">SpotLightShadow</a>。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">// white spotlight shining from the side, modulated by a texture
+const spotLight = new THREE.SpotLight( 0xffffff );
+spotLight.position.set( 100, 1000, 100 );
+spotLight.map = new THREE.TextureLoader().load( url );
+spotLight.castShadow = true;
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;
+spotLight.shadow.camera.near = 500;
+spotLight.shadow.camera.far = 4000;
+spotLight.shadow.camera.fov = 30;s
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SpotLight" translate="no">new <a href="#SpotLight">SpotLight</a><span class="signature">( color : <span class="param-type">number | <a href="Color.html">Color</a> | string</span>, intensity : <span class="param-type">number</span>, distance : <span class="param-type">number</span>, angle : <span class="param-type">number</span>, penumbra : <span class="param-type">number</span>, decay : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的聚光灯。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>光源颜色。</p>
+										<p>默认值为 <code>0xffffff</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">intensity</strong>
+									</td>
+									<td class="description last">
+										<p>光源强度，单位为坎德拉 (cd)。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">distance</strong>
+									</td>
+									<td class="description last">
+										<p>灯光的最大照射范围。<code>0</code> 表示无限制。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">angle</strong>
+									</td>
+									<td class="description last">
+										<p>光线相对其方向的最大散射角度，上限为 <code>Math.PI/2</code>。</p>
+										<p>默认值为 <code>Math.PI/3</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">penumbra</strong>
+									</td>
+									<td class="description last">
+										<p>聚光灯锥体中因半影而衰减的百分比。取值范围为 <code>[0,1]</code>。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">decay</strong>
+									</td>
+									<td class="description last">
+										<p>灯光沿距离衰减的程度。</p>
+										<p>默认值为 <code>2</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="angle" translate="no">.<a href="#angle">angle</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>光线相对其方向的最大散射角度，上限为 <code>Math.PI/2</code>。</p>
+						<p>默认值为 <code>Math.PI/3</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="decay" translate="no">.<a href="#decay">decay</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>灯光沿距离衰减的程度。在物理正确渲染的语境下，
+不应更改默认值。</p>
+						<p>默认值为 <code>2</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="distance" translate="no">.<a href="#distance">distance</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>灯光的最大照射范围。<code>0</code> 表示无限制。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isSpotLight" translate="no">.<a href="#isSpotLight">isSpotLight</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="map" translate="no">.<a href="#map">map</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>用于调制灯光颜色的纹理。聚光灯颜色
+会与该纹理的 RGB 值混合，混合比例
+对应该纹理的 alpha 值。类似 cookie 的遮罩效果
+通过像素值 <code>(0, 0, 0, 1-cookie_value)</code> 再现。</p>
+<p><em>警告</em>：若 <a href="Object3D.html#castShadow">Object3D#castShadow</a> 设为 <code>false</code>，此属性将被禁用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="penumbra" translate="no">.<a href="#penumbra">penumbra</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>聚光灯锥体中因半影而衰减的百分比。
+取值范围为 <code>[0,1]</code>。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="power" translate="no">.<a href="#power">power</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>灯光功率。功率是以流明 (lm) 为单位的光通量。
+更改功率也会更改灯光强度。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="shadow" translate="no">.<a href="#shadow">shadow</a><span class="type-signature"> : <a href="SpotLightShadow.html">SpotLightShadow</a></span> </h3>
+					<div class="description">
+						<p>此属性保存灯光的阴影配置。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="target" translate="no">.<a href="#target">target</a><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="description">
+						<p>聚光灯从其位置指向
+目标的位置。</p>
+<p>要将目标位置改为默认值以外的值，
+必须将其添加到场景中。</p>
+<p>也可以将目标设为场景中的另一个 3D 物体，
+灯光将跟踪该目标物体。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/SpotLight.js" translate="no" target="_blank" rel="noopener">src/lights/SpotLight.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

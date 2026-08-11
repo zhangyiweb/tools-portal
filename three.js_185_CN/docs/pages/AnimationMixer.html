@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>AnimationMixer - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">AnimationMixer</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><code>AnimationMixer</code> 是场景中特定对象的动画播放器。当场景中多个对象需要独立播放动画时，
+可为每个对象分别使用一个 <code>AnimationMixer</code>。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="AnimationMixer" translate="no">new <a href="#AnimationMixer">AnimationMixer</a><span class="signature">( root : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的动画混合器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">root</strong>
+									</td>
+									<td class="description last">
+										<p>由该混合器播放动画的对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="time" translate="no">.<a href="#time">time</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>混合器的全局时间（秒；混合器创建时从 <code>0</code> 开始）。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="timeScale" translate="no">.<a href="#timeScale">timeScale</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>全局时间的缩放因子。</p>
+<p>注意：将此成员设为 <code>0</code> 后再设回 <code>1</code>，可用于暂停/恢复该混合器控制的所有动作。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clipAction" translate="no">.<a href="#clipAction">clipAction</a><span class="signature">( clip : <span class="param-type"><a href="AnimationClip.html">AnimationClip</a> | string</span>, optionalRoot : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, blendMode : <span class="param-type"><a href="global.html#NormalAnimationBlendMode">NormalAnimationBlendMode</a> | <a href="global.html#AdditiveAnimationBlendMode">AdditiveAnimationBlendMode</a></span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回传入片段对应的 <a href="AnimationAction.html">AnimationAction</a> 实例。</p>
+<p>若尚不存在匹配片段和根对象参数的动作，此方法会创建它。使用相同的片段和根对象参数多次调用此方法，始终返回同一个动作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">clip</strong>
+									</td>
+									<td class="description last">
+										<p>动画片段，或动画片段的名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">optionalRoot</strong>
+									</td>
+									<td class="description last">
+										<p>可选的替代根对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">blendMode</strong>
+									</td>
+									<td class="description last">
+										<p>混合模式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 动画动作。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="existingAction" translate="no">.<a href="#existingAction">existingAction</a><span class="signature">( clip : <span class="param-type"><a href="AnimationClip.html">AnimationClip</a> | string</span>, optionalRoot : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回传入片段对应的已有动画动作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">clip</strong>
+									</td>
+									<td class="description last">
+										<p>动画片段，或动画片段的名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">optionalRoot</strong>
+									</td>
+									<td class="description last">
+										<p>可选的替代根对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 动画动作。若未找到则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRoot" translate="no">.<a href="#getRoot">getRoot</a><span class="signature">()</span><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回该混合器的根对象。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 混合器的根对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setTime" translate="no">.<a href="#setTime">setTime</a><span class="signature">( time : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationMixer.html">AnimationMixer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将混合器的全局时间设置到指定时刻，并相应更新动画。</p>
+<p>当需要跳转到动画的精确时刻时很有用。输入参数会乘以 <a href="AnimationMixer.html#timeScale">AnimationMixer#timeScale</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">time</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的时间（秒）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画混合器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="stopAllAction" translate="no">.<a href="#stopAllAction">stopAllAction</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationMixer.html">AnimationMixer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>停用该混合器上所有已调度的动作。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画混合器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="uncacheAction" translate="no">.<a href="#uncacheAction">uncacheAction</a><span class="signature">( clip : <span class="param-type"><a href="AnimationClip.html">AnimationClip</a> | string</span>, optionalRoot : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放某个动作占用的所有内存资源。动作由给定片段和可选根对象标识。使用此方法前，
+请确保调用 <a href="AnimationAction.html#stop">AnimationAction#stop</a> 停用该动作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">clip</strong>
+									</td>
+									<td class="description last">
+										<p>动画片段，或动画片段的名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">optionalRoot</strong>
+									</td>
+									<td class="description last">
+										<p>可选的替代根对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="uncacheClip" translate="no">.<a href="#uncacheClip">uncacheClip</a><span class="signature">( clip : <span class="param-type"><a href="AnimationClip.html">AnimationClip</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放某个片段占用的所有内存资源。使用此方法前，
+请确保对所有相关动作调用 <a href="AnimationAction.html#stop">AnimationAction#stop</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">clip</strong>
+									</td>
+									<td class="description last">
+										<p>要清除缓存的片段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="uncacheRoot" translate="no">.<a href="#uncacheRoot">uncacheRoot</a><span class="signature">( root : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放某个根对象占用的所有内存资源。使用此方法前，
+请确保对所有相关动作调用 <a href="AnimationAction.html#stop">AnimationAction#stop</a>，
+或在混合器仅操作单个根对象时调用 <a href="AnimationMixer.html#stopAllAction">AnimationMixer#stopAllAction</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">root</strong>
+									</td>
+									<td class="description last">
+										<p>要清除缓存的根对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( deltaTime : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationMixer.html">AnimationMixer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>推进混合器的全局时间并更新动画。</p>
+<p>通常在渲染循环中完成，传入来自 <a href="Clock.html">Clock</a> 或 <a href="Timer.html">Timer</a> 的时间增量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">deltaTime</strong>
+									</td>
+									<td class="description last">
+										<p>时间增量（秒）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画混合器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationMixer.js" translate="no" target="_blank" rel="noopener">src/animation/AnimationMixer.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

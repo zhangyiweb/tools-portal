@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>GLBufferAttribute - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">GLBufferAttribute</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>缓冲属性的替代版本，可对 VBO 进行更精细的控制。</p>
+<p>渲染器不会为这类属性构造 VBO，而是使用构造函数中传入的 VBO，之后也可通过 <code>buffer</code> 属性修改。</p>
+<p>最常见的用例是某种 GPGPU 计算介入甚至直接生成相关 VBO 时。</p>
+<p>注意：此类仅可与 <a href="WebGLRenderer.html">WebGLRenderer</a> 配合使用。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="GLBufferAttribute" translate="no">new <a href="#GLBufferAttribute">GLBufferAttribute</a><span class="signature">( buffer : <span class="param-type">WebGLBuffer</span>, type : <span class="param-type">number</span>, itemSize : <span class="param-type">number</span>, elementSize : <span class="param-type">number</span>, count : <span class="param-type">number</span>, normalized : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 GL 缓冲属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">buffer</strong>
+									</td>
+									<td class="description last">
+										<p>原生 WebGL 缓冲区。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>原生数据类型（例如 <code>gl.FLOAT</code>）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">itemSize</strong>
+									</td>
+									<td class="description last">
+										<p>每个顶点的分量数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">elementSize</strong>
+									</td>
+									<td class="description last">
+										<p>给定 <code>type</code> 参数对应的字节大小。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>VBO 中预期的顶点数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">normalized</strong>
+									</td>
+									<td class="description last">
+										<p>数据是否已归一化。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="buffer" translate="no">.<a href="#buffer">buffer</a><span class="type-signature"> : WebGLBuffer</span> </h3>
+					<div class="description">
+						<p>原生 WebGL 缓冲区。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="count" translate="no">.<a href="#count">count</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>VBO 中预期的顶点数量。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="elementSize" translate="no">.<a href="#elementSize">elementSize</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>给定 <code>type</code> 参数对应的字节大小。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isGLBufferAttribute" translate="no">.<a href="#isGLBufferAttribute">isGLBufferAttribute</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="itemSize" translate="no">.<a href="#itemSize">itemSize</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>每个顶点的分量数量，参见 <a href="BufferAttribute.html#itemSize">BufferAttribute#itemSize</a>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="name" translate="no">.<a href="#name">name</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>缓冲属性的名称。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="needsUpdate" translate="no">.<a href="#needsUpdate">needsUpdate</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>标志该属性已更改，应重新发送到 GPU。修改数组值时请将其设为 <code>true</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalized" translate="no">.<a href="#normalized">normalized</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>仅适用于整数数据。指示缓冲区中的底层数据如何映射到 GLSL 代码中的值。例如，若 <code>buffer</code> 包含 <code>gl.UNSIGNED_SHORT</code> 数据，且 <code>normalized</code> 为 <code>true</code>，则缓冲区中的 <code>0 - +65535</code> 会映射为 GLSL 属性中的 <code>0.0f - +1.0f</code>。若 <code>normalized</code> 为 <code>false</code>，这些值将原样转换为浮点数，即 <code>65535</code> 变为 <code>65535.0f</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="type" translate="no">.<a href="#type">type</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>原生数据类型。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="version" translate="no">.<a href="#version">version</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>版本号，每次将 <code>needsUpdate</code> 设为 <code>true</code> 时递增。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setBuffer" translate="no">.<a href="#setBuffer">setBuffer</a><span class="signature">( buffer : <span class="param-type">WebGLBuffer</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定的原生 WebGL 缓冲区。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">buffer</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的缓冲区。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setCount" translate="no">.<a href="#setCount">setCount</a><span class="signature">( count : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置计数（VBO 中预期的顶点数量）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>计数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setItemSize" translate="no">.<a href="#setItemSize">setItemSize</a><span class="signature">( itemSize : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置每个顶点的分量数量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">itemSize</strong>
+									</td>
+									<td class="description last">
+										<p>每个顶点的分量数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setType" translate="no">.<a href="#setType">setType</a><span class="signature">( type : <span class="param-type">number</span>, elementSize : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定的原生数据类型和元素大小。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>原生数据类型（例如 <code>gl.FLOAT</code>）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">elementSize</strong>
+									</td>
+									<td class="description last">
+										<p>给定 <code>type</code> 参数对应的字节大小。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/core/GLBufferAttribute.js" translate="no" target="_blank" rel="noopener">src/core/GLBufferAttribute.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

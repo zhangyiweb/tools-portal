@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ShadowMesh - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Mesh.html">Mesh</a> → </p>
+	<h1 translate="no">ShadowMesh</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一种跟随场景中投射阴影网格移动、但被限制在单一平面上的阴影网格。
+该技术可作为传统阴影贴图的高性能替代方案。不过，它有以下严重限制：</p>
+<ul>
+<li>阴影只能投射到平面上。</li>
+<li>不支持软阴影。</li>
+</ul></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const cubeShadow = new ShadowMesh( cube );
+scene.add( cubeShadow );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ShadowMesh</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { ShadowMesh } from 'three/addons/objects/ShadowMesh.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ShadowMesh" translate="no">new <a href="#ShadowMesh">ShadowMesh</a><span class="signature">( mesh : <span class="param-type"><a href="Mesh.html">Mesh</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的阴影网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">mesh</strong>
+									</td>
+									<td class="description last">
+										<p>投射阴影的参考网格。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="frustumCulled" translate="no">.<a href="#frustumCulled">frustumCulled</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>已重写，默认禁用视锥体裁剪。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Mesh.html#frustumCulled">Mesh#frustumCulled</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isShadowMesh" translate="no">.<a href="#isShadowMesh">isShadowMesh</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="matrixAutoUpdate" translate="no">.<a href="#matrixAutoUpdate">matrixAutoUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>已重写，默认禁用自动矩阵更新。局部矩阵在
+<a href="ShadowMesh.html#update">ShadowMesh#update</a> 中手动计算。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Mesh.html#matrixAutoUpdate">Mesh#matrixAutoUpdate</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="meshMatrix" translate="no">.<a href="#meshMatrix">meshMatrix</a><span class="type-signature"> : <a href="Matrix4.html">Matrix4</a></span> </h3>
+					<div class="description">
+						<p>表示参考网格的世界矩阵。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( plane : <span class="param-type"><a href="Plane.html">Plane</a></span>, lightPosition4D : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新阴影网格，使其跟随投射阴影的参考网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">plane</strong>
+									</td>
+									<td class="description last">
+										<p>阴影网格投影到的平面。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">lightPosition4D</strong>
+									</td>
+									<td class="description last">
+										<p>光源位置。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/objects/ShadowMesh.js" translate="no" target="_blank" rel="noopener">examples/jsm/objects/ShadowMesh.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

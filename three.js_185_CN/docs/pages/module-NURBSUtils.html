@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NURBSUtils - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">NURBSUtils</h1>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">NURBSUtils</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import * as NURBSUtils from 'three/addons/curves/NURBSUtils.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="~calcBSplineDerivatives" translate="no">.<a href="#~calcBSplineDerivatives">calcBSplineDerivatives</a><span class="signature">( p : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span>, P : <span class="param-type">Array.&lt;<a href="Vector4.html">Vector4</a>></span>, u : <span class="param-type">number</span>, nd : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;<a href="Vector4.html">Vector4</a>></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算 B 样条的导数。参见《The NURBS Book》第 93 页，算法 A3.2。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">P</strong>
+									</td>
+									<td class="description last">
+										<p>控制点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">nd</strong>
+									</td>
+									<td class="description last">
+										<p>导数的阶数（数量）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含导数的数组[d+1]。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~calcBSplinePoint" translate="no">.<a href="#~calcBSplinePoint">calcBSplinePoint</a><span class="signature">( p : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span>, P : <span class="param-type">Array.&lt;<a href="Vector4.html">Vector4</a>></span>, u : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算 B 样条曲线上的点。参见《The NURBS Book》第 82 页，算法 A3.1。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>B 样条的阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">P</strong>
+									</td>
+									<td class="description last">
+										<p>控制点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>参数点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定 <code>u</code> 处的点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~calcBasisFunctionDerivatives" translate="no">.<a href="#~calcBasisFunctionDerivatives">calcBasisFunctionDerivatives</a><span class="signature">( span : <span class="param-type">number</span>, u : <span class="param-type">number</span>, p : <span class="param-type">number</span>, n : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span> )</span><span class="type-signature"> : Array.&lt;Array.&lt;number>></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算基函数的导数。参见《The NURBS Book》第 72 页，算法 A2.3。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">span</strong>
+									</td>
+									<td class="description last">
+										<p><code>u</code> 所在的跨度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">n</strong>
+									</td>
+									<td class="description last">
+										<p>要计算的导数数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>节点向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含基函数导数的数组[n+1][p+1]。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~calcBasisFunctions" translate="no">.<a href="#~calcBasisFunctions">calcBasisFunctions</a><span class="signature">( span : <span class="param-type">number</span>, u : <span class="param-type">number</span>, p : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span> )</span><span class="type-signature"> : Array.&lt;number></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算基函数。参见《The NURBS Book》第 70 页，算法 A2.2。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">span</strong>
+									</td>
+									<td class="description last">
+										<p><code>u</code> 所在的跨度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>参数值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>节点向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含基函数值的数组[p+1]。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~calcKoverI" translate="no">.<a href="#~calcKoverI">calcKoverI</a><span class="signature">( k : <span class="param-type">number</span>, i : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算「K 选 I」（组合数）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">k</strong>
+									</td>
+									<td class="description last">
+										<p>K 值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i</strong>
+									</td>
+									<td class="description last">
+										<p>I 值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> k!/(i!(k-i)!)</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~calcNURBSDerivatives" translate="no">.<a href="#~calcNURBSDerivatives">calcNURBSDerivatives</a><span class="signature">( p : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span>, P : <span class="param-type">Array.&lt;<a href="Vector4.html">Vector4</a>></span>, u : <span class="param-type">number</span>, nd : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;<a href="Vector3.html">Vector3</a>></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算 NURBS 曲线的导数。参见《The NURBS Book》第 127 页，算法 A4.2。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">P</strong>
+									</td>
+									<td class="description last">
+										<p>齐次空间中的控制点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">nd</strong>
+									</td>
+									<td class="description last">
+										<p>导数的阶数（数量）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 有理曲线的导数数组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~calcRationalCurveDerivatives" translate="no">.<a href="#~calcRationalCurveDerivatives">calcRationalCurveDerivatives</a><span class="signature">( Pders : <span class="param-type">Array.&lt;<a href="Vector4.html">Vector4</a>></span> )</span><span class="type-signature"> : Array.&lt;<a href="Vector3.html">Vector3</a>></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算有理曲线的导数（0 到 nd）。参见《The NURBS Book》第 127 页，算法 A4.2。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">Pders</strong>
+									</td>
+									<td class="description last">
+										<p>包含导数的数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 有理曲线的导数数组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~calcSurfacePoint" translate="no">.<a href="#~calcSurfacePoint">calcSurfacePoint</a><span class="signature">( p : <span class="param-type">number</span>, q : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span>, V : <span class="param-type">Array.&lt;number></span>, P : <span class="param-type">Array.&lt;Array.&lt;<a href="Vector4.html">Vector4</a>>></span>, u : <span class="param-type">number</span>, v : <span class="param-type">number</span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算有理 B 样条曲面上的点。参见《The NURBS Book》第 134 页，算法 A4.3。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>B 样条曲面的第一维阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">q</strong>
+									</td>
+									<td class="description last">
+										<p>B 样条曲面的第二维阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>第一维节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">V</strong>
+									</td>
+									<td class="description last">
+										<p>第二维节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">P</strong>
+									</td>
+									<td class="description last">
+										<p>齐次空间中的控制点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>第一维参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>第二维参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="~calcVolumePoint" translate="no">.<a href="#~calcVolumePoint">calcVolumePoint</a><span class="signature">( p : <span class="param-type">number</span>, q : <span class="param-type">number</span>, r : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span>, V : <span class="param-type">Array.&lt;number></span>, W : <span class="param-type">Array.&lt;number></span>, P : <span class="param-type">Array.&lt;Array.&lt;Array.&lt;<a href="Vector4.html">Vector4</a>>>></span>, u : <span class="param-type">number</span>, v : <span class="param-type">number</span>, w : <span class="param-type">number</span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>计算有理 B 样条体积中的点。参见《The NURBS Book》第 134 页，算法 A4.3。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>B 样条体积的第一维阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">q</strong>
+									</td>
+									<td class="description last">
+										<p>B 样条体积的第二维阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">r</strong>
+									</td>
+									<td class="description last">
+										<p>B 样条体积的第三维阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>第一维节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">V</strong>
+									</td>
+									<td class="description last">
+										<p>第二维节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">W</strong>
+									</td>
+									<td class="description last">
+										<p>第三维节点向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">P</strong>
+									</td>
+									<td class="description last">
+										<p>齐次空间中的控制点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>第一维参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>第二维参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">w</strong>
+									</td>
+									<td class="description last">
+										<p>第三维参数点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="~findSpan" translate="no">.<a href="#~findSpan">findSpan</a><span class="signature">( p : <span class="param-type">number</span>, u : <span class="param-type">number</span>, U : <span class="param-type">Array.&lt;number></span> )</span><span class="type-signature"> : number</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>查找节点向量的跨度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>阶数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>参数值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">U</strong>
+									</td>
+									<td class="description last">
+										<p>节点向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 跨度。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/curves/NURBSUtils.js" translate="no" target="_blank" rel="noopener">examples/jsm/curves/NURBSUtils.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

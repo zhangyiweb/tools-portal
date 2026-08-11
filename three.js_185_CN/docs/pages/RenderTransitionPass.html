@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>RenderTransitionPass - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Pass.html">Pass</a> → </p>
+	<h1 translate="no">RenderTransitionPass</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一种用于实现转场效果的特殊渲染通道。
+激活时，该通道将从场景 A 过渡到场景 B。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const renderTransitionPass = new RenderTransitionPass( fxSceneA.scene, fxSceneA.camera, fxSceneB.scene, fxSceneB.camera );
+renderTransitionPass.setTexture( textures[ 0 ] );
+composer.addPass( renderTransitionPass );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">RenderTransitionPass</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { RenderTransitionPass } from 'three/addons/postprocessing/RenderTransitionPass.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="RenderTransitionPass" translate="no">new <a href="#RenderTransitionPass">RenderTransitionPass</a><span class="signature">( sceneA : <span class="param-type"><a href="Scene.html">Scene</a></span>, cameraA : <span class="param-type"><a href="Camera.html">Camera</a></span>, sceneB : <span class="param-type"><a href="Scene.html">Scene</a></span>, cameraB : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个渲染转场通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sceneA</strong>
+									</td>
+									<td class="description last">
+										<p>第一个场景。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">cameraA</strong>
+									</td>
+									<td class="description last">
+										<p>第一个场景的相机。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">sceneB</strong>
+									</td>
+									<td class="description last">
+										<p>第二个场景。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">cameraB</strong>
+									</td>
+									<td class="description last">
+										<p>第二个场景的相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="cameraA" translate="no">.<a href="#cameraA">cameraA</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>第一个场景的相机。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="cameraB" translate="no">.<a href="#cameraB">cameraB</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>第二个场景的相机。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="material" translate="no">.<a href="#material">material</a><span class="type-signature"> : <a href="ShaderMaterial.html">ShaderMaterial</a></span> </h3>
+					<div class="description">
+						<p>通道材质。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sceneA" translate="no">.<a href="#sceneA">sceneA</a><span class="type-signature"> : <a href="Scene.html">Scene</a></span> </h3>
+					<div class="description">
+						<p>第一个场景。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sceneB" translate="no">.<a href="#sceneB">sceneB</a><span class="type-signature"> : <a href="Scene.html">Scene</a></span> </h3>
+					<div class="description">
+						<p>第二个场景。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放该实例分配的 GPU 相关资源。当应用中不再需要此通道时，应调用此方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#dispose">Pass#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="render" translate="no">.<a href="#render">render</a><span class="signature">( renderer : <span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span>, writeBuffer : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span>, readBuffer : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span>, deltaTime : <span class="param-type">number</span>, maskActive : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>执行转场通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">writeBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>写入缓冲区。该缓冲区作为通道的渲染目标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">readBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>读取缓冲区。通道可从此缓冲区获取上一通道的渲染结果。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">deltaTime</strong>
+									</td>
+									<td class="description last">
+										<p>时间增量（秒）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maskActive</strong>
+									</td>
+									<td class="description last">
+										<p>遮罩是否处于激活状态。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#render">Pass#render</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置通道的尺寸。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#setSize">Pass#setSize</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setTexture" translate="no">.<a href="#setTexture">setTexture</a><span class="signature">( value : <span class="param-type"><a href="Texture.html">Texture</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置效果纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>效果纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setTextureThreshold" translate="no">.<a href="#setTextureThreshold">setTextureThreshold</a><span class="signature">( value : <span class="param-type">boolean | number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置纹理阈值。该值定义纹理对转场效果的影响强度。
+必须在 <code>[0,1]</code> 范围内（0 表示完全生效，1 表示无效果）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>阈值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setTransition" translate="no">.<a href="#setTransition">setTransition</a><span class="signature">( value : <span class="param-type">boolean | number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置转场因子。必须在 <code>[0,1]</code> 范围内。
+该值决定两个场景的混合程度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>转场因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="useTexture" translate="no">.<a href="#useTexture">useTexture</a><span class="signature">( value : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>切换是否对效果使用纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>是否对转场效果使用纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/postprocessing/RenderTransitionPass.js" translate="no" target="_blank" rel="noopener">examples/jsm/postprocessing/RenderTransitionPass.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

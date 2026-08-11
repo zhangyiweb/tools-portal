@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>RTTNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="InputNode.html">InputNode</a> → <a href="UniformNode.html">UniformNode</a> → <a href="TextureNode.html">TextureNode</a> → </p>
+	<h1 translate="no">RTTNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><code>RTTNode</code> 接收另一个节点，并使用 <code>QuadMesh</code> 将其渲染到纹理（RTT）中。
+此模块在后处理场景中尤为重要，某些节点的效果需要
+纹理输入。基于本模块的辅助函数 <code>convertToTexture()</code>
+可让节点系统在需要时自动确保纹理输入。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="RTTNode" translate="no">new <a href="#RTTNode">RTTNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, width : <span class="param-type">number</span>, height : <span class="param-type">number</span>, options : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 RTT 节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>用于渲染纹理的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>内部渲染目标的宽度。若未指定宽度，渲染目标会自动调整大小。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>内部渲染目标的高度。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>内部渲染目标的选项。</p>
+										<p>默认值为 <code>{type:HalfFloatType}</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="autoResize" translate="no">.<a href="#autoResize">autoResize</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>内部渲染目标是否应自动调整大小。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="autoUpdate" translate="no">.<a href="#autoUpdate">autoUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>纹理是否应自动更新。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="height" translate="no">.<a href="#height">height</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>内部渲染目标的高度。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isRTTNode" translate="no">.<a href="#isRTTNode">isRTTNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="node" translate="no">.<a href="#node">node</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>用于渲染纹理的节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderTarget" translate="no">.<a href="#renderTarget">renderTarget</a><span class="type-signature"> : <a href="RenderTarget.html">RenderTarget</a></span> </h3>
+					<div class="description">
+						<p>渲染目标。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="textureNeedsUpdate" translate="no">.<a href="#textureNeedsUpdate">textureNeedsUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>纹理是否需要更新。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateBeforeType" translate="no">.<a href="#updateBeforeType">updateBeforeType</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p><code>updateBeforeType</code> 设置为 <code>NodeUpdateType.RENDER</code>，因为节点会在
+其 <a href="RTTNode.html#updateBefore">RTTNode#updateBefore</a> 方法中每帧渲染时更新纹理。</p>
+						<p>默认值为 <code>'render'</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TextureNode.html#updateBeforeType">TextureNode#updateBeforeType</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="width" translate="no">.<a href="#width">width</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>内部渲染目标的宽度。
+若未指定宽度，渲染目标会自动调整大小。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="getResolutionScale" translate="no">.<a href="#getResolutionScale">getResolutionScale</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>获取分辨率缩放比例。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 分辨率缩放比例。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setResolutionScale" translate="no">.<a href="#setResolutionScale">setResolutionScale</a><span class="signature">( resolutionScale : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="RTTNode.html">RTTNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置分辨率缩放比例。
+分辨率缩放比例是一个与渲染器宽度和高度相乘的因子。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">resolutionScale</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的分辨率缩放比例。<code>1</code> 表示全分辨率。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置内部渲染目标的大小。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/utils/RTTNode.js" translate="no" target="_blank" rel="noopener">src/nodes/utils/RTTNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

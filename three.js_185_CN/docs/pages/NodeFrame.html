@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NodeFrame - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">NodeFrame</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于更新节点的管理类。该模块跟踪诸如
+已经过时间、增量时间、渲染 ID 和帧 ID 等度量，
+以便根据节点的配置正确地调用节点更新方法
+<a href="Node.html#updateBefore">Node#updateBefore</a>、<a href="Node.html#update">Node#update</a>
+和 <a href="Node.html#updateAfter">Node#updateAfter</a>。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="NodeFrame" translate="no">new <a href="#NodeFrame">NodeFrame</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的节点帧。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="camera" translate="no">.<a href="#camera">camera</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>对当前相机的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="deltaTime" translate="no">.<a href="#deltaTime">deltaTime</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>增量时间（以秒为单位）。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="frameId" translate="no">.<a href="#frameId">frameId</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>帧 ID。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="material" translate="no">.<a href="#material">material</a><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="description">
+						<p>对当前材质的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="object" translate="no">.<a href="#object">object</a><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="description">
+						<p>对当前 3D 对象的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderId" translate="no">.<a href="#renderId">renderId</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>渲染 ID。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderer" translate="no">.<a href="#renderer">renderer</a><span class="type-signature"> : <a href="Renderer.html">Renderer</a></span> </h3>
+					<div class="description">
+						<p>对当前渲染器的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scene" translate="no">.<a href="#scene">scene</a><span class="type-signature"> : <a href="Scene.html">Scene</a></span> </h3>
+					<div class="description">
+						<p>对当前场景的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="time" translate="no">.<a href="#time">time</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>已经过时间（以秒为单位）。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateAfterMap" translate="no">.<a href="#updateAfterMap">updateAfterMap</a><span class="type-signature"> : WeakMap.&lt;<a href="Node.html">Node</a>, Object></span> </h3>
+					<div class="description">
+						<p>用于控制 <a href="Node.html#updateAfter">Node#updateAfter</a> 的调用。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateBeforeMap" translate="no">.<a href="#updateBeforeMap">updateBeforeMap</a><span class="type-signature"> : WeakMap.&lt;<a href="Node.html">Node</a>, Object></span> </h3>
+					<div class="description">
+						<p>用于控制 <a href="Node.html#updateBefore">Node#updateBefore</a> 的调用。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateMap" translate="no">.<a href="#updateMap">updateMap</a><span class="type-signature"> : WeakMap.&lt;<a href="Node.html">Node</a>, Object></span> </h3>
+					<div class="description">
+						<p>用于控制 <a href="Node.html#update">Node#update</a> 的调用。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新节点帧的内部状态。此方法由渲染器
+在其内部动画循环中调用。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="updateAfterNode" translate="no">.<a href="#updateAfterNode">updateAfterNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法对给定节点执行 <a href="Node.html#updateAfter">Node#updateAfter</a>。
+它确保遵守 <a href="Node.html#updateAfterType">Node#updateAfterType</a>，即更新
+仅根据更新类型在每帧、每次渲染或每个对象上执行一次。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>应被更新的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateBeforeNode" translate="no">.<a href="#updateBeforeNode">updateBeforeNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法对给定节点执行 <a href="Node.html#updateBefore">Node#updateBefore</a>。
+它确保遵守 <a href="Node.html#updateBeforeType">Node#updateBeforeType</a>，即更新
+仅根据更新类型在每帧、每次渲染或每个对象上执行一次。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>应被更新的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateNode" translate="no">.<a href="#updateNode">updateNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法对给定节点执行 <a href="Node.html#update">Node#update</a>。
+它确保遵守 <a href="Node.html#updateType">Node#updateType</a>，即更新
+仅根据更新类型在每帧、每次渲染或每个对象上执行一次。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>应被更新的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/core/NodeFrame.js" translate="no" target="_blank" rel="noopener">src/nodes/core/NodeFrame.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

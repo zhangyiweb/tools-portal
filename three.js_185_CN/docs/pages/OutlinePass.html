@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>OutlinePass - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Pass.html">Pass</a> → </p>
+	<h1 translate="no">OutlinePass</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于在选中对象周围渲染描边的通道。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const resolution = new THREE.Vector2( window.innerWidth, window.innerHeight );
+const outlinePass = new OutlinePass( resolution, scene, camera );
+composer.addPass( outlinePass );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">OutlinePass</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="OutlinePass" translate="no">new <a href="#OutlinePass">OutlinePass</a><span class="signature">( resolution : <span class="param-type"><a href="Vector2.html">Vector2</a></span>, scene : <span class="param-type"><a href="Scene.html">Scene</a></span>, camera : <span class="param-type"><a href="Camera.html">Camera</a></span>, selectedObjects : <span class="param-type">Array.&lt;<a href="Object3D.html">Object3D</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的描边通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">resolution</strong>
+									</td>
+									<td class="description last">
+										<p>效果的分辨率。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">scene</strong>
+									</td>
+									<td class="description last">
+										<p>要渲染的场景。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>相机。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">selectedObjects</strong>
+									</td>
+									<td class="description last">
+										<p>应接收描边的已选中 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="downSampleRatio" translate="no">.<a href="#downSampleRatio">downSampleRatio</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>下采样比率。该效果可以以远低于美化通道的分辨率进行渲染。</p>
+						<p>默认值为 <code>2</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="edgeGlow" translate="no">.<a href="#edgeGlow">edgeGlow</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>可用于实现动画发光/脉冲效果。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="edgeStrength" translate="no">.<a href="#edgeStrength">edgeStrength</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>边缘强度。</p>
+						<p>默认值为 <code>3</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="edgeThickness" translate="no">.<a href="#edgeThickness">edgeThickness</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>边缘厚度。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="hiddenEdgeColor" translate="no">.<a href="#hiddenEdgeColor">hiddenEdgeColor</a><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="description">
+						<p>隐藏边缘的颜色。</p>
+						<p>默认值为 <code>(0.1,0.04,0.02)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="patternTexture" translate="no">.<a href="#patternTexture">patternTexture</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>可用于高亮已选中的 3D 对象。需要将
+<a href="OutlinePass.html#usePatternTexture">OutlinePass#usePatternTexture</a> 设为 <code>true</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="pulsePeriod" translate="no">.<a href="#pulsePeriod">pulsePeriod</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>脉冲周期。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderCamera" translate="no">.<a href="#renderCamera">renderCamera</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>相机。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderScene" translate="no">.<a href="#renderScene">renderScene</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>要渲染的场景。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="resolution" translate="no">.<a href="#resolution">resolution</a><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="description">
+						<p>效果的分辨率。</p>
+						<p>默认值为 <code>(256,256)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="selectedObjects" translate="no">.<a href="#selectedObjects">selectedObjects</a><span class="type-signature"> : Array.&lt;<a href="Object3D.html">Object3D</a>></span> </h3>
+					<div class="description">
+						<p>应接收描边的已选中 3D 对象。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="usePatternTexture" translate="no">.<a href="#usePatternTexture">usePatternTexture</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否使用图案纹理来高亮已选中的 3D 对象。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="visibleEdgeColor" translate="no">.<a href="#visibleEdgeColor">visibleEdgeColor</a><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="description">
+						<p>可见边缘的颜色。</p>
+						<p>默认值为 <code>(1,1,1)</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放该实例分配的 GPU 相关资源。当应用中不再需要此通道时，应调用此方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#dispose">Pass#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="render" translate="no">.<a href="#render">render</a><span class="signature">( renderer : <span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span>, writeBuffer : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span>, readBuffer : <span class="param-type"><a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span>, deltaTime : <span class="param-type">number</span>, maskActive : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>执行描边通道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">writeBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>写入缓冲区。该缓冲区作为通道的渲染目标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">readBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>读取缓冲区。通道可从此缓冲区获取上一通道的渲染结果。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">deltaTime</strong>
+									</td>
+									<td class="description last">
+										<p>时间增量（秒）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maskActive</strong>
+									</td>
+									<td class="description last">
+										<p>遮罩是否处于激活状态。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#render">Pass#render</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置通道的尺寸。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Pass.html#setSize">Pass#setSize</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/postprocessing/OutlinePass.js" translate="no" target="_blank" rel="noopener">examples/jsm/postprocessing/OutlinePass.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+.canvas-viewport {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(1000px 520px at 18% 0%, rgba(59, 130, 246, 0.08), transparent 55%),
+    radial-gradient(800px 480px at 92% 18%, rgba(99, 102, 241, 0.06), transparent 50%),
+    linear-gradient(180deg, #07080c 0%, #05060a 100%);
+  cursor: grab;
+}
+
+.canvas-viewport::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 78%);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.canvas-viewport--panning {
+  cursor: grabbing;
+}
+
+.canvas-viewport--drop {
+  outline: 2px dashed rgba(96, 165, 250, 0.65);
+  outline-offset: -6px;
+}
+
+.canvas-viewport--drop .canvas-artboard {
+  box-shadow:
+    0 0 0 2px rgba(59, 130, 246, 0.55),
+    0 28px 72px rgba(0, 0, 0, 0.65);
+}
+
+.canvas-world {
+  transform-origin: 0 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.canvas-artboard {
+  position: relative;
+  border-radius: 6px;
+  /* 相对更深工作区，画板用更亮的面板色区分 */
+  background: #1e222c;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 18px 48px rgba(0, 0, 0, 0.55),
+    0 2px 0 rgba(255, 255, 255, 0.04) inset;
+  overflow: visible;
+}
+
+.canvas-artboard__clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #1e222c;
+}
+
+.canvas-artboard--empty::after {
+  content: '从左侧拖入或点击组件开始设计';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.canvas-ref-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left top;
+  pointer-events: none;
+  z-index: 50;
+  mix-blend-mode: normal;
+}

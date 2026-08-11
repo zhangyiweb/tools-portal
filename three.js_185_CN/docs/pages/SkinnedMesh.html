@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SkinnedMesh - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Mesh.html">Mesh</a> → </p>
+	<h1 translate="no">SkinnedMesh</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>拥有 <a href="Skeleton.html">Skeleton</a> 的网格，可用于通过蒙皮/骨骼动画
+来驱动几何体顶点。</p>
+<p>除了有效的骨架外，蒙皮网格还要求其几何体中包含
+作为缓冲属性的皮肤索引和权重。这些属性定义了哪些骨骼
+以何种程度影响单个顶点。</p>
+<p>通常蒙皮网格不会手动创建，而是由 <a href="GLTFLoader.html">GLTFLoader</a>
+或 <a href="FBXLoader.html">FBXLoader</a> 等加载器导入相应模型。</p></div>
+				<iframe id="viewer" src="../scenes/bones-browser.html"></iframe>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SkinnedMesh" translate="no">new <a href="#SkinnedMesh">SkinnedMesh</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, material : <span class="param-type"><a href="Material.html">Material</a> | Array.&lt;<a href="Material.html">Material</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的蒙皮网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>网格几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>网格材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="bindMatrix" translate="no">.<a href="#bindMatrix">bindMatrix</a><span class="type-signature"> : <a href="Matrix4.html">Matrix4</a></span> </h3>
+					<div class="description">
+						<p>用于绑定骨骼变换的基础矩阵。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bindMatrixInverse" translate="no">.<a href="#bindMatrixInverse">bindMatrixInverse</a><span class="type-signature"> : <a href="Matrix4.html">Matrix4</a></span> </h3>
+					<div class="description">
+						<p>用于重置绑定骨骼变换的基础矩阵。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bindMode" translate="no">.<a href="#bindMode">bindMode</a><span class="type-signature"> : <a href="global.html#AttachedBindMode">AttachedBindMode</a> | <a href="global.html#DetachedBindMode">DetachedBindMode</a></span> </h3>
+					<div class="description">
+						<p><code>AttachedBindMode</code> 表示蒙皮网格与骨架共享同一世界空间。
+使用 <code>DetachedBindMode</code> 时则并非如此，该模式在多个蒙皮网格
+共享同一骨架时很有用。</p>
+						<p>默认值为 <code>AttachedBindMode</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="boundingBox" translate="no">.<a href="#boundingBox">boundingBox</a><span class="type-signature"> : <a href="Box3.html">Box3</a></span> </h3>
+					<div class="description">
+						<p>蒙皮网格的包围盒。可通过 <a href="SkinnedMesh.html#computeBoundingBox">SkinnedMesh#computeBoundingBox</a> 计算。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="boundingSphere" translate="no">.<a href="#boundingSphere">boundingSphere</a><span class="type-signature"> : <a href="Sphere.html">Sphere</a></span> </h3>
+					<div class="description">
+						<p>蒙皮网格的包围球。可通过 <a href="SkinnedMesh.html#computeBoundingSphere">SkinnedMesh#computeBoundingSphere</a> 计算。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isSkinnedMesh" translate="no">.<a href="#isSkinnedMesh">isSkinnedMesh</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>该标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="applyBoneTransform" translate="no">.<a href="#applyBoneTransform">applyBoneTransform</a><span class="signature">( index : <span class="param-type">number</span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a> | <a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a> | <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将与给定索引关联的骨骼变换应用到给定向量。
+可通过提供 w 分量为 1 或 0 的 Vector4，分别用于变换位置或方向向量。
+返回更新后的向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>顶点索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 更新后的顶点属性数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="bind" translate="no">.<a href="#bind">bind</a><span class="signature">( skeleton : <span class="param-type"><a href="Skeleton.html">Skeleton</a></span>, bindMatrix : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定骨架绑定到蒙皮网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">skeleton</strong>
+									</td>
+									<td class="description last">
+										<p>要绑定的骨架。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindMatrix</strong>
+									</td>
+									<td class="description last">
+										<p>绑定矩阵。若未提供绑定矩阵，
+将改用蒙皮网格的世界矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="computeBoundingBox" translate="no">.<a href="#computeBoundingBox">computeBoundingBox</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算蒙皮网格的包围盒，并更新 <a href="SkinnedMesh.html#boundingBox">SkinnedMesh#boundingBox</a>。
+引擎不会自动计算包围盒；必须由应用调用此方法。
+若蒙皮网格处于动画状态，应每帧重新计算包围盒，以反映
+当前动画状态。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="computeBoundingSphere" translate="no">.<a href="#computeBoundingSphere">computeBoundingSphere</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算蒙皮网格的包围球，并更新 <a href="SkinnedMesh.html#boundingSphere">SkinnedMesh#boundingSphere</a>。
+引擎会在需要时（例如用于光线投射和视锥体裁剪）自动计算一次包围球。
+若蒙皮网格处于动画状态，应每帧重新计算包围球，以反映
+当前动画状态。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="normalizeSkinWeights" translate="no">.<a href="#normalizeSkinWeights">normalizeSkinWeights</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>归一化蒙皮网格几何体中定义为缓冲属性的皮肤权重。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="pose" translate="no">.<a href="#pose">pose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法将蒙皮网格设置为休息姿势。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/SkinnedMesh.js" translate="no" target="_blank" rel="noopener">src/objects/SkinnedMesh.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

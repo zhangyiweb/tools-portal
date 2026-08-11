@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Sky - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Mesh.html">Mesh</a> → </p>
+	<h1 translate="no">Sky</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示用于场景背景的天空穹顶。基于 <a href="https://www.researchgate.net/publication/220720443_A_Practical_Analytic_Model_for_Daylight" target="_blank" rel="noopener">A Practical Analytic Model for Daylight</a>
+（即 Preetham 模型），该模型是解析天空穹顶的事实标准。</p>
+<p>注意：该类只能与 <a href="WebGLRenderer.html">WebGLRenderer</a> 一起使用。
+使用 <a href="WebGPURenderer.html">WebGPURenderer</a> 时，请改用 <a href="SkyMesh.html">SkyMesh</a>。</p>
+<p>更多参考：</p>
+<ul>
+<li><a href="http://simonwallner.at/project/atmospheric-scattering/" target="_blank" rel="noopener">http://simonwallner.at/project/atmospheric-scattering/</a></li>
+<li><a href="http://blenderartists.org/forum/showthread.php?245954-preethams-sky-impementation-HDR" target="_blank" rel="noopener">http://blenderartists.org/forum/showthread.php?245954-preethams-sky-impementation-HDR</a></li>
+</ul>
+<pre><code class="language-js">const sky = new Sky();
+sky.scale.setScalar( 10000 );
+scene.add( sky );
+</code></pre>
+<p>在生成环境贴图时隐藏太阳圆盘有助于避免伪影</p>
+<pre><code class="language-js">// disable before rendering environment map
+sky.material.uniforms.showSunDisc.value = false;
+// ...
+// re-enable before scene sky box rendering
+sky.material.uniforms.showSunDisc.value = true;
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">Sky</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { Sky } from 'three/addons/objects/Sky.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Sky" translate="no">new <a href="#Sky">Sky</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的天空穹顶。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isSky" translate="no">.<a href="#isSky">isSky</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/objects/Sky.js" translate="no" target="_blank" rel="noopener">examples/jsm/objects/Sky.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

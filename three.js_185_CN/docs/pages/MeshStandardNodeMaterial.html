@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MeshStandardNodeMaterial - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Material.html">Material</a> → <a href="NodeMaterial.html">NodeMaterial</a> → </p>
+	<h1 translate="no">MeshStandardNodeMaterial</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><a href="MeshStandardMaterial.html">MeshStandardMaterial</a> 的节点材质版本。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MeshStandardNodeMaterial" translate="no">new <a href="#MeshStandardNodeMaterial">MeshStandardNodeMaterial</a><span class="signature">( parameters : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的网格标准节点材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>配置参数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="emissiveNode" translate="no">.<a href="#emissiveNode">emissiveNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>标准材质的自发光颜色默认由 <code>emissive</code>、
+<code>emissiveIntensity</code> 和 <code>emissiveMap</code> 属性推断。此节点属性允许
+覆盖默认值，改用节点定义自发光颜色。</p>
+<p>若不想覆盖自发光颜色，而只想修改现有
+值，请使用 <a href="TSL.html#materialEmissive">materialEmissive</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMeshStandardNodeMaterial" translate="no">.<a href="#isMeshStandardNodeMaterial">isMeshStandardNodeMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lights" translate="no">.<a href="#lights">lights</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>设为 <code>true</code>，因为标准材质会对光照做出响应。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="NodeMaterial.html#lights">NodeMaterial#lights</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="metalnessNode" translate="no">.<a href="#metalnessNode">metalnessNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>标准材质的金属度默认由 <code>metalness</code>
+和 <code>metalnessMap</code> 属性推断。此节点属性允许
+覆盖默认值，改用节点定义金属度。</p>
+<p>若不想覆盖金属度，而只想修改现有
+值，请使用 <a href="TSL.html#materialMetalness">materialMetalness</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="roughnessNode" translate="no">.<a href="#roughnessNode">roughnessNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>标准材质的粗糙度默认由 <code>roughness</code>
+和 <code>roughnessMap</code> 属性推断。此节点属性允许
+覆盖默认值，改用节点定义粗糙度。</p>
+<p>若不想覆盖粗糙度，而只想修改现有
+值，请使用 <a href="TSL.html#materialRoughness">materialRoughness</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setupEnvironment" translate="no">.<a href="#setupEnvironment">setupEnvironment</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="EnvironmentNode.html">EnvironmentNode</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>已重写，因为此类材质使用 <a href="EnvironmentNode.html">EnvironmentNode</a>
+实现基于 PBR（PMREM）的环境贴图。此外，
+该方法还会遵循 <code>Scene.environment</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="NodeMaterial.html#setupEnvironment">NodeMaterial#setupEnvironment</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 环境节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupLightingModel" translate="no">.<a href="#setupLightingModel">setupLightingModel</a><span class="signature">()</span><span class="type-signature"> : <a href="PhysicalLightingModel.html">PhysicalLightingModel</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置光照模型。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="NodeMaterial.html#setupLightingModel">NodeMaterial#setupLightingModel</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 光照模型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupSpecular" translate="no">.<a href="#setupSpecular">setupSpecular</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置与高光相关的节点变量。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="setupVariants" translate="no">.<a href="#setupVariants">setupVariants</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置标准材质特有的节点变量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="NodeMaterial.html#setupVariants">NodeMaterial#setupVariants</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/nodes/MeshStandardNodeMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/nodes/MeshStandardNodeMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

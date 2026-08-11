@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TransformControls - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Controls.html">Controls</a> → </p>
+	<h1 translate="no">TransformControls</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>该类可用于在 3D 空间中变换对象，其交互模型类似于 Blender 等 DCC 工具。
+与其他控制器不同，它并非用于变换场景相机。</p>
+<p><code>TransformControls</code> 要求其所附加的 3D 对象属于场景图的一部分。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TransformControls</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TransformControls } from 'three/addons/controls/TransformControls.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TransformControls" translate="no">new <a href="#TransformControls">TransformControls</a><span class="signature">( camera : <span class="param-type"><a href="Camera.html">Camera</a></span>, domElement : <span class="param-type">HTMLElement</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的控制器实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>所渲染场景的相机。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">domElement</strong>
+									</td>
+									<td class="description last">
+										<p>用于事件监听的 HTML 元素。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="axis" translate="no">.<a href="#axis">axis</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>当前的变换轴。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="camera" translate="no">.<a href="#camera">camera</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>所渲染场景的相机。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="dragging" translate="no">.<a href="#dragging">dragging</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>当前是否正在执行拖拽。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxX" translate="no">.<a href="#maxX">maxX</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>平移期间允许的最大 X 位置。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxY" translate="no">.<a href="#maxY">maxY</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>平移期间允许的最大 Y 位置。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxZ" translate="no">.<a href="#maxZ">maxZ</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>平移期间允许的最大 Z 位置。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="minX" translate="no">.<a href="#minX">minX</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>平移期间允许的最小 X 位置。</p>
+						<p>默认值为 <code>-Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="minY" translate="no">.<a href="#minY">minY</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>平移期间允许的最小 Y 位置。</p>
+						<p>默认值为 <code>-Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="minZ" translate="no">.<a href="#minZ">minZ</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>平移期间允许的最小 Z 位置。</p>
+						<p>默认值为 <code>-Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mode" translate="no">.<a href="#mode">mode</a><span class="type-signature"> : 'translate' | 'rotate' | 'scale'</span> </h3>
+					<div class="description">
+						<p>当前的变换模式。</p>
+						<p>默认值为 <code>'translate'</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="rotationSnap" translate="no">.<a href="#rotationSnap">rotationSnap</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>默认情况下，3D 对象会连续旋转。若将此属性设为数值（弧度），
+则可定义 3D 对象旋转的步进。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scaleSnap" translate="no">.<a href="#scaleSnap">scaleSnap</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>默认情况下，3D 对象会连续缩放。若将此属性设为数值，
+则可定义 3D 对象缩放的步进。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showE" translate="no">.<a href="#showE">showE</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>e 旋转辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showX" translate="no">.<a href="#showX">showX</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>x 轴辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showXY" translate="no">.<a href="#showXY">showXY</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>xy 平面辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showXYZE" translate="no">.<a href="#showXYZE">showXYZE</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>xyze 旋转辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showXZ" translate="no">.<a href="#showXZ">showXZ</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>xz 轴辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showY" translate="no">.<a href="#showY">showY</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>y 轴辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showYZ" translate="no">.<a href="#showYZ">showYZ</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>yz 平面辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="showZ" translate="no">.<a href="#showZ">showZ</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>z 轴辅助对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="size" translate="no">.<a href="#size">size</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>辅助 UI（轴/平面）的尺寸。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="space" translate="no">.<a href="#space">space</a><span class="type-signature"> : 'world' | 'local'</span> </h3>
+					<div class="description">
+						<p>定义应在哪个坐标空间中执行变换。</p>
+						<p>默认值为 <code>'world'</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="translationSnap" translate="no">.<a href="#translationSnap">translationSnap</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>默认情况下，3D 对象会连续平移。若将此属性设为数值
+（世界单位），则可定义 3D 对象平移的步进。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="viewport" translate="no">.<a href="#viewport">viewport</a><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="description">
+						<p>视口矩形，以逻辑（CSS）像素为单位，原点位于画布左下角。
+当渲染器使用子画布视口时请设置此项，以便指针坐标映射到正确区域。
+若为 <code>null</code>，则使用整个画布。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="attach" translate="no">.<a href="#attach">attach</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span><span class="type-signature"> : <a href="TransformControls.html">TransformControls</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置应被变换的 3D 对象，并确保控制器 UI 可见。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>应被变换的 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此控制器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="detach" translate="no">.<a href="#detach">detach</a><span class="signature">()</span><span class="type-signature"> : <a href="TransformControls.html">TransformControls</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从控制器中移除当前 3D 对象，并使辅助 UI 不可见。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此控制器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getHelper" translate="no">.<a href="#getHelper">getHelper</a><span class="signature">()</span><span class="type-signature"> : TransformControlsRoot</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回控制器的可视化表示。将辅助对象添加到场景中，即可
+可视化地变换所附加的 3D 对象。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 辅助对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMode" translate="no">.<a href="#getMode">getMode</a><span class="signature">()</span><span class="type-signature"> : 'translate' | 'rotate' | 'scale'</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回变换模式。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 变换模式。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRaycaster" translate="no">.<a href="#getRaycaster">getRaycaster</a><span class="signature">()</span><span class="type-signature"> : <a href="Raycaster.html">Raycaster</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回用于用户交互的射线投射器。该对象在所有
+<code>TransformControls</code> 实例之间共享。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 内部射线投射器。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="reset" translate="no">.<a href="#reset">reset</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将对象的位置、旋转和缩放重置为当前变换开始时的状态。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="setColors" translate="no">.<a href="#setColors">setColors</a><span class="signature">( xAxis : <span class="param-type">number | <a href="Color.html">Color</a> | string</span>, yAxis : <span class="param-type">number | <a href="Color.html">Color</a> | string</span>, zAxis : <span class="param-type">number | <a href="Color.html">Color</a> | string</span>, active : <span class="param-type">number | <a href="Color.html">Color</a> | string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置控制器 gizmo 的颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">xAxis</strong>
+									</td>
+									<td class="description last">
+										<p>x 轴颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">yAxis</strong>
+									</td>
+									<td class="description last">
+										<p>y 轴颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">zAxis</strong>
+									</td>
+									<td class="description last">
+										<p>z 轴颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">active</strong>
+									</td>
+									<td class="description last">
+										<p>活动元素的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setMode" translate="no">.<a href="#setMode">setMode</a><span class="signature">( mode : <span class="param-type">'translate' | 'rotate' | 'scale'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定的变换模式。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">mode</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的变换模式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setRotationSnap" translate="no">.<a href="#setRotationSnap">setRotationSnap</a><span class="signature">( rotationSnap : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置旋转吸附。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">rotationSnap</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的旋转吸附值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setScaleSnap" translate="no">.<a href="#setScaleSnap">setScaleSnap</a><span class="signature">( scaleSnap : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置缩放吸附。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scaleSnap</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的缩放吸附值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( size : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置辅助 UI 的尺寸。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">size</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的尺寸。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setSpace" translate="no">.<a href="#setSpace">setSpace</a><span class="signature">( space : <span class="param-type">'world' | 'local'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置应用变换时所使用的坐标空间。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">space</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的坐标空间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setTranslationSnap" translate="no">.<a href="#setTranslationSnap">setTranslationSnap</a><span class="signature">( translationSnap : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置平移吸附。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">translationSnap</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的平移吸附值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">事件</h2>
+					<h3 class="name name-method" id="event:change" translate="no">.<a href="#event:change">change</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当发生任何类型的变更（对象或属性变更）时触发。属性变更
+是独立的事件，你可以为其添加事件监听器。事件类型为 &quot;propertyname-changed&quot;。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="event:mouseDown" translate="no">.<a href="#event:mouseDown">mouseDown</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当指针（鼠标/触摸）变为活动状态时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="event:mouseUp" translate="no">.<a href="#event:mouseUp">mouseUp</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当指针（鼠标/触摸）不再活动时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="event:objectChange" translate="no">.<a href="#event:objectChange">objectChange</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当受控的 3D 对象发生变更时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/controls/TransformControls.js" translate="no" target="_blank" rel="noopener">examples/jsm/controls/TransformControls.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SVGRenderer - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">SVGRenderer</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此渲染器可用于使用 SVG 渲染几何数据。生成的矢量
+图形在以下用例中尤其有用：</p>
+<ul>
+<li>动画徽标或图标。</li>
+<li>交互式 2D/3D 图表或图形。</li>
+<li>交互式地图。</li>
+<li>复杂或动画化的用户界面。</li>
+</ul>
+<p><code>SVGRenderer</code> 有多种优势。它能生成清晰锐利的输出，
+且与实际视口分辨率无关。SVG 元素可通过 CSS 设置样式。
+并且具有良好的可访问性，因为可以添加标题或描述等元数据
+（对搜索引擎或屏幕阅读器很有用）。</p>
+<p>不过，存在一些重要限制：</p>
+<ul>
+<li>无高级着色。</li>
+<li>不支持纹理。</li>
+<li>不支持阴影。</li>
+</ul></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">SVGRenderer</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SVGRenderer" translate="no">new <a href="#SVGRenderer">SVGRenderer</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 SVG 渲染器。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="autoClear" translate="no">.<a href="#autoClear">autoClear</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否在渲染调用前自动执行清除。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="domElement" translate="no">.<a href="#domElement">domElement</a><span class="type-signature"> : SVGSVGElement</span> </h3>
+					<div class="description">
+						<p>渲染器将其子元素追加到的 DOM。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="info" translate="no">.<a href="#info">info</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>提供已渲染顶点和面数量的
+相关信息。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="outputColorSpace" translate="no">.<a href="#outputColorSpace">outputColorSpace</a><span class="type-signature"> : <a href="global.html#SRGBColorSpace">SRGBColorSpace</a> | <a href="global.html#LinearSRGBColorSpace">LinearSRGBColorSpace</a></span> </h3>
+					<div class="description">
+						<p>输出颜色空间。</p>
+						<p>默认值为 <code>SRGBColorSpace</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="overdraw" translate="no">.<a href="#overdraw">overdraw</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>为防止抗锯齿缝隙而放大多边形的小数像素数。
+范围为 <code>[0,1]</code>。</p>
+						<p>默认值为 <code>0.5</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sortElements" translate="no">.<a href="#sortElements">sortElements</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否对元素进行排序。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sortObjects" translate="no">.<a href="#sortObjects">sortObjects</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否对 3D 对象进行排序。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clear" translate="no">.<a href="#clear">clear</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用已定义的清除颜色执行手动清除。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="getSize" translate="no">.<a href="#getSize">getSize</a><span class="signature">()</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回包含渲染器宽度和高度的对象。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 渲染器的尺寸。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="render" translate="no">.<a href="#render">render</a><span class="signature">( scene : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, camera : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用给定相机渲染给定场景。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scene</strong>
+									</td>
+									<td class="description last">
+										<p>场景或其他类型的 3D 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setClearColor" translate="no">.<a href="#setClearColor">setClearColor</a><span class="signature">( color : <span class="param-type">number | <a href="Color.html">Color</a> | string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置清除颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的清除颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setPrecision" translate="no">.<a href="#setPrecision">setPrecision</a><span class="signature">( precision : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置用于创建路径的数据精度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">precision</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的精度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setQuality" translate="no">.<a href="#setQuality">setQuality</a><span class="signature">( quality : <span class="param-type">'low' | 'high'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置渲染质量。设为 <code>high</code> 时，浏览器会优先提升 SVG 质量，
+而非渲染速度和几何精度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">quality</strong>
+									</td>
+									<td class="description last">
+										<p>质量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将渲染器调整为给定的宽度和高度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器的高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/renderers/SVGRenderer.js" translate="no" target="_blank" rel="noopener">examples/jsm/renderers/SVGRenderer.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

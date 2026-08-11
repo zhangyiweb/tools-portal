@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>QuaternionKeyframeTrack - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="KeyframeTrack.html">KeyframeTrack</a> → </p>
+	<h1 translate="no">QuaternionKeyframeTrack</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于四元数类型关键帧值的轨道。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="QuaternionKeyframeTrack" translate="no">new <a href="#QuaternionKeyframeTrack">QuaternionKeyframeTrack</a><span class="signature">( name : <span class="param-type">string</span>, times : <span class="param-type">Array.&lt;number></span>, values : <span class="param-type">Array.&lt;number></span>, interpolation : <span class="param-type"><a href="global.html#InterpolateLinear">InterpolateLinear</a> | <a href="global.html#InterpolateDiscrete">InterpolateDiscrete</a> | <a href="global.html#InterpolateSmooth">InterpolateSmooth</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的四元数关键帧轨道。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>关键帧轨道名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">times</strong>
+									</td>
+									<td class="description last">
+										<p>关键帧时间列表。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">values</strong>
+									</td>
+									<td class="description last">
+										<p>关键帧值列表。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">interpolation</strong>
+									</td>
+									<td class="description last">
+										<p>插值类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="ValueTypeName" translate="no">.<a href="#ValueTypeName">ValueTypeName</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>值类型名称。</p>
+						<p>默认值为 <code>'quaternion'</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="KeyframeTrack.html#ValueTypeName">KeyframeTrack#ValueTypeName</a></dt>
+						</dl>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="InterpolantFactoryMethodLinear" translate="no">.<a href="#InterpolantFactoryMethodLinear">InterpolantFactoryMethodLinear</a><span class="signature">( result : <span class="param-type">TypedArray</span> )</span><span class="type-signature"> : <a href="QuaternionLinearInterpolant.html">QuaternionLinearInterpolant</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>重写此方法，使其返回基于四元数的插值器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">result</strong>
+									</td>
+									<td class="description last">
+										<p>结果缓冲区。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="KeyframeTrack.html#InterpolantFactoryMethodLinear">KeyframeTrack#InterpolantFactoryMethodLinear</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新的插值器。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/animation/tracks/QuaternionKeyframeTrack.js" translate="no" target="_blank" rel="noopener">src/animation/tracks/QuaternionKeyframeTrack.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

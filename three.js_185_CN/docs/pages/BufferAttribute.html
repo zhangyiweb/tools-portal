@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>BufferAttribute - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">BufferAttribute</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>该类用于存储与几何体关联的某个属性（例如顶点位置、面索引、法线、颜色、UV 以及任意自定义属性）的数据，从而更高效地将数据传递给 GPU。</p>
+<p>在处理类似向量的数据时，向量类与颜色类上的 <code>fromBufferAttribute( attribute, index )</code> 辅助方法可能会很有用，例如：<a href="Vector3.html#fromBufferAttribute">Vector3#fromBufferAttribute</a>。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="BufferAttribute" translate="no">new <a href="#BufferAttribute">BufferAttribute</a><span class="signature">( array : <span class="param-type">TypedArray</span>, itemSize : <span class="param-type">number</span>, normalized : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的缓冲属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>保存属性数据的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">itemSize</strong>
+									</td>
+									<td class="description last">
+										<p>单个条目的大小。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">normalized</strong>
+									</td>
+									<td class="description last">
+										<p>数据是否进行归一化。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="array" translate="no">.<a href="#array">array</a><span class="type-signature"> : TypedArray</span> </h3>
+					<div class="description">
+						<p>保存属性数据的数组。它应包含 <code>itemSize * numVertices</code> 个元素，其中 <code>numVertices</code> 为关联几何体中的顶点数量。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="count" translate="no">.<a href="#count">count</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>表示此缓冲属性存储的条目数量。内部通过将 <code>array</code> 的长度除以 <code>itemSize</code> 计算得出。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="gpuType" translate="no">.<a href="#gpuType">gpuType</a><span class="type-signature"> : <a href="global.html#FloatType">FloatType</a> | <a href="global.html#IntType">IntType</a></span> </h3>
+					<div class="description">
+						<p>配置绑定的 GPU 类型，供着色器使用。</p>
+<p>注意：此属性仅对整数数组有效，浮点数组不可配置。如需更低精度的浮点类型，请使用 <code>Float16BufferAttribute</code>。</p>
+						<p>默认值为 <code>FloatType</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="id" translate="no">.<a href="#id">id</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>缓冲属性的 ID。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isBufferAttribute" translate="no">.<a href="#isBufferAttribute">isBufferAttribute</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="itemSize" translate="no">.<a href="#itemSize">itemSize</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>数组中与单个顶点关联的数值个数。例如，若此属性存储 3 分量向量（如位置、法线或颜色），则该值应为 <code>3</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="name" translate="no">.<a href="#name">name</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>缓冲属性的名称。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="needsUpdate" translate="no">.<a href="#needsUpdate">needsUpdate</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>标记此属性已更改、需要重新传输到 GPU。修改数组中的值时，请将其设为 <code>true</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalized" translate="no">.<a href="#normalized">normalized</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>仅适用于整数数据。表示缓冲区中的底层数据如何映射到 GLSL 代码中的值。例如，若 <code>array</code> 为 <code>UInt16Array</code> 的实例，且 <code>normalized</code> 为 <code>true</code>，则数组中 <code>0 - +65535</code> 的值将映射为 GLSL 属性中的 <code>0.0f - +1.0f</code>。若 <code>normalized</code> 为 <code>false</code>，数值将直接转换为浮点数而不做映射，即 <code>65535</code> 变为 <code>65535.0f</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateRanges" translate="no">.<a href="#updateRanges">updateRanges</a><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="description">
+						<p>可用于仅更新所存储向量的部分分量（例如仅更新与颜色相关的分量）。使用 <code>addUpdateRange()</code> 函数向此数组添加更新范围。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="usage" translate="no">.<a href="#usage">usage</a><span class="type-signature"> : <a href="global.html#StaticDrawUsage">StaticDrawUsage</a> | <a href="global.html#DynamicDrawUsage">DynamicDrawUsage</a> | <a href="global.html#StreamDrawUsage">StreamDrawUsage</a> | <a href="global.html#StaticReadUsage">StaticReadUsage</a> | <a href="global.html#DynamicReadUsage">DynamicReadUsage</a> | <a href="global.html#StreamReadUsage">StreamReadUsage</a> | <a href="global.html#StaticCopyUsage">StaticCopyUsage</a> | <a href="global.html#DynamicCopyUsage">DynamicCopyUsage</a> | <a href="global.html#StreamCopyUsage">StreamCopyUsage</a></span> </h3>
+					<div class="description">
+						<p>定义数据存储的预期用法模式，以便优化。</p>
+<p>注意：缓冲区在首次使用后，其用法不可再更改。如需更改，请创建新实例并在下次渲染前设置所需用法。</p>
+						<p>默认值为 <code>StaticDrawUsage</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="version" translate="no">.<a href="#version">version</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>版本号，每当 <code>needsUpdate</code> 设为 <code>true</code> 时递增。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addUpdateRange" translate="no">.<a href="#addUpdateRange">addUpdateRange</a><span class="signature">( start : <span class="param-type">number</span>, count : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加数据数组中需要在 GPU 上更新的数据范围。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">start</strong>
+									</td>
+									<td class="description last">
+										<p>开始更新的位置。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的分量数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="applyMatrix3" translate="no">.<a href="#applyMatrix3">applyMatrix3</a><span class="signature">( m : <span class="param-type"><a href="Matrix3.html">Matrix3</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的 3×3 矩阵应用于该属性。适用于 item size 为 <code>2</code> 和 <code>3</code> 的情况。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>要应用的矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="applyMatrix4" translate="no">.<a href="#applyMatrix4">applyMatrix4</a><span class="signature">( m : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的 4×4 矩阵应用于该属性。仅适用于 item size 为 <code>3</code> 的情况。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>要应用的矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="applyNormalMatrix" translate="no">.<a href="#applyNormalMatrix">applyNormalMatrix</a><span class="signature">( m : <span class="param-type"><a href="Matrix3.html">Matrix3</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的 3×3 法线矩阵应用于该属性。仅适用于 item size 为 <code>3</code> 的情况。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>要应用的法线矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clearUpdateRanges" translate="no">.<a href="#clearUpdateRanges">clearUpdateRanges</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>清除更新范围。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个新缓冲属性，其值从本实例复制。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 本实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( source : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定缓冲属性的值复制到本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copyArray" translate="no">.<a href="#copyArray">copyArray</a><span class="signature">( array : <span class="param-type">TypedArray | Array</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的数组数据复制到此缓冲属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copyAt" translate="no">.<a href="#copyAt">copyAt</a><span class="signature">( index1 : <span class="param-type">number</span>, attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span>, index2 : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定缓冲属性复制一个向量到此缓冲属性。属性缓冲区中的源位置与目标位置由给定索引表示。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index1</strong>
+									</td>
+									<td class="description last">
+										<p>此缓冲属性中的目标索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的源缓冲属性。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">index2</strong>
+									</td>
+									<td class="description last">
+										<p>给定缓冲属性中的源索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>销毁该缓冲属性。仅在 <a href="WebGPURenderer.html">WebGPURenderer</a> 中可用。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="getComponent" translate="no">.<a href="#getComponent">getComponent</a><span class="signature">( index : <span class="param-type">number</span>, component : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定索引处向量的指定分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">component</strong>
+									</td>
+									<td class="description last">
+										<p>分量索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 返回的值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getW" translate="no">.<a href="#getW">getW</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定索引处向量的 w 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> w 分量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getX" translate="no">.<a href="#getX">getX</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定索引处向量的 x 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> x 分量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getY" translate="no">.<a href="#getY">getY</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定索引处向量的 y 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> y 分量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getZ" translate="no">.<a href="#getZ">getZ</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定索引处向量的 z 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> z 分量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="onUpload" translate="no">.<a href="#onUpload">onUpload</a><span class="signature">( callback : <span class="param-type">function</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定回调函数，在 Renderer 将属性数组数据传输到 GPU 后执行。可用于在上传完成后、CPU 侧不再需要属性数据时执行清理操作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">callback</strong>
+									</td>
+									<td class="description last">
+										<p><code>onUpload()</code> 回调。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="onUploadCallback" translate="no">.<a href="#onUploadCallback">onUploadCallback</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在 renderer 将属性数组数据传输到 GPU 后执行的回调函数。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( value : <span class="param-type">TypedArray | Array</span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在缓冲属性中设置给定的数组数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的数组数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>此缓冲属性数组中的偏移量。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setComponent" translate="no">.<a href="#setComponent">setComponent</a><span class="signature">( index : <span class="param-type">number</span>, component : <span class="param-type">number</span>, value : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定值设置到给定索引处向量的指定分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">component</strong>
+									</td>
+									<td class="description last">
+										<p>分量索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setUsage" translate="no">.<a href="#setUsage">setUsage</a><span class="signature">( value : <span class="param-type"><a href="global.html#StaticDrawUsage">StaticDrawUsage</a> | <a href="global.html#DynamicDrawUsage">DynamicDrawUsage</a> | <a href="global.html#StreamDrawUsage">StreamDrawUsage</a> | <a href="global.html#StaticReadUsage">StaticReadUsage</a> | <a href="global.html#DynamicReadUsage">DynamicReadUsage</a> | <a href="global.html#StreamReadUsage">StreamReadUsage</a> | <a href="global.html#StaticCopyUsage">StaticCopyUsage</a> | <a href="global.html#DynamicCopyUsage">DynamicCopyUsage</a> | <a href="global.html#StreamCopyUsage">StreamCopyUsage</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置此缓冲属性的用法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的用法。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该缓冲属性的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setW" translate="no">.<a href="#setW">setW</a><span class="signature">( index : <span class="param-type">number</span>, w : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定索引处向量的 w 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">w</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setX" translate="no">.<a href="#setX">setX</a><span class="signature">( index : <span class="param-type">number</span>, x : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定索引处向量的 x 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setXY" translate="no">.<a href="#setXY">setXY</a><span class="signature">( index : <span class="param-type">number</span>, x : <span class="param-type">number</span>, y : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定索引处向量的 x 和 y 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 x 分量值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 y 分量值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setXYZ" translate="no">.<a href="#setXYZ">setXYZ</a><span class="signature">( index : <span class="param-type">number</span>, x : <span class="param-type">number</span>, y : <span class="param-type">number</span>, z : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定索引处向量的 x、y 和 z 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 x 分量值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 y 分量值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 z 分量值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setXYZW" translate="no">.<a href="#setXYZW">setXYZW</a><span class="signature">( index : <span class="param-type">number</span>, x : <span class="param-type">number</span>, y : <span class="param-type">number</span>, z : <span class="param-type">number</span>, w : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定索引处向量的 x、y、z 和 w 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 x 分量值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 y 分量值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 z 分量值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">w</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 w 分量值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setY" translate="no">.<a href="#setY">setY</a><span class="signature">( index : <span class="param-type">number</span>, y : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定索引处向量的 y 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setZ" translate="no">.<a href="#setZ">setZ</a><span class="signature">( index : <span class="param-type">number</span>, z : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定索引处向量的 z 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性中的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">()</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将缓冲属性序列化为 JSON。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示已序列化缓冲属性的 JSON 对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="transformDirection" translate="no">.<a href="#transformDirection">transformDirection</a><span class="signature">( m : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span><span class="type-signature"> : <a href="BufferAttribute.html">BufferAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的 4×4 矩阵应用于该属性。仅适用于 item size 为 <code>3</code> 的方向向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>要应用的矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferAttribute.js" translate="no" target="_blank" rel="noopener">src/core/BufferAttribute.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

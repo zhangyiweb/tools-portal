@@ -1,0 +1,39 @@
+.selection-overlay {
+  position: absolute;
+  pointer-events: none;
+  border: 1.5px solid #3b82f6;
+  outline: none;
+  z-index: 30;
+  box-sizing: border-box;
+}
+
+.selection-handle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border: 1.5px solid #3b82f6;
+  border-radius: 1px;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+.selection-handle--nw { left: -4px; top: -4px; cursor: nwse-resize; }
+.selection-handle--n  { left: 50%; top: -4px; transform: translateX(-50%); cursor: ns-resize; }
+.selection-handle--ne { right: -4px; top: -4px; cursor: nesw-resize; }
+.selection-handle--e  { right: -4px; top: 50%; transform: translateY(-50%); cursor: ew-resize; }
+.selection-handle--se { right: -4px; bottom: -4px; cursor: nwse-resize; }
+.selection-handle--s  { left: 50%; bottom: -4px; transform: translateX(-50%); cursor: ns-resize; }
+.selection-handle--sw { left: -4px; bottom: -4px; cursor: nesw-resize; }
+.selection-handle--w  { left: -4px; top: 50%; transform: translateY(-50%); cursor: ew-resize; }
+
+.selection-root-outline {
+  position: absolute;
+  left: 0;
+  top: 0;
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+  pointer-events: none;
+  z-index: 20;
+  box-sizing: border-box;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SidewalkGenerator - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">SidewalkGenerator</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>为城市街区生成抬高的人行道：每个街区一块圆角混凝土板，边缘环绕突出于步行面并下落到路面的独立花岗岩路缘石。
+按一组放置变换实例化，并用自带的程序化材质装扮（浇筑混凝土板、刻划伸缩缝、花岗岩路缘）。
+返回包含两个实例化网格的 <code>THREE.Group</code>——步行板与路缘。</p>
+<p>与建筑生成器不同，此类自带材质：板与路缘的几何体以及为其着色的 TSL 都在此一并管理。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const sidewalk = new SidewalkGenerator( { width: 90, depth: 60, height: 0.5 } );
+scene.add( sidewalk.build( placements ) ); // placements: Matrix4[]
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SidewalkGenerator" translate="no">new <a href="#SidewalkGenerator">SidewalkGenerator</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/generators/city/SidewalkGenerator.js" translate="no" target="_blank" rel="noopener">examples/jsm/generators/city/SidewalkGenerator.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

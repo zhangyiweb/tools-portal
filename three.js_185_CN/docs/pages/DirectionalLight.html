@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>DirectionalLight - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Light.html">Light</a> → </p>
+	<h1 translate="no">DirectionalLight</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一种沿特定方向发出的光源。该光源的行为如同位于无限远处，
+所产生的光线全部平行。常见用途是模拟日光；太阳足够远，
+其位置可视为无穷远，且来自太阳的所有光线都是平行的。</p>
+<p>关于平行光，一个常见的误解是设置旋转不会产生任何效果。
+这是因为 three.js 中的 DirectionalLight 等效于其他应用中常说的
+“目标平行光”（Target Direct Light）。</p>
+<p>这意味着其方向是从光源的
+<a href="Object3D.html#position">Object3D#position</a> 指向
+<a href="DirectionalLight.html#target">DirectionalLight#target</a> 的位置计算得出的
+（而不是仅具有旋转分量的“自由平行光”）。</p>
+<p>该光源可以投射阴影——详情参见 <a href="DirectionalLightShadow.html">DirectionalLightShadow</a>。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">// White directional light at half intensity shining from the top.
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+scene.add( directionalLight );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="DirectionalLight" translate="no">new <a href="#DirectionalLight">DirectionalLight</a><span class="signature">( color : <span class="param-type">number | <a href="Color.html">Color</a> | string</span>, intensity : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的平行光。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>光源颜色。</p>
+										<p>默认值为 <code>0xffffff</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">intensity</strong>
+									</td>
+									<td class="description last">
+										<p>光源强度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isDirectionalLight" translate="no">.<a href="#isDirectionalLight">isDirectionalLight</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="shadow" translate="no">.<a href="#shadow">shadow</a><span class="type-signature"> : <a href="DirectionalLightShadow.html">DirectionalLightShadow</a></span> </h3>
+					<div class="description">
+						<p>该属性保存光源的阴影配置。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="target" translate="no">.<a href="#target">target</a><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="description">
+						<p>平行光从其自身位置指向目标的位置。</p>
+<p>若要将目标位置改为默认值以外的任何值，
+必须将其添加到场景中。</p>
+<p>也可以将目标设置为场景中的另一个 3D 对象。
+此时光源会跟踪该目标对象。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLight.js" translate="no" target="_blank" rel="noopener">src/lights/DirectionalLight.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

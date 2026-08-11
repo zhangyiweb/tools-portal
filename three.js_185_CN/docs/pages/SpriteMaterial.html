@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SpriteMaterial - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Material.html">Material</a> → </p>
+	<h1 translate="no">SpriteMaterial</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于渲染 <a href="Sprite.html">Sprite</a> 实例的材质。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const map = new THREE.TextureLoader().load( 'textures/sprite.png' );
+const material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
+const sprite = new THREE.Sprite( material );
+sprite.scale.set(200, 200, 1)
+scene.add( sprite );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SpriteMaterial" translate="no">new <a href="#SpriteMaterial">SpriteMaterial</a><span class="signature">( parameters : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的精灵材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>包含一个或多个属性的对象，
+用于定义材质的外观。材质的任何属性
+（包括从继承材质中获得的任何属性）都可以传入
+此处。颜色值可以传入 <a href="Color.html#set">Color#set</a>
+所接受的任意类型的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="alphaMap" translate="no">.<a href="#alphaMap">alphaMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>Alpha 贴图是一张灰度纹理，用于控制表面各处的不透明度
+（黑色：完全透明；白色：完全不透明）。</p>
+<p>仅使用纹理的颜色，若存在 alpha 通道则会被
+忽略。对于 RGB 和 RGBA 纹理，渲染器在采样此纹理时会使用绿色通道，
+因为在 DXT 压缩格式以及未压缩的 RGB 565 格式中，
+绿色通道具有额外的精度位。仅亮度以及
+亮度/alpha 纹理仍可按预期工作。</p>
+<p><code>alphaMap</code> 表示非颜色数据。所指定的任何纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="color" translate="no">.<a href="#color">color</a><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="description">
+						<p>材质的颜色。</p>
+						<p>默认值为 <code>(1,1,1)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fog" translate="no">.<a href="#fog">fog</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>材质是否受雾效影响。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isSpriteMaterial" translate="no">.<a href="#isSpriteMaterial">isSpriteMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="map" translate="no">.<a href="#map">map</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>颜色贴图。可选地包含 alpha 通道，通常与
+<a href="Material.html#transparent">Material#transparent</a> 或 <a href="Material.html#alphaTest">Material#alphaTest</a> 结合使用。纹理贴图
+颜色会受漫反射 <code>color</code> 调制。</p>
+<p><code>map</code> 表示颜色数据，纹理必须指定
+<a href="Texture.html#colorSpace">Texture#colorSpace</a>。大多数 <code>map</code> 纹理会设置
+<code>texture.colorSpace = SRGBColorSpace</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="rotation" translate="no">.<a href="#rotation">rotation</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>精灵的旋转角度（以弧度为单位）。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sizeAttenuation" translate="no">.<a href="#sizeAttenuation">sizeAttenuation</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>指定精灵大小是否会随相机深度衰减（仅适用于透视相机）。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="transparent" translate="no">.<a href="#transparent">transparent</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>已重写，因为精灵材质默认
+为透明。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Material.html#transparent">Material#transparent</a></dt>
+						</dl>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/SpriteMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/SpriteMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>BlendMode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">BlendMode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示混合配置。</p>
+<p>此类封装了所有与混合相关的属性，用于控制材质颜色
+如何与帧缓冲中已有的颜色进行组合。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="BlendMode" translate="no">new <a href="#BlendMode">BlendMode</a><span class="signature">( blending : <span class="param-type"><a href="global.html#NoBlending">NoBlending</a> | <a href="global.html#NormalBlending">NormalBlending</a> | <a href="global.html#AdditiveBlending">AdditiveBlending</a> | <a href="global.html#SubtractiveBlending">SubtractiveBlending</a> | <a href="global.html#MultiplyBlending">MultiplyBlending</a> | <a href="global.html#CustomBlending">CustomBlending</a> | <a href="global.html#MaterialBlending">MaterialBlending</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的混合配置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">blending</strong>
+									</td>
+									<td class="description last">
+										<p>混合模式。</p>
+										<p>默认值为 <code>NormalBlending</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="blendDst" translate="no">.<a href="#blendDst">blendDst</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合目标因子。</p>
+<p>这决定了帧缓冲中目标（已有）片段颜色在与源（传入）
+片段颜色组合之前如何进行加权。</p>
+						<p>默认值为 <code>OneMinusSrcAlphaFactor</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendDstAlpha" translate="no">.<a href="#blendDstAlpha">blendDstAlpha</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合目标 alpha 因子。</p>
+<p>设置后，可单独控制 alpha 通道的目标混合因子。
+若为 <code>null</code>，alpha 通道也使用 <a href="BlendMode.html#blendDst">BlendMode#blendDst</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendEquation" translate="no">.<a href="#blendEquation">blendEquation</a><span class="type-signature"> : <a href="global.html#AddEquation">AddEquation</a> | <a href="global.html#SubtractEquation">SubtractEquation</a> | <a href="global.html#ReverseSubtractEquation">ReverseSubtractEquation</a> | <a href="global.html#MinEquation">MinEquation</a> | <a href="global.html#MaxEquation">MaxEquation</a></span> </h3>
+					<div class="description">
+						<p>定义混合方程。</p>
+<p>这决定了源颜色与目标颜色如何组合。</p>
+						<p>默认值为 <code>AddEquation</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendEquationAlpha" translate="no">.<a href="#blendEquationAlpha">blendEquationAlpha</a><span class="type-signature"> : <a href="global.html#AddEquation">AddEquation</a> | <a href="global.html#SubtractEquation">SubtractEquation</a> | <a href="global.html#ReverseSubtractEquation">ReverseSubtractEquation</a> | <a href="global.html#MinEquation">MinEquation</a> | <a href="global.html#MaxEquation">MaxEquation</a></span> </h3>
+					<div class="description">
+						<p>定义 alpha 通道的混合方程。</p>
+<p>设置后，可单独控制 alpha 通道的混合方程。
+若为 <code>null</code>，alpha 通道也使用 <a href="BlendMode.html#blendEquation">BlendMode#blendEquation</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendSrc" translate="no">.<a href="#blendSrc">blendSrc</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合源因子。</p>
+<p>这决定了源（传入）片段颜色在与帧缓冲中目标（已有）
+片段颜色相加之前如何进行加权。</p>
+						<p>默认值为 <code>SrcAlphaFactor</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendSrcAlpha" translate="no">.<a href="#blendSrcAlpha">blendSrcAlpha</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合源 alpha 因子。</p>
+<p>设置后，可单独控制 alpha 通道的源混合因子。
+若为 <code>null</code>，alpha 通道也使用 <a href="BlendMode.html#blendSrc">BlendMode#blendSrc</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blending" translate="no">.<a href="#blending">blending</a><span class="type-signature"> : <a href="global.html#NoBlending">NoBlending</a> | <a href="global.html#NormalBlending">NormalBlending</a> | <a href="global.html#AdditiveBlending">AdditiveBlending</a> | <a href="global.html#SubtractiveBlending">SubtractiveBlending</a> | <a href="global.html#MultiplyBlending">MultiplyBlending</a> | <a href="global.html#CustomBlending">CustomBlending</a> | <a href="global.html#MaterialBlending">MaterialBlending</a></span> </h3>
+					<div class="description">
+						<p>定义混合类型。</p>
+<p>若要使 <a href="BlendMode.html#blendSrc">BlendMode#blendSrc</a>、<a href="BlendMode.html#blendDst">BlendMode#blendDst</a> 或 <a href="BlendMode.html#blendEquation">BlendMode#blendEquation</a>
+等自定义混合属性生效，必须将其设置为 <code>CustomBlending</code>。</p>
+						<p>默认值为 <code>NormalBlending</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="premultiplyAlpha" translate="no">.<a href="#premultiplyAlpha">premultiplyAlpha</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>定义是否预乘 alpha（透明度）值。</p>
+<p>若为 <code>true</code>，纹理或材质的 RGB 颜色会乘以其 alpha 值。
+这对于透明纹理/材质很有用，因为颜色数据
+应已包含透明度信息。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="BlendMode.html">BlendMode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回此混合配置的克隆。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 具有相同属性的新 Blending 实例。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( source : <span class="param-type"><a href="BlendMode.html">BlendMode</a></span> )</span><span class="type-signature"> : <a href="BlendMode.html">BlendMode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定源的混合属性复制到此实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的混合配置。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此实例的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/common/BlendMode.js" translate="no" target="_blank" rel="noopener">src/renderers/common/BlendMode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

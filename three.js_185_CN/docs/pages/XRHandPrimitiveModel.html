@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>XRHandPrimitiveModel - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">XRHandPrimitiveModel</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示 <a href="XRHandModelFactory.html">XRHandModelFactory</a> 根据所选配置文件可能生成的手部模型类型之一。<code>XRHandPrimitiveModel</code> 根据所选的 <code>primitive</code> 选项，使用球体或立方体基本体表示手部。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">XRHandPrimitiveModel</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { XRHandPrimitiveModel } from 'three/addons/webxr/XRHandPrimitiveModel.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="XRHandPrimitiveModel" translate="no">new <a href="#XRHandPrimitiveModel">XRHandPrimitiveModel</a><span class="signature">( handModel : <span class="param-type"><a href="XRHandModel.html">XRHandModel</a></span>, controller : <span class="param-type"><a href="Group.html">Group</a></span>, path : <span class="param-type">string</span>, handedness : <span class="param-type">XRHandedness</span>, options : <span class="param-type"><a href="XRHandPrimitiveModel.html#~Options">XRHandPrimitiveModel~Options</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 XR 手部基本体模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">handModel</strong>
+									</td>
+									<td class="description last">
+										<p>手部模型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">controller</strong>
+									</td>
+									<td class="description last">
+										<p>WebXR 控制器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>模型路径。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">handedness</strong>
+									</td>
+									<td class="description last">
+										<p>XR 输入源的左右手属性。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>模型选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="controller" translate="no">.<a href="#controller">controller</a><span class="type-signature"> : <a href="Group.html">Group</a></span> </h3>
+					<div class="description">
+						<p>WebXR 控制器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="envMap" translate="no">.<a href="#envMap">envMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>模型的环境贴图。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="handModel" translate="no">.<a href="#handModel">handModel</a><span class="type-signature"> : <a href="XRHandModel.html">XRHandModel</a></span> </h3>
+					<div class="description">
+						<p>手部模型。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="updateMesh" translate="no">.<a href="#updateMesh">updateMesh</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据跟踪的 XR 关节数据更新网格。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Options" translate="no">.<a href="#~Options">Options</a> </h3>
+					<div class="description">
+						<p><code>XRHandPrimitiveModel</code> 的构造函数选项。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>primitive</strong>
+						<br>
+<span class="param-type">'box'</span>
+|
+<span class="param-type">'sphere'</span>
+				</td>
+			<td class="description last">
+				<p>基本体类型。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/webxr/XRHandPrimitiveModel.js" translate="no" target="_blank" rel="noopener">examples/jsm/webxr/XRHandPrimitiveModel.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

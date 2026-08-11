@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Vector4 - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Vector4</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示四维向量的类。四维向量是四个有序数字
+（标记为 x、y、z 和 w），可用于表示多种事物，例如：</p>
+<ul>
+<li>四维空间中的点。</li>
+<li>四维空间中的方向与长度。在 three.js 中，长度始终是从 <code>(0, 0, 0, 0)</code> 到 <code>(x, y, z, w)</code> 的欧几里得距离（直线距离），
+方向也是从 <code>(0, 0, 0, 0)</code> 指向 <code>(x, y, z, w)</code>。</li>
+<li>任意有序的四元组数字。</li>
+</ul>
+<p>四维向量还可用于表示其他事物，但以上是 <em>three.js</em> 中最常见的用途。</p>
+<p>遍历向量实例将按相应顺序产生其分量 <code>(x, y, z, w)</code>。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const a = new THREE.Vector4( 0, 1, 0, 0 );
+//no arguments; will be initialised to (0, 0, 0, 1)
+const b = new THREE.Vector4( );
+const d = a.dot( b );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Vector4" translate="no">new <a href="#Vector4">Vector4</a><span class="signature">( x : <span class="param-type">number</span>, y : <span class="param-type">number</span>, z : <span class="param-type">number</span>, w : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的四维向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>此向量的 x 值。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>此向量的 y 值。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>此向量的 z 值。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">w</strong>
+									</td>
+									<td class="description last">
+										<p>此向量的 w 值。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="height" translate="no">.<a href="#height">height</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p><a href="Vector4.html#w">Vector4#w</a> 的别名。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="w" translate="no">.<a href="#w">w</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>此向量的 w 值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="width" translate="no">.<a href="#width">width</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p><a href="Vector4.html#z">Vector4#z</a> 的别名。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="x" translate="no">.<a href="#x">x</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>此向量的 x 值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="y" translate="no">.<a href="#y">y</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>此向量的 y 值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="z" translate="no">.<a href="#z">z</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>此向量的 z 值。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="add" translate="no">.<a href="#add">add</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定向量加到本实例上。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>要相加的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addScalar" translate="no">.<a href="#addScalar">addScalar</a><span class="signature">( s : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定标量值加到本实例的所有分量上。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>要相加的标量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addScaledVector" translate="no">.<a href="#addScaledVector">addScaledVector</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span>, s : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将按给定因子缩放后的给定向量加到本实例上。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>缩放 <code>v</code> 的因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addVectors" translate="no">.<a href="#addVectors">addVectors</a><span class="signature">( a : <span class="param-type"><a href="Vector4.html">Vector4</a></span>, b : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定向量相加，并将结果存入本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>第一个向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>第二个向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="applyMatrix4" translate="no">.<a href="#applyMatrix4">applyMatrix4</a><span class="signature">( m : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量与给定的 4x4 矩阵相乘。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>4x4 矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="ceil" translate="no">.<a href="#ceil">ceil</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的各分量向上取整到最近的整数值。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clamp" translate="no">.<a href="#clamp">clamp</a><span class="signature">( min : <span class="param-type"><a href="Vector4.html">Vector4</a></span>, max : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此向量的 x、y、z 或 w 值大于最大向量的对应值，则替换为对应值。
+如果此向量的 x、y、z 或 w 值小于最小向量的对应值，则替换为对应值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">min</strong>
+									</td>
+									<td class="description last">
+										<p>最小的 x、y 和 z 值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">max</strong>
+									</td>
+									<td class="description last">
+										<p>期望范围内的最大 x、y 和 z 值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clampLength" translate="no">.<a href="#clampLength">clampLength</a><span class="signature">( min : <span class="param-type">number</span>, max : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此向量的长度大于最大值，则替换为最大值。
+如果此向量的长度小于最小值，则替换为最小值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">min</strong>
+									</td>
+									<td class="description last">
+										<p>向量长度将被钳制到的最小值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">max</strong>
+									</td>
+									<td class="description last">
+										<p>向量长度将被钳制到的最大值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clampScalar" translate="no">.<a href="#clampScalar">clampScalar</a><span class="signature">( minVal : <span class="param-type">number</span>, maxVal : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此向量的 x、y、z 或 w 值大于最大值，则替换为最大值。
+如果此向量的 x、y、z 或 w 值小于最小值，则替换为最小值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">minVal</strong>
+									</td>
+									<td class="description last">
+										<p>分量将被钳制到的最小值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxVal</strong>
+									</td>
+									<td class="description last">
+										<p>分量将被钳制到的最大值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个新向量，其值从本实例复制而来。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 本实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( v : <span class="param-type"><a href="Vector3.html">Vector3</a> | <a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定向量的值复制到本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="divide" translate="no">.<a href="#divide">divide</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将本实例除以给定向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>要除以的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="divideScalar" translate="no">.<a href="#divideScalar">divideScalar</a><span class="signature">( scalar : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量除以给定标量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scalar</strong>
+									</td>
+									<td class="description last">
+										<p>要除以的标量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="dot" translate="no">.<a href="#dot">dot</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算给定向量与本实例的点积。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>用于计算点积的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 点积结果。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="equals" translate="no">.<a href="#equals">equals</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此向量与给定向量相等，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>要测试相等性的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此向量是否与给定向量相等。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="floor" translate="no">.<a href="#floor">floor</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的各分量向下取整到最近的整数值。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="fromArray" translate="no">.<a href="#fromArray">fromArray</a><span class="signature">( array : <span class="param-type">Array.&lt;number></span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的 x 值设为 <code>array[ offset ]</code>，y 值设为 <code>array[ offset + 1 ]</code>，
+z 值设为 <code>array[ offset + 2 ]</code>，w 值设为 <code>array[ offset + 3 ]</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>保存向量分量值的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>数组中的偏移量。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="fromBufferAttribute" translate="no">.<a href="#fromBufferAttribute">fromBufferAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span>, index : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定缓冲属性设置此向量的分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>保存向量数据的缓冲属性。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>属性中的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getComponent" translate="no">.<a href="#getComponent">getComponent</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回与给定索引匹配的向量分量值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>分量索引。<code>0</code> 对应 x，<code>1</code> 对应 y，
+<code>2</code> 对应 z，<code>3</code> 对应 w。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 向量分量值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="length" translate="no">.<a href="#length">length</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算从 (0, 0, 0, 0) 到 (x, y, z, w) 的欧几里得长度（直线长度）。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此向量的长度。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lengthSq" translate="no">.<a href="#lengthSq">lengthSq</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算从 (0, 0, 0, 0) 到 (x, y, z, w) 的欧几里得长度（直线长度）的平方。
+如果只是比较向量长度，应比较长度的平方，因为计算稍高效一些。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此向量长度的平方。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lerp" translate="no">.<a href="#lerp">lerp</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span>, alpha : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在给定向量与本实例之间进行线性插值，其中 alpha 为沿直线的百分比距离——
+alpha = 0 为本向量，alpha = 1 为给定向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>插值目标向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">alpha</strong>
+									</td>
+									<td class="description last">
+										<p>插值因子，通常在闭区间 <code>[0, 1]</code> 内。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lerpVectors" translate="no">.<a href="#lerpVectors">lerpVectors</a><span class="signature">( v1 : <span class="param-type"><a href="Vector4.html">Vector4</a></span>, v2 : <span class="param-type"><a href="Vector4.html">Vector4</a></span>, alpha : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在给定向量之间进行线性插值，其中 alpha 为沿直线的百分比距离——
+alpha = 0 为第一个向量，alpha = 1 为第二个向量。结果存入本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v1</strong>
+									</td>
+									<td class="description last">
+										<p>第一个向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v2</strong>
+									</td>
+									<td class="description last">
+										<p>第二个向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">alpha</strong>
+									</td>
+									<td class="description last">
+										<p>插值因子，通常在闭区间 <code>[0, 1]</code> 内。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="manhattanLength" translate="no">.<a href="#manhattanLength">manhattanLength</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算此向量的曼哈顿长度。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此向量的长度。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="max" translate="no">.<a href="#max">max</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此向量的 x、y、z 或 w 值小于给定向量的对应值，
+则用对应的最大值替换该值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="min" translate="no">.<a href="#min">min</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此向量的 x、y、z 或 w 值大于给定向量的对应值，
+则用对应的最小值替换该值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="multiply" translate="no">.<a href="#multiply">multiply</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定向量与本实例相乘。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>要相乘的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="multiplyScalar" translate="no">.<a href="#multiplyScalar">multiplyScalar</a><span class="signature">( scalar : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定标量值与本实例的所有分量相乘。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scalar</strong>
+									</td>
+									<td class="description last">
+										<p>要相乘的标量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="negate" translate="no">.<a href="#negate">negate</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>取反此向量——即设置 x = -x、y = -y、z = -z、w = -w。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="normalize" translate="no">.<a href="#normalize">normalize</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量转换为单位向量——即设为与当前方向相同、但长度为 <code>1</code> 的向量。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="random" translate="no">.<a href="#random">random</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的每个分量设为 <code>0</code> 到 <code>1</code>（不含 <code>1</code>）之间的伪随机值。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="round" translate="no">.<a href="#round">round</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的各分量四舍五入到最近的整数值</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="roundToZero" translate="no">.<a href="#roundToZero">roundToZero</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的各分量向零取整（负值向上、正值向下）到整数值。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( x : <span class="param-type">number</span>, y : <span class="param-type">number</span>, z : <span class="param-type">number</span>, w : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置向量分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>x 分量的值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>y 分量的值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>z 分量的值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">w</strong>
+									</td>
+									<td class="description last">
+										<p>w 分量的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setAxisAngleFromQuaternion" translate="no">.<a href="#setAxisAngleFromQuaternion">setAxisAngleFromQuaternion</a><span class="signature">( q : <span class="param-type"><a href="Quaternion.html">Quaternion</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的 x、y、z 分量设为四元数的轴，将 w 设为角度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">q</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的四元数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setAxisAngleFromRotationMatrix" translate="no">.<a href="#setAxisAngleFromRotationMatrix">setAxisAngleFromRotationMatrix</a><span class="signature">( m : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的 x、y、z 分量设为旋转轴，将 w 设为角度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>4x4 矩阵，其左上 3x3 部分为纯旋转矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setComponent" translate="no">.<a href="#setComponent">setComponent</a><span class="signature">( index : <span class="param-type">number</span>, value : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>允许通过索引设置向量分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>分量索引。<code>0</code> 对应 x，<code>1</code> 对应 y，
+<code>2</code> 对应 z，<code>3</code> 对应 w。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFromMatrixPosition" translate="no">.<a href="#setFromMatrixPosition">setFromMatrixPosition</a><span class="signature">( m : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将向量分量设为给定变换矩阵的位置元素。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>4x4 矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setLength" translate="no">.<a href="#setLength">setLength</a><span class="signature">( length : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量设为与当前方向相同、但长度为指定值的向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">length</strong>
+									</td>
+									<td class="description last">
+										<p>此向量的新长度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setScalar" translate="no">.<a href="#setScalar">setScalar</a><span class="signature">( scalar : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将向量各分量设为相同值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scalar</strong>
+									</td>
+									<td class="description last">
+										<p>为所有向量分量设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setW" translate="no">.<a href="#setW">setW</a><span class="signature">( w : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将向量的 w 分量设为给定值</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">w</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setX" translate="no">.<a href="#setX">setX</a><span class="signature">( x : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将向量的 x 分量设为给定值</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setY" translate="no">.<a href="#setY">setY</a><span class="signature">( y : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将向量的 y 分量设为给定值</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setZ" translate="no">.<a href="#setZ">setZ</a><span class="signature">( z : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将向量的 z 分量设为给定值</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="sub" translate="no">.<a href="#sub">sub</a><span class="signature">( v : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从本实例减去给定向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>要减去的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="subScalar" translate="no">.<a href="#subScalar">subScalar</a><span class="signature">( s : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从本实例的所有分量减去给定标量值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>要减去的标量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="subVectors" translate="no">.<a href="#subVectors">subVectors</a><span class="signature">( a : <span class="param-type"><a href="Vector4.html">Vector4</a></span>, b : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定向量相减，并将结果存入本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>第一个向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>第二个向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此向量的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toArray" translate="no">.<a href="#toArray">toArray</a><span class="signature">( array : <span class="param-type">Array.&lt;number></span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此向量的分量写入给定数组。如果未提供数组，
+则方法返回一个新实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>保存向量分量的目标数组。</p>
+										<p>默认值为 <code>[]</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>数组中第一个元素的索引。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 向量分量。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/math/Vector4.js" translate="no" target="_blank" rel="noopener">src/math/Vector4.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

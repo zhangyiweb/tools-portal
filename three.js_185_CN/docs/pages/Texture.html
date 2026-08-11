@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Texture - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → </p>
+	<h1 translate="no">Texture</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>所有纹理的基类。</p>
+<p>注意：纹理首次使用后，其尺寸、格式和类型
+不能更改。应改为调用 <a href="Texture.html#dispose">Texture#dispose</a> 并实例化一个新纹理。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Texture" translate="no">new <a href="#Texture">Texture</a><span class="signature">( image : <span class="param-type">Object</span>, mapping : <span class="param-type">number</span>, wrapS : <span class="param-type">number</span>, wrapT : <span class="param-type">number</span>, magFilter : <span class="param-type">number</span>, minFilter : <span class="param-type">number</span>, format : <span class="param-type">number</span>, type : <span class="param-type">number</span>, anisotropy : <span class="param-type">number</span>, colorSpace : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">image</strong>
+									</td>
+									<td class="description last">
+										<p>保存纹理数据的图像。</p>
+										<p>默认值为 <code>Texture.DEFAULT_IMAGE</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">mapping</strong>
+									</td>
+									<td class="description last">
+										<p>纹理映射方式。</p>
+										<p>默认值为 <code>Texture.DEFAULT_MAPPING</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">wrapS</strong>
+									</td>
+									<td class="description last">
+										<p>wrapS 值。</p>
+										<p>默认值为 <code>ClampToEdgeWrapping</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">wrapT</strong>
+									</td>
+									<td class="description last">
+										<p>wrapT 值。</p>
+										<p>默认值为 <code>ClampToEdgeWrapping</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">magFilter</strong>
+									</td>
+									<td class="description last">
+										<p>放大过滤器值。</p>
+										<p>默认值为 <code>LinearFilter</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">minFilter</strong>
+									</td>
+									<td class="description last">
+										<p>缩小过滤器值。</p>
+										<p>默认值为 <code>LinearMipmapLinearFilter</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">format</strong>
+									</td>
+									<td class="description last">
+										<p>纹理格式。</p>
+										<p>默认值为 <code>RGBAFormat</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>纹理类型。</p>
+										<p>默认值为 <code>UnsignedByteType</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">anisotropy</strong>
+									</td>
+									<td class="description last">
+										<p>各向异性值。</p>
+										<p>默认值为 <code>Texture.DEFAULT_ANISOTROPY</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>颜色空间。</p>
+										<p>默认值为 <code>NoColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="anisotropy" translate="no">.<a href="#anisotropy">anisotropy</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>沿穿过像素的轴、在纹素密度最高处所取的采样数。
+默认情况下该值为 <code>1</code>。更高的值可获得比基础 mipmap
+更清晰的结果，但代价是使用更多纹理采样。</p>
+						<p>默认值为 <code>Texture.DEFAULT_ANISOTROPY</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="center" translate="no">.<a href="#center">center</a><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="description">
+						<p>旋转所围绕的点。值为 <code>(0.5, 0.5)</code> 对应
+纹理中心。默认值为 <code>(0, 0)</code>，即左下角。</p>
+						<p>默认值为 <code>(0,0)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="channel" translate="no">.<a href="#channel">channel</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>选择用于映射纹理的 uv 属性。<code>0</code> 对应 <code>uv</code>，
+<code>1</code> 对应 <code>uv1</code>，<code>2</code> 对应 <code>uv2</code>，<code>3</code> 对应 <code>uv3</code>。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="colorSpace" translate="no">.<a href="#colorSpace">colorSpace</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>包含颜色数据的纹理应标注为 <code>SRGBColorSpace</code> 或 <code>LinearSRGBColorSpace</code>。</p>
+						<p>默认值为 <code>NoColorSpace</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depth" translate="no">.<a href="#depth">depth</a> </h3>
+					<div class="description">
+						<p>纹理的深度（以像素为单位）。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="flipY" translate="no">.<a href="#flipY">flipY</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设为 <code>true</code>，纹理在上传到 GPU 时会沿垂直轴翻转。</p>
+<p>注意：使用 <code>ImageBitmap</code> 时此属性无效。需要在
+创建 bitmap 时配置翻转。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="format" translate="no">.<a href="#format">format</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>纹理的格式。</p>
+						<p>默认值为 <code>RGBAFormat</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="generateMipmaps" translate="no">.<a href="#generateMipmaps">generateMipmaps</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否为纹理生成 mipmap（若可能）。</p>
+<p>若手动创建 mipmap，请将此属性设为 <code>false</code>。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="height" translate="no">.<a href="#height">height</a> </h3>
+					<div class="description">
+						<p>纹理的高度（以像素为单位）。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="id" translate="no">.<a href="#id">id</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>纹理的 ID。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="image" translate="no">.<a href="#image">image</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>保存纹理数据的图像对象。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="internalFormat" translate="no">.<a href="#internalFormat">internalFormat</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>默认内部格式由 <a href="Texture.html#format">Texture#format</a> 和 <a href="Texture.html#type">Texture#type</a> 推导，
+定义纹理数据在 GPU 上的存储方式。</p>
+<p>此属性允许覆盖默认格式。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isArrayTexture" translate="no">.<a href="#isArrayTexture">isArrayTexture</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>指示纹理是否应按纹理数组处理。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isRenderTargetTexture" translate="no">.<a href="#isRenderTargetTexture">isRenderTargetTexture</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>指示纹理是否属于渲染目标。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isTexture" translate="no">.<a href="#isTexture">isTexture</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="magFilter" translate="no">.<a href="#magFilter">magFilter</a><span class="type-signature"> : <a href="global.html#NearestFilter">NearestFilter</a> | <a href="global.html#NearestMipmapNearestFilter">NearestMipmapNearestFilter</a> | <a href="global.html#NearestMipmapLinearFilter">NearestMipmapLinearFilter</a> | <a href="global.html#LinearFilter">LinearFilter</a> | <a href="global.html#LinearMipmapNearestFilter">LinearMipmapNearestFilter</a> | <a href="global.html#LinearMipmapLinearFilter">LinearMipmapLinearFilter</a></span> </h3>
+					<div class="description">
+						<p>当一个纹素覆盖多个像素时，纹理的采样方式。</p>
+						<p>默认值为 <code>LinearFilter</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mapping" translate="no">.<a href="#mapping">mapping</a><span class="type-signature"> : <a href="global.html#UVMapping">UVMapping</a> | <a href="global.html#CubeReflectionMapping">CubeReflectionMapping</a> | <a href="global.html#CubeRefractionMapping">CubeRefractionMapping</a> | <a href="global.html#EquirectangularReflectionMapping">EquirectangularReflectionMapping</a> | <a href="global.html#EquirectangularRefractionMapping">EquirectangularRefractionMapping</a> | <a href="global.html#CubeUVReflectionMapping">CubeUVReflectionMapping</a></span> </h3>
+					<div class="description">
+						<p>纹理如何应用到对象上。默认值为 <code>UVMapping</code>，
+即使用纹理或 uv 坐标来应用贴图。</p>
+						<p>默认值为 <code>UVMapping</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="matrix" translate="no">.<a href="#matrix">matrix</a><span class="type-signature"> : <a href="Matrix3.html">Matrix3</a></span> </h3>
+					<div class="description">
+						<p>纹理的 uv 变换矩阵。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="matrixAutoUpdate" translate="no">.<a href="#matrixAutoUpdate">matrixAutoUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否根据属性 <a href="Texture.html#offset">Texture#offset</a>、<a href="Texture.html#repeat">Texture#repeat</a>、
+<a href="Texture.html#rotation">Texture#rotation</a> 和 <a href="Texture.html#center">Texture#center</a>
+更新纹理的 uv 变换 <a href="Texture.html#matrix">Texture#matrix</a>。</p>
+<p>若直接指定 uv 变换矩阵，请将此属性设为 <code>false</code>。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="minFilter" translate="no">.<a href="#minFilter">minFilter</a><span class="type-signature"> : <a href="global.html#NearestFilter">NearestFilter</a> | <a href="global.html#NearestMipmapNearestFilter">NearestMipmapNearestFilter</a> | <a href="global.html#NearestMipmapLinearFilter">NearestMipmapLinearFilter</a> | <a href="global.html#LinearFilter">LinearFilter</a> | <a href="global.html#LinearMipmapNearestFilter">LinearMipmapNearestFilter</a> | <a href="global.html#LinearMipmapLinearFilter">LinearMipmapLinearFilter</a></span> </h3>
+					<div class="description">
+						<p>当一个纹素覆盖不到一个像素时，纹理的采样方式。</p>
+						<p>默认值为 <code>LinearMipmapLinearFilter</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mipmaps" translate="no">.<a href="#mipmaps">mipmaps</a><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="description">
+						<p>保存用户自定义 mipmap 的数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="name" translate="no">.<a href="#name">name</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>纹理的名称。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="needsPMREMUpdate" translate="no">.<a href="#needsPMREMUpdate">needsPMREMUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>将此属性设为 <code>true</code> 表示引擎必须重新生成 PMREM。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="needsUpdate" translate="no">.<a href="#needsUpdate">needsUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>将此属性设为 <code>true</code> 表示引擎必须在下一次渲染时更新纹理。
+这会触发纹理上传到 GPU，并确保纹理参数配置正确。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalized" translate="no">.<a href="#normalized">normalized</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>纹理是否应使用采样时归一化到 [0, 1] 或 [-1, 1]
+（取决于有符号/无符号）的 16 位整数格式之一。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="offset" translate="no">.<a href="#offset">offset</a><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="description">
+						<p>纹理单次重复在 U 和 V 方向上相对起点的偏移量。
+典型范围为 <code>0.0</code> 到 <code>1.0</code>。</p>
+						<p>默认值为 <code>(0,0)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="onUpdate" translate="no">.<a href="#onUpdate">onUpdate</a><span class="type-signature"> : function</span> </h3>
+					<div class="description">
+						<p>回调函数，在纹理更新时调用（例如当
+<a href="Texture.html#needsUpdate">Texture#needsUpdate</a> 设为 true 且随后使用该纹理时）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="pmremVersion" translate="no">.<a href="#pmremVersion">pmremVersion</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>指示此纹理是否应由 <code>PMREMGenerator</code> 处理
+（仅与渲染目标纹理相关）。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="premultiplyAlpha" translate="no">.<a href="#premultiplyAlpha">premultiplyAlpha</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设为 <code>true</code>，在纹理上传到 GPU 时，若存在 alpha 通道，
+会将其乘入颜色通道。</p>
+<p>注意：使用 <code>ImageBitmap</code> 时此属性无效。需要在
+创建 bitmap 时配置预乘 alpha。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderTarget" translate="no">.<a href="#renderTarget">renderTarget</a><span class="type-signature"> : <a href="RenderTarget.html">RenderTarget</a> | <a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span> </h3>
+					<div class="description">
+						<p>可选的反向引用，指向纹理所属的渲染目标。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="repeat" translate="no">.<a href="#repeat">repeat</a><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="description">
+						<p>纹理在表面 U 和 V 方向上重复的次数。若任一方向的
+重复次数大于 <code>1</code>，对应的包裹参数也应设为
+<code>RepeatWrapping</code> 或 <code>MirroredRepeatWrapping</code> 才能获得预期的平铺效果。</p>
+						<p>默认值为 <code>(1,1)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="rotation" translate="no">.<a href="#rotation">rotation</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>纹理绕中心点旋转的角度（以弧度为单位）。
+正值为逆时针方向。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="source" translate="no">.<a href="#source">source</a><span class="type-signature"> : <a href="Source.html">Source</a></span> </h3>
+					<div class="description">
+						<p>纹理的数据定义。对数据源的引用可在多个纹理之间共享。
+这在精灵表场景中通常很有用：多个纹理渲染相同数据，
+但使用不同的纹理变换。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="type" translate="no">.<a href="#type">type</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>纹理的数据类型。</p>
+						<p>默认值为 <code>UnsignedByteType</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="unpackAlignment" translate="no">.<a href="#unpackAlignment">unpackAlignment</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>指定内存中每个像素行起始处的对齐要求。
+允许的值为 <code>1</code>（字节对齐）、<code>2</code>（行对齐到偶数字节）、
+<code>4</code>（字对齐）和 <code>8</code>（行起始于双字边界）。</p>
+						<p>默认值为 <code>4</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateRanges" translate="no">.<a href="#updateRanges">updateRanges</a><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="description">
+						<p>可用于仅更新纹理的子区域或特定行（例如仅更新
+前 3 行）。使用 <code>addUpdateRange()</code> 函数向此数组添加范围。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="userData" translate="no">.<a href="#userData">userData</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>可用于存储纹理自定义数据的对象。不应保存对函数的引用，
+因为这些引用不会被克隆。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uuid" translate="no">.<a href="#uuid">uuid</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>纹理的 UUID。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="version" translate="no">.<a href="#version">version</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>从 <code>0</code> 开始，统计 <a href="Texture.html#needsUpdate">Texture#needsUpdate</a> 被设为 <code>true</code> 的次数。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="width" translate="no">.<a href="#width">width</a> </h3>
+					<div class="description">
+						<p>纹理的宽度（以像素为单位）。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wrapS" translate="no">.<a href="#wrapS">wrapS</a><span class="type-signature"> : <a href="global.html#RepeatWrapping">RepeatWrapping</a> | <a href="global.html#ClampToEdgeWrapping">ClampToEdgeWrapping</a> | <a href="global.html#MirroredRepeatWrapping">MirroredRepeatWrapping</a></span> </h3>
+					<div class="description">
+						<p>定义纹理在水平方向上的包裹方式，对应
+UV 映射中的 <em>U</em>。</p>
+						<p>默认值为 <code>ClampToEdgeWrapping</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wrapT" translate="no">.<a href="#wrapT">wrapT</a><span class="type-signature"> : <a href="global.html#RepeatWrapping">RepeatWrapping</a> | <a href="global.html#ClampToEdgeWrapping">ClampToEdgeWrapping</a> | <a href="global.html#MirroredRepeatWrapping">MirroredRepeatWrapping</a></span> </h3>
+					<div class="description">
+						<p>定义纹理在垂直方向上的包裹方式，对应
+UV 映射中的 <em>V</em>。</p>
+						<p>默认值为 <code>ClampToEdgeWrapping</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id=".DEFAULT_ANISOTROPY" translate="no">.<a href="#.DEFAULT_ANISOTROPY">DEFAULT_ANISOTROPY</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>所有纹理的默认各向异性值。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id=".DEFAULT_IMAGE" translate="no">.<a href="#.DEFAULT_IMAGE">DEFAULT_IMAGE</a><span class="type-signature"> : Image</span> </h3>
+					<div class="description">
+						<p>所有纹理的默认图像。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id=".DEFAULT_MAPPING" translate="no">.<a href="#.DEFAULT_MAPPING">DEFAULT_MAPPING</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>所有纹理的默认映射方式。</p>
+						<p>默认值为 <code>UVMapping</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addUpdateRange" translate="no">.<a href="#addUpdateRange">addUpdateRange</a><span class="signature">( start : <span class="param-type">number</span>, count : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加要在 GPU 上更新的数据纹理数据范围。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">start</strong>
+									</td>
+									<td class="description last">
+										<p>开始更新的位置。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的分量数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="clearUpdateRanges" translate="no">.<a href="#clearUpdateRanges">clearUpdateRanges</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>清除更新范围。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个从此实例复制数值的新纹理。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( source : <span class="param-type"><a href="Texture.html">Texture</a></span> )</span><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定纹理的值复制到此实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放此实例分配的 GPU 相关资源。当应用中
+不再使用此实例时，请调用此方法。</p>
+						</div>
+						<h5>触发：</h5>
+						<ul>
+							<li><a href="Texture.html#event:dispose">Texture#event:dispose</a></li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="setValues" translate="no">.<a href="#setValues">setValues</a><span class="signature">( values : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据 <code>values</code> 设置此纹理的属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">values</strong>
+									</td>
+									<td class="description last">
+										<p>包含纹理参数的容器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">( meta : <span class="param-type">Object | string</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将纹理序列化为 JSON。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">meta</strong>
+									</td>
+									<td class="description last">
+										<p>可选值，保存有关序列化的元信息。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-see">参见：</dt>
+							<dd class="tag-see">
+								<ul>
+									<li><a href="ObjectLoader.html#parse">ObjectLoader#parse</a></li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示序列化纹理的 JSON 对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="transformUv" translate="no">.<a href="#transformUv">transformUv</a><span class="signature">( uv : <span class="param-type"><a href="Vector2.html">Vector2</a></span> )</span><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用纹理的 uv 变换矩阵变换给定的 uv 向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uv</strong>
+									</td>
+									<td class="description last">
+										<p>uv 向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 变换后的 uv 向量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateMatrix" translate="no">.<a href="#updateMatrix">updateMatrix</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据属性 <a href="Texture.html#offset">Texture#offset</a>、
+<a href="Texture.html#repeat">Texture#repeat</a>、<a href="Texture.html#rotation">Texture#rotation</a> 和 <a href="Texture.html#center">Texture#center</a>
+更新纹理变换矩阵。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">事件</h2>
+					<h3 class="name name-method" id="event:dispose" translate="no">.<a href="#event:dispose">dispose</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当纹理被释放时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/Texture.js" translate="no" target="_blank" rel="noopener">src/textures/Texture.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

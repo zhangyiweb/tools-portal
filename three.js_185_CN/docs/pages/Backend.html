@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Backend - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Backend</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>大部分渲染相关逻辑实现于 <a href="Renderer.html">Renderer</a> 模块及相关管理组件中。但有时仍需执行特定于当前 3D 后端（WebGPU 或 WebGL 2）的命令。此抽象基类定义了封装所有后端相关逻辑的接口。各后端的派生类必须实现该接口。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Backend" translate="no">new <a href="#Backend">Backend</a><span class="signature">( parameters : <span class="param-type">Object</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的后端。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>包含后端参数的对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="coordinateSystem" translate="no">.<a href="#coordinateSystem">coordinateSystem</a><span class="type-signature"> : number</span> <span class="type-signature">(abstract, readonly) </span></h3>
+					<div class="description">
+						<p>后端的坐标系。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="data" translate="no">.<a href="#data">data</a><span class="type-signature"> : WeakMap.&lt;Object, Object></span> </h3>
+					<div class="description">
+						<p>此弱映射保存对象（如纹理、属性或渲染目标）的后端特定数据。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="domElement" translate="no">.<a href="#domElement">domElement</a><span class="type-signature"> : HTMLCanvasElement | OffscreenCanvas</span> </h3>
+					<div class="description">
+						<p>渲染器绘制目标画布元素的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="hasTimestamp" translate="no">.<a href="#hasTimestamp">hasTimestamp</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>后端是否支持时间戳查询。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="parameters" translate="no">.<a href="#parameters">parameters</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>后端的参数。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderer" translate="no">.<a href="#renderer">renderer</a><span class="type-signature"> : <a href="Renderer.html">Renderer</a></span> </h3>
+					<div class="description">
+						<p>渲染器的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="timestampQueryPool" translate="no">.<a href="#timestampQueryPool">timestampQueryPool</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>时间戳查询池的引用。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="trackTimestamp" translate="no">.<a href="#trackTimestamp">trackTimestamp</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否使用 Timestamp Query API 跟踪时间戳。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="_getQueryPool" translate="no">.<a href="#_getQueryPool">_getQueryPool</a><span class="signature">( uid : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="TimestampQueryPool.html">TimestampQueryPool</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定 uid 的查询池。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uid</strong>
+									</td>
+									<td class="description last">
+										<p>唯一标识符。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 查询池。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="beginCompute" translate="no">.<a href="#beginCompute">beginCompute</a><span class="signature">( computeGroup : <span class="param-type"><a href="Node.html">Node</a> | Array.&lt;<a href="Node.html">Node</a>></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法在计算调用开始时执行，可供后端为即将到来的计算任务准备状态。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">computeGroup</strong>
+									</td>
+									<td class="description last">
+										<p>计算节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="beginRender" translate="no">.<a href="#beginRender">beginRender</a><span class="signature">( renderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法在渲染调用开始时执行，可供后端为即将到来的绘制调用准备状态。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="compute" translate="no">.<a href="#compute">compute</a><span class="signature">( computeGroup : <span class="param-type"><a href="Node.html">Node</a> | Array.&lt;<a href="Node.html">Node</a>></span>, computeNode : <span class="param-type"><a href="Node.html">Node</a></span>, bindings : <span class="param-type">Array.&lt;<a href="BindGroup.html">BindGroup</a>></span>, computePipeline : <span class="param-type"><a href="ComputePipeline.html">ComputePipeline</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定计算节点执行计算命令。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">computeGroup</strong>
+									</td>
+									<td class="description last">
+										<p>一次计算调用中的计算节点组。也可以是单个计算节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">computeNode</strong>
+									</td>
+									<td class="description last">
+										<p>计算节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindings</strong>
+									</td>
+									<td class="description last">
+										<p>绑定。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">computePipeline</strong>
+									</td>
+									<td class="description last">
+										<p>计算管线。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="copyFramebufferToTexture" translate="no">.<a href="#copyFramebufferToTexture">copyFramebufferToTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span>, renderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a></span>, rectangle : <span class="param-type"><a href="Vector4.html">Vector4</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>将当前绑定的帧缓冲复制到给定纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>目标纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">rectangle</strong>
+									</td>
+									<td class="description last">
+										<p>定义复制原点与尺寸的四维向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="copyTextureToBuffer" translate="no">.<a href="#copyTextureToBuffer">copyTextureToBuffer</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span>, x : <span class="param-type">number</span>, y : <span class="param-type">number</span>, width : <span class="param-type">number</span>, height : <span class="param-type">number</span>, faceIndex : <span class="param-type">number</span> )</span><span class="type-signature"> : Promise.&lt;TypedArray></span> <span class="type-signature">(async, abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以类型化数组形式返回纹理数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>复制原点的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>复制原点的 y 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>复制区域的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>复制区域的高度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">faceIndex</strong>
+									</td>
+									<td class="description last">
+										<p>面索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 复制操作完成时解析为类型化数组的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copyTextureToTexture" translate="no">.<a href="#copyTextureToTexture">copyTextureToTexture</a><span class="signature">( srcTexture : <span class="param-type"><a href="Texture.html">Texture</a></span>, dstTexture : <span class="param-type"><a href="Texture.html">Texture</a></span>, srcRegion : <span class="param-type"><a href="Box3.html">Box3</a> | <a href="Box2.html">Box2</a></span>, dstPosition : <span class="param-type"><a href="Vector2.html">Vector2</a> | <a href="Vector3.html">Vector3</a></span>, srcLevel : <span class="param-type">number</span>, dstLevel : <span class="param-type">number</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定源纹理的数据复制到给定目标纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">srcTexture</strong>
+									</td>
+									<td class="description last">
+										<p>源纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">dstTexture</strong>
+									</td>
+									<td class="description last">
+										<p>目标纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">srcRegion</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的源纹理区域。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">dstPosition</strong>
+									</td>
+									<td class="description last">
+										<p>复制的目标位置。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">srcLevel</strong>
+									</td>
+									<td class="description last">
+										<p>要从中复制的源 mip 级别。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">dstLevel</strong>
+									</td>
+									<td class="description last">
+										<p>要复制到的目标 mip 级别。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createAttribute" translate="no">.<a href="#createAttribute">createAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>创建着色器属性的 GPU 缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createBindings" translate="no">.<a href="#createBindings">createBindings</a><span class="signature">( bindGroup : <span class="param-type"><a href="BindGroup.html">BindGroup</a></span>, bindings : <span class="param-type">Array.&lt;<a href="BindGroup.html">BindGroup</a>></span>, cacheIndex : <span class="param-type">number</span>, version : <span class="param-type">number</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定绑定组定义创建绑定。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindGroup</strong>
+									</td>
+									<td class="description last">
+										<p>绑定组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindings</strong>
+									</td>
+									<td class="description last">
+										<p>绑定组数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">cacheIndex</strong>
+									</td>
+									<td class="description last">
+										<p>缓存索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">version</strong>
+									</td>
+									<td class="description last">
+										<p>版本。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createComputePipeline" translate="no">.<a href="#createComputePipeline">createComputePipeline</a><span class="signature">( computePipeline : <span class="param-type"><a href="ComputePipeline.html">ComputePipeline</a></span>, bindings : <span class="param-type">Array.&lt;<a href="BindGroup.html">BindGroup</a>></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定计算节点创建计算管线。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">computePipeline</strong>
+									</td>
+									<td class="description last">
+										<p>计算管线。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindings</strong>
+									</td>
+									<td class="description last">
+										<p>绑定。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createDefaultTexture" translate="no">.<a href="#createDefaultTexture">createDefaultTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定纹理创建默认纹理，可在实际纹理就绪前用作占位符。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>要为其创建默认纹理的纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createIndexAttribute" translate="no">.<a href="#createIndexAttribute">createIndexAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>创建索引着色器属性的 GPU 缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>索引缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createNodeBuilder" translate="no">.<a href="#createNodeBuilder">createNodeBuilder</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span>, renderer : <span class="param-type"><a href="Renderer.html">Renderer</a></span> )</span><span class="type-signature"> : <a href="NodeBuilder.html">NodeBuilder</a></span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定渲染对象的节点构建器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点构建器。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="createProgram" translate="no">.<a href="#createProgram">createProgram</a><span class="signature">( program : <span class="param-type"><a href="ProgrammableStage.html">ProgrammableStage</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定可编程阶段创建着色器程序。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">program</strong>
+									</td>
+									<td class="description last">
+										<p>可编程阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createRenderPipeline" translate="no">.<a href="#createRenderPipeline">createRenderPipeline</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span>, promises : <span class="param-type">Array.&lt;Promise></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定渲染对象创建渲染管线。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">promises</strong>
+									</td>
+									<td class="description last">
+										<p>用于 <code>compileAsync()</code> 的编译 Promise 数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createStorageAttribute" translate="no">.<a href="#createStorageAttribute">createStorageAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>创建存储属性的 GPU 缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createTexture" translate="no">.<a href="#createTexture">createTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span>, options : <span class="param-type">Object</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>在 GPU 上为给定纹理对象定义纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>可选配置参数。</p>
+										<p>默认值为 <code>{}</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="createUniformBuffer" translate="no">.<a href="#createUniformBuffer">createUniformBuffer</a><span class="signature">( uniformBuffer : <span class="param-type"><a href="Buffer.html">Buffer</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>创建 uniform 缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uniformBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>uniform 缓冲。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="delete" translate="no">.<a href="#delete">delete</a><span class="signature">( object : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从内部数据结构中删除对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>要删除的对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="deleteBindGroupData" translate="no">.<a href="#deleteBindGroupData">deleteBindGroupData</a><span class="signature">( bindGroup : <span class="param-type"><a href="BindGroup.html">BindGroup</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>删除与绑定组关联的 GPU 数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindGroup</strong>
+									</td>
+									<td class="description last">
+										<p>绑定组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="destroyAttribute" translate="no">.<a href="#destroyAttribute">destroyAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>销毁着色器属性的 GPU 缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>要销毁的缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="destroyProgram" translate="no">.<a href="#destroyProgram">destroyProgram</a><span class="signature">( program : <span class="param-type"><a href="ProgrammableStage.html">ProgrammableStage</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>销毁给定可编程阶段的着色器程序。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">program</strong>
+									</td>
+									<td class="description last">
+										<p>可编程阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="destroySampler" translate="no">.<a href="#destroySampler">destroySampler</a><span class="signature">( binding : <span class="param-type"><a href="Sampler.html">Sampler</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>释放给定采样器绑定的 GPU 采样器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">binding</strong>
+									</td>
+									<td class="description last">
+										<p>要释放的采样器绑定。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="destroyTexture" translate="no">.<a href="#destroyTexture">destroyTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span>, isDefaultTexture : <span class="param-type">boolean</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>销毁给定纹理对象的 GPU 数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">isDefaultTexture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理是否使用默认 GPU 纹理。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="destroyUniformBuffer" translate="no">.<a href="#destroyUniformBuffer">destroyUniformBuffer</a><span class="signature">( uniformBuffer : <span class="param-type"><a href="Buffer.html">Buffer</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>销毁 uniform 缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uniformBuffer</strong>
+									</td>
+									<td class="description last">
+										<p>uniform 缓冲。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>释放内部资源。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="draw" translate="no">.<a href="#draw">draw</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span>, info : <span class="param-type"><a href="Info.html">Info</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定渲染对象执行绘制命令。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>要绘制的渲染对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">info</strong>
+									</td>
+									<td class="description last">
+										<p>保存关于 GPU 内存与渲染过程的一系列统计信息。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="finishCompute" translate="no">.<a href="#finishCompute">finishCompute</a><span class="signature">( computeGroup : <span class="param-type"><a href="Node.html">Node</a> | Array.&lt;<a href="Node.html">Node</a>></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法在计算调用结束时执行，可供后端在计算任务完成后收尾。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">computeGroup</strong>
+									</td>
+									<td class="description last">
+										<p>计算节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="finishRender" translate="no">.<a href="#finishRender">finishRender</a><span class="signature">( renderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法在渲染调用结束时执行，可供后端在绘制调用完成后收尾。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="generateMipmaps" translate="no">.<a href="#generateMipmaps">generateMipmaps</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定纹理生成 mipmap。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="get" translate="no">.<a href="#get">get</a><span class="signature">( object : <span class="param-type">Object</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定对象的字典。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对象的字典。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getArrayBufferAsync" translate="no">.<a href="#getArrayBufferAsync">getArrayBufferAsync</a><span class="signature">( attribute : <span class="param-type"><a href="StorageBufferAttribute.html">StorageBufferAttribute</a></span> )</span><span class="type-signature"> : Promise.&lt;ArrayBuffer></span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法执行回读操作，将存储缓冲属性中的缓冲数据从 GPU 移至 CPU。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>存储缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 数据就绪时解析为缓冲数据的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getClearColor" translate="no">.<a href="#getClearColor">getClearColor</a><span class="signature">()</span><span class="type-signature"> : <a href="Color4.html">Color4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将清除颜色与 alpha 合并返回为单个颜色对象。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 清除颜色。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getContext" translate="no">.<a href="#getContext">getContext</a><span class="signature">()</span><span class="type-signature"> : Object</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回后端的渲染上下文。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 渲染上下文。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getDomElement" translate="no">.<a href="#getDomElement">getDomElement</a><span class="signature">()</span><span class="type-signature"> : HTMLCanvasElement</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 DOM 元素。若不存在 DOM 元素，后端会创建一个新的。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> DOM 元素。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getDrawingBufferSize" translate="no">.<a href="#getDrawingBufferSize">getDrawingBufferSize</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回绘图缓冲大小。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 绘图缓冲大小。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRenderCacheKey" translate="no">.<a href="#getRenderCacheKey">getRenderCacheKey</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回用于标识渲染管线的缓存键。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 缓存键。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTimestamp" translate="no">.<a href="#getTimestamp">getTimestamp</a><span class="signature">( uid : <span class="param-type">string</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定 uid 的时间戳。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uid</strong>
+									</td>
+									<td class="description last">
+										<p>唯一标识符。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 时间戳。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTimestampFrames" translate="no">.<a href="#getTimestampFrames">getTimestampFrames</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定类型的所有时间戳帧。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>时间戳类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 时间戳帧。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTimestampUID" translate="no">.<a href="#getTimestampUID">getTimestampUID</a><span class="signature">( abstractRenderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a> | <a href="ComputeNode.html">ComputeNode</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定渲染上下文的唯一标识符，可用于分配遮挡查询或时间戳查询等资源。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">abstractRenderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 唯一标识符。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="has" translate="no">.<a href="#has">has</a><span class="signature">( object : <span class="param-type">Object</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>检查给定对象是否已定义带有数据的字典。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 是否已为给定对象定义字典。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="hasCompatibility" translate="no">.<a href="#hasCompatibility">hasCompatibility</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>检查后端是否具有给定兼容性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>兼容性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 后端是否具有给定兼容性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="hasFeature" translate="no">.<a href="#hasFeature">hasFeature</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>检查后端是否支持给定特性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>特性名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 是否支持该特性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="hasFeatureAsync" translate="no">.<a href="#hasFeatureAsync">hasFeatureAsync</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : Promise.&lt;boolean></span> <span class="type-signature">(async, abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>检查后端是否支持给定特性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>特性名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析为布尔值、指示是否支持该特性的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="hasTimestampQuery" translate="no">.<a href="#hasTimestampQuery">hasTimestampQuery</a><span class="signature">( uid : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若给定 uid 的时间戳可用，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uid</strong>
+									</td>
+									<td class="description last">
+										<p>唯一标识符。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 时间戳是否可用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="init" translate="no">.<a href="#init">init</a><span class="signature">( renderer : <span class="param-type"><a href="Renderer.html">Renderer</a></span> )</span><span class="type-signature"> : Promise</span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>初始化后端以使其可供使用。具体后端应在此方法中实现渲染上下文创建及相关操作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 后端初始化完成时解析的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="initRenderTarget" translate="no">.<a href="#initRenderTarget">initRenderTarget</a><span class="signature">( renderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>初始化给定渲染上下文中定义的渲染目标。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="isOccluded" translate="no">.<a href="#isOccluded">isOccluded</a><span class="signature">( renderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a></span>, object : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span><span class="type-signature"> : boolean</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>若给定 3D 对象被场景中其他 3D 对象完全遮挡，则返回 <code>true</code>。后端必须使用 Occlusion Query API 实现此方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>要测试的 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 3D 对象是否被完全遮挡。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="needsRenderUpdate" translate="no">.<a href="#needsRenderUpdate">needsRenderUpdate</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span> )</span><span class="type-signature"> : boolean</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>若渲染管线需要更新，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 渲染管线是否需要更新。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="resolveTimestampsAsync" translate="no">.<a href="#resolveTimestampsAsync">resolveTimestampsAsync</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : Promise.&lt;number></span> <span class="type-signature">(async, abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定渲染上下文与类型的时间戳。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>时间戳类型。</p>
+										<p>默认值为 <code>'render'</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析为时间戳的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( object : <span class="param-type">Object</span>, value : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定对象的字典设置到内部数据结构中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的字典。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setScissorTest" translate="no">.<a href="#setScissorTest">setScissorTest</a><span class="signature">( boolean : <span class="param-type">boolean</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>定义裁剪测试。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">boolean</strong>
+									</td>
+									<td class="description last">
+										<p>是否应启用裁剪测试。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setXRTarget" translate="no">.<a href="#setXRTarget">setXRTarget</a><span class="signature">( xrTarget : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置 XR 渲染目标。</p>
+<p>直接渲染到 XR 帧缓冲的后端可重写此钩子。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">xrTarget</strong>
+									</td>
+									<td class="description last">
+										<p>XR 渲染目标。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateAttribute" translate="no">.<a href="#updateAttribute">updateAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>更新着色器属性的 GPU 缓冲。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateBinding" translate="no">.<a href="#updateBinding">updateBinding</a><span class="signature">( binding : <span class="param-type"><a href="Buffer.html">Buffer</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>更新缓冲绑定。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">binding</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的缓冲绑定。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateBindings" translate="no">.<a href="#updateBindings">updateBindings</a><span class="signature">( bindGroup : <span class="param-type"><a href="BindGroup.html">BindGroup</a></span>, bindings : <span class="param-type">Array.&lt;<a href="BindGroup.html">BindGroup</a>></span>, cacheIndex : <span class="param-type">number</span>, version : <span class="param-type">number</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>更新给定绑定组定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindGroup</strong>
+									</td>
+									<td class="description last">
+										<p>绑定组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bindings</strong>
+									</td>
+									<td class="description last">
+										<p>绑定组数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">cacheIndex</strong>
+									</td>
+									<td class="description last">
+										<p>缓存索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">version</strong>
+									</td>
+									<td class="description last">
+										<p>版本。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateSampler" translate="no">.<a href="#updateSampler">updateSampler</a><span class="signature">( binding : <span class="param-type"><a href="Sampler.html">Sampler</a></span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定纹理更新 GPU 采样器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">binding</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的采样器绑定。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前采样器键。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateSize" translate="no">.<a href="#updateSize">updateSize</a><span class="signature">()</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>当渲染器尺寸改变时若需运行逻辑，后端可使用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="updateTexture" translate="no">.<a href="#updateTexture">updateTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span>, options : <span class="param-type">Object</span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>将更新后的纹理数据上传到 GPU。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>可选配置参数。</p>
+										<p>默认值为 <code>{}</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateTimeStampUID" translate="no">.<a href="#updateTimeStampUID">updateTimeStampUID</a><span class="signature">( abstractRenderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a> | <a href="ComputeNode.html">ComputeNode</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新给定渲染上下文的唯一标识符，可用于分配遮挡查询或时间戳查询等资源。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">abstractRenderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="updateViewport" translate="no">.<a href="#updateViewport">updateViewport</a><span class="signature">( renderContext : <span class="param-type"><a href="RenderContext.html">RenderContext</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>使用给定渲染上下文中的值更新视口。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderContext</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/common/Backend.js" translate="no" target="_blank" rel="noopener">src/renderers/common/Backend.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

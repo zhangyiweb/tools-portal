@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>WebGLTimestampQueryPool - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="TimestampQueryPool.html">TimestampQueryPool</a> → </p>
+	<h1 translate="no">WebGLTimestampQueryPool</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>管理用于性能测量的 WebGL 时间戳查询池。
+使用 WebGL 扩展处理计时查询的创建、执行与解析。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="WebGLTimestampQueryPool" translate="no">new <a href="#WebGLTimestampQueryPool">WebGLTimestampQueryPool</a><span class="signature">( gl : <span class="param-type">WebGLRenderingContext | WebGL2RenderingContext</span>, type : <span class="param-type">string</span>, maxQueries : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>创建一个新的 WebGL 时间戳查询池。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">gl</strong>
+									</td>
+									<td class="description last">
+										<p>WebGL 上下文。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>此查询池的类型标识符。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxQueries</strong>
+									</td>
+									<td class="description last">
+										<p>此池可容纳的最大查询数量。</p>
+										<p>默认值为 <code>2048</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="allocateQueriesForContext" translate="no">.<a href="#allocateQueriesForContext">allocateQueriesForContext</a><span class="signature">( uid : <span class="param-type">string</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定的渲染上下文分配一对查询。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uid</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文的唯一标识符。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TimestampQueryPool.html#allocateQueriesForContext">TimestampQueryPool#allocateQueriesForContext</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 已分配查询的基偏移量；若分配失败则返回 null。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="beginQuery" translate="no">.<a href="#beginQuery">beginQuery</a><span class="signature">( uid : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为指定的渲染上下文开始一次时间戳查询。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uid</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文的唯一标识符。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放此查询池持有的所有资源。
+包括删除所有查询对象并清除内部状态。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TimestampQueryPool.html#dispose">TimestampQueryPool#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="endQuery" translate="no">.<a href="#endQuery">endQuery</a><span class="signature">( uid : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>结束指定渲染上下文的活动时间戳查询。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uid</strong>
+									</td>
+									<td class="description last">
+										<p>渲染上下文的唯一标识符。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="resolveQueriesAsync" translate="no">.<a href="#resolveQueriesAsync">resolveQueriesAsync</a><span class="signature">()</span><span class="type-signature"> : Promise.&lt;number></span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>异步解析所有已完成的查询，并返回总时长。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TimestampQueryPool.html#resolveQueriesAsync">TimestampQueryPool#resolveQueriesAsync</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 总时长（毫秒）；若解析失败则返回上一个有效值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="resolveQuery" translate="no">.<a href="#resolveQuery">resolveQuery</a><span class="signature">( query : <span class="param-type">WebGLQuery</span> )</span><span class="type-signature"> : Promise.&lt;number></span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>解析单个查询，检查是否完成以及是否发生不相交操作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">query</strong>
+									</td>
+									<td class="description last">
+										<p>要解析的查询对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 经过的时间（毫秒）。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/webgl-fallback/utils/WebGLTimestampQueryPool.js" translate="no" target="_blank" rel="noopener">src/renderers/webgl-fallback/utils/WebGLTimestampQueryPool.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

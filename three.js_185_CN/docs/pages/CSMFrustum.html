@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>CSMFrustum - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">CSMFrustum</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示 CSM 实例的视锥体。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">CSMFrustum</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { CSMFrustum } from 'three/addons/csm/CSMFrustum.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="CSMFrustum" translate="no">new <a href="#CSMFrustum">CSMFrustum</a><span class="signature">( data : <span class="param-type"><a href="CSMFrustum.html#~Data">CSMFrustum~Data</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 CSM 视锥体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>CSM 数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="vertices" translate="no">.<a href="#vertices">vertices</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>表示近平面与远平面在视图空间中
+顶点的对象。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="zFar" translate="no">.<a href="#zFar">zFar</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>zFar 值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="zNear" translate="no">.<a href="#zNear">zNear</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>zNear 值。该值取决于 CSM 是与 WebGL 还是
+WebGPU 一起使用。两种 API 的投影矩阵约定不同。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setFromProjectionMatrix" translate="no">.<a href="#setFromProjectionMatrix">setFromProjectionMatrix</a><span class="signature">( projectionMatrix : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span>, maxFar : <span class="param-type">number</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的投影矩阵和最大远裁剪面值设置此 CSM 视锥体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">projectionMatrix</strong>
+									</td>
+									<td class="description last">
+										<p>投影矩阵，通常为场景相机的投影矩阵。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxFar</strong>
+									</td>
+									<td class="description last">
+										<p>最大远裁剪面值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示近平面与远平面在视图空间中顶点的对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="split" translate="no">.<a href="#split">split</a><span class="signature">( breaks : <span class="param-type">Array.&lt;number></span>, target : <span class="param-type">Array.&lt;<a href="CSMFrustum.html">CSMFrustum</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>按给定数组分割 CSM 视锥体。新的 CSM 视锥体将被推入给定的
+目标数组。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">breaks</strong>
+									</td>
+									<td class="description last">
+										<p>取值范围为 <code>[0,1]</code> 的数字数组，用于定义如何分割
+CSM 视锥体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存放新 CSM 视锥体的目标数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="toSpace" translate="no">.<a href="#toSpace">toSpace</a><span class="signature">( cameraMatrix : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span>, target : <span class="param-type"><a href="CSMFrustum.html">CSMFrustum</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的目标 CSM 视锥体变换到由给定相机矩阵所定义的
+另一坐标系中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">cameraMatrix</strong>
+									</td>
+									<td class="description last">
+										<p>定义新坐标系的矩阵。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>要转换的 CSM。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Data" translate="no">.<a href="#~Data">Data</a> </h3>
+					<div class="description">
+						<p><code>CSMFrustum</code> 的构造函数数据。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>webGL</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>此 CSM 视锥体是与 WebGL 还是 WebGPU 一起使用。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>reversedDepth</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否启用反向深度缓冲。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>projectionMatrix</strong>
+						<br>
+<span class="param-type"><a href="Matrix4.html">Matrix4</a></span>
+				</td>
+			<td class="description last">
+				<p>投影矩阵，通常为场景相机的投影矩阵。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>maxFar</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>最大远裁剪面值。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/csm/CSMFrustum.js" translate="no" target="_blank" rel="noopener">examples/jsm/csm/CSMFrustum.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Layers - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Layers</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>图层对象可将 3D 对象分配到编号为 <code>0</code> 到 <code>31</code> 的 32 个图层中的一个或多个——内部以位掩码形式存储图层，默认情况下所有 3D 对象都属于图层 <code>0</code>。</p>
+<p>这可用于控制可见性——对象必须与相机共享至少一个图层，才能在该相机视图渲染时可见。</p>
+<p>所有继承自 <a href="Object3D.html">Object3D</a> 的类都有一个 <code>layers</code> 属性，它是该类的实例。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Layers" translate="no">new <a href="#Layers">Layers</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的图层实例，初始成员关系设置为图层 <code>0</code>。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="mask" translate="no">.<a href="#mask">mask</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>位掩码，存储该图层对象当前所属的 32 个图层。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="disable" translate="no">.<a href="#disable">disable</a><span class="signature">( layer : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>移除给定图层的成员关系。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">layer</strong>
+									</td>
+									<td class="description last">
+										<p>要禁用的图层。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="disableAll" translate="no">.<a href="#disableAll">disableAll</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>移除所有图层的成员关系。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="enable" translate="no">.<a href="#enable">enable</a><span class="signature">( layer : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加给定图层的成员关系。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">layer</strong>
+									</td>
+									<td class="description last">
+										<p>要启用的图层。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="enableAll" translate="no">.<a href="#enableAll">enableAll</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加所有图层的成员关系。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="isEnabled" translate="no">.<a href="#isEnabled">isEnabled</a><span class="signature">( layer : <span class="param-type">number</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若给定图层已启用，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">layer</strong>
+									</td>
+									<td class="description last">
+										<p>要测试的图层。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定图层是否已启用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( layer : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将成员关系设置为给定图层，并移除所有其他图层的成员关系。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">layer</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的图层。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="test" translate="no">.<a href="#test">test</a><span class="signature">( layers : <span class="param-type"><a href="Layers.html">Layers</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若该对象与给定图层对象至少共享一个图层，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">layers</strong>
+									</td>
+									<td class="description last">
+										<p>要测试的图层对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 该对象与给定图层对象是否至少共享一个图层。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toggle" translate="no">.<a href="#toggle">toggle</a><span class="signature">( layer : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>切换给定图层的成员关系。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">layer</strong>
+									</td>
+									<td class="description last">
+										<p>要切换的图层。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/core/Layers.js" translate="no" target="_blank" rel="noopener">src/core/Layers.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

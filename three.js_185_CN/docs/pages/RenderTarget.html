@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>RenderTarget - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → </p>
+	<h1 translate="no">RenderTarget</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>渲染目标（Render Target）是一块缓冲区，用于在后端渲染场景时由显卡写入像素。它常用于多种效果，例如在将渲染结果显示到屏幕之前对图像进行后处理。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="RenderTarget" translate="no">new <a href="#RenderTarget">RenderTarget</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span>, options : <span class="param-type"><a href="RenderTarget.html#~Options">RenderTarget~Options</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>创建一个渲染目标。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>渲染目标的宽度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>渲染目标的高度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>配置对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="depth" translate="no">.<a href="#depth">depth</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>渲染目标的深度。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthBuffer" translate="no">.<a href="#depthBuffer">depthBuffer</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否分配深度缓冲区。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthTexture" translate="no">.<a href="#depthTexture">depthTexture</a><span class="type-signature"> : <a href="DepthTexture.html">DepthTexture</a></span> </h3>
+					<div class="description">
+						<p>不将深度保存在 renderbuffer 中，而改用纹理保存，便于后续处理，例如在后处理流程中使用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="height" translate="no">.<a href="#height">height</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>渲染目标的高度。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isRenderTarget" translate="no">.<a href="#isRenderTarget">isRenderTarget</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="multiview" translate="no">.<a href="#multiview">multiview</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>该目标是否用于多视图渲染。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="resolveDepthBuffer" translate="no">.<a href="#resolveDepthBuffer">resolveDepthBuffer</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否解析深度缓冲区。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="resolveStencilBuffer" translate="no">.<a href="#resolveStencilBuffer">resolveStencilBuffer</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否解析模板缓冲区。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="samples" translate="no">.<a href="#samples">samples</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>MSAA 采样数。</p>
+<p>值为 <code>0</code> 时禁用 MSAA。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scissor" translate="no">.<a href="#scissor">scissor</a><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="description">
+						<p>渲染目标视口内的矩形区域。该区域之外的片元将被丢弃。</p>
+						<p>默认值为 <code>(0,0,width,height)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scissorTest" translate="no">.<a href="#scissorTest">scissorTest</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>渲染到此渲染目标时是否启用剪刀测试。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilBuffer" translate="no">.<a href="#stencilBuffer">stencilBuffer</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否分配模板缓冲区。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="texture" translate="no">.<a href="#texture">texture</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>表示默认颜色附着点的纹理。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="textures" translate="no">.<a href="#textures">textures</a><span class="type-signature"> : Array.&lt;<a href="Texture.html">Texture</a>></span> </h3>
+					<div class="description">
+						<p>纹理数组。每个颜色附着点对应独立的纹理。至少包含一个用于默认颜色附着点的条目。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="useArrayDepthTexture" translate="no">.<a href="#useArrayDepthTexture">useArrayDepthTexture</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否将深度纹理创建为数组纹理，以支持逐层深度测试。这与 multiview 独立，使分层渲染目标可在不使用 multiview 扩展的情况下使用数组深度。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="viewport" translate="no">.<a href="#viewport">viewport</a><span class="type-signature"> : <a href="Vector4.html">Vector4</a></span> </h3>
+					<div class="description">
+						<p>表示渲染目标视口的矩形区域。</p>
+						<p>默认值为 <code>(0,0,width,height)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="width" translate="no">.<a href="#width">width</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>渲染目标的宽度。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="RenderTarget.html">RenderTarget</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个拷贝了本实例值的渲染目标。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( source : <span class="param-type"><a href="RenderTarget.html">RenderTarget</a></span> )</span><span class="type-signature"> : <a href="RenderTarget.html">RenderTarget</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>复制指定渲染目标的设置。这是结构性拷贝，拷贝后两个渲染目标之间不共享资源，包括所有 MRT 纹理和深度纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的渲染目标。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放本实例占用的 GPU 相关资源。在应用中不再使用该实例时应调用此方法。</p>
+						</div>
+						<h5>触发：</h5>
+						<ul>
+							<li>RenderTarget#event:dispose</li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span>, depth : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置此渲染目标的大小。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>高度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depth</strong>
+									</td>
+									<td class="description last">
+										<p>深度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Options" translate="no">.<a href="#~Options">Options</a> </h3>
+					<div class="description">
+						<p>渲染目标选项。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>generateMipmaps</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否生成 mipmap。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>magFilter</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>放大过滤器。</p>
+						<p>默认值为 <code>LinearFilter</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>minFilter</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>缩小过滤器。</p>
+						<p>默认值为 <code>LinearFilter</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>format</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理格式。</p>
+						<p>默认值为 <code>RGBAFormat</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>type</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理类型。</p>
+						<p>默认值为 <code>UnsignedByteType</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>internalFormat</strong>
+						<br>
+<span class="param-type">string</span>
+				</td>
+			<td class="description last">
+				<p>纹理的内部格式。</p>
+						<p>默认值为 <code>null</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>wrapS</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理 UV 包裹模式。</p>
+						<p>默认值为 <code>ClampToEdgeWrapping</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>wrapT</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理 UV 包裹模式。</p>
+						<p>默认值为 <code>ClampToEdgeWrapping</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>anisotropy</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理的各向异性值。</p>
+						<p>默认值为 <code>1</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>colorSpace</strong>
+						<br>
+<span class="param-type">string</span>
+				</td>
+			<td class="description last">
+				<p>纹理的色彩空间。</p>
+						<p>默认值为 <code>NoColorSpace</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>depthBuffer</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否分配深度缓冲区。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>stencilBuffer</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否分配模板缓冲区。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>resolveDepthBuffer</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否解析深度缓冲区。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>resolveStencilBuffer</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否解析模板缓冲区。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>depthTexture</strong>
+						<br>
+<span class="param-type"><a href="Texture.html">Texture</a></span>
+				</td>
+			<td class="description last">
+				<p>深度纹理的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>samples</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>MSAA 采样数。</p>
+						<p>默认值为 <code>0</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>count</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>定义颜色附着点的数量。至少为 <code>1</code>。</p>
+						<p>默认值为 <code>1</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>depth</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理深度。</p>
+						<p>默认值为 <code>1</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>multiview</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>该目标是否用于多视图渲染（WebGL OVR_multiview2 扩展）。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>useArrayDepthTexture</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否将深度纹理创建为数组纹理，以支持逐层深度测试。这与 multiview 独立，使分层渲染目标可在不使用 multiview 扩展的情况下使用数组深度。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/core/RenderTarget.js" translate="no" target="_blank" rel="noopener">src/core/RenderTarget.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

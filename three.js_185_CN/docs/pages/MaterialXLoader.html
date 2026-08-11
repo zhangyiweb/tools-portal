@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MaterialXLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">MaterialXLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载 MaterialX 格式的加载器。</p>
+<p>通过此加载器加载的节点材质只能与 <a href="WebGPURenderer.html">WebGPURenderer</a> 一起使用。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new MaterialXLoader().setPath( SAMPLE_PATH );
+const materials = await loader.loadAsync( 'standard_surface_brass_tiled.mtlx' );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">MaterialXLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { MaterialXLoader } from 'three/addons/loaders/MaterialXLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MaterialXLoader" translate="no">new <a href="#MaterialXLoader">MaterialXLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 MaterialX 加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span><span class="type-signature"> : <a href="MaterialXLoader.html">MaterialXLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的 MaterialX 资源
+传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( text : <span class="param-type">string</span> )</span><span class="type-signature"> : Object.&lt;string, <a href="NodeMaterial.html">NodeMaterial</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 MaterialX 数据并返回生成的材质。</p>
+<p>支持的 standard_surface 输入：</p>
+<ul>
+<li>base、base_color：基础色/反照率</li>
+<li>opacity：Alpha/透明度</li>
+<li>specular_roughness：表面粗糙度</li>
+<li>metalness：金属度</li>
+<li>specular：镜面反射强度</li>
+<li>specular_color：镜面反射颜色</li>
+<li>ior：折射率</li>
+<li>specular_anisotropy、specular_rotation：各向异性反射</li>
+<li>transmission、transmission_color：透射属性</li>
+<li>thin_film_thickness、thin_film_ior：薄膜干涉</li>
+<li>sheen、sheen_color、sheen_roughness：光泽属性</li>
+<li>normal：法线贴图</li>
+<li>coat、coat_roughness、coat_color：清漆属性</li>
+<li>emission、emissionColor：自发光属性</li>
+</ul>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">text</strong>
+									</td>
+									<td class="description last">
+										<p>原始 MaterialX 数据字符串。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含解析后节点材质的字典。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/MaterialXLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/MaterialXLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

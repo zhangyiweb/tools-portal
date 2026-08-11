@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>StorageTexture3DNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="InputNode.html">InputNode</a> → <a href="UniformNode.html">UniformNode</a> → <a href="TextureNode.html">TextureNode</a> → <a href="StorageTextureNode.html">StorageTextureNode</a> → </p>
+	<h1 translate="no">StorageTexture3DNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此特殊版本的纹理节点可用于
+通过计算着色器向 3D 存储纹理写入数据。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="StorageTexture3DNode" translate="no">new <a href="#StorageTexture3DNode">StorageTexture3DNode</a><span class="signature">( value : <span class="param-type"><a href="Storage3DTexture.html">Storage3DTexture</a></span>, uvNode : <span class="param-type"><a href="Node.html">Node</a>.&lt;vec3></span>, storeNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 3D 存储纹理节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>3D 存储纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">uvNode</strong>
+									</td>
+									<td class="description last">
+										<p>uv 节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">storeNode</strong>
+									</td>
+									<td class="description last">
+										<p>应存储到纹理中的值节点。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isStorageTexture3DNode" translate="no">.<a href="#isStorageTexture3DNode">isStorageTexture3DNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型测试。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="generateOffset" translate="no">.<a href="#generateOffset">generateOffset</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span>, offsetNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>生成偏移量代码片段。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offsetNode</strong>
+									</td>
+									<td class="description last">
+										<p>要为其生成代码的偏移节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="StorageTextureNode.html#generateOffset">StorageTextureNode#generateOffset</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 生成的代码片段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateUV" translate="no">.<a href="#generateUV">generateUV</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span>, uvNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>生成 uv 代码片段。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">uvNode</strong>
+									</td>
+									<td class="description last">
+										<p>要为其生成代码的 uv 节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="StorageTextureNode.html#generateUV">StorageTextureNode#generateUV</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 生成的代码片段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getDefaultUV" translate="no">.<a href="#getDefaultUV">getDefaultUV</a><span class="signature">()</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回默认 uv 节点；在 3D 纹理场景下，
+这是一个三维 uv 节点。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="StorageTextureNode.html#getDefaultUV">StorageTextureNode#getDefaultUV</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 默认 uv 节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setUpdateMatrix" translate="no">.<a href="#setUpdateMatrix">setUpdateMatrix</a><span class="signature">( value : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>已用空实现重写，因为对于 3D 纹理会忽略 <code>updateMatrix</code> 标志。
+uv 变换矩阵不会应用于 3D 纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>更新开关。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="StorageTextureNode.html#setUpdateMatrix">StorageTextureNode#setUpdateMatrix</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/accessors/StorageTexture3DNode.js" translate="no" target="_blank" rel="noopener">src/nodes/accessors/StorageTexture3DNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

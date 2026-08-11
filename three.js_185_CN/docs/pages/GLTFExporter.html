@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>GLTFExporter - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">GLTFExporter</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><code>glTF</code> 2.0 导出器。</p>
+<p>glTF（GL Transmission Format）是一种<a href="https://github.com/KhronosGroup/glTF/tree/master/specification/2.0" target="_blank" rel="noopener">开放格式规范</a>，
+用于高效传输和加载 3D 内容。资源可以以 JSON（.gltf）或二进制（.glb）格式提供。外部文件存储纹理（.jpg、.png）及附加二进制数据（.bin）。glTF 资源可包含一个或多个场景，包括网格、材质、纹理、蒙皮、骨骼、形变目标、动画、灯光和/或相机。</p>
+<p>GLTFExporter 支持以下<a href="https://github.com/KhronosGroup/glTF/tree/master/extensions/" target="_blank" rel="noopener">glTF 2.0 扩展</a>：</p>
+<ul>
+<li>KHR_lights_punctual</li>
+<li>KHR_materials_clearcoat</li>
+<li>KHR_materials_dispersion</li>
+<li>KHR_materials_emissive_strength</li>
+<li>KHR_materials_ior</li>
+<li>KHR_materials_iridescence</li>
+<li>KHR_materials_specular</li>
+<li>KHR_materials_sheen</li>
+<li>KHR_materials_transmission</li>
+<li>KHR_materials_unlit</li>
+<li>KHR_materials_volume</li>
+<li>KHR_mesh_quantization</li>
+<li>KHR_texture_transform</li>
+<li>EXT_materials_bump</li>
+<li>EXT_mesh_gpu_instancing</li>
+<li>EXT_texture_webp</li>
+</ul>
+<p>以下 glTF 2.0 扩展由外部用户插件提供支持：</p>
+<ul>
+<li><a href="https://github.com/takahirox/three-gltf-extensions" target="_blank" rel="noopener">KHR_materials_variants</a></li>
+</ul></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const exporter = new GLTFExporter();
+const data = await exporter.parseAsync( scene, options );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">GLTFExporter</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="GLTFExporter" translate="no">new <a href="#GLTFExporter">GLTFExporter</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 glTF 导出器。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="textureUtils" translate="no">.<a href="#textureUtils">textureUtils</a><span class="type-signature"> : <a href="WebGLTextureUtils.html">WebGLTextureUtils</a> | <a href="WebGPUTextureUtils.html">WebGPUTextureUtils</a></span> </h3>
+					<div class="description">
+						<p>纹理工具模块的引用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( input : <span class="param-type"><a href="Scene.html">Scene</a> | Array.&lt;<a href="Scene.html">Scene</a>></span>, onDone : <span class="param-type"><a href="GLTFExporter.html#~OnDone">GLTFExporter~OnDone</a></span>, onError : <span class="param-type"><a href="GLTFExporter.html#~OnError">GLTFExporter~OnError</a></span>, options : <span class="param-type"><a href="GLTFExporter.html#~Options">GLTFExporter~Options</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定场景并生成 glTF 输出。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">input</strong>
+									</td>
+									<td class="description last">
+										<p>一个场景或场景数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onDone</strong>
+									</td>
+									<td class="description last">
+										<p>导出完成时执行的回调函数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行的回调函数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="parseAsync" translate="no">.<a href="#parseAsync">parseAsync</a><span class="signature">( input : <span class="param-type"><a href="Scene.html">Scene</a> | Array.&lt;<a href="Scene.html">Scene</a>></span>, options : <span class="param-type"><a href="GLTFExporter.html#~Options">GLTFExporter~Options</a></span> )</span><span class="type-signature"> : Promise.&lt;(ArrayBuffer|string)></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p><a href="GLTFExporter.html#parse">GLTFExporter#parse</a> 的异步版本。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">input</strong>
+									</td>
+									<td class="description last">
+										<p>一个场景或场景数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 一个 Promise，解析后返回导出的 glTF 数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="register" translate="no">.<a href="#register">register</a><span class="signature">( callback : <span class="param-type">function</span> )</span><span class="type-signature"> : <a href="GLTFExporter.html">GLTFExporter</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>注册插件回调。此 API 在内部用于实现各种 glTF 扩展，第三方代码也可使用它为导出器添加额外逻辑。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">callback</strong>
+									</td>
+									<td class="description last">
+										<p>要注册的回调函数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此导出器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setTextureUtils" translate="no">.<a href="#setTextureUtils">setTextureUtils</a><span class="signature">( utils : <span class="param-type"><a href="WebGLTextureUtils.html">WebGLTextureUtils</a> | <a href="WebGPUTextureUtils.html">WebGPUTextureUtils</a></span> )</span><span class="type-signature"> : <a href="GLTFExporter.html">GLTFExporter</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置此导出器的纹理工具。仅在需要导出压缩纹理时相关。</p>
+<p>根据使用的是 <a href="WebGLRenderer.html">WebGLRenderer</a> 还是 <a href="WebGPURenderer.html">WebGPURenderer</a>，必须注入对应的纹理工具 <a href="WebGLTextureUtils.html">WebGLTextureUtils</a> 或 <a href="WebGPUTextureUtils.html">WebGPUTextureUtils</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">utils</strong>
+									</td>
+									<td class="description last">
+										<p>纹理工具。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此导出器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="unregister" translate="no">.<a href="#unregister">unregister</a><span class="signature">( callback : <span class="param-type">function</span> )</span><span class="type-signature"> : <a href="GLTFExporter.html">GLTFExporter</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>注销插件回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">callback</strong>
+									</td>
+									<td class="description last">
+										<p>要注销的回调函数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此导出器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+					<h3 class="name name-method" id="~OnDone" translate="no">.<a href="#~OnDone">OnDone</a><span class="signature">( result : <span class="param-type">ArrayBuffer | string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p><code>GLTFExporter</code> 的 onDone 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">result</strong>
+									</td>
+									<td class="description last">
+										<p>生成的 .gltf（JSON）或 .glb（二进制）数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="~OnError" translate="no">.<a href="#~OnError">OnError</a><span class="signature">( error : <span class="param-type">Error</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p><code>GLTFExporter</code> 的 onError 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">error</strong>
+									</td>
+									<td class="description last">
+										<p>错误对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<div class="member">
+					<h3 class="name" id="~Options" translate="no">.<a href="#~Options">Options</a> </h3>
+					<div class="description">
+						<p><code>GLTFExporter</code> 的导出选项。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>trs</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>为每个节点导出位置、旋转和缩放，而非矩阵。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>onlyVisible</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>仅导出可见的 3D 对象。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>binary</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>以二进制（.glb）格式导出，返回 ArrayBuffer。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>maxTextureSize</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>将图像最大尺寸（宽度和高度）限制为给定值。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>animations</strong>
+						<br>
+<span class="param-type">Array.&lt;<a href="AnimationClip.html">AnimationClip</a>></span>
+|
+<span class="param-type">Array.&lt;Array.&lt;<a href="AnimationClip.html">AnimationClip</a>>></span>
+				</td>
+			<td class="description last">
+				<p>要包含在导出中的动画列表。导出单个 3D 对象或场景时，这是一个扁平的剪辑列表。
+导出多个场景数组时，必须是嵌套数组，每个场景对应一个剪辑列表，按索引与输入匹配。</p>
+						<p>默认值为 <code>[]</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>includeCustomExtensions</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>导出对象 <code>userData.gltfExtensions</code> 属性上定义的自定义 glTF 扩展。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/exporters/GLTFExporter.js" translate="no" target="_blank" rel="noopener">examples/jsm/exporters/GLTFExporter.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

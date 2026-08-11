@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LightProbeGrid - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">LightProbeGrid</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>由 L2 球谐辐照度探针组成的三维网格，用于提供
+与位置相关的漫反射全局光照。</p>
+<p>注意：此类仅可与 <a href="WebGLRenderer.html">WebGLRenderer</a> 配合使用。
+适用于 <a href="WebGPURenderer.html">WebGPURenderer</a> 的版本将在稍后添加。</p>
+<p>全部七个打包的 SH 子体积存储在<strong>单个</strong> RGBA
+<code>WebGL3DRenderTarget</code> 中，沿 Z 轴采用纹理图集布局。
+每个子体积占用 <code>( nz + 2 )</code> 个图集切片：两端各有一个填充切片
+（复制最近的边缘数据切片），以防止硬件三线性过滤
+跨子体积边界采样时出现颜色渗漏。</p>
+<p>图集布局（nz = resolution.z，PADDING = 1）：</p>
+<p>图集总深度 = <code>7 * ( nz + 2 )</code>。</p>
+<p>烘焙完全在 GPU 上完成：立方体贴图渲染、SH 投影以及
+纹理打包均在 GPU 上执行，无需 CPU 回读。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre class="prettyprint source"><code>  slice   0              : padding  (copy of sub-volume 0, data slice 0)
+  slices  1 … nz         : sub-volume 0 data
+  slice   nz + 1         : padding  (copy of sub-volume 0, data slice nz-1)
+  slice   nz + 2         : padding  (copy of sub-volume 1, data slice 0)
+  slices  nz+3 … 2*nz+2  : sub-volume 1 data
+  …
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">LightProbeGrid</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { LightProbeGrid } from 'three/addons/lighting/LightProbeGrid.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LightProbeGrid" translate="no">new <a href="#LightProbeGrid">LightProbeGrid</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span>, depth : <span class="param-type">number</span>, widthProbes : <span class="param-type">number</span>, heightProbes : <span class="param-type">number</span>, depthProbes : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的辐照度探针网格。</p>
+<p>该体积以对象的位置为中心。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>体积沿 X 轴的完整宽度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>体积沿 Y 轴的完整高度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depth</strong>
+									</td>
+									<td class="description last">
+										<p>体积沿 Z 轴的完整深度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">widthProbes</strong>
+									</td>
+									<td class="description last">
+										<p>沿 X 轴的探针数量。默认为 <code>Math.max( 2, Math.round( width ) + 1 )</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">heightProbes</strong>
+									</td>
+									<td class="description last">
+										<p>沿 Y 轴的探针数量。默认为 <code>Math.max( 2, Math.round( height ) + 1 )</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depthProbes</strong>
+									</td>
+									<td class="description last">
+										<p>沿 Z 轴的探针数量。默认为 <code>Math.max( 2, Math.round( depth ) + 1 )</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="boundingBox" translate="no">.<a href="#boundingBox">boundingBox</a><span class="type-signature"> : <a href="Box3.html">Box3</a></span> </h3>
+					<div class="description">
+						<p>网格的世界空间包围盒。由 <a href="LightProbeGrid.html#bake">LightProbeGrid#bake</a> 自动更新。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depth" translate="no">.<a href="#depth">depth</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>体积沿 Z 轴的完整深度。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="height" translate="no">.<a href="#height">height</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>体积沿 Y 轴的完整高度。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isLightProbeGrid" translate="no">.<a href="#isLightProbeGrid">isLightProbeGrid</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="resolution" translate="no">.<a href="#resolution">resolution</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>各轴上的探针数量。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="texture" translate="no">.<a href="#texture">texture</a><span class="type-signature"> : <a href="Data3DTexture.html">Data3DTexture</a></span> </h3>
+					<div class="description">
+						<p>存储全部七个打包 SH 子体积的单个 RGBA 图集三维纹理。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="width" translate="no">.<a href="#width">width</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>体积沿 X 轴的完整宽度。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="bake" translate="no">.<a href="#bake">bake</a><span class="signature">( renderer : <span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span>, scene : <span class="param-type"><a href="Scene.html">Scene</a></span>, options : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过在每个探针位置渲染立方体贴图并投影到 L2 SH 来烘焙所有探针。
+可选地进行额外迭代以捕获间接反弹——每一额外遍次会采样上一遍次的
+图集作为间接光，因此在烘焙前将网格加入场景时，
+每多一遍就会累积一次反弹。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">scene</strong>
+									</td>
+									<td class="description last">
+										<p>要渲染的场景。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>烘焙选项。</p>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">cubemapSize</strong>
+									</td>
+									<td class="description last">
+										<p>每个立方体贴图面的分辨率。</p>
+										<p>默认值为 <code>8</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">near</strong>
+									</td>
+									<td class="description last">
+										<p>立方体相机的近裁剪面。</p>
+										<p>默认值为 <code>0.1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">far</strong>
+									</td>
+									<td class="description last">
+										<p>立方体相机的远裁剪面。</p>
+										<p>默认值为 <code>100</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bounces</strong>
+									</td>
+									<td class="description last">
+										<p>初始直接光照遍次之后的额外反弹遍次。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放 GPU 资源。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="getProbePosition" translate="no">.<a href="#getProbePosition">getProbePosition</a><span class="signature">( ix : <span class="param-type">number</span>, iy : <span class="param-type">number</span>, iz : <span class="param-type">number</span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回网格索引 (ix, iy, iz) 处探针的世界空间位置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">ix</strong>
+									</td>
+									<td class="description last">
+										<p>X 索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">iy</strong>
+									</td>
+									<td class="description last">
+										<p>Y 索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">iz</strong>
+									</td>
+									<td class="description last">
+										<p>Z 索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 世界空间位置。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateBoundingBox" translate="no">.<a href="#updateBoundingBox">updateBoundingBox</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据当前位置和尺寸更新世界空间包围盒。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/lighting/LightProbeGrid.js" translate="no" target="_blank" rel="noopener">examples/jsm/lighting/LightProbeGrid.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

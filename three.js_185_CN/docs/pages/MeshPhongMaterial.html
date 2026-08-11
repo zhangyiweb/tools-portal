@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MeshPhongMaterial - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Material.html">Material</a> → </p>
+	<h1 translate="no">MeshPhongMaterial</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于带有镜面高光的光泽表面的材质。</p>
+<p>该材质使用基于非物理的 <a href="https://en.wikipedia.org/wiki/Blinn-Phong_shading_model" target="_blank" rel="noopener">Blinn-Phong</a>
+模型计算反射。与 <a href="MeshLambertMaterial.html">MeshLambertMaterial</a> 中使用的 Lambertian 模型不同，它可以模拟带有高光的光泽表面（例如上漆的木材）。<code>MeshPhongMaterial</code> 使用逐片段着色。</p>
+<p>使用此材质时性能通常优于
+<a href="MeshStandardMaterial.html">MeshStandardMaterial</a> 或 <a href="MeshPhysicalMaterial.html">MeshPhysicalMaterial</a>，但会在一定程度上牺牲图形精度。</p></div>
+				<iframe id="viewer" src="../scenes/material-browser.html#MeshPhongMaterial"></iframe>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MeshPhongMaterial" translate="no">new <a href="#MeshPhongMaterial">MeshPhongMaterial</a><span class="signature">( parameters : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 mesh phong 材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>包含一个或多个定义材质外观属性的对象。材质的任何属性（包括继承材质的任何属性）都可在此传入。颜色值可以是 <a href="Color.html#set">Color#set</a> 接受的任意类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="alphaMap" translate="no">.<a href="#alphaMap">alphaMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>alpha 贴图是一张灰度纹理，用于控制表面各处的不透明度（黑色：完全透明；白色：完全不透明）。</p>
+<p>仅使用纹理的颜色，若存在 alpha 通道则会被忽略。对于 RGB 和 RGBA 纹理，渲染器在采样时会使用绿色通道，因为在 DXT 压缩格式以及未压缩的 RGB 565 格式中，绿色通道具有额外的精度位。仅亮度以及亮度/alpha 纹理仍可按预期工作。</p>
+<p><code>alphaMap</code> 表示非颜色数据。所赋纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="aoMap" translate="no">.<a href="#aoMap">aoMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>该纹理的红色通道用作环境光遮蔽贴图。
+需要第二套 UV。</p>
+<p><code>aoMap</code> 表示非颜色数据。所赋纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="aoMapIntensity" translate="no">.<a href="#aoMapIntensity">aoMapIntensity</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>环境光遮蔽效果的强度。范围为 <code>[0,1]</code>，其中 <code>0</code>
+禁用环境光遮蔽。当强度为 <code>1</code> 且 AO 贴图的
+红色通道也为 <code>1</code> 时，表面上的环境光会被完全遮蔽。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bumpMap" translate="no">.<a href="#bumpMap">bumpMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>用于创建凹凸贴图的纹理。黑白值映射为相对于光照的感知深度。凹凸实际上不会改变物体的几何形状，只影响光照。若已定义法线贴图，则此贴图会被忽略。</p>
+<p><code>bumpMap</code> 表示非颜色数据。所赋纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bumpScale" translate="no">.<a href="#bumpScale">bumpScale</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>凹凸贴图对材质的影响程度。典型范围为 <code>[0,1]</code>。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="color" translate="no">.<a href="#color">color</a><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="description">
+						<p>材质的颜色。</p>
+						<p>默认值为 <code>(1,1,1)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="combine" translate="no">.<a href="#combine">combine</a><span class="type-signature"> : <a href="global.html#MultiplyOperation">MultiplyOperation</a> | <a href="global.html#MixOperation">MixOperation</a> | <a href="global.html#AddOperation">AddOperation</a></span> </h3>
+					<div class="description">
+						<p>如何将表面颜色的结果与环境贴图（若有）进行合成。</p>
+<p>当设置为 <code>MixOperation</code> 时，会使用 <a href="MeshBasicMaterial.html#reflectivity">MeshBasicMaterial#reflectivity</a>
+在两种颜色之间进行混合。</p>
+						<p>默认值为 <code>MultiplyOperation</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="displacementBias" translate="no">.<a href="#displacementBias">displacementBias</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>位移贴图像素值在网格顶点上的偏移量。
+该偏置会加到经缩放的位移贴图采样值上。
+未设置位移贴图时，此值不会生效。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="displacementMap" translate="no">.<a href="#displacementMap">displacementMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>位移贴图会影响网格顶点的位置。与仅影响材质明暗的其他贴图不同，被位移的顶点可以投射阴影、遮挡其他物体，并在其他方面表现得像真实几何体。位移纹理是一幅图像，其中每个像素的值（白色最高）会映射并重新定位网格顶点。为获得最佳效果，请将位移贴图与匹配的法线贴图配对使用，因为渲染器无法根据位移后的顶点重新计算表面法线。</p>
+<p><code>displacementMap</code> 表示非颜色数据。所赋纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="displacementScale" translate="no">.<a href="#displacementScale">displacementScale</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>位移贴图对网格的影响程度（黑色表示无位移，白色表示最大位移）。未设置位移贴图时，此值不会生效。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="emissive" translate="no">.<a href="#emissive">emissive</a><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="description">
+						<p>材质的自发光（发光）颜色，本质上是一种不受其他光照影响的纯色。</p>
+						<p>默认值为 <code>(0,0,0)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="emissiveIntensity" translate="no">.<a href="#emissiveIntensity">emissiveIntensity</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>自发光的强度。用于调制自发光颜色。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="emissiveMap" translate="no">.<a href="#emissiveMap">emissiveMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>设置自发光（辉光）贴图。自发光贴图颜色会受自发光颜色与自发光强度调制。若使用了自发光贴图，请务必将自发光颜色设置为非黑色。</p>
+<p><code>emissiveMap</code> 表示颜色数据，纹理必须指定
+<a href="Texture.html#colorSpace">Texture#colorSpace</a>。大多数 <code>emissiveMap</code> 纹理会设置
+<code>texture.colorSpace = SRGBColorSpace</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="envMap" translate="no">.<a href="#envMap">envMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>环境贴图。</p>
+<p><code>envMap</code> 表示亮度数据，纹理必须指定
+<a href="Texture.html#colorSpace">Texture#colorSpace</a>。大多数 <code>envMap</code> 纹理会设置
+<code>texture.colorSpace = LinearSRGBColorSpace</code>，并使用浮点类型格式，
+例如 <code>.exr</code> 或 <code>.hdr</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="envMapIntensity" translate="no">.<a href="#envMapIntensity">envMapIntensity</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>通过乘以其颜色来缩放环境贴图的效果。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="envMapRotation" translate="no">.<a href="#envMapRotation">envMapRotation</a><span class="type-signature"> : <a href="Euler.html">Euler</a></span> </h3>
+					<div class="description">
+						<p>环境贴图的旋转角度，单位为弧度。</p>
+						<p>默认值为 <code>(0,0,0)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="flatShading" translate="no">.<a href="#flatShading">flatShading</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>材质是否以平面着色方式渲染。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fog" translate="no">.<a href="#fog">fog</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>材质是否受雾影响。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMeshPhongMaterial" translate="no">.<a href="#isMeshPhongMaterial">isMeshPhongMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lightMap" translate="no">.<a href="#lightMap">lightMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>光照贴图。需要第二套 UV。</p>
+<p><code>lightMap</code> 表示预烘焙的照度数据，纹理必须指定
+<a href="Texture.html#colorSpace">Texture#colorSpace</a>。大多数 <code>lightMap</code> 纹理会设置
+<code>texture.colorSpace = LinearSRGBColorSpace</code>，并使用浮点类型格式，
+例如 <code>.exr</code> 或 <code>.hdr</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lightMapIntensity" translate="no">.<a href="#lightMapIntensity">lightMapIntensity</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>烘焙光照的强度。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="map" translate="no">.<a href="#map">map</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>颜色贴图。可选地包含 alpha 通道，通常与
+<a href="Material.html#transparent">Material#transparent</a> 或 <a href="Material.html#alphaTest">Material#alphaTest</a> 配合使用。纹理贴图颜色会受漫反射 <code>color</code> 调制。</p>
+<p><code>map</code> 表示颜色数据，纹理必须指定
+<a href="Texture.html#colorSpace">Texture#colorSpace</a>。大多数 <code>map</code> 纹理会设置
+<code>texture.colorSpace = SRGBColorSpace</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalMap" translate="no">.<a href="#normalMap">normalMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>用于创建法线贴图的纹理。RGB 值会影响每个像素片段的表面法线，并改变颜色的受光方式。法线贴图不会改变表面的实际形状，只影响光照。若材质的法线贴图按左手坐标系编写，则应将 <code>normalScale</code> 的 <code>y</code> 分量取反，以补偿手性差异。</p>
+<p><code>normalMap</code> 表示非颜色数据。所赋纹理必须设置
+<code>texture.colorSpace = NoColorSpace</code>（默认）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalMapType" translate="no">.<a href="#normalMapType">normalMapType</a><span class="type-signature"> : <a href="global.html#TangentSpaceNormalMap">TangentSpaceNormalMap</a> | <a href="global.html#ObjectSpaceNormalMap">ObjectSpaceNormalMap</a></span> </h3>
+					<div class="description">
+						<p>法线贴图的类型。</p>
+						<p>默认值为 <code>TangentSpaceNormalMap</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalScale" translate="no">.<a href="#normalScale">normalScale</a><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="description">
+						<p>法线贴图对材质的影响程度。典型取值范围为 <code>[0,1]</code>。</p>
+						<p>默认值为 <code>(1,1)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="reflectivity" translate="no">.<a href="#reflectivity">reflectivity</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>环境贴图对表面的影响程度。
+有效范围在 <code>0</code>（无反射）到 <code>1</code>（完全反射）之间。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="refractionRatio" translate="no">.<a href="#refractionRatio">refractionRatio</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>空气的折射率（IOR，约等于 1）除以材质的折射率。用于环境贴图模式
+<a href="global.html#CubeRefractionMapping">CubeRefractionMapping</a> 和 <a href="global.html#EquirectangularRefractionMapping">EquirectangularRefractionMapping</a>。
+折射比不应超过 <code>1</code>。</p>
+						<p>默认值为 <code>0.98</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="shininess" translate="no">.<a href="#shininess">shininess</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>镜面高光的光泽程度；值越高，高光越锐利。</p>
+						<p>默认值为 <code>30</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="specular" translate="no">.<a href="#specular">specular</a><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="description">
+						<p>材质的高光颜色。默认颜色为 <code>0x111111</code>（非常深的灰色）。</p>
+<p>这定义了材质的光泽程度及其高光颜色。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="specularMap" translate="no">.<a href="#specularMap">specularMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>高光贴图的值既影响表面镜面高光的贡献程度，也影响环境贴图对表面的影响程度。</p>
+<p><code>specularMap</code> 表示颜色数据，纹理必须指定
+<a href="Texture.html#colorSpace">Texture#colorSpace</a>。大多数 <code>specularMap</code> 纹理会设置
+<code>texture.colorSpace = SRGBColorSpace</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wireframe" translate="no">.<a href="#wireframe">wireframe</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>将几何体渲染为线框。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wireframeLinecap" translate="no">.<a href="#wireframeLinecap">wireframeLinecap</a><span class="type-signature"> : 'round' | 'bevel' | 'miter'</span> </h3>
+					<div class="description">
+						<p>定义线框端点的外观。</p>
+<p>仅可与 <a href="SVGRenderer.html">SVGRenderer</a> 一起使用。</p>
+						<p>默认值为 <code>'round'</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wireframeLinejoin" translate="no">.<a href="#wireframeLinejoin">wireframeLinejoin</a><span class="type-signature"> : 'round' | 'bevel' | 'miter'</span> </h3>
+					<div class="description">
+						<p>定义线框连接处的外观。</p>
+<p>仅可与 <a href="SVGRenderer.html">SVGRenderer</a> 一起使用。</p>
+						<p>默认值为 <code>'round'</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wireframeLinewidth" translate="no">.<a href="#wireframeLinewidth">wireframeLinewidth</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>控制线框的粗细。</p>
+<p>仅可与 <a href="SVGRenderer.html">SVGRenderer</a> 一起使用。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/MeshPhongMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/MeshPhongMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

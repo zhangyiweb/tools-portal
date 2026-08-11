@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MeshPhysicalNodeMaterial - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Material.html">Material</a> → <a href="NodeMaterial.html">NodeMaterial</a> → <a href="MeshStandardNodeMaterial.html">MeshStandardNodeMaterial</a> → </p>
+	<h1 translate="no">MeshPhysicalNodeMaterial</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><a href="MeshPhysicalMaterial.html">MeshPhysicalMaterial</a> 的节点材质版本。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MeshPhysicalNodeMaterial" translate="no">new <a href="#MeshPhysicalNodeMaterial">MeshPhysicalNodeMaterial</a><span class="signature">( parameters : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 mesh physical 节点材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>配置参数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="anisotropyNode" translate="no">.<a href="#anisotropyNode">anisotropyNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的各向异性默认从
+<code>anisotropy</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义各向异性。</p>
+<p>若不想覆盖各向异性，而只想修改现有值，
+请使用 <a href="TSL.html#materialAnisotropy">materialAnisotropy</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="attenuationColorNode" translate="no">.<a href="#attenuationColorNode">attenuationColorNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>物理材质的衰减颜色默认从
+<code>attenuationColor</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义衰减颜色。</p>
+<p>若不想覆盖衰减颜色，而只想修改现有值，
+请使用 <a href="TSL.html#materialAttenuationColor">materialAttenuationColor</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="attenuationDistanceNode" translate="no">.<a href="#attenuationDistanceNode">attenuationDistanceNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的衰减距离默认从
+<code>attenuationDistance</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义衰减距离。</p>
+<p>若不想覆盖衰减距离，而只想修改现有值，
+请使用 <a href="TSL.html#materialAttenuationDistance">materialAttenuationDistance</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clearcoatNode" translate="no">.<a href="#clearcoatNode">clearcoatNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的清漆默认从 <code>clearcoat</code>
+和 <code>clearcoatMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义清漆。</p>
+<p>若不想覆盖清漆，而只想修改现有值，
+请使用 <a href="TSL.html#materialClearcoat">materialClearcoat</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clearcoatNormalNode" translate="no">.<a href="#clearcoatNormalNode">clearcoatNormalNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>物理材质的清漆法线默认从 <code>clearcoatNormalMap</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义清漆法线。</p>
+<p>若不想覆盖清漆法线，而只想修改现有值，
+请使用 <a href="TSL.html#materialClearcoatNormal">materialClearcoatNormal</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clearcoatRoughnessNode" translate="no">.<a href="#clearcoatRoughnessNode">clearcoatRoughnessNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的清漆粗糙度默认从 <code>clearcoatRoughness</code>
+和 <code>clearcoatRoughnessMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义清漆粗糙度。</p>
+<p>若不想覆盖清漆粗糙度，而只想修改现有值，
+请使用 <a href="TSL.html#materialClearcoatRoughness">materialClearcoatRoughness</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="dispersionNode" translate="no">.<a href="#dispersionNode">dispersionNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的色散默认从
+<code>dispersion</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义色散。</p>
+<p>若不想覆盖色散，而只想修改现有值，
+请使用 <a href="TSL.html#materialDispersion">materialDispersion</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iorNode" translate="no">.<a href="#iorNode">iorNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的折射率默认从 <code>ior</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义折射率。</p>
+<p>若不想覆盖折射率，而只想修改现有值，
+请使用 <a href="TSL.html#materialIOR">materialIOR</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescenceIORNode" translate="no">.<a href="#iridescenceIORNode">iridescenceIORNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的虹彩折射率默认从 <code>iridescenceIOR</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义虹彩折射率。</p>
+<p>若不想覆盖虹彩折射率，而只想修改现有值，
+请使用 <a href="TSL.html#materialIridescenceIOR">materialIridescenceIOR</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescenceNode" translate="no">.<a href="#iridescenceNode">iridescenceNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的虹彩默认从 <code>iridescence</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义虹彩。</p>
+<p>若不想覆盖虹彩，而只想修改现有值，
+请使用 <a href="TSL.html#materialIridescence">materialIridescence</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="iridescenceThicknessNode" translate="no">.<a href="#iridescenceThicknessNode">iridescenceThicknessNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的虹彩厚度默认从 <code>iridescenceThicknessRange</code>
+和 <code>iridescenceThicknessMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义虹彩厚度。</p>
+<p>若不想覆盖虹彩厚度，而只想修改现有值，
+请使用 <a href="TSL.html#materialIridescenceThickness">materialIridescenceThickness</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMeshPhysicalNodeMaterial" translate="no">.<a href="#isMeshPhysicalNodeMaterial">isMeshPhysicalNodeMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sheenNode" translate="no">.<a href="#sheenNode">sheenNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>物理材质的光泽默认从 <code>sheen</code>、<code>sheenColor</code>
+和 <code>sheenColorMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义光泽。</p>
+<p>若不想覆盖光泽，而只想修改现有值，
+请使用 <a href="TSL.html#materialSheen">materialSheen</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sheenRoughnessNode" translate="no">.<a href="#sheenRoughnessNode">sheenRoughnessNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的光泽粗糙度默认从 <code>sheenRoughness</code> 和
+<code>sheenRoughnessMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义光泽粗糙度。</p>
+<p>若不想覆盖光泽粗糙度，而只想修改现有值，
+请使用 <a href="TSL.html#materialSheenRoughness">materialSheenRoughness</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="specularColorNode" translate="no">.<a href="#specularColorNode">specularColorNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>物理材质的高光颜色默认从 <code>specularColor</code>
+和 <code>specularColorMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义高光颜色。</p>
+<p>若不想覆盖高光颜色，而只想修改现有值，
+请使用 <a href="TSL.html#materialSpecularColor">materialSpecularColor</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="specularIntensityNode" translate="no">.<a href="#specularIntensityNode">specularIntensityNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的高光强度默认从 <code>specularIntensity</code>
+和 <code>specularIntensityMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义高光强度。</p>
+<p>若不想覆盖高光强度，而只想修改现有值，
+请使用 <a href="TSL.html#materialSpecularIntensity">materialSpecularIntensity</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="thicknessNode" translate="no">.<a href="#thicknessNode">thicknessNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的厚度默认从 <code>thickness</code> 和
+<code>thicknessMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义厚度。</p>
+<p>若不想覆盖厚度，而只想修改现有值，
+请使用 <a href="TSL.html#materialThickness">materialThickness</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="transmissionNode" translate="no">.<a href="#transmissionNode">transmissionNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>物理材质的透射默认从 <code>transmission</code> 和
+<code>transmissionMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义透射。</p>
+<p>若不想覆盖透射，而只想修改现有值，
+请使用 <a href="TSL.html#materialTransmission">materialTransmission</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="useAnisotropy" translate="no">.<a href="#useAnisotropy">useAnisotropy</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>光照模型是否应使用各向异性。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="useClearcoat" translate="no">.<a href="#useClearcoat">useClearcoat</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>光照模型是否应使用清漆。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="useDispersion" translate="no">.<a href="#useDispersion">useDispersion</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>光照模型是否应使用色散。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="useIridescence" translate="no">.<a href="#useIridescence">useIridescence</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>光照模型是否应使用虹彩。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="useSheen" translate="no">.<a href="#useSheen">useSheen</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>光照模型是否应使用光泽。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="useTransmission" translate="no">.<a href="#useTransmission">useTransmission</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>光照模型是否应使用透射。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setupClearcoatNormal" translate="no">.<a href="#setupClearcoatNormal">setupClearcoatNormal</a><span class="signature">()</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置清漆法线节点。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 清漆法线。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupLightingModel" translate="no">.<a href="#setupLightingModel">setupLightingModel</a><span class="signature">()</span><span class="type-signature"> : <a href="PhysicalLightingModel.html">PhysicalLightingModel</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置光照模型。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="MeshStandardNodeMaterial.html#setupLightingModel">MeshStandardNodeMaterial#setupLightingModel</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 光照模型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupSpecular" translate="no">.<a href="#setupSpecular">setupSpecular</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置高光相关的节点变量。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="MeshStandardNodeMaterial.html#setupSpecular">MeshStandardNodeMaterial#setupSpecular</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupVariants" translate="no">.<a href="#setupVariants">setupVariants</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置物理材质专用的节点变量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="MeshStandardNodeMaterial.html#setupVariants">MeshStandardNodeMaterial#setupVariants</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/nodes/MeshPhysicalNodeMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/nodes/MeshPhysicalNodeMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

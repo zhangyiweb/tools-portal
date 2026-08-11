@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>BezierInterpolant - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Interpolant.html">Interpolant</a> → </p>
+	<h1 translate="no">BezierInterpolant</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>使用带二维控制点的三次贝塞尔曲线的贝塞尔插值器。</p>
+<p>该插值器支持 COLLADA/Maya 风格的贝塞尔动画，其中
+每个关键帧都有以二维坐标（时间、值）显式指定的
+入/出切线控制点。</p>
+<p>切线数据从插值器上的 <code>inTangents</code> 和 <code>outTangents</code> 读取
+（由 <code>KeyframeTrack.InterpolantFactoryMethodBezier</code> 填充）。</p>
+<p>对于具有 N 个关键帧、步幅为 S 的轨道：</p>
+<ul>
+<li>每个切线数组有 N * S * 2 个值</li>
+<li>布局：[k0_c0_time, k0_c0_value, k0_c1_time, k0_c1_value, ..., k0_cS_time, k0_cS_value,
+k1_c0_time, k1_c0_value, ...]</li>
+</ul></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="BezierInterpolant" translate="no">new <a href="#BezierInterpolant">BezierInterpolant</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/math/interpolants/BezierInterpolant.js" translate="no" target="_blank" rel="noopener">src/math/interpolants/BezierInterpolant.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

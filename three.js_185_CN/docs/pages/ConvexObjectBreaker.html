@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ConvexObjectBreaker - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">ConvexObjectBreaker</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类可用于将凸 Geometry 对象细分为多个碎片。</p>
+<p>使用 prepareBreakableObject 函数准备可破碎的 Mesh 对象，
+然后调用各种函数对对象进行细分（subdivideByImpact、cutByPlane）。
+细分产生的子对象无需再次调用 prepareBreakableObject。</p>
+<p>对象需满足以下条件：</p>
+<ul>
+<li>Mesh 对象必须具有 buffer geometry 和 material。</li>
+<li>顶点法线必须为平面法线（未平滑）。</li>
+<li>几何体必须为凸体（库中不会检查）。可使用 <a href="ConvexGeometry.html">ConvexGeometry</a> 创建凸几何体。
+<a href="BoxGeometry.html">BoxGeometry</a>、<a href="SphereGeometry.html">SphereGeometry</a> 及其他
+凸基本体也可使用。</li>
+</ul>
+<p>注意：此库会向对象的 userData 成员添加变量（参见 prepareBreakableObject 函数）。
+与其他库一起使用时请谨慎，并阅读相关代码。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ConvexObjectBreaker</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { ConvexObjectBreaker } from 'three/addons/misc/ConvexObjectBreaker.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ConvexObjectBreaker" translate="no">new <a href="#ConvexObjectBreaker">ConvexObjectBreaker</a><span class="signature">( minSizeForBreak : <span class="param-type">number</span>, smallDelta : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的凸对象破碎器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">minSizeForBreak</strong>
+									</td>
+									<td class="description last">
+										<p>碎片可继续破碎的最小尺寸。</p>
+										<p>默认值为 <code>1.4</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">smallDelta</strong>
+									</td>
+									<td class="description last">
+										<p>判定某点属于某平面的最大距离。</p>
+										<p>默认值为 <code>0.0001</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="cutByPlane" translate="no">.<a href="#cutByPlane">cutByPlane</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, plane : <span class="param-type"><a href="Plane.html">Plane</a></span>, output : <span class="param-type">Object</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用平面将给定的 3D 对象细分为多个碎片。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>要细分的 3D 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">plane</strong>
+									</td>
+									<td class="description last">
+										<p>用于切割 3D 对象的平面。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">output</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储碎片的对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 碎片数量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="prepareBreakableObject" translate="no">.<a href="#prepareBreakableObject">prepareBreakableObject</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, mass : <span class="param-type">number</span>, velocity : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, angularVelocity : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, breakable : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>所有应可破碎的 3D 对象都必须调用此方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象。必须具有凸几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">mass</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象的质量（kg）。必须大于 <code>0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">velocity</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象的速度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">angularVelocity</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象的角速度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">breakable</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象是否可破碎。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="subdivideByImpact" translate="no">.<a href="#subdivideByImpact">subdivideByImpact</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, pointOfImpact : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, normal : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, maxRadialIterations : <span class="param-type">number</span>, maxRandomIterations : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;<a href="Object3D.html">Object3D</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过撞击将给定的 3D 对象细分为多个碎片（即另一对象在某一表面点撞击给定 3D 对象）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>要细分的 3D 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">pointOfImpact</strong>
+									</td>
+									<td class="description last">
+										<p>撞击点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">normal</strong>
+									</td>
+									<td class="description last">
+										<p>撞击法线。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxRadialIterations</strong>
+									</td>
+									<td class="description last">
+										<p>径向切割的迭代次数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxRandomIterations</strong>
+									</td>
+									<td class="description last">
+										<p>非径向切割的最大随机迭代次数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 碎片数组。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/misc/ConvexObjectBreaker.js" translate="no" target="_blank" rel="noopener">examples/jsm/misc/ConvexObjectBreaker.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

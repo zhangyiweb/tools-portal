@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>PositionalAudio - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Audio.html">Audio</a> → </p>
+	<h1 translate="no">PositionalAudio</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示空间定位音频对象。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">// create an AudioListener and add it to the camera
+const listener = new THREE.AudioListener();
+camera.add( listener );
+// create the PositionalAudio object (passing in the listener)
+const sound = new THREE.PositionalAudio( listener );
+// load a sound and set it as the PositionalAudio object's buffer
+const audioLoader = new THREE.AudioLoader();
+audioLoader.load( 'sounds/song.ogg', function( buffer ) {
+	sound.setBuffer( buffer );
+	sound.setRefDistance( 20 );
+	sound.play();
+});
+// create an object for the sound to play from
+const sphere = new THREE.SphereGeometry( 20, 32, 16 );
+const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
+const mesh = new THREE.Mesh( sphere, material );
+scene.add( mesh );
+// finally add the sound to the mesh
+mesh.add( sound );</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="PositionalAudio" translate="no">new <a href="#PositionalAudio">PositionalAudio</a><span class="signature">( listener : <span class="param-type"><a href="AudioListener.html">AudioListener</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个空间音频对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">listener</strong>
+									</td>
+									<td class="description last">
+										<p>全局音频监听器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="panner" translate="no">.<a href="#panner">panner</a><span class="type-signature"> : PannerNode</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>声像定位节点，表示 3D 空间中音频源的位置、方向和行为。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="getDistanceModel" translate="no">.<a href="#getDistanceModel">getDistanceModel</a><span class="signature">()</span><span class="type-signature"> : 'linear' | 'inverse' | 'exponential'</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前距离模型。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 距离模型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMaxDistance" translate="no">.<a href="#getMaxDistance">getMaxDistance</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前最大距离。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 最大距离。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRefDistance" translate="no">.<a href="#getRefDistance">getRefDistance</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前参考距离。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 参考距离。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRolloffFactor" translate="no">.<a href="#getRolloffFactor">getRolloffFactor</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前衰减因子。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 衰减因子。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setDirectionalCone" translate="no">.<a href="#setDirectionalCone">setDirectionalCone</a><span class="signature">( coneInnerAngle : <span class="param-type">number</span>, coneOuterAngle : <span class="param-type">number</span>, coneOuterGain : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="PositionalAudio.html">PositionalAudio</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置可听到音频的定向锥体范围。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">coneInnerAngle</strong>
+									</td>
+									<td class="description last">
+										<p>内锥角度（度），在此锥体内音量不衰减。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">coneOuterAngle</strong>
+									</td>
+									<td class="description last">
+										<p>外锥角度（度），在此锥体外音量将按 <code>coneOuterGain</code> 参数定义的恒定值衰减。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">coneOuterGain</strong>
+									</td>
+									<td class="description last">
+										<p>在 <code>coneOuterAngle</code> 定义的锥体之外的音量衰减量。设为 <code>0</code> 时完全听不到声音。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setDistanceModel" translate="no">.<a href="#setDistanceModel">setDistanceModel</a><span class="signature">( value : <span class="param-type">'linear' | 'inverse' | 'exponential'</span> )</span><span class="type-signature"> : <a href="PositionalAudio.html">PositionalAudio</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义音频源远离监听器时降低音量所使用的算法。</p>
+<p>更多细节请参阅 <a href="https://www.w3.org/TR/webaudio-1.1/#enumdef-distancemodeltype" target="_blank" rel="noopener">规范</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的距离模型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setMaxDistance" translate="no">.<a href="#setMaxDistance">setMaxDistance</a><span class="signature">( value : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="PositionalAudio.html">PositionalAudio</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义音频源与监听器之间的最大距离，超过此距离后音量不再进一步降低。</p>
+<p>此值仅由 <code>linear</code> 距离模型使用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>最大距离。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setRefDistance" translate="no">.<a href="#setRefDistance">setRefDistance</a><span class="signature">( value : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="PositionalAudio.html">PositionalAudio</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义参考距离：音频源远离监听器时开始降低音量的距离，
+即音量衰减开始生效的距离。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的参考距离。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setRolloffFactor" translate="no">.<a href="#setRolloffFactor">setRolloffFactor</a><span class="signature">( value : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="PositionalAudio.html">PositionalAudio</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义音频源远离监听器时音量降低的速度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>衰减因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该实例的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/audio/PositionalAudio.js" translate="no" target="_blank" rel="noopener">src/audio/PositionalAudio.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

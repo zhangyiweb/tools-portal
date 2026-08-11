@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LineDashedNodeMaterial - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Material.html">Material</a> → <a href="NodeMaterial.html">NodeMaterial</a> → </p>
+	<h1 translate="no">LineDashedNodeMaterial</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><a href="LineDashedMaterial.html">LineDashedMaterial</a> 的节点材质版本。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LineDashedNodeMaterial" translate="no">new <a href="#LineDashedNodeMaterial">LineDashedNodeMaterial</a><span class="signature">( parameters : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的虚线节点材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">parameters</strong>
+									</td>
+									<td class="description last">
+										<p>配置参数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="dashOffset" translate="no">.<a href="#dashOffset">dashOffset</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>虚线偏移量。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="dashScaleNode" translate="no">.<a href="#dashScaleNode">dashScaleNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>虚线材质的缩放默认从 <code>scale</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义缩放。</p>
+<p>若不想覆盖缩放，而只想修改已有值，
+请使用 <a href="TSL.html#materialLineScale">materialLineScale</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="dashSizeNode" translate="no">.<a href="#dashSizeNode">dashSizeNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>虚线材质的虚线段长度默认从 <code>dashSize</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义虚线段长度。</p>
+<p>若不想覆盖虚线段长度，而只想修改已有值，
+请使用 <a href="TSL.html#materialLineDashSize">materialLineDashSize</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="gapSizeNode" translate="no">.<a href="#gapSizeNode">gapSizeNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>虚线材质的间隙大小默认从 <code>gapSize</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义间隙大小。</p>
+<p>若不想覆盖间隙大小，而只想修改已有值，
+请使用 <a href="TSL.html#materialLineGapSize">materialLineGapSize</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isLineDashedNodeMaterial" translate="no">.<a href="#isLineDashedNodeMaterial">isLineDashedNodeMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="offsetNode" translate="no">.<a href="#offsetNode">offsetNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>虚线材质的偏移默认从 <code>dashOffset</code>
+属性推断。此节点属性允许覆盖默认值，
+改用节点定义偏移。</p>
+<p>若不想覆盖偏移，而只想修改已有值，
+请使用 <a href="TSL.html#materialLineDashOffset">materialLineDashOffset</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setupVariants" translate="no">.<a href="#setupVariants">setupVariants</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置虚线专用的节点变量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="NodeMaterial.html#setupVariants">NodeMaterial#setupVariants</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/nodes/LineDashedNodeMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/nodes/LineDashedNodeMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

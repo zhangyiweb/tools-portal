@@ -1,0 +1,16 @@
+{
+  "name": "ui-editor",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "concurrently -n web,api -c cyan,magenta \"npm run dev --prefix apps/web\" \"npm run dev --prefix server\"",
+    "dev:web": "npm run dev --prefix apps/web",
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix apps/web",
+    "test": "npm run test --prefix apps/web"
+  },
+
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

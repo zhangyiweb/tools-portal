@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>CurvePath - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Curve.html">Curve</a> → </p>
+	<h1 translate="no">CurvePath</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>扩展 <a href="Curve.html">Curve</a> 的基类。<code>CurvePath</code> 本质上是一组首尾相连的曲线数组，但仍保留曲线的 API。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="CurvePath" translate="no">new <a href="#CurvePath">CurvePath</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一条新的曲线路径。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="autoClose" translate="no">.<a href="#autoClose">autoClose</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>路径是否应通过一条直线曲线自动闭合。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="curves" translate="no">.<a href="#curves">curves</a><span class="type-signature"> : Array.&lt;<a href="Curve.html">Curve</a>></span> </h3>
+					<div class="description">
+						<p>定义该路径的曲线数组。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="add" translate="no">.<a href="#add">add</a><span class="signature">( curve : <span class="param-type"><a href="Curve.html">Curve</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向该曲线路径添加一条曲线。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">curve</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的曲线。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="closePath" translate="no">.<a href="#closePath">closePath</a><span class="signature">()</span><span class="type-signature"> : <a href="CurvePath.html">CurvePath</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加一条直线曲线以闭合路径。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该曲线路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCurveLengths" translate="no">.<a href="#getCurveLengths">getCurveLengths</a><span class="signature">()</span><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回已定义各曲线的累计长度列表。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 曲线长度。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getPoint" translate="no">.<a href="#getPoint">getPoint</a><span class="signature">( t : <span class="param-type">number</span>, optionalTarget : <span class="param-type"><a href="Vector2.html">Vector2</a> | <a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector2.html">Vector2</a> | <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的插值因子，返回二维或三维空间中的向量（取决于曲线定义）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">t</strong>
+									</td>
+									<td class="description last">
+										<p>表示曲线上位置的插值因子，必须在 <code>[0,1]</code> 范围内。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">optionalTarget</strong>
+									</td>
+									<td class="description last">
+										<p>可选的目标向量，结果将写入其中。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Curve.html#getPoint">Curve#getPoint</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 曲线上的位置。根据曲线定义，可以是二维或三维向量。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/CurvePath.js" translate="no" target="_blank" rel="noopener">src/extras/core/CurvePath.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

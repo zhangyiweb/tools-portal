@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TriangleBlurShader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">TriangleBlurShader</h1>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TriangleBlurShader</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TriangleBlurShader } from 'three/addons/shaders/TriangleBlurShader.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="~TechnicolorShader" translate="no">.<a href="#~TechnicolorShader">TechnicolorShader</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>模拟 20 世纪初电影中流行的双色条 technicolor 工艺外观。
+更多历史信息见：<a href="http://www.widescreenmuseum.com/oldcolor/technicolor1.htm" target="_blank" rel="noopener">http://www.widescreenmuseum.com/oldcolor/technicolor1.htm</a>
+演示见：<a href="http://charliehoey.com/technicolor_shader/shader_test.html" target="_blank" rel="noopener">http://charliehoey.com/technicolor_shader/shader_test.html</a></p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShader1" translate="no">.<a href="#~ToonShader1">ToonShader1</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon1 着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShader2" translate="no">.<a href="#~ToonShader2">ToonShader2</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon2 着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShaderDotted" translate="no">.<a href="#~ToonShaderDotted">ToonShaderDotted</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon 点状着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShaderHatching" translate="no">.<a href="#~ToonShaderHatching">ToonShaderHatching</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon 阴影线着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~TriangleBlurShader" translate="no">.<a href="#~TriangleBlurShader">TriangleBlurShader</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>基于 <a href="https://github.com/evanw/glfx.js" target="_blank" rel="noopener">glfx.js triangle blur shader</a> 的三角模糊着色器。</p>
+<p>一种基本的模糊滤镜，将图像与金字塔滤镜进行卷积。
+金字塔滤镜是可分离的，并作为两个互相垂直的三角滤镜应用。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/shaders/TechnicolorShader.js" translate="no" target="_blank" rel="noopener">examples/jsm/shaders/TechnicolorShader.js</a>
+				</p>
+			</article>
+		</section>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TriangleBlurShader</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import * as ToonShader from 'three/addons/shaders/ToonShader.js';</code></pre>
+				<div class="container-overview">
+					<div class="description"><p>卡通着色器集合。</p></div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="~TechnicolorShader" translate="no">.<a href="#~TechnicolorShader">TechnicolorShader</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>模拟 20 世纪初电影中流行的双色条 technicolor 工艺外观。
+更多历史信息见：<a href="http://www.widescreenmuseum.com/oldcolor/technicolor1.htm" target="_blank" rel="noopener">http://www.widescreenmuseum.com/oldcolor/technicolor1.htm</a>
+演示见：<a href="http://charliehoey.com/technicolor_shader/shader_test.html" target="_blank" rel="noopener">http://charliehoey.com/technicolor_shader/shader_test.html</a></p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShader1" translate="no">.<a href="#~ToonShader1">ToonShader1</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon1 着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShader2" translate="no">.<a href="#~ToonShader2">ToonShader2</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon2 着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShaderDotted" translate="no">.<a href="#~ToonShaderDotted">ToonShaderDotted</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon 点状着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShaderHatching" translate="no">.<a href="#~ToonShaderHatching">ToonShaderHatching</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon 阴影线着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~TriangleBlurShader" translate="no">.<a href="#~TriangleBlurShader">TriangleBlurShader</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>基于 <a href="https://github.com/evanw/glfx.js" target="_blank" rel="noopener">glfx.js triangle blur shader</a> 的三角模糊着色器。</p>
+<p>一种基本的模糊滤镜，将图像与金字塔滤镜进行卷积。
+金字塔滤镜是可分离的，并作为两个互相垂直的三角滤镜应用。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/shaders/ToonShader.js" translate="no" target="_blank" rel="noopener">examples/jsm/shaders/ToonShader.js</a>
+				</p>
+			</article>
+		</section>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TriangleBlurShader</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TriangleBlurShader } from 'three/addons/shaders/TriangleBlurShader.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="~TechnicolorShader" translate="no">.<a href="#~TechnicolorShader">TechnicolorShader</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>模拟 20 世纪初电影中流行的双色条 technicolor 工艺外观。
+更多历史信息见：<a href="http://www.widescreenmuseum.com/oldcolor/technicolor1.htm" target="_blank" rel="noopener">http://www.widescreenmuseum.com/oldcolor/technicolor1.htm</a>
+演示见：<a href="http://charliehoey.com/technicolor_shader/shader_test.html" target="_blank" rel="noopener">http://charliehoey.com/technicolor_shader/shader_test.html</a></p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShader1" translate="no">.<a href="#~ToonShader1">ToonShader1</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon1 着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShader2" translate="no">.<a href="#~ToonShader2">ToonShader2</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon2 着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShaderDotted" translate="no">.<a href="#~ToonShaderDotted">ToonShaderDotted</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon 点状着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~ToonShaderHatching" translate="no">.<a href="#~ToonShaderHatching">ToonShaderHatching</a><span class="type-signature"> : Object</span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>Toon 阴影线着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="~TriangleBlurShader" translate="no">.<a href="#~TriangleBlurShader">TriangleBlurShader</a><span class="type-signature"> : <a href="ShaderMaterial.html#~Shader">ShaderMaterial~Shader</a></span> <span class="type-signature">(inner, constant) </span></h3>
+					<div class="description">
+						<p>基于 <a href="https://github.com/evanw/glfx.js" target="_blank" rel="noopener">glfx.js triangle blur shader</a> 的三角模糊着色器。</p>
+<p>一种基本的模糊滤镜，将图像与金字塔滤镜进行卷积。
+金字塔滤镜是可分离的，并作为两个互相垂直的三角滤镜应用。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/shaders/TriangleBlurShader.js" translate="no" target="_blank" rel="noopener">examples/jsm/shaders/TriangleBlurShader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

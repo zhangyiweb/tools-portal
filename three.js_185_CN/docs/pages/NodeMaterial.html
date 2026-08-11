@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NodeMaterial - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Material.html">Material</a> → </p>
+	<h1 translate="no">NodeMaterial</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>所有节点材质的基类。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="NodeMaterial" translate="no">new <a href="#NodeMaterial">NodeMaterial</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的节点材质。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="alphaTestNode" translate="no">.<a href="#alphaTestNode">alphaTestNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>节点材质的 alpha 测试默认由 <code>alphaTest</code>
+属性推断。此节点属性允许覆盖默认值，改用
+节点定义 alpha 测试。</p>
+<p>若不想覆盖 alpha 测试，而只想修改现有
+值，请使用 <a href="TSL.html#materialAlphaTest">materialAlphaTest</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="aoNode" translate="no">.<a href="#aoNode">aoNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>节点材质的光照可能受环境光遮蔽影响。
+默认 AO 由赋给 <code>aoMap</code> 的环境光遮蔽贴图
+以及相应的 <code>aoMapIntensity</code> 推断。此节点属性允许覆盖
+默认值，改用自定义节点定义环境光遮蔽。</p>
+<p>若不想覆盖漫反射颜色，而只想修改现有
+值，请使用 <a href="TSL.html#materialAO">materialAO</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="backdropAlphaNode" translate="no">.<a href="#backdropAlphaNode">backdropAlphaNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>此节点可用于调节 <code>backdropNode</code> 对出射光的影响。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="backdropNode" translate="no">.<a href="#backdropNode">backdropNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>此节点可用于实现多种类似滤镜的效果。思路是
+将当前渲染结果存入纹理（例如通过 <code>viewportSharedTexture()</code>），用它
+创建任意效果，然后将节点组合赋给此属性。
+使用此材质的对象后方的一切现在都会受滤镜影响。</p>
+<pre><code class="language-js">const material = new NodeMaterial()
+material.transparent = true;
+// everything behind the object will be monochromatic
+material.backdropNode = saturation( viewportSharedTexture().rgb, 0 );
+</code></pre>
+<p>背景计算是光照的一部分，因此只有受光材质才能使用此属性。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="castShadowNode" translate="no">.<a href="#castShadowNode">castShadowNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="description">
+						<p>此节点可用于影响使用此节点材质的对象
+如何投射阴影。要为阴影应用颜色，可以简单地这样做：</p>
+<pre><code class="language-js">material.castShadowNode = vec4( 1, 0, 0, 1 );
+</code></pre>
+<p>这对于伪造半透明对象的彩色阴影很有用。也
+常见的做法是将该属性与 <code>Fn</code> 函数一起使用，以便按片段执行检查。</p>
+<pre><code class="language-js">materialCustomShadow.castShadowNode = Fn( () => {
+	hash( vertexIndex ).greaterThan( 0.5 ).discard();
+	return materialColor;
+} )();
+</code></pre>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="castShadowPositionNode" translate="no">.<a href="#castShadowPositionNode">castShadowPositionNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>允许覆盖用于阴影贴图投影的几何体位置，默认
+为 <a href="TSL.html#positionLocal">positionLocal</a>（局部空间中的顶点位置）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="colorNode" translate="no">.<a href="#colorNode">colorNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>节点材质的漫反射颜色默认由
+<code>color</code> 和 <code>map</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义漫反射颜色。</p>
+<pre><code class="language-js">material.colorNode = color( 0xff0000 ); // define red color
+</code></pre>
+<p>若不想覆盖漫反射颜色，而只想修改现有
+值，请使用 <a href="TSL.html#materialColor">materialColor</a>。</p>
+<pre><code class="language-js">material.colorNode = materialColor.mul( color( 0xff0000 ) ); // give diffuse colors a red tint
+</code></pre>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="contextNode" translate="no">.<a href="#contextNode">contextNode</a><span class="type-signature"> : <a href="ContextNode.html">ContextNode</a></span> </h3>
+					<div class="description">
+						<p>此节点可用作该材质的全局上下文管理组件。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthNode" translate="no">.<a href="#depthNode">depthNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>允许在片段着色器中覆盖深度值。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="envNode" translate="no">.<a href="#envNode">envNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>节点材质的环境可由赋给 <code>envMap</code> 属性的环境
+贴图定义；若节点材质是 PBR 材质，也可由 <code>Scene.environment</code>
+定义。此节点属性允许覆盖
+默认行为，改用自定义节点定义环境。</p>
+<pre><code class="language-js">material.envNode = pmremTexture( renderTarget.texture );
+</code></pre>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fog" translate="no">.<a href="#fog">fog</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>此材质是否受雾影响。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fragmentNode" translate="no">.<a href="#fragmentNode">fragmentNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="description">
+						<p>若需要在实现片段着色器时获得完全自由，可使用此节点属性。
+赋给节点将替换片段阶段中使用的内置材质逻辑。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="geometryNode" translate="no">.<a href="#geometryNode">geometryNode</a><span class="type-signature"> : function</span> </h3>
+					<div class="description">
+						<p>此节点属性面向一次性或每动画步修改几何体数据的逻辑。
+应用通常会把此类逻辑随意放在初始化例程或动画循环中。
+<code>geometryNode</code> 旨在作为专用 API，以便有明确的位置来实现
+几何体修改。</p>
+<p>思路是赋一个持有几何体修改逻辑的 <code>Fn</code> 定义。典型示例
+是基于 GPU 的粒子系统，它在应用层提供节点材质。粒子
+模拟会实现为计算着色器，并在 <code>Fn</code> 函数内管理。该函数最终
+会赋给 <code>geometryNode</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isNodeMaterial" translate="no">.<a href="#isNodeMaterial">isNodeMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lights" translate="no">.<a href="#lights">lights</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>此材质是否受灯光影响。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lightsNode" translate="no">.<a href="#lightsNode">lightsNode</a><span class="type-signature"> : <a href="LightsNode.html">LightsNode</a></span> </h3>
+					<div class="description">
+						<p>将 <code>lights</code> 属性设为 <code>true</code> 的节点材质
+会受场景中所有灯光影响。有时需要选择性
+光照，即场景中只有<em>部分</em>灯光
+影响材质。可以通过创建带有选择性
+灯光列表的 <a href="LightsNode.html">LightsNode</a> 实例，并将该节点赋给此属性来实现。</p>
+<pre><code class="language-js">const customLightsNode = lights( [ light1, light2 ] );
+material.lightsNode = customLightsNode;
+</code></pre>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maskNode" translate="no">.<a href="#maskNode">maskNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;bool></span> </h3>
+					<div class="description">
+						<p>若遮罩值为 <code>false</code>，则丢弃该片段。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maskShadowNode" translate="no">.<a href="#maskShadowNode">maskShadowNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;bool></span> </h3>
+					<div class="description">
+						<p>此节点可用于为材质实现阴影遮罩。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mrtNode" translate="no">.<a href="#mrtNode">mrtNode</a><span class="type-signature"> : <a href="MRTNode.html">MRTNode</a></span> </h3>
+					<div class="description">
+						<p>MRT 配置在渲染器或通道级别完成。此节点允许在材质级别
+覆盖写入 MRT 目标的值。这
+对于实现只应影响特定对象的选择性 FX 功能很有用。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="normalNode" translate="no">.<a href="#normalNode">normalNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>节点材质的法线默认由 <code>normalMap</code>/<code>normalScale</code>
+或 <code>bumpMap</code>/<code>bumpScale</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义法线。</p>
+<p>若不想覆盖法线，而只想修改现有值，
+请使用 <a href="TSL.html#materialNormal">materialNormal</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="opacityNode" translate="no">.<a href="#opacityNode">opacityNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>节点材质的不透明度默认由 <code>opacity</code>
+和 <code>alphaMap</code> 属性推断。此节点属性允许覆盖默认值，
+改用节点定义不透明度。</p>
+<p>若不想覆盖不透明度，而只想修改现有
+值，请使用 <a href="TSL.html#materialOpacity">materialOpacity</a>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="outputNode" translate="no">.<a href="#outputNode">outputNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="description">
+						<p>此节点可用于定义材质的最终输出。</p>
+<p>TODO: Explain the differences to <code>fragmentNode</code>.</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="positionNode" translate="no">.<a href="#positionNode">positionNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="description">
+						<p>局部顶点位置基于属性数据、变形或蒙皮等多个因素计算。
+此节点属性允许覆盖
+默认值，改用节点定义局部顶点位置。</p>
+<p>若不想覆盖顶点位置，而只想修改现有
+值，请使用 <a href="TSL.html#positionLocal">positionLocal</a>。</p>
+<pre><code class="language-js">material.positionNode = positionLocal.add( displace );
+</code></pre>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="receivedShadowNode" translate="no">.<a href="#receivedShadowNode">receivedShadowNode</a><span class="type-signature"> : function | <a href="FunctionNode.html">FunctionNode</a>.&lt;vec4></span> </h3>
+					<div class="description">
+						<p>此节点可用于影响使用此节点材质的对象
+如何接收阴影。</p>
+<pre><code class="language-js">const totalShadows = float( 1 ).toVar();
+material.receivedShadowNode = Fn( ( [ shadow ] ) => {
+	totalShadows.mulAssign( shadow );
+	//return float( 1 ); // bypass received shadows
+	return shadow.mix( color( 0xff0000 ), 1 ); // modify shadow color
+} );</code></pre>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="receivedShadowPositionNode" translate="no">.<a href="#receivedShadowPositionNode">receivedShadowPositionNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;float></span> </h3>
+					<div class="description">
+						<p>允许覆盖用于阴影贴图渲染的位置，默认
+为 <a href="TSL.html#positionWorld">positionWorld</a>（世界空间中的顶点位置）。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="type" translate="no">.<a href="#type">type</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>表示节点材质的类型。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Material.html#type">Material#type</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="vertexNode" translate="no">.<a href="#vertexNode">vertexNode</a><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="description">
+						<p>若需要在实现顶点着色器时获得完全自由，可使用此节点属性。
+赋给节点将替换顶点阶段中使用的内置材质逻辑。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="build" translate="no">.<a href="#build">build</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用给定的节点构建器构建此材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( source : <span class="param-type"><a href="Material.html">Material</a></span> )</span><span class="type-signature"> : <a href="NodeMaterial.html">NodeMaterial</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定材质的公共属性复制到此实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Material.html#copy">Material#copy</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点材质的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="customProgramCacheKey" translate="no">.<a href="#customProgramCacheKey">customProgramCacheKey</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>允许定义自定义缓存键，该键会影响渲染对象的材质键计算。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Material.html#customProgramCacheKey">Material#customProgramCacheKey</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 自定义缓存键。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setDefaultValues" translate="no">.<a href="#setDefaultValues">setDefaultValues</a><span class="signature">( material : <span class="param-type"><a href="Material.html">Material</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>大多数经典材质类型都有对应的节点版本，例如 <code>MeshBasicMaterial</code>
+对应 <code>MeshBasicNodeMaterial</code>。此工具方法用于
+在节点类型中定义经典类型的所有材质属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>要将其属性及其值复制到此节点材质的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setup" translate="no">.<a href="#setup">setup</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置此节点材质的顶点与片段阶段。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setupAmbientOcclusion" translate="no">.<a href="#setupAmbientOcclusion">setupAmbientOcclusion</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从材质设置环境光遮蔽节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 环境光遮蔽节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupClipping" translate="no">.<a href="#setupClipping">setupClipping</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="ClippingNode.html">ClippingNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置裁剪节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 裁剪节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupDepth" translate="no">.<a href="#setupDepth">setupDepth</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置此材质的深度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setupDiffuseColor" translate="no">.<a href="#setupDiffuseColor">setupDiffuseColor</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span>, geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置材质漫反射颜色的计算。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>几何体。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setupEnvironment" translate="no">.<a href="#setupEnvironment">setupEnvironment</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从材质设置环境节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 环境节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupFog" translate="no">.<a href="#setupFog">setupFog</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span>, outputNode : <span class="param-type"><a href="Node.html">Node</a>.&lt;vec4></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置雾效。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">outputNode</strong>
+									</td>
+									<td class="description last">
+										<p>现有的输出节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 输出节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupHardwareClipping" translate="no">.<a href="#setupHardwareClipping">setupHardwareClipping</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若当前设备可用，则设置硬件裁剪。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setupLightMap" translate="no">.<a href="#setupLightMap">setupLightMap</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从材质设置光照贴图节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 光照贴图节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupLighting" translate="no">.<a href="#setupLighting">setupLighting</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置出射光节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 出射光节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupLightingModel" translate="no">.<a href="#setupLightingModel">setupLightingModel</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="LightingModel.html">LightingModel</a></span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>大多数派生材质都应实现此方法，
+因为它定义了材质的光照模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 光照模型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupMaterialLightings" translate="no">.<a href="#setupMaterialLightings">setupMaterialLightings</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="LightingNode.html">LightingNode</a>.&lt;Array></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据场景、环境和材质设置灯光节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 灯光节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupModelViewProjection" translate="no">.<a href="#setupModelViewProjection">setupModelViewProjection</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置裁剪空间中的位置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 视图空间中的位置。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupNormal" translate="no">.<a href="#setupNormal">setupNormal</a><span class="signature">()</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从材质设置法线节点。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 法线节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupObserver" translate="no">.<a href="#setupObserver">setupObserver</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="NodeMaterialObserver.html">NodeMaterialObserver</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使用给定构建器设置节点材质观察者。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点材质观察者。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupOutgoingLight" translate="no">.<a href="#setupOutgoingLight">setupOutgoingLight</a><span class="signature">()</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置出射光节点变量。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 出射光节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupOutput" translate="no">.<a href="#setupOutput">setupOutput</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span>, outputNode : <span class="param-type"><a href="Node.html">Node</a>.&lt;vec4></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置输出节点。</p>
+<p>派生材质可以实现此方法以扩展材质输出的功能，
+或完全替换它。</p>
+<pre><code class="language-js">class ColoredShadowMaterial extends MeshPhongNodeMaterial {
+  constructor( parameters ) {
+    super( parameters );
+    this._shadeColor = uniform( new Color( parameters.shadeColor ?? 0xff0000 ) );
+  }
+  setupOutput( builder, outputNode ) {
+	   // Modify the native output of the MeshPhongNodeMaterial fragment shader
+    const brightness = min( outputNode.r, 1.0 );
+    const mixedColor = mix( this._shadeColor, diffuseColor.rgb, brightness );
+	   // Return new output back into NodeMaterial flow
+    return super.setupOutput( builder, vec4( mixedColor, outputNode.a ) );
+  }
+}
+</code></pre>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">outputNode</strong>
+									</td>
+									<td class="description last">
+										<p>现有的输出节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 输出节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupPosition" translate="no">.<a href="#setupPosition">setupPosition</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置局部空间位置的计算。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 局部空间中的位置。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupPositionView" translate="no">.<a href="#setupPositionView">setupPositionView</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec3></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置视图空间中的位置节点。此方法的存在是为了
+让派生节点材质可以修改实现，例如精灵材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 视图空间中的位置。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupPremultipliedAlpha" translate="no">.<a href="#setupPremultipliedAlpha">setupPremultipliedAlpha</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span>, outputNode : <span class="param-type"><a href="Node.html">Node</a>.&lt;vec4></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置预乘 alpha。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">outputNode</strong>
+									</td>
+									<td class="description last">
+										<p>现有的输出节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 输出节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupVariants" translate="no">.<a href="#setupVariants">setupVariants</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>可由派生材质实现的抽象接口方法，
+用于设置材质特有的节点变量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setupVertex" translate="no">.<a href="#setupVertex">setupVertex</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a>.&lt;vec4></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置顶点阶段的逻辑。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 裁剪空间中的位置。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">( meta : <span class="param-type">Object | string</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此材质序列化为 JSON。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">meta</strong>
+									</td>
+									<td class="description last">
+										<p>用于序列化的元信息。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Material.html#toJSON">Material#toJSON</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 序列化后的节点。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/nodes/NodeMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/nodes/NodeMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

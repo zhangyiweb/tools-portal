@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MarchingCubes - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">MarchingCubes</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一种移动立方体（marching cubes）实现。</p>
+<p>移植自：<a href="http://webglsamples.org/blob/blob.html" target="_blank" rel="noopener">http://webglsamples.org/blob/blob.html</a></p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">MarchingCubes</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { MarchingCubes } from 'three/addons/objects/MarchingCubes.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MarchingCubes" translate="no">new <a href="#MarchingCubes">MarchingCubes</a><span class="signature">( resolution : <span class="param-type">number</span>, material : <span class="param-type"><a href="Material.html">Material</a></span>, enableUvs : <span class="param-type">boolean</span>, enableColors : <span class="param-type">boolean</span>, maxPolyCount : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的移动立方体实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">resolution</strong>
+									</td>
+									<td class="description last">
+										<p>效果的分辨率。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>立方体的材质。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">enableUvs</strong>
+									</td>
+									<td class="description last">
+										<p>是否应动画化纹理坐标。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">enableColors</strong>
+									</td>
+									<td class="description last">
+										<p>是否应动画化颜色。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">maxPolyCount</strong>
+									</td>
+									<td class="description last">
+										<p>几何缓冲区的最大大小。</p>
+										<p>默认值为 <code>10000</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="enableColors" translate="no">.<a href="#enableColors">enableColors</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否应动画化颜色。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="enableUvs" translate="no">.<a href="#enableUvs">enableUvs</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否应动画化纹理坐标。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMarchingCubes" translate="no">.<a href="#isMarchingCubes">isMarchingCubes</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addBall" translate="no">.<a href="#addBall">addBall</a><span class="signature">( ballx : <span class="param-type">number</span>, bally : <span class="param-type">number</span>, ballz : <span class="param-type">number</span>, strength : <span class="param-type">number</span>, subtract : <span class="param-type">number</span>, colors : <span class="param-type"><a href="Color.html">Color</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加一个倒数球（外观圆润、呈团块状）。为提高速度，该球在由
+strength 与 subtract 决定的固定距离后衰减为零。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">ballx</strong>
+									</td>
+									<td class="description last">
+										<p>球的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">bally</strong>
+									</td>
+									<td class="description last">
+										<p>球的 y 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">ballz</strong>
+									</td>
+									<td class="description last">
+										<p>球的 z 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">strength</strong>
+									</td>
+									<td class="description last">
+										<p>强度因子。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">subtract</strong>
+									</td>
+									<td class="description last">
+										<p>减去因子。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colors</strong>
+									</td>
+									<td class="description last">
+										<p>颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addPlaneX" translate="no">.<a href="#addPlaneX">addPlaneX</a><span class="signature">( strength : <span class="param-type">number</span>, subtract : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>沿 x 轴添加一个平面。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">strength</strong>
+									</td>
+									<td class="description last">
+										<p>强度因子。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">subtract</strong>
+									</td>
+									<td class="description last">
+										<p>减去因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addPlaneY" translate="no">.<a href="#addPlaneY">addPlaneY</a><span class="signature">( strength : <span class="param-type">number</span>, subtract : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>沿 y 轴添加一个平面。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">strength</strong>
+									</td>
+									<td class="description last">
+										<p>强度因子。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">subtract</strong>
+									</td>
+									<td class="description last">
+										<p>减去因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addPlaneZ" translate="no">.<a href="#addPlaneZ">addPlaneZ</a><span class="signature">( strength : <span class="param-type">number</span>, subtract : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>沿 z 轴添加一个平面。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">strength</strong>
+									</td>
+									<td class="description last">
+										<p>强度因子。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">subtract</strong>
+									</td>
+									<td class="description last">
+										<p>减去因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="blur" translate="no">.<a href="#blur">blur</a><span class="signature">( intensity : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>以给定强度应用模糊。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">intensity</strong>
+									</td>
+									<td class="description last">
+										<p>模糊强度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="getCell" translate="no">.<a href="#getCell">getCell</a><span class="signature">( x : <span class="param-type">number</span>, y : <span class="param-type">number</span>, z : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定坐标处的单元值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>x 值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>y 值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>z 值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 该值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="reset" translate="no">.<a href="#reset">reset</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>重置效果。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="setCell" translate="no">.<a href="#setCell">setCell</a><span class="signature">( x : <span class="param-type">number</span>, y : <span class="param-type">number</span>, z : <span class="param-type">number</span>, value : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置给定坐标处的单元值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>x 值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>y 值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>z 值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新效果。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/objects/MarchingCubes.js" translate="no" target="_blank" rel="noopener">examples/jsm/objects/MarchingCubes.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

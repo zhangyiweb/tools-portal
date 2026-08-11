@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>GLTFLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">GLTFLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载 glTF 2.0 格式的加载器。</p>
+<p><a href="https://www.khronos.org/gltf/" target="_blank" rel="noopener">glTF</a>（GL Transmission Format）是一种<a href="https://github.com/KhronosGroup/glTF/tree/main/specification/2.0)" target="_blank" rel="noopener">开放格式规范</a>，在可能的情况下使用。请注意，ImageBitmap 在不再被引用时不会自动被垃圾回收，在销毁过程中需要特殊处理。</p>
+<p><code>GLTFLoader</code> 支持以下 glTF 2.0 扩展：</p>
+<ul>
+<li>KHR_draco_mesh_compression</li>
+<li>KHR_lights_punctual</li>
+<li>KHR_materials_anisotropy</li>
+<li>KHR_materials_clearcoat</li>
+<li>KHR_materials_dispersion</li>
+<li>KHR_materials_emissive_strength</li>
+<li>KHR_materials_ior</li>
+<li>KHR_materials_specular</li>
+<li>KHR_materials_transmission</li>
+<li>KHR_materials_iridescence</li>
+<li>KHR_materials_unlit</li>
+<li>KHR_materials_volume</li>
+<li>KHR_mesh_quantization</li>
+<li>KHR_meshopt_compression</li>
+<li>KHR_texture_basisu</li>
+<li>KHR_texture_transform</li>
+<li>EXT_materials_bump</li>
+<li>EXT_meshopt_compression</li>
+<li>EXT_mesh_gpu_instancing</li>
+<li>EXT_texture_avif</li>
+<li>EXT_texture_webp</li>
+</ul>
+<p>以下 glTF 2.0 扩展由外部用户插件支持：</p>
+<ul>
+<li><a href="https://github.com/takahirox/three-gltf-extensions" target="_blank" rel="noopener">KHR_materials_variants</a></li>
+<li><a href="https://github.com/takahirox/three-gltf-extensions" target="_blank" rel="noopener">MSFT_texture_dds</a></li>
+<li><a href="https://github.com/needle-tools/three-animation-pointer" target="_blank" rel="noopener">KHR_animation_pointer</a></li>
+<li><a href="https://github.com/needle-tools/gltf-progressive" target="_blank" rel="noopener">NEEDLE_progressive</a></li>
+</ul></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new GLTFLoader();
+// Optional: Provide a DRACOLoader instance to decode compressed mesh data
+const dracoLoader = new DRACOLoader();
+dracoLoader.setDecoderPath( '/examples/jsm/libs/draco/' );
+loader.setDRACOLoader( dracoLoader );
+const gltf = await loader.loadAsync( 'models/gltf/duck/duck.gltf' );
+scene.add( gltf.scene );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">GLTFLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="GLTFLoader" translate="no">new <a href="#GLTFLoader">GLTFLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 glTF 加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的 glTF 资源传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( data : <span class="param-type">string | ArrayBuffer</span>, path : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 glTF 数据并返回生成的组。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>原始 glTF 数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>URL 基础路径。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parseAsync" translate="no">.<a href="#parseAsync">parseAsync</a><span class="signature">( data : <span class="param-type">string | ArrayBuffer</span>, path : <span class="param-type">string</span> )</span><span class="type-signature"> : Promise.&lt;<a href="GLTFLoader.html#~LoadObject">GLTFLoader~LoadObject</a>></span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p><a href="GLTFLoader.html#parse">GLTFLoader#parse</a> 的异步版本。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>原始 glTF 数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>URL 基础路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 在解析完成后解析并返回已加载 glTF 的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="register" translate="no">.<a href="#register">register</a><span class="signature">( callback : <span class="param-type">function</span> )</span><span class="type-signature"> : <a href="GLTFLoader.html">GLTFLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>注册插件回调。此 API 在内部用于实现各种
+glTF 扩展，也可供第三方代码向加载器添加额外逻辑。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">callback</strong>
+									</td>
+									<td class="description last">
+										<p>要注册的回调函数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setDRACOLoader" translate="no">.<a href="#setDRACOLoader">setDRACOLoader</a><span class="signature">( dracoLoader : <span class="param-type"><a href="DRACOLoader.html">DRACOLoader</a></span> )</span><span class="type-signature"> : <a href="GLTFLoader.html">GLTFLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将指定的 Draco 加载器设置到此加载器。解码使用 <code>KHR_draco_mesh_compression</code> 扩展压缩的资源时需要。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">dracoLoader</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 Draco 加载器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setKTX2Loader" translate="no">.<a href="#setKTX2Loader">setKTX2Loader</a><span class="signature">( ktx2Loader : <span class="param-type"><a href="KTX2Loader.html">KTX2Loader</a></span> )</span><span class="type-signature"> : <a href="GLTFLoader.html">GLTFLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将指定的 KTX2 加载器设置到此加载器。加载 KTX2
+压缩纹理时需要。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">ktx2Loader</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 KTX2 加载器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setMeshoptDecoder" translate="no">.<a href="#setMeshoptDecoder">setMeshoptDecoder</a><span class="signature">( meshoptDecoder : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="GLTFLoader.html">GLTFLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置指定的 meshopt 解码器。解码使用 <code>EXT_meshopt_compression</code> 扩展压缩的资源时需要。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">meshoptDecoder</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 meshopt 解码器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="unregister" translate="no">.<a href="#unregister">unregister</a><span class="signature">( callback : <span class="param-type">function</span> )</span><span class="type-signature"> : <a href="GLTFLoader.html">GLTFLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>注销插件回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">callback</strong>
+									</td>
+									<td class="description last">
+										<p>要注销的回调函数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~LoadObject" translate="no">.<a href="#~LoadObject">LoadObject</a> </h3>
+					<div class="description">
+						<p><code>GLTFLoader</code> 的加载器结果。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>animations</strong>
+						<br>
+<span class="param-type">Array.&lt;<a href="AnimationClip.html">AnimationClip</a>></span>
+				</td>
+			<td class="description last">
+				<p>动画剪辑数组。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>asset</strong>
+						<br>
+<span class="param-type">Object</span>
+				</td>
+			<td class="description last">
+				<p>已加载资源的元数据。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>cameras</strong>
+						<br>
+<span class="param-type">Array.&lt;<a href="Camera.html">Camera</a>></span>
+				</td>
+			<td class="description last">
+				<p>相机数组。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>parser</strong>
+						<br>
+<span class="param-type">GLTFParser</span>
+				</td>
+			<td class="description last">
+				<p>内部解析器的引用。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>scene</strong>
+						<br>
+<span class="param-type"><a href="Group.html">Group</a></span>
+				</td>
+			<td class="description last">
+				<p>默认场景。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>scenes</strong>
+						<br>
+<span class="param-type">Array.&lt;<a href="Group.html">Group</a>></span>
+				</td>
+			<td class="description last">
+				<p>glTF 资源可能定义多个场景。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>userData</strong>
+						<br>
+<span class="param-type">Object</span>
+				</td>
+			<td class="description last">
+				<p>附加数据。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/GLTFLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/GLTFLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

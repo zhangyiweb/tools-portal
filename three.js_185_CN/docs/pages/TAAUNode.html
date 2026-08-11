@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TAAUNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="TempNode.html">TempNode</a> → </p>
+	<h1 translate="no">TAAUNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于执行时域抗锯齿上采样（TAAU）的特殊节点。</p>
+<p>与 TRAA 类似，该节点在多帧上累积抖动采样，并使用运动向量重投影历史帧。与 TRAA 不同的是，输入缓冲区（beauty、depth、velocity）应以低于渲染器绘制缓冲区分辨率的分辨率渲染——通常通过 <a href="PassNode.html#setResolutionScale">PassNode#setResolutionScale</a> 降低上游通道的分辨率——解析通道则对抖动输入采样使用 9 点 Blackman-Harris 滤波器（高斯近似）重建输出分辨率的图像。其结果可作为 FSR2/3 的替代方案，在单次通道中同时完成抗锯齿与上采样。</p>
+<p>参考文献：</p>
+<ul>
+<li>Karis，&quot;High Quality Temporal Supersampling&quot;，SIGGRAPH 2014，<a href="https://advances.realtimerendering.com/s2014/" target="_blank" rel="noopener">https://advances.realtimerendering.com/s2014/</a></li>
+<li>Riley/Arcila，FidelityFX Super Resolution 2，GDC 2022，<a href="https://gpuopen.com/download/GDC_FidelityFX_Super_Resolution_2_0.pdf" target="_blank" rel="noopener">https://gpuopen.com/download/GDC_FidelityFX_Super_Resolution_2_0.pdf</a></li>
+</ul>
+<p>注意：使用 TAAU 时必须禁用 MSAA。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TAAUNode</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { taau } from 'three/addons/tsl/display/TAAUNode.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TAAUNode" translate="no">new <a href="#TAAUNode">TAAUNode</a><span class="signature">( beautyNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, depthNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, velocityNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, camera : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 TAAU 节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">beautyNode</strong>
+									</td>
+									<td class="description last">
+										<p>表示效果输入的纹理节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depthNode</strong>
+									</td>
+									<td class="description last">
+										<p>表示场景深度的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">velocityNode</strong>
+									</td>
+									<td class="description last">
+										<p>表示场景速度的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>用于渲染场景的相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="beautyNode" translate="no">.<a href="#beautyNode">beautyNode</a><span class="type-signature"> : <a href="TextureNode.html">TextureNode</a></span> </h3>
+					<div class="description">
+						<p>表示效果输入的纹理节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="camera" translate="no">.<a href="#camera">camera</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>用于渲染场景的相机。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="currentFrameWeight" translate="no">.<a href="#currentFrameWeight">currentFrameWeight</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>解析时应用于当前帧的基准权重。较低的值会产生更平滑的结果，累积时间更长，但在遮挡解除区域收敛较慢；运动因子会叠加在其上，因此快速移动的像素仍能快速响应。</p>
+						<p>默认值为 <code>0.025</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthNode" translate="no">.<a href="#depthNode">depthNode</a><span class="type-signature"> : <a href="TextureNode.html">TextureNode</a></span> </h3>
+					<div class="description">
+						<p>表示场景深度的节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthThreshold" translate="no">.<a href="#depthThreshold">depthThreshold</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>当当前深度与上一帧深度的差值超过此阈值时，历史帧被视为无效。</p>
+						<p>默认值为 <code>0.0005</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="edgeDepthDiff" translate="no">.<a href="#edgeDepthDiff">edgeDepthDiff</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>3×3 邻域内的深度差值，用于判定像素是否为边缘。</p>
+						<p>默认值为 <code>0.001</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isTAAUNode" translate="no">.<a href="#isTAAUNode">isTAAUNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxVelocityLength" translate="no">.<a href="#maxVelocityLength">maxVelocityLength</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>当速度的像素长度接近此值时，历史帧将变为无效。</p>
+						<p>默认值为 <code>128</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateBeforeType" translate="no">.<a href="#updateBeforeType">updateBeforeType</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p><code>updateBeforeType</code> 设为 <code>NodeUpdateType.FRAME</code>，因为该节点在 <code>updateBefore()</code> 中每帧渲染一次效果。</p>
+						<p>默认值为 <code>'frame'</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#updateBeforeType">TempNode#updateBeforeType</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="velocityNode" translate="no">.<a href="#velocityNode">velocityNode</a><span class="type-signature"> : <a href="TextureNode.html">TextureNode</a></span> </h3>
+					<div class="description">
+						<p>表示场景速度的节点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clearViewOffset" translate="no">.<a href="#clearViewOffset">clearViewOffset</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>清除场景相机的视图偏移。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放内部资源。当效果不再使用时，应调用此方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#dispose">TempNode#dispose</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTextureNode" translate="no">.<a href="#getTextureNode">getTextureNode</a><span class="signature">()</span><span class="type-signature"> : <a href="PassTextureNode.html">PassTextureNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>以纹理节点的形式返回效果结果。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示效果结果的纹理节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setSize" translate="no">.<a href="#setSize">setSize</a><span class="signature">( outputWidth : <span class="param-type">number</span>, outputHeight : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置效果的输出尺寸（历史帧与解析目标）。上一帧深度纹理在 <code>updateBefore()</code> 中独立设置尺寸，以匹配场景当前的深度纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">outputWidth</strong>
+									</td>
+									<td class="description last">
+										<p>输出宽度（绘制缓冲区宽度）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">outputHeight</strong>
+									</td>
+									<td class="description last">
+										<p>输出高度（绘制缓冲区高度）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setViewOffset" translate="no">.<a href="#setViewOffset">setViewOffset</a><span class="signature">( inputWidth : <span class="param-type">number</span>, inputHeight : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将 TAAU 当前的抖动定义为场景相机的视图偏移。抖动被缩小到一个<em>输出</em>像素（而非一个输入像素），以便 Halton 序列在多帧上逐渐填充输出亚像素网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">inputWidth</strong>
+									</td>
+									<td class="description last">
+										<p>相机渲染到的输入缓冲区宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">inputHeight</strong>
+									</td>
+									<td class="description last">
+										<p>相机渲染到的输入缓冲区高度。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setup" translate="no">.<a href="#setup">setup</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="PassTextureNode.html">PassTextureNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法用于设置效果的渲染目标与 TSL 代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#setup">TempNode#setup</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateBefore" translate="no">.<a href="#updateBefore">updateBefore</a><span class="signature">( frame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法用于每帧渲染一次效果。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frame</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点帧。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="TempNode.html#updateBefore">TempNode#updateBefore</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/tsl/display/TAAUNode.js" translate="no" target="_blank" rel="noopener">examples/jsm/tsl/display/TAAUNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

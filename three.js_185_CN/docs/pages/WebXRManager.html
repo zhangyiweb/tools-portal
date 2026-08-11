@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>WebXRManager - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → </p>
+	<h1 translate="no">WebXRManager</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类是对 WebXR Device API 的抽象，由
+<a href="WebGLRenderer.html">WebGLRenderer</a> 内部使用。<code>WebXRManager</code> 还提供了公共
+接口，允许用户启用/禁用 XR，并执行与 XR 相关的
+任务，例如获取控制器。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="cameraAutoUpdate" translate="no">.<a href="#cameraAutoUpdate">cameraAutoUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>管理器的 XR 相机是否应自动更新。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="enabled" translate="no">.<a href="#enabled">enabled</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>此标志通知渲染器已准备好进行 XR 渲染。若你的应用
+将使用 XR，请将其设为 <code>true</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isPresenting" translate="no">.<a href="#isPresenting">isPresenting</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>XR 呈现是否处于活动状态。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="getBaseLayer" translate="no">.<a href="#getBaseLayer">getBaseLayer</a><span class="signature">()</span><span class="type-signature"> : XRWebGLLayer | XRProjectionLayer</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前的基础层。</p>
+<p>当目标 XR 设备支持 WebXR Layers API 时，这是一个 <code>XRProjectionLayer</code>；
+否则为 <code>XRWebGLLayer</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> XR 基础层。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBinding" translate="no">.<a href="#getBinding">getBinding</a><span class="signature">()</span><span class="type-signature"> : XRWebGLBinding</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前的 XR 绑定。</p>
+<p>若需要且浏览器支持，则会创建新的绑定。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> XR 绑定。若无法创建则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCamera" translate="no">.<a href="#getCamera">getCamera</a><span class="signature">()</span><span class="type-signature"> : <a href="ArrayCamera.html">ArrayCamera</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个 <a href="ArrayCamera.html">ArrayCamera</a> 实例，表示活动 XR 会话的 XR 相机。
+它对每个视图持有一个单独的相机对象。</p>
+<p>该相机的 <code>fov</code> 当前未被使用，也不反映 XR 相机的视场角。
+若需要在应用层使用视场角，必须从 XR 相机的投影矩阵
+手动计算。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> XR 相机。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCameraTexture" translate="no">.<a href="#getCameraTexture">getCameraTexture</a><span class="signature">( xrCamera : <span class="param-type">XRCamera</span> )</span><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从与视图对齐的 XRCamera 获取不透明纹理。
+仅在当前动画循环期间可用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">xrCamera</strong>
+									</td>
+									<td class="description last">
+										<p>要查询的相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示当前原始相机帧的不透明纹理。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getController" translate="no">.<a href="#getController">getController</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Group.html">Group</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回表示 XR 控制器 <code>target ray</code> 空间的组。
+使用此空间可视化可帮助用户完成指向任务
+（如 UI 交互）的 3D 对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>控制器的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示 <code>target ray</code> 空间的组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getControllerGrip" translate="no">.<a href="#getControllerGrip">getControllerGrip</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Group.html">Group</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回表示 XR 控制器 <code>grip</code> 空间的组。
+使用此空间可视化可帮助用户完成指向任务
+（如 UI 交互）的 3D 对象。</p>
+<p>注意：若既要在用户手中显示物体，又要同时提供
+指向射线，应将手持物体附加到
+<code>getControllerGrip()</code> 返回的组，并将射线附加到
+<code>getController()</code> 返回的组。其思路是为同一个 WebXR
+控制器在两个不同的坐标空间中使用两个不同的组。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>控制器的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示 <code>grip</code> 空间的组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getDepthSensingMesh" translate="no">.<a href="#getDepthSensingMesh">getDepthSensingMesh</a><span class="signature">()</span><span class="type-signature"> : <a href="Mesh.html">Mesh</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回深度感知网格。</p>
+<p>参见 <a href="WebXRDepthSensing.html#getMesh">WebXRDepthSensing#getMesh</a>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 深度感知网格。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getDepthTexture" translate="no">.<a href="#getDepthTexture">getDepthTexture</a><span class="signature">()</span><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回通过深度感知计算得到的当前深度纹理。</p>
+<p>参见 <a href="WebXRDepthSensing.html#getDepthTexture">WebXRDepthSensing#getDepthTexture</a>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 深度纹理。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getEnvironmentBlendMode" translate="no">.<a href="#getEnvironmentBlendMode">getEnvironmentBlendMode</a><span class="signature">()</span><span class="type-signature"> : 'opaque' | 'additive' | 'alpha-blend' | undefined</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前 XR 会话的环境混合模式。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 环境混合模式。在 XR 会话之外使用时返回 <code>undefined</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getFoveation" translate="no">.<a href="#getFoveation">getFoveation</a><span class="signature">()</span><span class="type-signature"> : number | undefined</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 XR 合成器对投影层使用的注视点渲染（foveation）量。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 注视点渲染量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getFrame" translate="no">.<a href="#getFrame">getFrame</a><span class="signature">()</span><span class="type-signature"> : XRFrame</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前的 XR 帧。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> XR 帧。在 XR 会话之外使用时返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getHand" translate="no">.<a href="#getHand">getHand</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Group.html">Group</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回表示 XR 控制器 <code>hand</code> 空间的组。
+使用此空间可视化可帮助用户完成指向任务
+（如 UI 交互）的 3D 对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>控制器的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示 <code>hand</code> 空间的组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getReferenceSpace" translate="no">.<a href="#getReferenceSpace">getReferenceSpace</a><span class="signature">()</span><span class="type-signature"> : XRReferenceSpace</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 XR 参考空间。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> XR 参考空间。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getSession" translate="no">.<a href="#getSession">getSession</a><span class="signature">()</span><span class="type-signature"> : XRSession</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前的 XR 会话。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> XR 会话。在 XR 会话之外使用时返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="hasDepthSensing" translate="no">.<a href="#hasDepthSensing">hasDepthSensing</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若支持深度感知则返回 <code>true</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 是否支持深度感知。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFoveation" translate="no">.<a href="#setFoveation">setFoveation</a><span class="signature">( value : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置注视点渲染（foveation）值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>范围为 <code>[0,1]</code> 的数值，其中 <code>0</code> 表示无注视点渲染（全分辨率），
+<code>1</code> 表示最大注视点渲染（边缘以较低分辨率渲染）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setFramebufferScaleFactor" translate="no">.<a href="#setFramebufferScaleFactor">setFramebufferScaleFactor</a><span class="signature">( value : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置帧缓冲缩放因子。</p>
+<p>此方法不能在 XR 会话期间使用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>帧缓冲缩放因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setReferenceSpace" translate="no">.<a href="#setReferenceSpace">setReferenceSpace</a><span class="signature">( space : <span class="param-type">XRReferenceSpace</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置自定义 XR 参考空间。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">space</strong>
+									</td>
+									<td class="description last">
+										<p>XR 参考空间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setReferenceSpaceType" translate="no">.<a href="#setReferenceSpaceType">setReferenceSpaceType</a><span class="signature">( value : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置参考空间类型。可用于配置与用户物理环境的空间关系。
+根据用户在 3D 空间中的移动方式，设置合适的参考空间可改善追踪。
+默认值为 <code>local-floor</code>。有效值可参见
+https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpace#reference_space_types。</p>
+<p>此方法不能在 XR 会话期间使用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>参考空间类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setSession" translate="no">.<a href="#setSession">setSession</a><span class="signature">( value : <span class="param-type">XRSession</span> )</span><span class="type-signature"> : Promise</span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>在通常通过某个 <code>*Button</code> 模块请求 XR 会话后，
+使用此方法将其注入渲染器。此方法会触发实际 XR 渲染的开始。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的 XR 会话。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 在会话设置完成后 resolve 的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateCamera" translate="no">.<a href="#updateCamera">updateCamera</a><span class="signature">( camera : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>更新 XR 相机的状态。若在应用层将
+<code>cameraAutoUpdate</code> 设为 <code>false</code>，请使用此方法。该方法需要将场景的
+非 XR 相机作为参数。调用此方法时，传入相机的变换
+会自动调整为 XR 相机的位置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/webxr/WebXRManager.js" translate="no" target="_blank" rel="noopener">src/renderers/webxr/WebXRManager.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

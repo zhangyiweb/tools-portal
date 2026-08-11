@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>OculusHandModel - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → </p>
+	<h1 translate="no">OculusHandModel</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示 Oculus 手部模型。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">OculusHandModel</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { OculusHandModel } from 'three/addons/webxr/OculusHandModel.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="OculusHandModel" translate="no">new <a href="#OculusHandModel">OculusHandModel</a><span class="signature">( controller : <span class="param-type"><a href="Group.html">Group</a></span>, loader : <span class="param-type"><a href="Loader.html">Loader</a></span>, onLoad : <span class="param-type">function</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 Oculus 手部模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">controller</strong>
+									</td>
+									<td class="description last">
+										<p>手部控制器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">loader</strong>
+									</td>
+									<td class="description last">
+										<p>用于加载手部模型的加载器。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>手部模型加载完成后执行的回调。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="controller" translate="no">.<a href="#controller">controller</a><span class="type-signature"> : <a href="Group.html">Group</a></span> </h3>
+					<div class="description">
+						<p>手部控制器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="envMap" translate="no">.<a href="#envMap">envMap</a><span class="type-signature"> : <a href="Texture.html">Texture</a></span> </h3>
+					<div class="description">
+						<p>模型的环境贴图。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="loader" translate="no">.<a href="#loader">loader</a><span class="type-signature"> : <a href="Loader.html">Loader</a></span> </h3>
+					<div class="description">
+						<p>用于加载手部模型的加载器。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mesh" translate="no">.<a href="#mesh">mesh</a><span class="type-signature"> : <a href="Mesh.html">Mesh</a></span> </h3>
+					<div class="description">
+						<p>模型网格。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="motionController" translate="no">.<a href="#motionController">motionController</a><span class="type-signature"> : MotionController</span> </h3>
+					<div class="description">
+						<p>运动控制器。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="onLoad" translate="no">.<a href="#onLoad">onLoad</a><span class="type-signature"> : function</span> </h3>
+					<div class="description">
+						<p>手部模型加载完成后执行的回调。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="path" translate="no">.<a href="#path">path</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>模型资源库的路径。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="checkButton" translate="no">.<a href="#checkButton">checkButton</a><span class="signature">( button : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据与给定按钮的交互状态执行相应操作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">button</strong>
+									</td>
+									<td class="description last">
+										<p>按钮。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="getPointerPosition" translate="no">.<a href="#getPointerPosition">getPointerPosition</a><span class="signature">()</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回指针位置，即食指指尖的位置。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 指针位置。若未找到食指指尖关节，则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="intersectBoxObject" translate="no">.<a href="#intersectBoxObject">intersectBoxObject</a><span class="signature">( boxObject : <span class="param-type"><a href="Mesh.html">Mesh</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若当前指针位置（食指指尖）与给定盒体对象相交，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">boxObject</strong>
+									</td>
+									<td class="description last">
+										<p>盒体对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 是否检测到相交。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="updateMatrixWorld" translate="no">.<a href="#updateMatrixWorld">updateMatrixWorld</a><span class="signature">( force : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>已用自定义实现重写。确保运动控制器更新网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">force</strong>
+									</td>
+									<td class="description last">
+										<p>设为 <code>true</code> 时，即使 <a href="Object3D.html#matrixWorldAutoUpdate">Object3D#matrixWorldAutoUpdate</a> 设为 <code>false</code>，也会强制重新计算世界矩阵。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Object3D.html#updateMatrixWorld">Object3D#updateMatrixWorld</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/webxr/OculusHandModel.js" translate="no" target="_blank" rel="noopener">examples/jsm/webxr/OculusHandModel.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Color - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Color</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>Color 实例由其在线性<i>工作色彩空间</i>中的 RGB 分量表示，
+默认工作色彩空间为 <code>LinearSRGBColorSpace</code>。习惯上使用
+<code>SRGBColorSpace</code> 的输入（如十六进制值与 CSS 字符串）
+会自动转换到工作色彩空间。</p>
+<pre><code class="language-js">// converted automatically from SRGBColorSpace to LinearSRGBColorSpace
+const color = new THREE.Color().setHex( 0x112233 );
+</code></pre>
+<p>也可显式指定源色彩空间，以确保正确转换。</p>
+<pre><code class="language-js">// assumed already LinearSRGBColorSpace; no conversion
+const color = new THREE.Color().setRGB( 0.5, 0.5, 0.5 );
+// converted explicitly from SRGBColorSpace to LinearSRGBColorSpace
+const color = new THREE.Color().setRGB( 0.5, 0.5, 0.5, SRGBColorSpace );
+</code></pre>
+<p>若禁用 THREE.ColorManagement，则不会发生转换。详情参见
+<i>色彩管理</i>。遍历 Color 实例将按对应顺序产出其分量
+（r、g、b）。可用以下任一方式初始化 Color：</p>
+<pre><code class="language-js">//empty constructor - will default white
+const color1 = new THREE.Color();
+//Hexadecimal color (recommended)
+const color2 = new THREE.Color( 0xff0000 );
+//RGB string
+const color3 = new THREE.Color(&quot;rgb(255, 0, 0)&quot;);
+const color4 = new THREE.Color(&quot;rgb(100%, 0%, 0%)&quot;);
+//X11 color name - all 140 color names are supported.
+//Note the lack of CamelCase in the name
+const color5 = new THREE.Color( 'skyblue' );
+//HSL string
+const color6 = new THREE.Color(&quot;hsl(0, 100%, 50%)&quot;);
+//Separate RGB values between 0 and 1
+const color7 = new THREE.Color( 1, 0, 0 );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Color" translate="no">new <a href="#Color">Color</a><span class="signature">( r : <span class="param-type">number | string | <a href="Color.html">Color</a></span>, g : <span class="param-type">number</span>, b : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新颜色。</p>
+<p>注意：在 three.js 中指定颜色的标准方式是使用十六进制三元组，
+文档其余部分也采用该方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">r</strong>
+									</td>
+									<td class="description last">
+										<p>颜色的红色分量。若未提供 <code>g</code> 和 <code>b</code>，
+则可以是十六进制三元组、CSS 风格字符串或另一个 <code>Color</code> 实例。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">g</strong>
+									</td>
+									<td class="description last">
+										<p>绿色分量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>蓝色分量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="b" translate="no">.<a href="#b">b</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>蓝色分量。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="g" translate="no">.<a href="#g">g</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>绿色分量。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isColor" translate="no">.<a href="#isColor">isColor</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="r" translate="no">.<a href="#r">r</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>红色分量。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id=".NAMES" translate="no">.<a href="#.NAMES">NAMES</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>包含 X11 颜色名称的字典。</p>
+<p>注意：像 Dark Orange 这样的多词名称会变为字符串 'darkorange'。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="add" translate="no">.<a href="#add">add</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定颜色的 RGB 值加到此颜色的 RGB 值上。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要相加的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addColors" translate="no">.<a href="#addColors">addColors</a><span class="signature">( color1 : <span class="param-type"><a href="Color.html">Color</a></span>, color2 : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定颜色的 RGB 值相加，并将结果存储在本实例中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color1</strong>
+									</td>
+									<td class="description last">
+										<p>第一种颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">color2</strong>
+									</td>
+									<td class="description last">
+										<p>第二种颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addScalar" translate="no">.<a href="#addScalar">addScalar</a><span class="signature">( s : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定标量值加到此颜色的 RGB 值上。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>要相加的标量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="applyMatrix3" translate="no">.<a href="#applyMatrix3">applyMatrix3</a><span class="signature">( m : <span class="param-type"><a href="Matrix3.html">Matrix3</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用给定的 3x3 矩阵变换此颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">m</strong>
+									</td>
+									<td class="description last">
+										<p>矩阵。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个新颜色，其值从本实例复制而来。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="convertLinearToSRGB" translate="no">.<a href="#convertLinearToSRGB">convertLinearToSRGB</a><span class="signature">()</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此颜色从 <code>LinearSRGBColorSpace</code> 转换到 <code>SRGBColorSpace</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="convertSRGBToLinear" translate="no">.<a href="#convertSRGBToLinear">convertSRGBToLinear</a><span class="signature">()</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此颜色从 <code>SRGBColorSpace</code> 转换到 <code>LinearSRGBColorSpace</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定颜色的值复制到本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copyLinearToSRGB" translate="no">.<a href="#copyLinearToSRGB">copyLinearToSRGB</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定颜色复制到此颜色，然后将其从
+<code>LinearSRGBColorSpace</code> 转换到 <code>SRGBColorSpace</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要复制/转换的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copySRGBToLinear" translate="no">.<a href="#copySRGBToLinear">copySRGBToLinear</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定颜色复制到此颜色，然后将其从
+<code>SRGBColorSpace</code> 转换到 <code>LinearSRGBColorSpace</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要复制/转换的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="equals" translate="no">.<a href="#equals">equals</a><span class="signature">( c : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若此颜色与给定颜色相等，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">c</strong>
+									</td>
+									<td class="description last">
+										<p>要测试相等性的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此颜色是否与给定颜色相等。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="fromArray" translate="no">.<a href="#fromArray">fromArray</a><span class="signature">( array : <span class="param-type">Array.&lt;number></span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从此给定数组设置此颜色的 RGB 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>保存 RGB 值的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>数组中的偏移量。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="fromBufferAttribute" translate="no">.<a href="#fromBufferAttribute">fromBufferAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span>, index : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定缓冲属性设置此颜色的各分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>保存颜色数据的缓冲属性。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>属性中的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getHSL" translate="no">.<a href="#getHSL">getHSL</a><span class="signature">( target : <span class="param-type">Object</span>, colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将颜色的 RGB 值转换为 HSL 格式，并存储到给定目标对象中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>ColorManagement.workingColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此颜色的 HSL 表示。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getHex" translate="no">.<a href="#getHex">getHex</a><span class="signature">( colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回此颜色的十六进制值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>SRGBColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 十六进制值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getHexString" translate="no">.<a href="#getHexString">getHexString</a><span class="signature">( colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>以字符串形式返回此颜色的十六进制值（例如 'FFFFFF'）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>SRGBColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 十六进制值字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRGB" translate="no">.<a href="#getRGB">getRGB</a><span class="signature">( target : <span class="param-type"><a href="Color.html">Color</a></span>, colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回此颜色的 RGB 值，并存储到给定目标对象中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>ColorManagement.workingColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此颜色的 RGB 表示。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getStyle" translate="no">.<a href="#getStyle">getStyle</a><span class="signature">( colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>以 CSS 样式字符串形式返回此颜色的值。示例：<code>rgb(255,0,0)</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>SRGBColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此颜色的 CSS 表示。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lerp" translate="no">.<a href="#lerp">lerp</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span>, alpha : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此颜色的 RGB 值向给定颜色的 RGB 值线性插值。
+可将 alpha 参数理解为两种颜色之间的比例，其中 <code>0.0</code>
+表示此颜色，<code>1.0</code> 表示第一个参数。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要趋近的颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">alpha</strong>
+									</td>
+									<td class="description last">
+										<p>闭区间 <code>[0,1]</code> 内的插值因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lerpColors" translate="no">.<a href="#lerpColors">lerpColors</a><span class="signature">( color1 : <span class="param-type"><a href="Color.html">Color</a></span>, color2 : <span class="param-type"><a href="Color.html">Color</a></span>, alpha : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在给定颜色之间线性插值，并将结果存储在本实例中。
+可将 alpha 参数理解为两种颜色之间的比例，其中 <code>0.0</code>
+表示第一种颜色，<code>1.0</code> 表示第二种颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color1</strong>
+									</td>
+									<td class="description last">
+										<p>第一种颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">color2</strong>
+									</td>
+									<td class="description last">
+										<p>第二种颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">alpha</strong>
+									</td>
+									<td class="description last">
+										<p>闭区间 <code>[0,1]</code> 内的插值因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lerpHSL" translate="no">.<a href="#lerpHSL">lerpHSL</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span>, alpha : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此颜色的 HSL 值向给定颜色的 HSL 值线性插值。它与
+<a href="Color.html#lerp">Color#lerp</a> 的不同之处在于：不是直接从一种颜色插值到另一种，
+而是经过两种颜色之间的所有色相。可将 alpha 参数理解为
+两种颜色之间的比例，其中 0.0 表示此颜色，1.0 表示第一个参数。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要趋近的颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">alpha</strong>
+									</td>
+									<td class="description last">
+										<p>闭区间 <code>[0,1]</code> 内的插值因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="multiply" translate="no">.<a href="#multiply">multiply</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定颜色的 RGB 值与此颜色的 RGB 值相乘。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要相乘的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="multiplyScalar" translate="no">.<a href="#multiplyScalar">multiplyScalar</a><span class="signature">( s : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定标量值与此颜色的 RGB 值相乘。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>要相乘的标量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="offsetHSL" translate="no">.<a href="#offsetHSL">offsetHSL</a><span class="signature">( h : <span class="param-type">number</span>, s : <span class="param-type">number</span>, l : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定 HSL 值加到此颜色的值上。
+内部会将颜色的 RGB 值转换为 HSL，加上 HSL，
+再转换回 RGB。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">h</strong>
+									</td>
+									<td class="description last">
+										<p>色相值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>饱和度值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">l</strong>
+									</td>
+									<td class="description last">
+										<p>亮度值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( r : <span class="param-type">number | string | <a href="Color.html">Color</a></span>, g : <span class="param-type">number</span>, b : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定值设置颜色的各分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">r</strong>
+									</td>
+									<td class="description last">
+										<p>颜色的红色分量。若未提供 <code>g</code> 和 <code>b</code>，
+则可以是十六进制三元组、CSS 风格字符串或另一个 <code>Color</code> 实例。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">g</strong>
+									</td>
+									<td class="description last">
+										<p>绿色分量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>蓝色分量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setColorName" translate="no">.<a href="#setColorName">setColorName</a><span class="signature">( style : <span class="param-type">string</span>, colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据颜色名称设置此颜色。若不需要其他 CSS 风格格式，
+则比 <a href="Color.html#setStyle">Color#setStyle</a> 更快。</p>
+<p>为方便起见，名称列表以哈希形式暴露在 <code>Color.NAMES</code> 中。</p>
+<pre><code class="language-js">Color.NAMES.aliceblue // returns 0xF0F8FF
+</code></pre>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">style</strong>
+									</td>
+									<td class="description last">
+										<p>颜色名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>SRGBColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFromVector3" translate="no">.<a href="#setFromVector3">setFromVector3</a><span class="signature">( v : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定三维向量设置颜色的 RGB 分量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setHSL" translate="no">.<a href="#setHSL">setHSL</a><span class="signature">( h : <span class="param-type">number</span>, s : <span class="param-type">number</span>, l : <span class="param-type">number</span>, colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据 HSL 值设置此颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">h</strong>
+									</td>
+									<td class="description last">
+										<p>色相值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>饱和度值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">l</strong>
+									</td>
+									<td class="description last">
+										<p>亮度值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>ColorManagement.workingColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setHex" translate="no">.<a href="#setHex">setHex</a><span class="signature">( hex : <span class="param-type">number</span>, colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据十六进制值设置此颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">hex</strong>
+									</td>
+									<td class="description last">
+										<p>十六进制值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>SRGBColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setRGB" translate="no">.<a href="#setRGB">setRGB</a><span class="signature">( r : <span class="param-type">number</span>, g : <span class="param-type">number</span>, b : <span class="param-type">number</span>, colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据 RGB 值设置此颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">r</strong>
+									</td>
+									<td class="description last">
+										<p>红色通道值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">g</strong>
+									</td>
+									<td class="description last">
+										<p>绿色通道值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>蓝色通道值，范围 <code>0.0</code> 到 <code>1.0</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>ColorManagement.workingColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setScalar" translate="no">.<a href="#setScalar">setScalar</a><span class="signature">( scalar : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将颜色的各分量设为给定标量值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scalar</strong>
+									</td>
+									<td class="description last">
+										<p>标量值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setStyle" translate="no">.<a href="#setStyle">setStyle</a><span class="signature">( style : <span class="param-type">string</span>, colorSpace : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据 CSS 风格字符串设置此颜色。例如 <code>rgb(250, 0,0)</code>、
+<code>rgb(100%, 0%, 0%)</code>、<code>hsl(0, 100%, 50%)</code>、<code>#ff0000</code>、<code>#f00</code> 或 <code>red</code>（或
+任意 <a href="https://en.wikipedia.org/wiki/X11_color_names#Color_name_chart" target="_blank" rel="noopener">X11 颜色名称</a>——
+全部 140 个颜色名称均受支持）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">style</strong>
+									</td>
+									<td class="description last">
+										<p>CSS 风格字符串形式的颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">colorSpace</strong>
+									</td>
+									<td class="description last">
+										<p>色彩空间。</p>
+										<p>默认值为 <code>SRGBColorSpace</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="sub" translate="no">.<a href="#sub">sub</a><span class="signature">( color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从此颜色的 RGB 值中减去给定颜色的 RGB 值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>要减去的颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toArray" translate="no">.<a href="#toArray">toArray</a><span class="signature">( array : <span class="param-type">Array.&lt;number></span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将此颜色的 RGB 分量写入给定数组。若未提供数组，
+则方法返回一个新实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>保存颜色分量的目标数组。</p>
+										<p>默认值为 <code>[]</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>数组中第一个元素的索引。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 颜色分量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法定义该类的序列化结果。以十六进制值形式返回颜色。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 十六进制值。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/math/Color.js" translate="no" target="_blank" rel="noopener">src/math/Color.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

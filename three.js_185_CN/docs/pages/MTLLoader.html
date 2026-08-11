@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>MTLLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">MTLLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载 MTL 格式的加载器。</p>
+<p>Material Template Library 格式（MTL）或 .MTL 文件格式是与 OBJ 配套的文件格式，
+用于描述一个或多个 OBJ 文件中对象的表面着色（材质）属性。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new MTLLoader();
+const materials = await loader.loadAsync( 'models/obj/male02/male02.mtl' );
+const objLoader = new OBJLoader();
+objLoader.setMaterials( materials );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">MTLLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="MTLLoader" translate="no">new <a href="#MTLLoader">MTLLoader</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的 MTL 资源
+传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( text : <span class="param-type">string</span>, path : <span class="param-type">string</span> )</span><span class="type-signature"> : MaterialCreator</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 MTL 数据并返回生成的材质创建器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">text</strong>
+									</td>
+									<td class="description last">
+										<p>原始 MTL 数据字符串。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>URL 基础路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 材质创建器。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setMaterialOptions" translate="no">.<a href="#setMaterialOptions">setMaterialOptions</a><span class="signature">( value : <span class="param-type"><a href="MTLLoader.html#~MaterialOptions">MTLLoader~MaterialOptions</a></span> )</span><span class="type-signature"> : <a href="MTLLoader.html">MTLLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置材质选项。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>材质选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~MaterialOptions" translate="no">.<a href="#~MaterialOptions">MaterialOptions</a> </h3>
+					<div class="description">
+						<p><code>MTLLoader</code> 的材质选项。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>side</strong>
+						<br>
+<span class="param-type"><a href="global.html#FrontSide">FrontSide</a></span>
+|
+<span class="param-type"><a href="global.html#BackSide">BackSide</a></span>
+|
+<span class="param-type"><a href="global.html#DoubleSide">DoubleSide</a></span>
+				</td>
+			<td class="description last">
+				<p>材质应用到哪一面。</p>
+						<p>默认值为 <code>FrontSide</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>wrap</strong>
+						<br>
+<span class="param-type"><a href="global.html#RepeatWrapping">RepeatWrapping</a></span>
+|
+<span class="param-type"><a href="global.html#ClampToEdgeWrapping">ClampToEdgeWrapping</a></span>
+|
+<span class="param-type"><a href="global.html#MirroredRepeatWrapping">MirroredRepeatWrapping</a></span>
+				</td>
+			<td class="description last">
+				<p>纹理使用的包裹类型。</p>
+						<p>默认值为 <code>RepeatWrapping</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>normalizeRGB</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否将 RGB 颜色从 <code>0-255</code> 归一化到 <code>0-1</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>ignoreZeroRGBs</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>忽略 RGB（Ka、Kd、Ks）全为 0 的值。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/MTLLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/MTLLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

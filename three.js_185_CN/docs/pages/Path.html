@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Path - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Curve.html">Curve</a> → <a href="CurvePath.html">CurvePath</a> → </p>
+	<h1 translate="no">Path</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>二维路径表示。该类提供创建路径及二维形状轮廓的方法，用法类似二维 Canvas API。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const path = new THREE.Path();
+path.lineTo( 0, 0.8 );
+path.quadraticCurveTo( 0, 1, 0.2, 1 );
+path.lineTo( 1, 1 );
+const points = path.getPoints();
+const geometry = new THREE.BufferGeometry().setFromPoints( points );
+const material = new THREE.LineBasicMaterial( { color: 0xffffff } );
+const line = new THREE.Line( geometry, material );
+scene.add( line );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Path" translate="no">new <a href="#Path">Path</a><span class="signature">( points : <span class="param-type">Array.&lt;<a href="Vector2.html">Vector2</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一条新路径。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>定义该路径的二维点数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="currentPoint" translate="no">.<a href="#currentPoint">currentPoint</a><span class="type-signature"> : <a href="Vector2.html">Vector2</a></span> </h3>
+					<div class="description">
+						<p>路径的当前偏移。任何新添加的曲线都将从此处开始。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="absarc" translate="no">.<a href="#absarc">absarc</a><span class="signature">( aX : <span class="param-type">number</span>, aY : <span class="param-type">number</span>, aRadius : <span class="param-type">number</span>, aStartAngle : <span class="param-type">number</span>, aEndAngle : <span class="param-type">number</span>, aClockwise : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向路径添加一条绝对定位的圆弧，类型为 <a href="EllipseCurve.html">EllipseCurve</a> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">aX</strong>
+									</td>
+									<td class="description last">
+										<p>圆弧中心的 x 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aY</strong>
+									</td>
+									<td class="description last">
+										<p>圆弧中心的 y 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aRadius</strong>
+									</td>
+									<td class="description last">
+										<p>圆弧半径。</p>
+										<p>默认值为 <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aStartAngle</strong>
+									</td>
+									<td class="description last">
+										<p>起始角度（弧度）。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aEndAngle</strong>
+									</td>
+									<td class="description last">
+										<p>结束角度（弧度）。</p>
+										<p>默认值为 <code>Math.PI*2</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aClockwise</strong>
+									</td>
+									<td class="description last">
+										<p>是否按顺时针方向扫过圆弧。</p>
+										<p>默认值为 <code>false</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="absellipse" translate="no">.<a href="#absellipse">absellipse</a><span class="signature">( aX : <span class="param-type">number</span>, aY : <span class="param-type">number</span>, xRadius : <span class="param-type">number</span>, yRadius : <span class="param-type">number</span>, aStartAngle : <span class="param-type">number</span>, aEndAngle : <span class="param-type">number</span>, aClockwise : <span class="param-type">boolean</span>, aRotation : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向路径添加一个绝对定位的椭圆，类型为 <a href="EllipseCurve.html">EllipseCurve</a> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">aX</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆绝对中心的 x 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aY</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆绝对中心的 y 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">xRadius</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆在 x 轴方向上的半径。</p>
+										<p>默认值为 <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">yRadius</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆在 y 轴方向上的半径。</p>
+										<p>默认值为 <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aStartAngle</strong>
+									</td>
+									<td class="description last">
+										<p>起始角度（弧度）。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aEndAngle</strong>
+									</td>
+									<td class="description last">
+										<p>结束角度（弧度）。</p>
+										<p>默认值为 <code>Math.PI*2</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aClockwise</strong>
+									</td>
+									<td class="description last">
+										<p>是否按顺时针方向扫过椭圆。</p>
+										<p>默认值为 <code>false</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aRotation</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆的旋转角度（弧度），从正 X 轴逆时针计量。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="arc" translate="no">.<a href="#arc">arc</a><span class="signature">( aX : <span class="param-type">number</span>, aY : <span class="param-type">number</span>, aRadius : <span class="param-type">number</span>, aStartAngle : <span class="param-type">number</span>, aEndAngle : <span class="param-type">number</span>, aClockwise : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向路径添加一条圆弧，类型为 <a href="EllipseCurve.html">EllipseCurve</a> 实例，相对于当前点定位。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">aX</strong>
+									</td>
+									<td class="description last">
+										<p>相对于上一条曲线偏移的圆弧中心 x 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aY</strong>
+									</td>
+									<td class="description last">
+										<p>相对于上一条曲线偏移的圆弧中心 y 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aRadius</strong>
+									</td>
+									<td class="description last">
+										<p>圆弧半径。</p>
+										<p>默认值为 <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aStartAngle</strong>
+									</td>
+									<td class="description last">
+										<p>起始角度（弧度）。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aEndAngle</strong>
+									</td>
+									<td class="description last">
+										<p>结束角度（弧度）。</p>
+										<p>默认值为 <code>Math.PI*2</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aClockwise</strong>
+									</td>
+									<td class="description last">
+										<p>是否按顺时针方向扫过圆弧。</p>
+										<p>默认值为 <code>false</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="bezierCurveTo" translate="no">.<a href="#bezierCurveTo">bezierCurveTo</a><span class="signature">( aCP1x : <span class="param-type">number</span>, aCP1y : <span class="param-type">number</span>, aCP2x : <span class="param-type">number</span>, aCP2y : <span class="param-type">number</span>, aX : <span class="param-type">number</span>, aY : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过连接当前点与给定点，向路径添加一个 <a href="CubicBezierCurve.html">CubicBezierCurve</a> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">aCP1x</strong>
+									</td>
+									<td class="description last">
+										<p>第一个控制点的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aCP1y</strong>
+									</td>
+									<td class="description last">
+										<p>第一个控制点的 y 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aCP2x</strong>
+									</td>
+									<td class="description last">
+										<p>第二个控制点的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aCP2y</strong>
+									</td>
+									<td class="description last">
+										<p>第二个控制点的 y 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aX</strong>
+									</td>
+									<td class="description last">
+										<p>终点的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aY</strong>
+									</td>
+									<td class="description last">
+										<p>终点的 y 坐标。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="ellipse" translate="no">.<a href="#ellipse">ellipse</a><span class="signature">( aX : <span class="param-type">number</span>, aY : <span class="param-type">number</span>, xRadius : <span class="param-type">number</span>, yRadius : <span class="param-type">number</span>, aStartAngle : <span class="param-type">number</span>, aEndAngle : <span class="param-type">number</span>, aClockwise : <span class="param-type">boolean</span>, aRotation : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向路径添加一个椭圆，类型为 <a href="EllipseCurve.html">EllipseCurve</a> 实例，相对于当前点定位</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">aX</strong>
+									</td>
+									<td class="description last">
+										<p>相对于上一条曲线偏移的椭圆中心 x 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aY</strong>
+									</td>
+									<td class="description last">
+										<p>相对于上一条曲线偏移的椭圆中心 y 坐标。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">xRadius</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆在 x 轴方向上的半径。</p>
+										<p>默认值为 <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">yRadius</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆在 y 轴方向上的半径。</p>
+										<p>默认值为 <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aStartAngle</strong>
+									</td>
+									<td class="description last">
+										<p>起始角度（弧度）。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aEndAngle</strong>
+									</td>
+									<td class="description last">
+										<p>结束角度（弧度）。</p>
+										<p>默认值为 <code>Math.PI*2</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aClockwise</strong>
+									</td>
+									<td class="description last">
+										<p>是否按顺时针方向扫过椭圆。</p>
+										<p>默认值为 <code>false</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aRotation</strong>
+									</td>
+									<td class="description last">
+										<p>椭圆的旋转角度（弧度），从正 X 轴逆时针计量。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lineTo" translate="no">.<a href="#lineTo">lineTo</a><span class="signature">( x : <span class="param-type">number</span>, y : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过连接当前点与给定点，向路径添加一个 <a href="LineCurve.html">LineCurve</a> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>终点的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>终点的 y 坐标。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="moveTo" translate="no">.<a href="#moveTo">moveTo</a><span class="signature">( x : <span class="param-type">number</span>, y : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将 <a href="Path.html#currentPoint">Path#currentPoint</a> 移动到给定点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>y 坐标。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="quadraticCurveTo" translate="no">.<a href="#quadraticCurveTo">quadraticCurveTo</a><span class="signature">( aCPx : <span class="param-type">number</span>, aCPy : <span class="param-type">number</span>, aX : <span class="param-type">number</span>, aY : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过连接当前点与给定点，向路径添加一个 <a href="QuadraticBezierCurve.html">QuadraticBezierCurve</a> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">aCPx</strong>
+									</td>
+									<td class="description last">
+										<p>控制点的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aCPy</strong>
+									</td>
+									<td class="description last">
+										<p>控制点的 y 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aX</strong>
+									</td>
+									<td class="description last">
+										<p>终点的 x 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">aY</strong>
+									</td>
+									<td class="description last">
+										<p>终点的 y 坐标。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFromPoints" translate="no">.<a href="#setFromPoints">setFromPoints</a><span class="signature">( points : <span class="param-type">Array.&lt;<a href="Vector2.html">Vector2</a>></span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的点列表创建路径。这些点将作为 <a href="LineCurve.html">LineCurve</a> 实例添加到路径中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>二维点数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="splineThru" translate="no">.<a href="#splineThru">splineThru</a><span class="signature">( pts : <span class="param-type">Array.&lt;<a href="Vector2.html">Vector2</a>></span> )</span><span class="type-signature"> : <a href="Path.html">Path</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过连接当前点与给定点列表，向路径添加一个 <a href="SplineCurve.html">SplineCurve</a> 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">pts</strong>
+									</td>
+									<td class="description last">
+										<p>二维空间中的点数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该路径的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/extras/core/Path.js" translate="no" target="_blank" rel="noopener">src/extras/core/Path.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

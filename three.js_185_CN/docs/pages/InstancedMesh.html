@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>InstancedMesh - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Mesh.html">Mesh</a> → </p>
+	<h1 translate="no">InstancedMesh</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>支持实例化渲染的特殊网格版本。如果你需要渲染大量
+具有相同几何体和材质、但世界变换不同的对象，请使用
+此类。使用 <code>InstancedMesh</code> 有助于减少绘制调用次数，从而
+提升应用的整体渲染性能。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="InstancedMesh" translate="no">new <a href="#InstancedMesh">InstancedMesh</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, material : <span class="param-type"><a href="Material.html">Material</a> | Array.&lt;<a href="Material.html">Material</a>></span>, count : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的实例化网格。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>网格几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>网格材质。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>实例数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="boundingBox" translate="no">.<a href="#boundingBox">boundingBox</a><span class="type-signature"> : <a href="Box3.html">Box3</a></span> </h3>
+					<div class="description">
+						<p>实例化网格的包围盒。可通过 <a href="InstancedMesh.html#computeBoundingBox">InstancedMesh#computeBoundingBox</a> 计算。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="boundingSphere" translate="no">.<a href="#boundingSphere">boundingSphere</a><span class="type-signature"> : <a href="Sphere.html">Sphere</a></span> </h3>
+					<div class="description">
+						<p>实例化网格的包围球。可通过 <a href="InstancedMesh.html#computeBoundingSphere">InstancedMesh#computeBoundingSphere</a> 计算。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="count" translate="no">.<a href="#count">count</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>实例数量。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Mesh.html#count">Mesh#count</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="instanceColor" translate="no">.<a href="#instanceColor">instanceColor</a><span class="type-signature"> : <a href="InstancedBufferAttribute.html">InstancedBufferAttribute</a></span> </h3>
+					<div class="description">
+						<p>表示所有实例的颜色。如果你通过
+<a href="InstancedMesh.html#setColorAt">InstancedMesh#setColorAt</a> 修改了实例数据，必须将其
+<a href="BufferAttribute.html#needsUpdate">BufferAttribute#needsUpdate</a> 标志设为 true。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="instanceMatrix" translate="no">.<a href="#instanceMatrix">instanceMatrix</a><span class="type-signature"> : <a href="InstancedBufferAttribute.html">InstancedBufferAttribute</a></span> </h3>
+					<div class="description">
+						<p>表示所有实例的局部变换。如果你通过
+<a href="InstancedMesh.html#setMatrixAt">InstancedMesh#setMatrixAt</a> 修改了实例数据，必须将其
+<a href="BufferAttribute.html#needsUpdate">BufferAttribute#needsUpdate</a> 标志设为 true。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isInstancedMesh" translate="no">.<a href="#isInstancedMesh">isInstancedMesh</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="morphTexture" translate="no">.<a href="#morphTexture">morphTexture</a><span class="type-signature"> : <a href="DataTexture.html">DataTexture</a></span> </h3>
+					<div class="description">
+						<p>表示所有实例的变形目标权重。如果你通过
+<a href="InstancedMesh.html#setMorphAt">InstancedMesh#setMorphAt</a> 修改了实例数据，必须将其
+<a href="Texture.html#needsUpdate">Texture#needsUpdate</a> 标志设为 true。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="computeBoundingBox" translate="no">.<a href="#computeBoundingBox">computeBoundingBox</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算实例化网格的包围盒，并更新 <a href="InstancedMesh.html#boundingBox">InstancedMesh#boundingBox</a>。
+引擎不会自动计算包围盒；你的应用必须调用此方法。
+如果通过 <a href="InstancedMesh.html#setMatrixAt">InstancedMesh#setMatrixAt</a> 变换了某个实例，可能需要重新计算包围盒。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="computeBoundingSphere" translate="no">.<a href="#computeBoundingSphere">computeBoundingSphere</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算实例化网格的包围球，并更新 <a href="InstancedMesh.html#boundingSphere">InstancedMesh#boundingSphere</a>。
+当需要时（例如用于光线投射或视锥体剔除），引擎会自动计算包围球。
+如果通过 <a href="InstancedMesh.html#setMatrixAt">InstancedMesh#setMatrixAt</a> 变换了某个实例，可能需要重新计算包围球。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放此实例所分配的 GPU 相关资源。当你的应用不再使用
+此实例时，请调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="getColorAt" translate="no">.<a href="#getColorAt">getColorAt</a><span class="signature">( index : <span class="param-type">number</span>, color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>获取指定实例的颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>实例索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 目标颜色的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMatrixAt" translate="no">.<a href="#getMatrixAt">getMatrixAt</a><span class="signature">( index : <span class="param-type">number</span>, matrix : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span><span class="type-signature"> : <a href="Matrix4.html">Matrix4</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>获取指定实例的局部变换矩阵。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>实例索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">matrix</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 目标矩阵的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMorphAt" translate="no">.<a href="#getMorphAt">getMorphAt</a><span class="signature">( index : <span class="param-type">number</span>, object : <span class="param-type"><a href="Mesh.html">Mesh</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>获取指定实例的变形目标权重。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>实例索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setColorAt" translate="no">.<a href="#setColorAt">setColorAt</a><span class="signature">( index : <span class="param-type">number</span>, color : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="InstancedMesh.html">InstancedMesh</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定颜色设置到指定实例。更新完所有颜色后，请确保将
+<a href="InstancedMesh.html#instanceColor">InstancedMesh#instanceColor</a> 的 <code>needsUpdate</code> 标志设为 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>实例索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>实例颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例化网格的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setMatrixAt" translate="no">.<a href="#setMatrixAt">setMatrixAt</a><span class="signature">( index : <span class="param-type">number</span>, matrix : <span class="param-type"><a href="Matrix4.html">Matrix4</a></span> )</span><span class="type-signature"> : <a href="InstancedMesh.html">InstancedMesh</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定局部变换矩阵设置到指定实例。更新完所有矩阵后，请确保将
+<a href="InstancedMesh.html#instanceMatrix">InstancedMesh#instanceMatrix</a> 的 <code>needsUpdate</code> 标志设为 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>实例索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">matrix</strong>
+									</td>
+									<td class="description last">
+										<p>局部变换。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例化网格的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setMorphAt" translate="no">.<a href="#setMorphAt">setMorphAt</a><span class="signature">( index : <span class="param-type">number</span>, object : <span class="param-type"><a href="Mesh.html">Mesh</a></span> )</span><span class="type-signature"> : <a href="InstancedMesh.html">InstancedMesh</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将变形目标权重设置到指定实例。更新完所有影响权重后，请确保将
+<a href="InstancedMesh.html#morphTexture">InstancedMesh#morphTexture</a> 的 <code>needsUpdate</code> 标志设为 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>实例索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>一个网格，其 <code>morphTargetInfluences</code> 属性包含单个实例的变形目标权重。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例化网格的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/objects/InstancedMesh.js" translate="no" target="_blank" rel="noopener">src/objects/InstancedMesh.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

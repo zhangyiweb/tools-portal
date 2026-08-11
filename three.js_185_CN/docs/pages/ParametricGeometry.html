@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ParametricGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="BufferGeometry.html">BufferGeometry</a> → </p>
+	<h1 translate="no">ParametricGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类可用于基于参数曲面生成几何体。</p>
+<p>参考：<a href="https://prideout.net/blog/old/blog/index.html@p=44.html" target="_blank" rel="noopener">Mesh Generation with Python</a></p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const geometry = new THREE.ParametricGeometry( klein, 25, 25 );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const klein = new THREE.Mesh( geometry, material );
+scene.add( klein );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ParametricGeometry</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { ParametricGeometry } from 'three/addons/geometries/ParametricGeometry.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ParametricGeometry" translate="no">new <a href="#ParametricGeometry">ParametricGeometry</a><span class="signature">( func : <span class="param-type"><a href="ParametricGeometry.html#~Func">ParametricGeometry~Func</a></span>, slices : <span class="param-type">number</span>, stacks : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的参数化几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">func</strong>
+									</td>
+									<td class="description last">
+										<p>参数函数。默认为生成弯曲平面的函数。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">slices</strong>
+									</td>
+									<td class="description last">
+										<p>参数函数使用的切片数量。</p>
+										<p>默认值为 <code>8</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">stacks</strong>
+									</td>
+									<td class="description last">
+										<p>参数函数使用的堆叠数量。</p>
+										<p>默认值为 <code>8</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="parameters" translate="no">.<a href="#parameters">parameters</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>保存用于生成该几何体的构造函数参数。实例化后的任何修改都不会改变几何体。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">类型定义</h2>
+					<h3 class="name name-method" id="~Func" translate="no">.<a href="#~Func">Func</a><span class="signature">( u : <span class="param-type">number</span>, v : <span class="param-type">number</span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p><code>ParametricGeometry</code> 的参数函数定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">u</strong>
+									</td>
+									<td class="description last">
+										<p>曲面上范围为 <code>[0,1]</code> 的 <code>u</code> 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v</strong>
+									</td>
+									<td class="description last">
+										<p>曲面上范围为 <code>[0,1]</code> 的 <code>v</code> 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/geometries/ParametricGeometry.js" translate="no" target="_blank" rel="noopener">examples/jsm/geometries/ParametricGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SortUtils - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">SortUtils</h1>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">SortUtils</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import * as SortUtils from 'three/addons/utils/SortUtils.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".radixSort" translate="no">.<a href="#.radixSort">radixSort</a><span class="signature">( arr : <span class="param-type">Array.&lt;Object></span>, opt : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>混合基数排序，来源：</p>
+<ul>
+<li><a href="https://gist.github.com/sciecode/93ed864dd77c5c8803c6a86698d68dab" target="_blank" rel="noopener">https://gist.github.com/sciecode/93ed864dd77c5c8803c6a86698d68dab</a></li>
+<li><a href="https://github.com/mrdoob/three.js/pull/27202#issuecomment-1817640271" target="_blank" rel="noopener">https://github.com/mrdoob/three.js/pull/27202#issuecomment-1817640271</a></li>
+</ul>
+<p>期望无符号 32 位整数值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">arr</strong>
+									</td>
+									<td class="description last">
+										<p>要排序的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">opt</strong>
+									</td>
+									<td class="description last">
+										<p>选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/SortUtils.js" translate="no" target="_blank" rel="noopener">examples/jsm/utils/SortUtils.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

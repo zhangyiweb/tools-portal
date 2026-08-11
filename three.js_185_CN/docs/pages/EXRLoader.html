@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>EXRLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → <a href="DataTextureLoader.html">DataTextureLoader</a> → </p>
+	<h1 translate="no">EXRLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>OpenEXR 纹理格式的加载器。</p>
+<p><code>EXRLoader</code> 目前支持未压缩、ZIP(S)、RLE、PIZ、B44/A 和 DWA/B 压缩。
+支持以 UnsignedByte、HalfFloat 和 Float 类型读取数据纹理。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new EXRLoader();
+const texture = await loader.loadAsync( 'textures/memorial.exr' );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">EXRLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="EXRLoader" translate="no">new <a href="#EXRLoader">EXRLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 EXR 加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="outputFormat" translate="no">.<a href="#outputFormat">outputFormat</a><span class="type-signature"> : <a href="global.html#RGBAFormat">RGBAFormat</a> | <a href="global.html#RGFormat">RGFormat</a> | <a href="global.html#RedFormat">RedFormat</a></span> </h3>
+					<div class="description">
+						<p>纹理输出格式。</p>
+						<p>默认值为 <code>RGBAFormat</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="part" translate="no">.<a href="#part">part</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>对于多部分 EXR 文件，要加载的部分索引。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="type" translate="no">.<a href="#type">type</a><span class="type-signature"> : <a href="global.html#HalfFloatType">HalfFloatType</a> | <a href="global.html#FloatType">FloatType</a></span> </h3>
+					<div class="description">
+						<p>纹理类型。</p>
+						<p>默认值为 <code>HalfFloatType</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( buffer : <span class="param-type">ArrayBuffer</span> )</span><span class="type-signature"> : <a href="DataTextureLoader.html#~TexData">DataTextureLoader~TexData</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 EXR 纹理数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">buffer</strong>
+									</td>
+									<td class="description last">
+										<p>原始纹理数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="DataTextureLoader.html#parse">DataTextureLoader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示已解析纹理数据的对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setDataType" translate="no">.<a href="#setDataType">setDataType</a><span class="signature">( value : <span class="param-type"><a href="global.html#HalfFloatType">HalfFloatType</a> | <a href="global.html#FloatType">FloatType</a></span> )</span><span class="type-signature"> : <a href="EXRLoader.html">EXRLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置纹理类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的纹理类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setOutputFormat" translate="no">.<a href="#setOutputFormat">setOutputFormat</a><span class="signature">( value : <span class="param-type"><a href="global.html#RGBAFormat">RGBAFormat</a> | <a href="global.html#RGFormat">RGFormat</a> | <a href="global.html#RedFormat">RedFormat</a></span> )</span><span class="type-signature"> : <a href="EXRLoader.html">EXRLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置纹理输出格式。默认为 <code>RGBAFormat</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>纹理输出格式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setPart" translate="no">.<a href="#setPart">setPart</a><span class="signature">( value : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="EXRLoader.html">EXRLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>对于多部分 EXR 文件，设置要加载的部分。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的部分索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/EXRLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/EXRLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

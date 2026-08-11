@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>InstancedFlow - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Flow.html">Flow</a> → </p>
+	<h1 translate="no">InstancedFlow</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><a href="Flow.html">Flow</a> 的实例化版本，用于使网格沿曲线弯曲，其中实例沿曲线放置。</p>
+<p>此模块只能与 <a href="WebGLRenderer.html">WebGLRenderer</a> 一起使用。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">InstancedFlow</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { InstancedFlow } from 'three/addons/modifiers/CurveModifier.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="InstancedFlow" translate="no">new <a href="#InstancedFlow">InstancedFlow</a><span class="signature">( count : <span class="param-type">number</span>, curveCount : <span class="param-type">number</span>, geometry : <span class="param-type">Geometry</span>, material : <span class="param-type"><a href="Material.html">Material</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 InstancedFlow 实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>实例化元素的数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">curveCount</strong>
+									</td>
+									<td class="description last">
+										<p>应预分配的曲线数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>用于实例化网格的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>用于实例化网格的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">类</h2>
+				<dl>
+					<dt><a href="InstancedFlow.html">InstancedFlow</a></dt>
+					<dd></dd>
+				</dl>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="moveIndividualAlongCurve" translate="no">.<a href="#moveIndividualAlongCurve">moveIndividualAlongCurve</a><span class="signature">( index : <span class="param-type">number</span>, offset : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将单个元素沿曲线移动指定的量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的元素。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>偏移量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setCurve" translate="no">.<a href="#setCurve">setCurve</a><span class="signature">( index : <span class="param-type">number</span>, curveNo : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>选择某个元素应使用的曲线。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的实例化元素的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">curveNo</strong>
+									</td>
+									<td class="description last">
+										<p>该元素应使用的曲线索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="writeChanges" translate="no">.<a href="#writeChanges">writeChanges</a><span class="signature">( index : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>关于使用哪条曲线以及在曲线上位置的额外信息，存储在实例化对象矩阵的平移分量中。
+此方法将这些信息写入矩阵，并将其标记为需要更新。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>要更新的实例化元素的索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/modifiers/CurveModifier.js" translate="no" target="_blank" rel="noopener">examples/jsm/modifiers/CurveModifier.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

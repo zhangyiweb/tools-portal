@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SphericalHarmonics3 - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">SphericalHarmonics3</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示三阶球谐函数（SH）。光照探针使用此类
+来编码光照信息。</p>
+<ul>
+<li>主要参考：<a href="https://graphics.stanford.edu/papers/envmap/envmap.pdf" target="_blank" rel="noopener">https://graphics.stanford.edu/papers/envmap/envmap.pdf</a></li>
+<li>次要参考：<a href="https://www.ppsloan.org/publications/StupidSH36.pdf" target="_blank" rel="noopener">https://www.ppsloan.org/publications/StupidSH36.pdf</a></li>
+</ul></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SphericalHarmonics3" translate="no">new <a href="#SphericalHarmonics3">SphericalHarmonics3</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的球谐函数。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="coefficients" translate="no">.<a href="#coefficients">coefficients</a><span class="type-signature"> : Array.&lt;<a href="Vector3.html">Vector3</a>></span> </h3>
+					<div class="description">
+						<p>保存（9 个）SH 系数的数组。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isSphericalHarmonics3" translate="no">.<a href="#isSphericalHarmonics3">isSphericalHarmonics3</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="add" translate="no">.<a href="#add">add</a><span class="signature">( sh : <span class="param-type"><a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> )</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定的 SH 加到本实例上。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sh</strong>
+									</td>
+									<td class="description last">
+										<p>要相加的 SH。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此球谐函数的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addScaledSH" translate="no">.<a href="#addScaledSH">addScaledSH</a><span class="signature">( sh : <span class="param-type"><a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span>, s : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>便捷方法，可一次执行 <a href="SphericalHarmonics3.html#add">SphericalHarmonics3#add</a> 和
+<a href="SphericalHarmonics3.html#scale">SphericalHarmonics3#scale</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sh</strong>
+									</td>
+									<td class="description last">
+										<p>要相加的 SH。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>缩放因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此球谐函数的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个新球谐函数，其值从本实例复制而来。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 本实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( sh : <span class="param-type"><a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> )</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定球谐函数的值复制到本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sh</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的球谐函数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此球谐函数的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="equals" translate="no">.<a href="#equals">equals</a><span class="signature">( sh : <span class="param-type"><a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此球谐函数与给定球谐函数相等，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sh</strong>
+									</td>
+									<td class="description last">
+										<p>要测试相等性的球谐函数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此球谐函数是否与给定球谐函数相等。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="fromArray" translate="no">.<a href="#fromArray">fromArray</a><span class="signature">( array : <span class="param-type">Array.&lt;number></span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定数组设置本实例的 SH 系数。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>保存 SH 系数的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>开始复制的数组偏移量。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 本实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getAt" translate="no">.<a href="#getAt">getAt</a><span class="signature">( normal : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定法线方向上的辐射度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">normal</strong>
+									</td>
+									<td class="description last">
+										<p>法线向量（假定为单位长度）</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 辐射度。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getIrradianceAt" translate="no">.<a href="#getIrradianceAt">getIrradianceAt</a><span class="signature">( normal : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定法线方向上的辐照度（辐射度与余弦瓣卷积的结果）。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">normal</strong>
+									</td>
+									<td class="description last">
+										<p>法线向量（假定为单位长度）</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 辐照度。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="lerp" translate="no">.<a href="#lerp">lerp</a><span class="signature">( sh : <span class="param-type"><a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span>, alpha : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>按给定的 alpha 因子，在给定 SH 与本实例之间进行线性插值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">sh</strong>
+									</td>
+									<td class="description last">
+										<p>用于插值的 SH。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">alpha</strong>
+									</td>
+									<td class="description last">
+										<p>alpha 因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此球谐函数的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="scale" translate="no">.<a href="#scale">scale</a><span class="signature">( s : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>按给定缩放因子缩放此 SH。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">s</strong>
+									</td>
+									<td class="description last">
+										<p>缩放因子。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此球谐函数的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( coefficients : <span class="param-type">Array.&lt;<a href="Vector3.html">Vector3</a>></span> )</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过复制给定值，将给定的 SH 系数设置到本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">coefficients</strong>
+									</td>
+									<td class="description last">
+										<p>SH 系数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此球谐函数的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="toArray" translate="no">.<a href="#toArray">toArray</a><span class="signature">( array : <span class="param-type">Array.&lt;number></span>, offset : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;number></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回包含 SH 系数的数组，或将其复制到提供的数组中。
+系数以数字形式表示。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>目标数组。</p>
+										<p>默认值为 <code>[]</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">offset</strong>
+									</td>
+									<td class="description last">
+										<p>开始复制的数组偏移量。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含扁平化 SH 系数的数组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="zero" translate="no">.<a href="#zero">zero</a><span class="signature">()</span><span class="type-signature"> : <a href="SphericalHarmonics3.html">SphericalHarmonics3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将所有 SH 系数设为 <code>0</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此球谐函数的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".getBasisAt" translate="no">.<a href="#.getBasisAt">getBasisAt</a><span class="signature">( normal : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, shBasis : <span class="param-type">Array.&lt;number></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算给定法线向量的 SH 基。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">normal</strong>
+									</td>
+									<td class="description last">
+										<p>法线。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shBasis</strong>
+									</td>
+									<td class="description last">
+										<p>保存 SH 基的目标数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/math/SphericalHarmonics3.js" translate="no" target="_blank" rel="noopener">src/math/SphericalHarmonics3.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

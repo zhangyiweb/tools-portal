@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Data3DTexture - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Texture.html">Texture</a> → </p>
+	<h1 translate="no">Data3DTexture</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>从原始数据创建三维纹理，并可通过参数将其划分为
+宽度、高度与深度。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Data3DTexture" translate="no">new <a href="#Data3DTexture">Data3DTexture</a><span class="signature">( data : <span class="param-type">TypedArray</span>, width : <span class="param-type">number</span>, height : <span class="param-type">number</span>, depth : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的数据数组纹理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲区数据。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>纹理的宽度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>纹理的高度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depth</strong>
+									</td>
+									<td class="description last">
+										<p>纹理的深度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="flipY" translate="no">.<a href="#flipY">flipY</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设为 <code>true</code>，纹理在上传到 GPU 时会沿垂直轴翻转。</p>
+<p>已覆盖并默认设为 <code>false</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Texture.html#flipY">Texture#flipY</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="generateMipmaps" translate="no">.<a href="#generateMipmaps">generateMipmaps</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否为纹理生成 mipmap（若可能）。</p>
+<p>已覆盖并默认设为 <code>false</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Texture.html#generateMipmaps">Texture#generateMipmaps</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="image" translate="no">.<a href="#image">image</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>数据纹理的图像定义。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Texture.html#image">Texture#image</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isData3DTexture" translate="no">.<a href="#isData3DTexture">isData3DTexture</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="magFilter" translate="no">.<a href="#magFilter">magFilter</a><span class="type-signature"> : <a href="global.html#NearestFilter">NearestFilter</a> | <a href="global.html#NearestMipmapNearestFilter">NearestMipmapNearestFilter</a> | <a href="global.html#NearestMipmapLinearFilter">NearestMipmapLinearFilter</a> | <a href="global.html#LinearFilter">LinearFilter</a> | <a href="global.html#LinearMipmapNearestFilter">LinearMipmapNearestFilter</a> | <a href="global.html#LinearMipmapLinearFilter">LinearMipmapLinearFilter</a></span> </h3>
+					<div class="description">
+						<p>当一个纹素覆盖多于一个像素时，纹理的采样方式。</p>
+<p>已覆盖并默认设为 <code>NearestFilter</code>。</p>
+						<p>默认值为 <code>NearestFilter</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Texture.html#magFilter">Texture#magFilter</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="minFilter" translate="no">.<a href="#minFilter">minFilter</a><span class="type-signature"> : <a href="global.html#NearestFilter">NearestFilter</a> | <a href="global.html#NearestMipmapNearestFilter">NearestMipmapNearestFilter</a> | <a href="global.html#NearestMipmapLinearFilter">NearestMipmapLinearFilter</a> | <a href="global.html#LinearFilter">LinearFilter</a> | <a href="global.html#LinearMipmapNearestFilter">LinearMipmapNearestFilter</a> | <a href="global.html#LinearMipmapLinearFilter">LinearMipmapLinearFilter</a></span> </h3>
+					<div class="description">
+						<p>当一个纹素覆盖少于一个像素时，纹理的采样方式。</p>
+<p>已覆盖并默认设为 <code>NearestFilter</code>。</p>
+						<p>默认值为 <code>NearestFilter</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Texture.html#minFilter">Texture#minFilter</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="unpackAlignment" translate="no">.<a href="#unpackAlignment">unpackAlignment</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>指定内存中每行像素起始位置的对齐要求。</p>
+<p>已覆盖并默认设为 <code>1</code>。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Texture.html#unpackAlignment">Texture#unpackAlignment</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="wrapR" translate="no">.<a href="#wrapR">wrapR</a><span class="type-signature"> : <a href="global.html#RepeatWrapping">RepeatWrapping</a> | <a href="global.html#ClampToEdgeWrapping">ClampToEdgeWrapping</a> | <a href="global.html#MirroredRepeatWrapping">MirroredRepeatWrapping</a></span> </h3>
+					<div class="description">
+						<p>定义纹理在深度方向上的包裹方式，对应 UVW 映射中的
+<em>W</em>。</p>
+						<p>默认值为 <code>ClampToEdgeWrapping</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/textures/Data3DTexture.js" translate="no" target="_blank" rel="noopener">src/textures/Data3DTexture.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

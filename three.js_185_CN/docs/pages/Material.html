@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Material - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → </p>
+	<h1 translate="no">Material</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>材质的抽象基类。</p>
+<p>材质定义可渲染 3D 对象的外观。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Material" translate="no">new <a href="#Material">Material</a><span class="signature">()</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新材质。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="allowOverride" translate="no">.<a href="#allowOverride">allowOverride</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否允许用 <a href="Scene.html#overrideMaterial">Scene#overrideMaterial</a> 覆盖此材质。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="alphaHash" translate="no">.<a href="#alphaHash">alphaHash</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>启用 alpha 哈希透明度，作为 <a href="Material.html#transparent">Material#transparent</a> 或
+<a href="Material.html#alphaTest">Material#alphaTest</a> 的替代方案。若不透明度低于
+随机阈值，则不会渲染该材质。随机化会引入一些颗粒或噪点，但可近似实现 alpha
+混合，同时避免排序相关问题。使用 TAA 可减少由此产生的噪点。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="alphaTest" translate="no">.<a href="#alphaTest">alphaTest</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>设置运行 alpha 测试时使用的 alpha 值。若不透明度
+低于此值，则不会渲染该材质。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="alphaToCoverage" translate="no">.<a href="#alphaToCoverage">alphaToCoverage</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否应启用 alpha to coverage。仅可在启用 MSAA 的上下文中使用
+（即创建渲染器时将 <em>antialias</em> 参数设为 <code>true</code>）。启用后
+可平滑裁剪平面边缘以及经 alphaTest 裁剪的边缘锯齿。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendAlpha" translate="no">.<a href="#blendAlpha">blendAlpha</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>表示常量混合颜色的 alpha 值。</p>
+<p>仅在使用自定义混合且混合因子为 <code>ConstantAlpha</code> 或 <code>OneMinusConstantAlpha</code> 时生效。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendColor" translate="no">.<a href="#blendColor">blendColor</a><span class="type-signature"> : <a href="Color.html">Color</a></span> </h3>
+					<div class="description">
+						<p>表示常量混合颜色的 RGB 值。</p>
+<p>仅在使用自定义混合且混合因子为 <code>ConstantColor</code> 或 <code>OneMinusConstantColor</code> 时生效。</p>
+						<p>默认值为 <code>(0,0,0)</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendDst" translate="no">.<a href="#blendDst">blendDst</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合目标因子。</p>
+						<p>默认值为 <code>OneMinusSrcAlphaFactor</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendDstAlpha" translate="no">.<a href="#blendDstAlpha">blendDstAlpha</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合目标 alpha 因子。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendEquation" translate="no">.<a href="#blendEquation">blendEquation</a><span class="type-signature"> : <a href="global.html#AddEquation">AddEquation</a> | <a href="global.html#SubtractEquation">SubtractEquation</a> | <a href="global.html#ReverseSubtractEquation">ReverseSubtractEquation</a> | <a href="global.html#MinEquation">MinEquation</a> | <a href="global.html#MaxEquation">MaxEquation</a></span> </h3>
+					<div class="description">
+						<p>定义混合方程。</p>
+						<p>默认值为 <code>AddEquation</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendEquationAlpha" translate="no">.<a href="#blendEquationAlpha">blendEquationAlpha</a><span class="type-signature"> : <a href="global.html#AddEquation">AddEquation</a> | <a href="global.html#SubtractEquation">SubtractEquation</a> | <a href="global.html#ReverseSubtractEquation">ReverseSubtractEquation</a> | <a href="global.html#MinEquation">MinEquation</a> | <a href="global.html#MaxEquation">MaxEquation</a></span> </h3>
+					<div class="description">
+						<p>定义 alpha 通道的混合方程。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendSrc" translate="no">.<a href="#blendSrc">blendSrc</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合源因子。</p>
+						<p>默认值为 <code>SrcAlphaFactor</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blendSrcAlpha" translate="no">.<a href="#blendSrcAlpha">blendSrcAlpha</a><span class="type-signature"> : <a href="global.html#ZeroFactor">ZeroFactor</a> | <a href="global.html#OneFactor">OneFactor</a> | <a href="global.html#SrcColorFactor">SrcColorFactor</a> | <a href="global.html#OneMinusSrcColorFactor">OneMinusSrcColorFactor</a> | <a href="global.html#SrcAlphaFactor">SrcAlphaFactor</a> | <a href="global.html#OneMinusSrcAlphaFactor">OneMinusSrcAlphaFactor</a> | <a href="global.html#DstAlphaFactor">DstAlphaFactor</a> | <a href="global.html#OneMinusDstAlphaFactor">OneMinusDstAlphaFactor</a> | <a href="global.html#DstColorFactor">DstColorFactor</a> | <a href="global.html#OneMinusDstColorFactor">OneMinusDstColorFactor</a> | <a href="global.html#SrcAlphaSaturateFactor">SrcAlphaSaturateFactor</a> | <a href="global.html#ConstantColorFactor">ConstantColorFactor</a> | <a href="global.html#OneMinusConstantColorFactor">OneMinusConstantColorFactor</a> | <a href="global.html#ConstantAlphaFactor">ConstantAlphaFactor</a> | <a href="global.html#OneMinusConstantAlphaFactor">OneMinusConstantAlphaFactor</a></span> </h3>
+					<div class="description">
+						<p>定义混合源 alpha 因子。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="blending" translate="no">.<a href="#blending">blending</a><span class="type-signature"> : <a href="global.html#NoBlending">NoBlending</a> | <a href="global.html#NormalBlending">NormalBlending</a> | <a href="global.html#AdditiveBlending">AdditiveBlending</a> | <a href="global.html#SubtractiveBlending">SubtractiveBlending</a> | <a href="global.html#MultiplyBlending">MultiplyBlending</a> | <a href="global.html#CustomBlending">CustomBlending</a></span> </h3>
+					<div class="description">
+						<p>定义材质的混合类型。</p>
+<p>若要使 <a href="Material.html#blendSrc">Material#blendSrc</a>、<a href="Material.html#blendDst">Material#blendDst</a> 或 <a href="Material.html#blendEquation">Material#blendEquation</a>
+等自定义混合属性生效，必须将其设为 <code>CustomBlending</code>。</p>
+						<p>默认值为 <code>NormalBlending</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clipIntersection" translate="no">.<a href="#clipIntersection">clipIntersection</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>改变裁剪平面的行为，使裁剪的是它们的交集，
+而非并集。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clipShadows" translate="no">.<a href="#clipShadows">clipShadows</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>定义是否根据此材质上指定的裁剪平面
+裁剪阴影。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clippingPlanes" translate="no">.<a href="#clippingPlanes">clippingPlanes</a><span class="type-signature"> : Array.&lt;<a href="Plane.html">Plane</a>></span> </h3>
+					<div class="description">
+						<p>用户定义的裁剪平面，以世界空间中的 THREE.Plane 对象指定。
+这些平面作用于使用此材质的对象。
+到平面的有符号距离为负的空间点会被裁剪
+（不渲染）。这需要 <a href="WebGLRenderer.html#localClippingEnabled">WebGLRenderer#localClippingEnabled</a>
+为 <code>true</code>。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="colorWrite" translate="no">.<a href="#colorWrite">colorWrite</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否渲染材质颜色。</p>
+<p>可与 Object3D#renderOder 结合使用，以创建遮挡其他对象的不可见对象。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthFunc" translate="no">.<a href="#depthFunc">depthFunc</a><span class="type-signature"> : <a href="global.html#NeverDepth">NeverDepth</a> | <a href="global.html#AlwaysDepth">AlwaysDepth</a> | <a href="global.html#LessDepth">LessDepth</a> | <a href="global.html#LessEqualDepth">LessEqualDepth</a> | <a href="global.html#EqualDepth">EqualDepth</a> | <a href="global.html#GreaterEqualDepth">GreaterEqualDepth</a> | <a href="global.html#GreaterDepth">GreaterDepth</a> | <a href="global.html#NotEqualDepth">NotEqualDepth</a></span> </h3>
+					<div class="description">
+						<p>定义深度函数。</p>
+						<p>默认值为 <code>LessEqualDepth</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthTest" translate="no">.<a href="#depthTest">depthTest</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>渲染此材质时是否启用深度测试。
+禁用深度测试时，深度写入也会被隐式禁用。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="depthWrite" translate="no">.<a href="#depthWrite">depthWrite</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>渲染此材质是否对深度缓冲产生影响。</p>
+<p>绘制 2D 叠加层时，禁用深度写入可能很有用，
+以便将多层内容叠在一起而不产生 z-index 伪影。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="dithering" translate="no">.<a href="#dithering">dithering</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否对颜色应用抖动，以消除色带感。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="forceSinglePass" translate="no">.<a href="#forceSinglePass">forceSinglePass</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>双面透明对象是否应单次通道渲染。</p>
+<p>引擎默认以两次绘制调用渲染双面透明对象（先背面，
+后正面），以减轻透明度伪影。但在某些场景下，
+这种方法不会提升质量，却会使绘制调用翻倍，例如渲染扁平
+植被（如草地精灵）时。在这些情况下，可将 <code>forceSinglePass</code> 标志设为 <code>true</code>，
+以禁用双通道渲染，避免性能问题。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="id" translate="no">.<a href="#id">id</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>材质的 ID。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isMaterial" translate="no">.<a href="#isMaterial">isMaterial</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="name" translate="no">.<a href="#name">name</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>材质名称。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="needsUpdate" translate="no">.<a href="#needsUpdate">needsUpdate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>将此属性设为 <code>true</code> 表示引擎需要重新编译该材质。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="opacity" translate="no">.<a href="#opacity">opacity</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>定义材质的透明程度。
+<code>0.0</code> 表示完全透明，<code>1.0</code> 表示完全不透明。</p>
+<p>若 <a href="Material.html#transparent">Material#transparent</a> 未设为 <code>true</code>，
+材质将保持完全不透明，此值仅影响其颜色。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="polygonOffset" translate="no">.<a href="#polygonOffset">polygonOffset</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否使用多边形偏移。启用后，每个片元的深度值在从相应顶点的深度值插值后会被偏移。
+偏移在执行深度测试之前、将值写入深度缓冲之前添加。</p>
+<p>可用于渲染隐藏线图像、在表面贴贴花，以及渲染带高亮边缘的实体。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="polygonOffsetFactor" translate="no">.<a href="#polygonOffsetFactor">polygonOffsetFactor</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>指定用于为每个多边形创建可变深度偏移的比例因子。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="polygonOffsetUnits" translate="no">.<a href="#polygonOffsetUnits">polygonOffsetUnits</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>与实现相关的值相乘，以创建恒定深度偏移。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="precision" translate="no">.<a href="#precision">precision</a><span class="type-signature"> : 'highp' | 'mediump' | 'lowp'</span> </h3>
+					<div class="description">
+						<p>覆盖渲染器对此材质的默认精度。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="premultipliedAlpha" translate="no">.<a href="#premultipliedAlpha">premultipliedAlpha</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否预乘 alpha（透明度）值。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="shadowSide" translate="no">.<a href="#shadowSide">shadowSide</a><span class="type-signature"> : <a href="global.html#FrontSide">FrontSide</a> | <a href="global.html#BackSide">BackSide</a> | <a href="global.html#DoubleSide">DoubleSide</a></span> </h3>
+					<div class="description">
+						<p>定义哪一面投射阴影。若为 <code>null</code>，投射阴影的面按如下规则确定：</p>
+<ul>
+<li>当 <a href="Material.html#side">Material#side</a> 设为 <code>FrontSide</code> 时，背面投射阴影。</li>
+<li>当 <a href="Material.html#side">Material#side</a> 设为 <code>BackSide</code> 时，正面投射阴影。</li>
+<li>当 <a href="Material.html#side">Material#side</a> 设为 <code>DoubleSide</code> 时，双面均投射阴影。</li>
+</ul>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="side" translate="no">.<a href="#side">side</a><span class="type-signature"> : <a href="global.html#FrontSide">FrontSide</a> | <a href="global.html#BackSide">BackSide</a> | <a href="global.html#DoubleSide">DoubleSide</a></span> </h3>
+					<div class="description">
+						<p>定义渲染哪一面——正面、背面或双面。</p>
+						<p>默认值为 <code>FrontSide</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilFail" translate="no">.<a href="#stencilFail">stencilFail</a><span class="type-signature"> : <a href="global.html#ZeroStencilOp">ZeroStencilOp</a> | <a href="global.html#KeepStencilOp">KeepStencilOp</a> | <a href="global.html#ReplaceStencilOp">ReplaceStencilOp</a> | <a href="global.html#IncrementStencilOp">IncrementStencilOp</a> | <a href="global.html#DecrementStencilOp">DecrementStencilOp</a> | <a href="global.html#IncrementWrapStencilOp">IncrementWrapStencilOp</a> | <a href="global.html#DecrementWrapStencilOp">DecrementWrapStencilOp</a> | <a href="global.html#InvertStencilOp">InvertStencilOp</a></span> </h3>
+					<div class="description">
+						<p>当比较函数返回 <code>false</code> 时执行的模板操作。</p>
+						<p>默认值为 <code>KeepStencilOp</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilFunc" translate="no">.<a href="#stencilFunc">stencilFunc</a><span class="type-signature"> : <a href="global.html#NeverStencilFunc">NeverStencilFunc</a> | <a href="global.html#LessStencilFunc">LessStencilFunc</a> | <a href="global.html#EqualStencilFunc">EqualStencilFunc</a> | <a href="global.html#LessEqualStencilFunc">LessEqualStencilFunc</a> | <a href="global.html#GreaterStencilFunc">GreaterStencilFunc</a> | <a href="global.html#NotEqualStencilFunc">NotEqualStencilFunc</a> | <a href="global.html#GreaterEqualStencilFunc">GreaterEqualStencilFunc</a> | <a href="global.html#AlwaysStencilFunc">AlwaysStencilFunc</a></span> </h3>
+					<div class="description">
+						<p>要使用的模板比较函数。</p>
+						<p>默认值为 <code>AlwaysStencilFunc</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilFuncMask" translate="no">.<a href="#stencilFuncMask">stencilFuncMask</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>与模板缓冲比较时使用的位掩码。</p>
+						<p>默认值为 <code>0xff</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilRef" translate="no">.<a href="#stencilRef">stencilRef</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>执行模板比较或模板操作时使用的值。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilWrite" translate="no">.<a href="#stencilWrite">stencilWrite</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否对模板缓冲执行模板操作。要对模板缓冲进行写入或比较，
+此值必须为 <code>true</code>。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilWriteMask" translate="no">.<a href="#stencilWriteMask">stencilWriteMask</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>写入模板缓冲时使用的位掩码。</p>
+						<p>默认值为 <code>0xff</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilZFail" translate="no">.<a href="#stencilZFail">stencilZFail</a><span class="type-signature"> : <a href="global.html#ZeroStencilOp">ZeroStencilOp</a> | <a href="global.html#KeepStencilOp">KeepStencilOp</a> | <a href="global.html#ReplaceStencilOp">ReplaceStencilOp</a> | <a href="global.html#IncrementStencilOp">IncrementStencilOp</a> | <a href="global.html#DecrementStencilOp">DecrementStencilOp</a> | <a href="global.html#IncrementWrapStencilOp">IncrementWrapStencilOp</a> | <a href="global.html#DecrementWrapStencilOp">DecrementWrapStencilOp</a> | <a href="global.html#InvertStencilOp">InvertStencilOp</a></span> </h3>
+					<div class="description">
+						<p>当比较函数返回 <code>true</code> 但深度测试失败时执行的模板操作。</p>
+						<p>默认值为 <code>KeepStencilOp</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stencilZPass" translate="no">.<a href="#stencilZPass">stencilZPass</a><span class="type-signature"> : <a href="global.html#ZeroStencilOp">ZeroStencilOp</a> | <a href="global.html#KeepStencilOp">KeepStencilOp</a> | <a href="global.html#ReplaceStencilOp">ReplaceStencilOp</a> | <a href="global.html#IncrementStencilOp">IncrementStencilOp</a> | <a href="global.html#DecrementStencilOp">DecrementStencilOp</a> | <a href="global.html#IncrementWrapStencilOp">IncrementWrapStencilOp</a> | <a href="global.html#DecrementWrapStencilOp">DecrementWrapStencilOp</a> | <a href="global.html#InvertStencilOp">InvertStencilOp</a></span> </h3>
+					<div class="description">
+						<p>当比较函数返回 <code>true</code> 且深度测试通过时执行的模板操作。</p>
+						<p>默认值为 <code>KeepStencilOp</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="toneMapped" translate="no">.<a href="#toneMapped">toneMapped</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>定义此材质是否根据渲染器的色调映射设置进行色调映射。</p>
+<p>渲染到渲染目标、使用后期处理或使用
+<code>WebGPURenderer</code> 时会被忽略。在这些情况下，所有材质都会应用色调映射。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="transparent" translate="no">.<a href="#transparent">transparent</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>定义此材质是否透明。这会影响渲染，
+因为透明对象需要特殊处理，并在非透明对象之后渲染。</p>
+<p>设为 true 时，材质的透明程度由
+<a href="Material.html#opacity">Material#opacity</a> 控制。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="type" translate="no">.<a href="#type">type</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>type 属性用于在序列化/反序列化上下文中
+检测对象类型。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="userData" translate="no">.<a href="#userData">userData</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>可用于存储关于材质的自定义数据的对象。
+不应持有函数引用，因为这些不会被克隆。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uuid" translate="no">.<a href="#uuid">uuid</a><span class="type-signature"> : string</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>材质的 UUID。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="version" translate="no">.<a href="#version">version</a><span class="type-signature"> : number</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>从 <code>0</code> 开始，统计 <a href="Material.html#needsUpdate">Material#needsUpdate</a> 被设为 <code>true</code> 的次数。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="vertexColors" translate="no">.<a href="#vertexColors">vertexColors</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设为 <code>true</code>，应使用顶点颜色。</p>
+<p>引擎支持 RGB 和 RGBA 顶点颜色，取决于使用的是三分量（RGB）还是
+四分量（RGBA）颜色缓冲属性。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="visible" translate="no">.<a href="#visible">visible</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>定义使用此材质的 3D 对象是否可见。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个从此实例复制值的新材质。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( source : <span class="param-type"><a href="Material.html">Material</a></span> )</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定材质的值复制到此实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此实例的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="customProgramCacheKey" translate="no">.<a href="#customProgramCacheKey">customProgramCacheKey</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若使用了 <a href="Material.html#onBeforeCompile">Material#onBeforeCompile</a>，可用此回调标识
+<code>onBeforeCompile()</code> 中所用的设置值，以便 three.js 能按需重用缓存的
+着色器或为此材质重新编译着色器。</p>
+<p>此方法仅可在使用 <a href="WebGLRenderer.html">WebGLRenderer</a> 渲染时使用。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 自定义程序缓存键。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放此实例分配的 GPU 相关资源。当应用中
+不再使用此实例时，请调用此方法。</p>
+						</div>
+						<h5>触发：</h5>
+						<ul>
+							<li><a href="Material.html#event:dispose">Material#event:dispose</a></li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="fromJSON" translate="no">.<a href="#fromJSON">fromJSON</a><span class="signature">( json : <span class="param-type">Object</span>, textures : <span class="param-type">Object.&lt;string, <a href="Texture.html">Texture</a>></span> )</span><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定的 JSON 反序列化材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">json</strong>
+									</td>
+									<td class="description last">
+										<p>保存已序列化材质的 JSON。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">textures</strong>
+									</td>
+									<td class="description last">
+										<p>保存材质所引用纹理的字典。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此材质的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="onBeforeCompile" translate="no">.<a href="#onBeforeCompile">onBeforeCompile</a><span class="signature">( shaderobject : <span class="param-type">Object</span>, renderer : <span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>可选回调，在着色器程序编译前立即执行。
+该函数以着色器源代码为参数调用。适用于修改内置材质。</p>
+<p>此方法仅可在使用 <a href="WebGLRenderer.html">WebGLRenderer</a> 渲染时使用。自定义材质的
+推荐方式是使用 <code>WebGPURenderer</code> 配合新的
+节点材质系统与 <a href="https://github.com/mrdoob/three.js/wiki/Three.js-Shading-Language" target="_blank" rel="noopener">TSL</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderobject</strong>
+									</td>
+									<td class="description last">
+										<p>该对象包含 uniform 以及顶点与片元着色器源代码。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器的引用。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="onBeforeRender" translate="no">.<a href="#onBeforeRender">onBeforeRender</a><span class="signature">( renderer : <span class="param-type"><a href="WebGLRenderer.html">WebGLRenderer</a></span>, scene : <span class="param-type"><a href="Scene.html">Scene</a></span>, camera : <span class="param-type"><a href="Camera.html">Camera</a></span>, geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, group : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>可选回调，在材质用于渲染 3D 对象之前立即执行。</p>
+<p>此方法仅可在使用 <a href="WebGLRenderer.html">WebGLRenderer</a> 渲染时使用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">scene</strong>
+									</td>
+									<td class="description last">
+										<p>场景。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>用于渲染场景的相机。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">group</strong>
+									</td>
+									<td class="description last">
+										<p>几何体分组数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setValues" translate="no">.<a href="#setValues">setValues</a><span class="signature">( values : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法可用于从参数对象设置默认值。
+它是通用实现，因此可与不同类型的材质一起使用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">values</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的材质值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="toJSON" translate="no">.<a href="#toJSON">toJSON</a><span class="signature">( meta : <span class="param-type">Object | string</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将材质序列化为 JSON。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">meta</strong>
+									</td>
+									<td class="description last">
+										<p>可选值，保存关于序列化的元信息。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-see">参见：</dt>
+							<dd class="tag-see">
+								<ul>
+									<li><a href="ObjectLoader.html#parse">ObjectLoader#parse</a></li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 表示已序列化材质的 JSON 对象。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">事件</h2>
+					<h3 class="name name-method" id="event:dispose" translate="no">.<a href="#event:dispose">dispose</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当材质被销毁时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/Material.js" translate="no" target="_blank" rel="noopener">src/materials/Material.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

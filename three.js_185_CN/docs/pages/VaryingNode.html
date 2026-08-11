@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>VaryingNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → </p>
+	<h1 translate="no">VaryingNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于将着色器 varying 表示为节点的类。Varying 可由
+现有节点创建，示例如下：</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const positionLocal = positionGeometry.toVarying( 'vPositionLocal' );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="VaryingNode" translate="no">new <a href="#VaryingNode">VaryingNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, name : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 varying 节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>应为其创建 varying 的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>着色器中的 varying 名称。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="global" translate="no">.<a href="#global">global</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>此标志用于全局缓存。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#global">Node#global</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="interpolationSampling" translate="no">.<a href="#interpolationSampling">interpolationSampling</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>varying 数据的插值采样类型。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="interpolationType" translate="no">.<a href="#interpolationType">interpolationType</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>varying 数据的插值类型。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isVaryingNode" translate="no">.<a href="#isVaryingNode">isVaryingNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型测试。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="name" translate="no">.<a href="#name">name</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>着色器中的 varying 名称。若未定义名称，
+节点系统会自动生成一个。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#name">Node#name</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="node" translate="no">.<a href="#node">node</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>应为其创建 varying 的节点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setInterpolation" translate="no">.<a href="#setInterpolation">setInterpolation</a><span class="signature">( type : <span class="param-type">string</span>, sampling : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="VaryingNode.html">VaryingNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义该 varying 的插值类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>插值类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">sampling</strong>
+									</td>
+									<td class="description last">
+										<p>插值采样类型。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setupVarying" translate="no">.<a href="#setupVarying">setupVarying</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : <a href="NodeVarying.html">NodeVarying</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法使用当前节点构建器执行 varying 节点的设置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 来自节点构建器的节点 varying。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/core/VaryingNode.js" translate="no" target="_blank" rel="noopener">src/nodes/core/VaryingNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

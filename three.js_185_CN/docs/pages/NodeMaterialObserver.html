@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NodeMaterialObserver - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">NodeMaterialObserver</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类由 <a href="WebGPURenderer.html">WebGPURenderer</a> 用作管理组件。
+其主要目的是在即将渲染渲染对象之前，
+判断它们是否需要刷新。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="NodeMaterialObserver" translate="no">new <a href="#NodeMaterialObserver">NodeMaterialObserver</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的节点材质观察者。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="hasAnimation" translate="no">.<a href="#hasAnimation">hasAnimation</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>节点构建器的 3D 对象是否处于动画状态。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="hasNode" translate="no">.<a href="#hasNode">hasNode</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>材质是否使用节点对象。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="refreshUniforms" translate="no">.<a href="#refreshUniforms">refreshUniforms</a><span class="type-signature"> : Array.&lt;string></span> </h3>
+					<div class="description">
+						<p>所有可能的材质 uniform 列表。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderId" translate="no">.<a href="#renderId">renderId</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>保存来自节点帧的当前渲染 ID。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderObjects" translate="no">.<a href="#renderObjects">renderObjects</a><span class="type-signature"> : WeakMap.&lt;<a href="RenderObject.html">RenderObject</a>, Object></span> </h3>
+					<div class="description">
+						<p>一个节点材质可能被多个渲染对象使用，因此
+监视器必须维护渲染对象列表。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="containsNode" translate="no">.<a href="#containsNode">containsNode</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果节点构建器的材质使用
+节点属性，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点构建器的材质是否使用节点属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="equals" translate="no">.<a href="#equals">equals</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span>, lightsData : <span class="param-type">Array.&lt;<a href="Light.html">Light</a>></span>, renderId : <span class="param-type">number</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果给定渲染对象的状态未发生变化，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">lightsData</strong>
+									</td>
+									<td class="description last">
+										<p>当前材质的灯光。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderId</strong>
+									</td>
+									<td class="description last">
+										<p>当前渲染 ID。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定渲染对象是否与其缓存状态相等。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="firstInitialization" translate="no">.<a href="#firstInitialization">firstInitialization</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果给定渲染对象是该观察者首次验证，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定渲染对象是否是该观察者首次验证。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getAttributesData" translate="no">.<a href="#getAttributesData">getAttributesData</a><span class="signature">( attributes : <span class="param-type">Object</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回包含属性版本的属性数据结构，
+用于监视。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attributes</strong>
+									</td>
+									<td class="description last">
+										<p>几何体属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 用于监视属性版本的对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getGeometryData" translate="no">.<a href="#getGeometryData">getGeometryData</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回包含几何体属性值的几何体数据结构，
+用于监视。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>几何体。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 用于监视几何体属性的对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getLights" translate="no">.<a href="#getLights">getLights</a><span class="signature">( lightsNode : <span class="param-type"><a href="LightsNode.html">LightsNode</a></span>, renderId : <span class="param-type">number</span> )</span><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定灯光节点和渲染 ID 的灯光。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">lightsNode</strong>
+									</td>
+									<td class="description last">
+										<p>灯光节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderId</strong>
+									</td>
+									<td class="description last">
+										<p>渲染 ID。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定灯光节点和渲染 ID 的灯光。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getLightsData" translate="no">.<a href="#getLightsData">getLightsData</a><span class="signature">( materialLights : <span class="param-type">Array.&lt;<a href="Light.html">Light</a>></span> )</span><span class="type-signature"> : Array.&lt;Object></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定材质灯光的灯光数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">materialLights</strong>
+									</td>
+									<td class="description last">
+										<p>材质灯光。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定材质灯光的灯光数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMaterialData" translate="no">.<a href="#getMaterialData">getMaterialData</a><span class="signature">( material : <span class="param-type"><a href="Material.html">Material</a></span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回包含材质属性值的材质数据结构，
+用于监视。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">material</strong>
+									</td>
+									<td class="description last">
+										<p>材质。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 用于监视材质属性的对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRenderObjectData" translate="no">.<a href="#getRenderObjectData">getRenderObjectData</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定渲染对象的监视数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 监视数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="needsRefresh" translate="no">.<a href="#needsRefresh">needsRefresh</a><span class="signature">( renderObject : <span class="param-type"><a href="RenderObject.html">RenderObject</a></span>, nodeFrame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>检查给定渲染对象是否需要刷新。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderObject</strong>
+									</td>
+									<td class="description last">
+										<p>渲染对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">nodeFrame</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点帧。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定渲染对象是否需要刷新。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="needsVelocity" translate="no">.<a href="#needsVelocity">needsVelocity</a><span class="signature">( renderer : <span class="param-type"><a href="Renderer.html">Renderer</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果当前渲染会生成运动向量，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>渲染器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前渲染是否会生成运动向量。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/nodes/manager/NodeMaterialObserver.js" translate="no" target="_blank" rel="noopener">src/materials/nodes/manager/NodeMaterialObserver.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,3183 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NodeBuilder - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">NodeBuilder</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于根据 3D 对象及其节点材质定义生成着色器程序的构建器基类。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="NodeBuilder" translate="no">new <a href="#NodeBuilder">NodeBuilder</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, renderer : <span class="param-type"><a href="Renderer.html">Renderer</a></span>, parser : <span class="param-type"><a href="NodeParser.html">NodeParser</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的节点构建器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">renderer</strong>
+									</td>
+									<td class="description last">
+										<p>当前渲染器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">parser</strong>
+									</td>
+									<td class="description last">
+										<p>对节点解析器的引用。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="activeStacks" translate="no">.<a href="#activeStacks">activeStacks</a><span class="type-signature"> : Array.&lt;<a href="StackNode.html">StackNode</a>></span> </h3>
+					<div class="description">
+						<p>活动的栈节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="attributes" translate="no">.<a href="#attributes">attributes</a><span class="type-signature"> : Array.&lt;<a href="NodeAttribute.html">NodeAttribute</a>></span> </h3>
+					<div class="description">
+						<p>此数组保存此构建器通过 <a href="AttributeNode.html">AttributeNode</a> 创建的节点属性。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bindGroups" translate="no">.<a href="#bindGroups">bindGroups</a><span class="type-signature"> : Array.&lt;<a href="BindGroup.html">BindGroup</a>></span> </h3>
+					<div class="description">
+						<p>对绑定组数组的引用。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bindings" translate="no">.<a href="#bindings">bindings</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>此字典保存每个着色器阶段的绑定。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bindingsIndexes" translate="no">.<a href="#bindingsIndexes">bindingsIndexes</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>此字典维护每个绑定组的绑定索引。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="bufferAttributes" translate="no">.<a href="#bufferAttributes">bufferAttributes</a><span class="type-signature"> : Array.&lt;<a href="NodeAttribute.html">NodeAttribute</a>></span> </h3>
+					<div class="description">
+						<p>此数组保存此构建器通过 <a href="BufferAttributeNode.html">BufferAttributeNode</a> 创建的节点属性。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="buildStage" translate="no">.<a href="#buildStage">buildStage</a><span class="type-signature"> : 'setup' | 'analyze' | 'generate'</span> </h3>
+					<div class="description">
+						<p>当前构建阶段。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="cache" translate="no">.<a href="#cache">cache</a><span class="type-signature"> : <a href="NodeCache.html">NodeCache</a></span> </h3>
+					<div class="description">
+						<p>构建器的缓存。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="camera" translate="no">.<a href="#camera">camera</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>用于渲染该 3D 对象的相机。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="chaining" translate="no">.<a href="#chaining">chaining</a><span class="type-signature"> : Array.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>节点链。
+用于检查节点图中的递归调用。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clippingContext" translate="no">.<a href="#clippingContext">clippingContext</a><span class="type-signature"> : <a href="ClippingContext.html">ClippingContext</a></span> </h3>
+					<div class="description">
+						<p>当前裁剪上下文。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="codes" translate="no">.<a href="#codes">codes</a><span class="type-signature"> : Object.&lt;string, Array.&lt;<a href="NodeCode.html">NodeCode</a>>></span> </h3>
+					<div class="description">
+						<p>此字典保存此构建器的（原生）节点代码。
+代码按每个着色器阶段维护在数组中。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="computeShader" translate="no">.<a href="#computeShader">computeShader</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>生成的计算着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="context" translate="no">.<a href="#context">context</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>构建器的上下文。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="currentFunctionNode" translate="no">.<a href="#currentFunctionNode">currentFunctionNode</a><span class="type-signature"> : <a href="FunctionNode.html">FunctionNode</a></span> </h3>
+					<div class="description">
+						<p>对当前函数节点的引用。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="currentNode" translate="no">.<a href="#currentNode">currentNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>对当前节点的引用，即节点链中的最后一个节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="declarations" translate="no">.<a href="#declarations">declarations</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>此字典保存每个着色器阶段的声明。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="environmentNode" translate="no">.<a href="#environmentNode">environmentNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>对当前环境节点的引用。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="flow" translate="no">.<a href="#flow">flow</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>当前代码流。
+在此栈中生成的所有代码将存储在 <code>.flow</code> 中。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="flowCode" translate="no">.<a href="#flowCode">flowCode</a><span class="type-signature"> : Object.&lt;string, string></span> </h3>
+					<div class="description">
+						<p>来自 <code>.flowNodes</code> 的节点代码。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="flowNodes" translate="no">.<a href="#flowNodes">flowNodes</a><span class="type-signature"> : Object.&lt;string, Array.&lt;<a href="Node.html">Node</a>>></span> </h3>
+					<div class="description">
+						<p>用于代码生成主流程的节点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fnCall" translate="no">.<a href="#fnCall">fnCall</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>当前 TSL 函数（Fn）调用节点。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fogNode" translate="no">.<a href="#fogNode">fogNode</a><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="description">
+						<p>对当前雾效节点的引用。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="fragmentShader" translate="no">.<a href="#fragmentShader">fragmentShader</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>生成的片元着色器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="geometry" translate="no">.<a href="#geometry">geometry</a><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> </h3>
+					<div class="description">
+						<p>3D 对象的几何体。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="globalCache" translate="no">.<a href="#globalCache">globalCache</a><span class="type-signature"> : <a href="NodeCache.html">NodeCache</a></span> </h3>
+					<div class="description">
+						<p>由于 <a href="NodeBuilder.html#cache">NodeBuilder#cache</a> 可能会被其他缓存临时覆盖，
+此成员保留对构建器自身缓存的引用。</p>
+						<p>默认值为 <code>this.cache</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="hardwareClipping" translate="no">.<a href="#hardwareClipping">hardwareClipping</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>构建的材质是否使用硬件裁剪。</p>
+						<p>默认值为 <code>false</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="hashNodes" translate="no">.<a href="#hashNodes">hashNodes</a><span class="type-signature"> : Object.&lt;number, <a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>将每个节点分配唯一哈希的字典。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lightsNode" translate="no">.<a href="#lightsNode">lightsNode</a><span class="type-signature"> : <a href="LightsNode.html">LightsNode</a></span> </h3>
+					<div class="description">
+						<p>对当前灯光节点的引用。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="material" translate="no">.<a href="#material">material</a><span class="type-signature"> : <a href="Material.html">Material</a></span> </h3>
+					<div class="description">
+						<p>3D 对象的材质。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="nodes" translate="no">.<a href="#nodes">nodes</a><span class="type-signature"> : Set.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>构建器正在为此 3D 对象处理的所有节点列表。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="object" translate="no">.<a href="#object">object</a><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="description">
+						<p>3D 对象。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="observer" translate="no">.<a href="#observer">observer</a><span class="type-signature"> : <a href="NodeMaterialObserver.html">NodeMaterialObserver</a></span> </h3>
+					<div class="description">
+						<p>对节点材质观察器的引用。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="parser" translate="no">.<a href="#parser">parser</a><span class="type-signature"> : <a href="NodeParser.html">NodeParser</a></span> </h3>
+					<div class="description">
+						<p>对节点解析器的引用。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="renderer" translate="no">.<a href="#renderer">renderer</a><span class="type-signature"> : <a href="Renderer.html">Renderer</a></span> </h3>
+					<div class="description">
+						<p>当前渲染器。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scene" translate="no">.<a href="#scene">scene</a><span class="type-signature"> : <a href="Scene.html">Scene</a></span> </h3>
+					<div class="description">
+						<p>该 3D 对象所属的场景。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="sequentialNodes" translate="no">.<a href="#sequentialNodes">sequentialNodes</a><span class="type-signature"> : Set.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>构建器按顺序处理的所有节点列表。</p>
+<p>用于确定节点的更新顺序，这对 NodeUpdateType#UPDATE_BEFORE 和 NodeUpdateType#UPDATE_AFTER 很重要。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="shaderStage" translate="no">.<a href="#shaderStage">shaderStage</a><span class="type-signature"> : 'vertex' | 'fragment' | 'compute' | 'any'</span> </h3>
+					<div class="description">
+						<p>当前着色器阶段。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stack" translate="no">.<a href="#stack">stack</a><span class="type-signature"> : <a href="StackNode.html">StackNode</a></span> </h3>
+					<div class="description">
+						<p>当前栈。
+它反映代码块层次结构中的当前处理过程，
+例如，可用于判断当前处理是否在条件语句内部。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="stacks" translate="no">.<a href="#stacks">stacks</a><span class="type-signature"> : Array.&lt;<a href="StackNode.html">StackNode</a>></span> </h3>
+					<div class="description">
+						<p>栈节点列表。
+当前栈层次结构存储在数组中。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="structs" translate="no">.<a href="#structs">structs</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>此字典保存构建器的输出结构体。
+结构体按每个着色器阶段维护在数组中。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="subBuild" translate="no">.<a href="#subBuild">subBuild</a> </h3>
+					<div class="description">
+						<p>返回当前子构建层。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="subBuildFn" translate="no">.<a href="#subBuildFn">subBuildFn</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>当前子构建 TSL 函数（Fn）。</p>
+						<p>默认值为 <code>null</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="subBuildLayers" translate="no">.<a href="#subBuildLayers">subBuildLayers</a><span class="type-signature"> : Array.&lt;<a href="SubBuildNode.html">SubBuildNode</a>></span> </h3>
+					<div class="description">
+						<p>子构建层。</p>
+						<p>默认值为 <code>[]</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="tab" translate="no">.<a href="#tab">tab</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>制表符值。用于着色器字符串生成。</p>
+						<p>默认值为 <code>'\t'</code>.</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="types" translate="no">.<a href="#types">types</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>此字典保存构建器的类型。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uniforms" translate="no">.<a href="#uniforms">uniforms</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>此字典保存构建器的节点 uniform。
+uniform 按每个着色器阶段维护在数组中。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateAfterNodes" translate="no">.<a href="#updateAfterNodes">updateAfterNodes</a><span class="type-signature"> : Array.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>应执行 <a href="Node.html#updateAfter">Node#updateAfter</a> 方法的所有节点列表。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateBeforeNodes" translate="no">.<a href="#updateBeforeNodes">updateBeforeNodes</a><span class="type-signature"> : Array.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>应执行 <a href="Node.html#updateBefore">Node#updateBefore</a> 方法的所有节点列表。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateNodes" translate="no">.<a href="#updateNodes">updateNodes</a><span class="type-signature"> : Array.&lt;<a href="Node.html">Node</a>></span> </h3>
+					<div class="description">
+						<p>应执行 <a href="Node.html#update">Node#update</a> 方法的所有节点列表。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="vars" translate="no">.<a href="#vars">vars</a><span class="type-signature"> : Object.&lt;string, (Array.&lt;<a href="NodeVar.html">NodeVar</a>>|number)></span> </h3>
+					<div class="description">
+						<p>此字典保存此构建器的节点变量。
+变量按每个着色器阶段维护在数组中。
+此字典还用于按类型（const、vars）统计变量数量。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="varyings" translate="no">.<a href="#varyings">varyings</a><span class="type-signature"> : Array.&lt;<a href="NodeVarying.html">NodeVarying</a>></span> </h3>
+					<div class="description">
+						<p>此数组保存此构建器的节点 varying。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="vertexShader" translate="no">.<a href="#vertexShader">vertexShader</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>生成的顶点着色器。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="addChain" translate="no">.<a href="#addChain">addChain</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定节点添加到内部节点链。
+用于检查节点图中的递归调用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addContext" translate="no">.<a href="#addContext">addContext</a><span class="signature">( context : <span class="param-type">Object</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将上下文数据添加到构建器的当前上下文。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">context</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 先前的上下文。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addFlow" translate="no">.<a href="#addFlow">addFlow</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute'</span>, node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将节点添加到目标流，以便在 'generate' 过程中生成代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addFlowCode" translate="no">.<a href="#addFlowCode">addFlowCode</a><span class="signature">( code : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="NodeBuilder.html">NodeBuilder</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向当前代码流添加代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">code</strong>
+									</td>
+									<td class="description last">
+										<p>着色器代码。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点构建器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addFlowCodeHierarchy" translate="no">.<a href="#addFlowCodeHierarchy">addFlowCodeHierarchy</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, nodeBlock : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>基于代码块层次结构添加代码流。
+这样，像 If、Else 这样的代码块可以在节点仅在当前着色器阶段的某一条件分支内使用时本地创建变量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">nodeBlock</strong>
+									</td>
+									<td class="description last">
+										<p>基于节点的代码块。通常为 'ConditionalNode'。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addFlowTab" translate="no">.<a href="#addFlowTab">addFlowTab</a><span class="signature">()</span><span class="type-signature"> : <a href="NodeBuilder.html">NodeBuilder</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在将要生成的代码中添加制表符，以便其他代码片段遵循当前缩进。
+通常用于含有 If、Else 的代码。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点构建器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addInclude" translate="no">.<a href="#addInclude">addInclude</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : void</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将节点包含到当前函数节点中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要包含的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addLineFlowCode" translate="no">.<a href="#addLineFlowCode">addLineFlowCode</a><span class="signature">( code : <span class="param-type">string</span>, node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : <a href="NodeBuilder.html">NodeBuilder</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向当前流添加内联代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">code</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的代码。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>可选节点，可帮助系统判断该节点是否属于某个代码块。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点构建器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addLineFlowCodeBlock" translate="no">.<a href="#addLineFlowCodeBlock">addLineFlowCodeBlock</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, code : <span class="param-type">string</span>, nodeBlock : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向当前流代码块添加内联代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">code</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的代码。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">nodeBlock</strong>
+									</td>
+									<td class="description last">
+										<p>当前 ConditionalNode</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addNode" translate="no">.<a href="#addNode">addNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向此构建器添加节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addSequentialNode" translate="no">.<a href="#addSequentialNode">addSequentialNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用于添加将作为 FRAME 和 RENDER 事件使用的节点，
+这些节点需要按特定调用顺序才能正确工作。
+此函数应在 'build()' 过程中的 'setup()' 之后调用，以确保子节点先被处理。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="addStack" translate="no">.<a href="#addStack">addStack</a><span class="signature">()</span><span class="type-signature"> : <a href="StackNode.html">StackNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向内部栈添加栈节点。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 添加的栈节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="addSubBuild" translate="no">.<a href="#addSubBuild">addSubBuild</a><span class="signature">( subBuild : <span class="param-type"><a href="SubBuildNode.html">SubBuildNode</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向节点构建器添加子构建层。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">subBuild</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的子构建层。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="build" translate="no">.<a href="#build">build</a><span class="signature">()</span><span class="type-signature"> : <a href="NodeBuilder.html">NodeBuilder</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>控制给定对象构建过程的核心构建方法。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点构建器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="buildAsync" translate="no">.<a href="#buildAsync">buildAsync</a><span class="signature">()</span><span class="type-signature"> : Promise.&lt;<a href="NodeBuilder.html">NodeBuilder</a>></span> <span class="type-signature">(async) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>build() 的异步版本，在着色器阶段之间让出主线程。
+在 compileAsync() 中使用此方法以避免阻塞主线程。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析为此节点构建器的 Promise。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="buildCode" translate="no">.<a href="#buildCode">buildCode</a><span class="signature">()</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>控制各着色器阶段的代码构建。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="buildFunctionCode" translate="no">.<a href="#buildFunctionCode">buildFunctionCode</a><span class="signature">( shaderNode : <span class="param-type">ShaderNodeInternal</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>构建给定的着色器节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderNode</strong>
+									</td>
+									<td class="description last">
+										<p>着色器节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 函数代码。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="buildFunctionNode" translate="no">.<a href="#buildFunctionNode">buildFunctionNode</a><span class="signature">( shaderNode : <span class="param-type">ShaderNodeInternal</span> )</span><span class="type-signature"> : <a href="FunctionNode.html">FunctionNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定通用名称对应的原生着色器运算符名称。
+这是与 <a href="NodeBuilder.html#getMethod">NodeBuilder#getMethod</a> 类似类型的方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderNode</strong>
+									</td>
+									<td class="description last">
+										<p>用于构建函数节点的着色器节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 构建的函数节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="buildUpdateNodes" translate="no">.<a href="#buildUpdateNodes">buildUpdateNodes</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>检查节点的更新类型</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="changeComponentType" translate="no">.<a href="#changeComponentType">changeComponentType</a><span class="signature">( type : <span class="param-type">string</span>, newComponentType : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>对于给定类型，此方法将分量类型更改为给定值。
+例如，应将 <code>vec4</code> 更改为新的分量类型 <code>uint</code>，结果为 <code>uvec4</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">newComponentType</strong>
+									</td>
+									<td class="description last">
+										<p>新的分量类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="createCubeRenderTarget" translate="no">.<a href="#createCubeRenderTarget">createCubeRenderTarget</a><span class="signature">( size : <span class="param-type">number</span>, options : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="CubeRenderTarget.html">CubeRenderTarget</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用于使用给定尺寸和选项创建 <a href="CubeRenderTarget.html">CubeRenderTarget</a> 实例的工厂方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">size</strong>
+									</td>
+									<td class="description last">
+										<p>立方体渲染目标的尺寸。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>立方体渲染目标的选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 立方体渲染目标。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="createRenderTarget" translate="no">.<a href="#createRenderTarget">createRenderTarget</a><span class="signature">( width : <span class="param-type">number</span>, height : <span class="param-type">number</span>, options : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="RenderTarget.html">RenderTarget</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>用于使用给定尺寸和选项创建 <a href="RenderTarget.html">RenderTarget</a> 实例的工厂方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>渲染目标的宽度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">height</strong>
+									</td>
+									<td class="description last">
+										<p>渲染目标的高度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>渲染目标的选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 渲染目标。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="flowBuildStage" translate="no">.<a href="#flowBuildStage">flowBuildStage</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, buildStage : <span class="param-type">string</span>, output : <span class="param-type"><a href="Node.html">Node</a> | string</span> )</span><span class="type-signature"> : <a href="Node.html">Node</a> | string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在特定构建阶段执行节点。</p>
+<p>此函数可用于在标准构建过程之外任意执行指定的构建阶段。
+例如，如果节点的类型依赖于 'setup' 阶段创建的属性，
+则可以使用 flowBuildStage(node, 'setup') 在标准构建过程开始之前
+执行 setup 构建阶段并访问其生成的节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要执行的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">buildStage</strong>
+									</td>
+									<td class="description last">
+										<p>执行该节点的构建阶段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">output</strong>
+									</td>
+									<td class="description last">
+										<p>期望的输出类型。例如 'vec3'。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点构建的结果。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="flowChildNode" translate="no">.<a href="#flowChildNode">flowChildNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, output : <span class="param-type">string</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>基于子节点生成代码流。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要执行的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">output</strong>
+									</td>
+									<td class="description last">
+										<p>期望的输出类型。例如 'vec3'。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 代码流。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="flowNode" translate="no">.<a href="#flowNode">flowNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>基于根节点执行节点流以生成最终着色器代码。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要执行的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 代码流。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="flowNodeFromShaderStage" translate="no">.<a href="#flowNodeFromShaderStage">flowNodeFromShaderStage</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span>, node : <span class="param-type"><a href="Node.html">Node</a></span>, output : <span class="param-type">string</span>, propertyName : <span class="param-type">string</span> )</span><span class="type-signature"> : Object | <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在不同阶段执行代码流。</p>
+<p>某些节点（如 <code>varying()</code>）能够在顶点阶段计算代码，
+并在片元阶段返回值，即使它是在片元输入中执行的。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要执行的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">output</strong>
+									</td>
+									<td class="description last">
+										<p>期望的输出类型。例如 'vec3'。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">propertyName</strong>
+									</td>
+									<td class="description last">
+										<p>用于赋值结果的属性名。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 代码流或 node.build() 的结果。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="flowShaderNode" translate="no">.<a href="#flowShaderNode">flowShaderNode</a><span class="signature">( shaderNode : <span class="param-type">ShaderNodeInternal</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>基于 TSL 函数 Fn() 生成代码流。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderNode</strong>
+									</td>
+									<td class="description last">
+										<p>将根据输入生成函数代码。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="flowStagesNode" translate="no">.<a href="#flowStagesNode">flowStagesNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, output : <span class="param-type">string</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>使节点流经历创建的所有步骤：'setup'、'analyze'、'generate'。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要执行的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">output</strong>
+									</td>
+									<td class="description last">
+										<p>期望的输出类型。例如 'vec3'。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="format" translate="no">.<a href="#format">format</a><span class="signature">( snippet : <span class="param-type">string</span>, fromType : <span class="param-type">string</span>, toType : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定着色器代码片段从一种类型格式化为另一种类型。例如，
+此方法可用于将简单的 float 字符串 <code>&quot;1.0&quot;</code> 转换为
+<code>vec3</code> 表示：<code>&quot;vec3&lt;f32&gt;( 1.0 )&quot;</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">snippet</strong>
+									</td>
+									<td class="description last">
+										<p>着色器代码片段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">fromType</strong>
+									</td>
+									<td class="description last">
+										<p>源类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">toType</strong>
+									</td>
+									<td class="description last">
+										<p>目标类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 更新后的着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateArray" translate="no">.<a href="#generateArray">generateArray</a><span class="signature">( type : <span class="param-type">string</span>, count : <span class="param-type">number</span>, values : <span class="param-type">Array.&lt;<a href="Node.html">Node</a>></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定类型和值生成数组着色器字符串。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">values</strong>
+									</td>
+									<td class="description last">
+										<p>默认值。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 作为着色器字符串的生成值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateArrayDeclaration" translate="no">.<a href="#generateArrayDeclaration">generateArrayDeclaration</a><span class="signature">( type : <span class="param-type">string</span>, count : <span class="param-type">number</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>生成数组声明字符串。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>数量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 作为着色器字符串的生成值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateConst" translate="no">.<a href="#generateConst">generateConst</a><span class="signature">( type : <span class="param-type">string</span>, value : <span class="param-type"><a href="global.html#any">any</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定类型和值生成着色器字符串。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>值。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 作为着色器字符串的生成值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateStruct" translate="no">.<a href="#generateStruct">generateStruct</a><span class="signature">( type : <span class="param-type">string</span>, membersLayout : <span class="param-type">Array.&lt;Object></span>, values : <span class="param-type">Array.&lt;<a href="Node.html">Node</a>></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>生成结构体着色器字符串。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">membersLayout</strong>
+									</td>
+									<td class="description last">
+										<p>数量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">values</strong>
+									</td>
+									<td class="description last">
+										<p>默认值。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 作为着色器字符串的生成值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateTexture" translate="no">.<a href="#generateTexture">generateTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span>, textureProperty : <span class="param-type">string</span>, uvSnippet : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定纹理数据生成纹理采样着色器字符串。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">textureProperty</strong>
+									</td>
+									<td class="description last">
+										<p>纹理属性名。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">uvSnippet</strong>
+									</td>
+									<td class="description last">
+										<p>定义纹理坐标的代码片段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 生成的着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateTextureLod" translate="no">.<a href="#generateTextureLod">generateTextureLod</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span>, textureProperty : <span class="param-type">string</span>, uvSnippet : <span class="param-type">string</span>, depthSnippet : <span class="param-type">string</span>, levelSnippet : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定纹理数据生成纹理 LOD 着色器字符串。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">textureProperty</strong>
+									</td>
+									<td class="description last">
+										<p>纹理属性名。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">uvSnippet</strong>
+									</td>
+									<td class="description last">
+										<p>定义纹理坐标的代码片段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depthSnippet</strong>
+									</td>
+									<td class="description last">
+										<p>定义要采样的从 0 开始的纹理数组索引的代码片段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">levelSnippet</strong>
+									</td>
+									<td class="description last">
+										<p>定义 mip 级别的代码片段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 生成的着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getActiveStack" translate="no">.<a href="#getActiveStack">getActiveStack</a><span class="signature">()</span><span class="type-signature"> : <a href="StackNode.html">StackNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回活动栈。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 活动栈。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getAttribute" translate="no">.<a href="#getAttribute">getAttribute</a><span class="signature">( name : <span class="param-type">string</span>, type : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="NodeAttribute.html">NodeAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定名称和类型的节点属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>属性的名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>属性的类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getAttributes" translate="no">.<a href="#getAttributes">getAttributes</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以着色器字符串形式返回给定着色器阶段的属性定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 属性代码段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getAttributesArray" translate="no">.<a href="#getAttributesArray">getAttributesArray</a><span class="signature">()</span><span class="type-signature"> : Array.&lt;<a href="NodeAttribute.html">NodeAttribute</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回包含此节点构建器所有节点属性的数组。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此构建器的节点属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBaseStack" translate="no">.<a href="#getBaseStack">getBaseStack</a><span class="signature">()</span><span class="type-signature"> : <a href="StackNode.html">StackNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回基础栈。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 基础栈。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBindGroupArray" translate="no">.<a href="#getBindGroupArray">getBindGroupArray</a><span class="signature">( groupName : <span class="param-type">string</span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : Array.&lt;<a href="NodeUniformsGroup.html">NodeUniformsGroup</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定组名和着色器阶段的节点 uniform 组数组。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">groupName</strong>
+									</td>
+									<td class="description last">
+										<p>组名。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点 uniform 组数组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBindings" translate="no">.<a href="#getBindings">getBindings</a><span class="signature">()</span><span class="type-signature"> : Array.&lt;<a href="BindGroup.html">BindGroup</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回按组分隔的所有着色器阶段的绑定列表。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 绑定列表。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBufferAttributeFromNode" translate="no">.<a href="#getBufferAttributeFromNode">getBufferAttributeFromNode</a><span class="signature">( node : <span class="param-type"><a href="BufferAttributeNode.html">BufferAttributeNode</a></span>, type : <span class="param-type">string</span>, name : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="NodeAttribute.html">NodeAttribute</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定缓冲属性节点返回 <a href="NodeAttribute.html">NodeAttribute</a> 的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>节点类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性的名称。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBuildStage" translate="no">.<a href="#getBuildStage">getBuildStage</a><span class="signature">()</span><span class="type-signature"> : 'setup' | 'analyze' | 'generate'</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前构建阶段。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前构建阶段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCache" translate="no">.<a href="#getCache">getCache</a><span class="signature">()</span><span class="type-signature"> : <a href="NodeCache.html">NodeCache</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回构建器的当前缓存。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 构建器的当前缓存。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCacheFromNode" translate="no">.<a href="#getCacheFromNode">getCacheFromNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, parent : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="NodeCache.html">NodeCache</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定节点的缓存。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">parent</strong>
+									</td>
+									<td class="description last">
+										<p>此节点是否引用共享的父缓存。</p>
+										<p>默认值为 <code>true</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 缓存。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getClosestSubBuild" translate="no">.<a href="#getClosestSubBuild">getClosestSubBuild</a><span class="signature">( data : <span class="param-type"><a href="Node.html">Node</a> | Set.&lt;string> | Array.&lt;string></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定数据的最近子构建层。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>要从中获取最近子构建层的数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 最近的子构建名称，若未找到则为 null。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCodeFromNode" translate="no">.<a href="#getCodeFromNode">getCodeFromNode</a><span class="signature">( node : <span class="param-type"><a href="CodeNode.html">CodeNode</a></span>, type : <span class="param-type">string</span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : <a href="NodeCode.html">NodeCode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定代码节点返回 <a href="NodeCode.html">NodeCode</a> 的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>代码节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>节点类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+										<p>默认值为 <code>this.shaderStage</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点代码。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getCodes" translate="no">.<a href="#getCodes">getCodes</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>以着色器字符串形式返回给定着色器阶段的原生代码定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 原生代码段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getComponentType" translate="no">.<a href="#getComponentType">getComponentType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定类型的分量类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 分量类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getComponentTypeFromTexture" translate="no">.<a href="#getComponentTypeFromTexture">getComponentTypeFromTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定纹理的分量类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 分量类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getContext" translate="no">.<a href="#getContext">getContext</a><span class="signature">()</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回构建器的当前上下文。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 构建器的当前上下文。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getDataFromNode" translate="no">.<a href="#getDataFromNode">getDataFromNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span>, cache : <span class="param-type"><a href="NodeCache.html">NodeCache</a></span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构建器在构建过程中为每个节点维护（缓存的）数据。
+此方法可用于获取特定着色器阶段和缓存的这些数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要获取数据的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+										<p>默认值为 <code>this.shaderStage</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">cache</strong>
+									</td>
+									<td class="description last">
+										<p>可选的缓存。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getDrawIndex" translate="no">.<a href="#getDrawIndex">getDrawIndex</a><span class="signature">()</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以原生着色器字符串形式返回 drawIndex 输入变量。
+仅与 WebGL 及其 <code>WEBGL_multi_draw</code> 扩展相关。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> drawIndex 着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getElementType" translate="no">.<a href="#getElementType">getElementType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定类型的元素类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 元素类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getFlowData" translate="no">.<a href="#getFlowData">getFlowData</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>基于节点获取当前流数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>流开始时的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 流数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getFragCoord" translate="no">.<a href="#getFragCoord">getFragCoord</a><span class="signature">()</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以原生着色器字符串形式返回 fragCoord 输入变量。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> fragCoord 着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getFrontFacing" translate="no">.<a href="#getFrontFacing">getFrontFacing</a><span class="signature">()</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以原生着色器字符串形式返回 frontFacing 输入变量。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> frontFacing 着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getFunctionOperator" translate="no">.<a href="#getFunctionOperator">getFunctionOperator</a><span class="signature">( op : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定通用名称对应的原生着色器运算符名称。
+这是与 <a href="NodeBuilder.html#getMethod">NodeBuilder#getMethod</a> 类似类型的方法。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">op</strong>
+									</td>
+									<td class="description last">
+										<p>要解析的运算符名称。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的运算符名称。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getHash" translate="no">.<a href="#getHash">getHash</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回此节点构建器的哈希。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 哈希。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getInstanceIndex" translate="no">.<a href="#getInstanceIndex">getInstanceIndex</a><span class="signature">()</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>根据上下文返回顶点阶段的 instance index 内置变量，
+或工作组网格内计算调用的线性化索引。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> instanceIndex 着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getIntegerType" translate="no">.<a href="#getIntegerType">getIntegerType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定类型对应的整数类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 整数类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMethod" translate="no">.<a href="#getMethod">getMethod</a><span class="signature">( method : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定通用名称对应的原生着色器方法名。例如，
+方法名 <code>textureDimensions</code> 与 WGSL 名称匹配，
+但在 GLSL 中必须解析为 <code>textureSize</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">method</strong>
+									</td>
+									<td class="description last">
+										<p>要解析的方法名。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的方法名。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getNodeFromHash" translate="no">.<a href="#getNodeFromHash">getNodeFromHash</a><span class="signature">( hash : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定哈希对应的节点，参见 <a href="NodeBuilder.html#setHashNode">NodeBuilder#setHashNode</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">hash</strong>
+									</td>
+									<td class="description last">
+										<p>节点的哈希。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 找到的节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getNodeProperties" translate="no">.<a href="#getNodeProperties">getNodeProperties</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定节点和着色器阶段的属性。</p>
+<p>属性通常在构建阶段中用于引用节点的子节点，
+或引用在另一构建阶段手动赋给属性的节点。
+手动定义节点的典型用法是在 setup 阶段将依赖节点赋给当前节点的属性，
+并在 generate 阶段构建这些属性。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要获取属性的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+										<p>默认值为 <code>'any'</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getNodeUniform" translate="no">.<a href="#getNodeUniform">getNodeUniform</a><span class="signature">( uniformNode : <span class="param-type"><a href="NodeUniform.html">NodeUniform</a></span>, type : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Uniform.html">Uniform</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回稍后用于 UBO 生成和渲染的 uniform 表示。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">uniformNode</strong>
+									</td>
+									<td class="description last">
+										<p>uniform 节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>请求的类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> uniform。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getOutputStructName" translate="no">.<a href="#getOutputStructName">getOutputStructName</a><span class="signature">()</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 <a href="OutputStructNode.html">OutputStructNode</a> 所需的输出结构体名称。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 输出结构体的名称。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getOutputStructTypeFromNode" translate="no">.<a href="#getOutputStructTypeFromNode">getOutputStructTypeFromNode</a><span class="signature">( node : <span class="param-type"><a href="OutputStructNode.html">OutputStructNode</a></span>, membersLayout : <span class="param-type">Array.&lt;Object></span> )</span><span class="type-signature"> : StructType</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定输出结构体节点返回 StructType 的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>输出结构体节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">membersLayout</strong>
+									</td>
+									<td class="description last">
+										<p>输出结构体类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 结构体类型属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getOutputType" translate="no">.<a href="#getOutputType">getOutputType</a><span class="signature">( index : <span class="param-type">number</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据渲染器的渲染目标返回颜色输出的类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">index</strong>
+									</td>
+									<td class="description last">
+										<p>渲染目标纹理的索引。</p>
+										<p>默认值为 <code>0</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getPropertyName" translate="no">.<a href="#getPropertyName">getPropertyName</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定节点和着色器阶段在着色器中的属性名。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 属性名。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getShaderStage" translate="no">.<a href="#getShaderStage">getShaderStage</a><span class="signature">()</span><span class="type-signature"> : 'vertex' | 'fragment' | 'compute' | 'any'</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回当前着色器阶段。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 当前着色器阶段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getSharedContext" translate="no">.<a href="#getSharedContext">getSharedContext</a><span class="signature">()</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>获取可在不同材质间共享的着色器构建上下文。
+这是必要的，因为渲染器缓存可以重用在一种材质中生成的着色器并在另一种材质中使用。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 不含材质的构建器当前上下文。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getSharedDataFromNode" translate="no">.<a href="#getSharedDataFromNode">getSharedDataFromNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定节点的共享数据对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要从中获取共享数据的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 共享数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getSignature" translate="no">.<a href="#getSignature">getSignature</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回带有引擎当前修订版本的签名。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 签名。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getStructTypeFromNode" translate="no">.<a href="#getStructTypeFromNode">getStructTypeFromNode</a><span class="signature">( node : <span class="param-type"><a href="OutputStructNode.html">OutputStructNode</a></span>, membersLayout : <span class="param-type">Array.&lt;Object></span>, name : <span class="param-type">string</span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : StructType</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定输出结构体节点返回 StructType 的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>输出结构体节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">membersLayout</strong>
+									</td>
+									<td class="description last">
+										<p>输出结构体类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>结构体的名称。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+										<p>默认值为 <code>this.shaderStage</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 结构体类型属性。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getStructTypeNode" translate="no">.<a href="#getStructTypeNode">getStructTypeNode</a><span class="signature">( name : <span class="param-type">string</span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : StructType</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定结构体名称和着色器阶段返回 StructType 的实例，
+若未找到则返回 null。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>结构体的名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+										<p>默认值为 <code>this.shaderStage</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 结构体类型，若未找到则为 null。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getSubBuildOutput" translate="no">.<a href="#getSubBuildOutput">getSubBuildOutput</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回子构建层的输出节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要从中获取输出的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 输出节点名称。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getSubBuildProperty" translate="no">.<a href="#getSubBuildProperty">getSubBuildProperty</a><span class="signature">( property : <span class="param-type">string</span>, node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定属性和节点的子构建属性名。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">property</strong>
+									</td>
+									<td class="description last">
+										<p>属性名。</p>
+										<p>默认值为 <code>''</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要从中获取子构建的节点。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 子构建属性名。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTernary" translate="no">.<a href="#getTernary">getTernary</a><span class="signature">( condSnippet : <span class="param-type">string</span>, ifSnippet : <span class="param-type">string</span>, elseSnippet : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>返回三元运算的原生代码片段。例如，GLSL 会将三元运算输出为
+<code>cond ? x : y</code>，而 WGSL 会输出为 <code>select(y, x, cond)</code></p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">condSnippet</strong>
+									</td>
+									<td class="description last">
+										<p>决定解析哪个表达式的条件。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">ifSnippet</strong>
+									</td>
+									<td class="description last">
+										<p>条件为真时要解析的表达式。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">elseSnippet</strong>
+									</td>
+									<td class="description last">
+										<p>条件为假时要解析的表达式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的方法名。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getType" translate="no">.<a href="#getType">getType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>可能需要将某些数据类型转换为其他类型，
+因此可使用此方法隐藏转换过程。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 更新后的类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTypeFromArray" translate="no">.<a href="#getTypeFromArray">getTypeFromArray</a><span class="signature">( array : <span class="param-type">TypedArray</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定类型化数组的类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>类型化数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTypeFromAttribute" translate="no">.<a href="#getTypeFromAttribute">getTypeFromAttribute</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定缓冲属性的类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>缓冲属性。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTypeFromLength" translate="no">.<a href="#getTypeFromLength">getTypeFromLength</a><span class="signature">( length : <span class="param-type">number</span>, componentType : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定长度和分量类型返回数据类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">length</strong>
+									</td>
+									<td class="description last">
+										<p>长度。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">componentType</strong>
+									</td>
+									<td class="description last">
+										<p>分量类型。</p>
+										<p>默认值为 <code>'float'</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getTypeLength" translate="no">.<a href="#getTypeLength">getTypeLength</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定数据类型的长度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>数据类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 长度。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getUniformBufferLimit" translate="no">.<a href="#getUniformBufferLimit">getUniformBufferLimit</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回 uniform 缓冲区可用的最大字节数。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> uniform 缓冲区可用的最大字节数。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getUniformFromNode" translate="no">.<a href="#getUniformFromNode">getUniformFromNode</a><span class="signature">( node : <span class="param-type"><a href="UniformNode.html">UniformNode</a></span>, type : <span class="param-type">string</span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span>, name : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="NodeUniform.html">NodeUniform</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定 uniform 节点返回 <a href="NodeUniform.html">NodeUniform</a> 的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>uniform 节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>uniform 类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+										<p>默认值为 <code>this.shaderStage</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>uniform 的名称。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点 uniform。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getUniforms" translate="no">.<a href="#getUniforms">getUniforms</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以着色器字符串形式返回给定着色器阶段的 uniform 定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> uniform 代码段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVar" translate="no">.<a href="#getVar">getVar</a><span class="signature">( type : <span class="param-type">string</span>, name : <span class="param-type">string</span>, count : <span class="param-type">number</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>以着色器字符串形式返回给定变量类型和名称的单个变量定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>变量的类型。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>变量的名称。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">count</strong>
+									</td>
+									<td class="description last">
+										<p>数组长度。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVarFromNode" translate="no">.<a href="#getVarFromNode">getVarFromNode</a><span class="signature">( node : <span class="param-type"><a href="VarNode.html">VarNode</a></span>, name : <span class="param-type">string</span>, type : <span class="param-type">string</span>, shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span>, readOnly : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="NodeVar.html">NodeVar</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定变量节点返回 <a href="NodeVar.html">NodeVar</a> 的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>变量节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>变量的名称。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>变量的类型。</p>
+										<p>默认值为 <code>node.getNodeType( this )</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+										<p>默认值为 <code>this.shaderStage</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">readOnly</strong>
+									</td>
+									<td class="description last">
+										<p>该变量是否为只读。</p>
+										<p>默认值为 <code>false</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点变量。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVars" translate="no">.<a href="#getVars">getVars</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span>, global : <span class="param-type">boolean</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>以着色器字符串形式返回给定着色器阶段的变量定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">global</strong>
+									</td>
+									<td class="description last">
+										<p>这些变量是否为全局变量。</p>
+										<p>默认值为 <code>false</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 变量代码段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVaryingFromNode" translate="no">.<a href="#getVaryingFromNode">getVaryingFromNode</a><span class="signature">( node : <span class="param-type"><a href="VaryingNode.html">VaryingNode</a> | <a href="PropertyNode.html">PropertyNode</a></span>, name : <span class="param-type">string</span>, type : <span class="param-type">string</span>, interpolationType : <span class="param-type">string</span>, interpolationSampling : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="NodeVar.html">NodeVar</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定 varying 节点返回 <a href="NodeVarying.html">NodeVarying</a> 的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>varying 节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>varying 的名称。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>varying 的类型。</p>
+										<p>默认值为 <code>node.getNodeType( this )</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">interpolationType</strong>
+									</td>
+									<td class="description last">
+										<p>varying 的插值类型。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">interpolationSampling</strong>
+									</td>
+									<td class="description last">
+										<p>varying 的插值采样类型。</p>
+										<p>默认值为 <code>null</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点 varying。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVaryings" translate="no">.<a href="#getVaryings">getVaryings</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以着色器字符串形式返回给定着色器阶段的 varying 定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> varying 代码段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVectorFromMatrix" translate="no">.<a href="#getVectorFromMatrix">getVectorFromMatrix</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定矩阵类型对应的向量类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>矩阵类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 向量类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVectorType" translate="no">.<a href="#getVectorType">getVectorType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定类型对应的向量类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 向量类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getVertexIndex" translate="no">.<a href="#getVertexIndex">getVertexIndex</a><span class="signature">()</span><span class="type-signature"> : string</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>以原生着色器字符串形式返回 vertexIndex 输入变量。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> instanceIndex 着色器字符串。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="hasGeometryAttribute" translate="no">.<a href="#hasGeometryAttribute">hasGeometryAttribute</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>给定属性名是否在几何体中定义。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>属性名。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定属性名是否在几何体中定义。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="hasWriteUsage" translate="no">.<a href="#hasWriteUsage">hasWriteUsage</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回给定节点是否已在任何着色器阶段被写入。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要检查的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点是否已被写入。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="includes" translate="no">.<a href="#includes">includes</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>给定节点是否包含在内部节点数组中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要测试的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定节点是否包含在内部节点数组中。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="increaseUsage" translate="no">.<a href="#increaseUsage">increaseUsage</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>调用此方法会将给定节点的使用计数加一。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要增加使用计数的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 更新后的使用计数。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isAvailable" translate="no">.<a href="#isAvailable">isAvailable</a><span class="signature">( name : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>请求的功能是否可用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">name</strong>
+									</td>
+									<td class="description last">
+										<p>请求的功能。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 请求的功能是否受支持。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isContextAssign" translate="no">.<a href="#isContextAssign">isContextAssign</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回构建器当前是否处于赋值上下文中。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 构建器是否处于赋值上下文中。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isDeterministic" translate="no">.<a href="#isDeterministic">isDeterministic</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回节点或其流是否为确定性的，可用于 <code>const</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>varying 节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 若为确定性则返回 true。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isFilteredTexture" translate="no">.<a href="#isFilteredTexture">isFilteredTexture</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>给定纹理是否经过过滤。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>要检查的纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定纹理是否经过过滤。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isFlatShading" translate="no">.<a href="#isFlatShading">isFlatShading</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>材质是否使用平面着色。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 材质是否使用平面着色。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isFlipY" translate="no">.<a href="#isFlipY">isFlipY</a><span class="signature">()</span><span class="type-signature"> : boolean</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>是否沿垂直轴翻转纹理数据。WebGL 需要此方法返回 <code>true</code>，WebGPU 需要返回 <code>false</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 是否沿垂直轴翻转纹理数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isInteger" translate="no">.<a href="#isInteger">isInteger</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回该类型是否为整数类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 该类型是否为整数类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isMatrix" translate="no">.<a href="#isMatrix">isMatrix</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>给定类型是否为矩阵类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>要检查的类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定类型是否为矩阵类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isOpaque" translate="no">.<a href="#isOpaque">isOpaque</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>材质是否不透明。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 材质是否不透明。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isReference" translate="no">.<a href="#isReference">isReference</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>给定类型是否为引用类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>要检查的类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定类型是否为引用类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isVector" translate="no">.<a href="#isVector">isVector</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>给定类型是否为向量类型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>要检查的类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定类型是否为向量类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="needsPreviousData" translate="no">.<a href="#needsPreviousData">needsPreviousData</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果需要上一帧的数据则返回 <code>true</code>。
+在使用 <a href="VelocityNode.html">VelocityNode</a> 计算运动向量时相关。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 是否需要上一帧的数据。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="needsToWorkingColorSpace" translate="no">.<a href="#needsToWorkingColorSpace">needsToWorkingColorSpace</a><span class="signature">( texture : <span class="param-type"><a href="Texture.html">Texture</a></span> )</span><span class="type-signature"> : boolean</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>检查给定纹理是否需要手动转换到工作色彩空间。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">texture</strong>
+									</td>
+									<td class="description last">
+										<p>要检查的纹理。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定纹理是否需要转换到工作色彩空间。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="prebuild" translate="no">.<a href="#prebuild">prebuild</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>预构建节点构建器。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="registerDeclaration" translate="no">.<a href="#registerDeclaration">registerDeclaration</a><span class="signature">( node : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在当前着色器阶段注册节点声明。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要注册的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="removeActiveStack" translate="no">.<a href="#removeActiveStack">removeActiveStack</a><span class="signature">( stack : <span class="param-type"><a href="StackNode.html">StackNode</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从内部栈中移除活动栈。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">stack</strong>
+									</td>
+									<td class="description last">
+										<p>要移除的栈节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="removeChain" translate="no">.<a href="#removeChain">removeChain</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从内部节点链中移除给定节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要移除的节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="removeFlowTab" translate="no">.<a href="#removeFlowTab">removeFlowTab</a><span class="signature">()</span><span class="type-signature"> : <a href="NodeBuilder.html">NodeBuilder</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>移除一个制表符。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此节点构建器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="removeStack" translate="no">.<a href="#removeStack">removeStack</a><span class="signature">()</span><span class="type-signature"> : <a href="StackNode.html">StackNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从内部栈中移除最后一个栈节点。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 移除的栈节点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="removeSubBuild" translate="no">.<a href="#removeSubBuild">removeSubBuild</a><span class="signature">()</span><span class="type-signature"> : <a href="SubBuildNode.html">SubBuildNode</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从节点构建器中移除最后一个子构建层。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 移除的子构建层。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setActiveStack" translate="no">.<a href="#setActiveStack">setActiveStack</a><span class="signature">( stack : <span class="param-type"><a href="StackNode.html">StackNode</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>向内部栈添加活动栈。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">stack</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的栈节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setBuildStage" translate="no">.<a href="#setBuildStage">setBuildStage</a><span class="signature">( buildStage : <span class="param-type">'setup' | 'analyze' | 'generate'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置当前构建阶段。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">buildStage</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的构建阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setCache" translate="no">.<a href="#setCache">setCache</a><span class="signature">( cache : <span class="param-type"><a href="NodeCache.html">NodeCache</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置构建器的缓存。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">cache</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的缓存。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setContext" translate="no">.<a href="#setContext">setContext</a><span class="signature">( context : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置构建器的上下文。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">context</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的上下文。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setHashNode" translate="no">.<a href="#setHashNode">setHashNode</a><span class="signature">( node : <span class="param-type"><a href="Node.html">Node</a></span>, hash : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构建器在基于哈希的字典中维护每个节点。
+此方法将给定节点（值）以给定哈希（键）设置到此字典中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">node</strong>
+									</td>
+									<td class="description last">
+										<p>要添加的节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">hash</strong>
+									</td>
+									<td class="description last">
+										<p>节点的哈希。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="setShaderStage" translate="no">.<a href="#setShaderStage">setShaderStage</a><span class="signature">( shaderStage : <span class="param-type">'vertex' | 'fragment' | 'compute' | 'any'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置当前着色器阶段。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shaderStage</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的着色器阶段。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="sortBindingGroups" translate="no">.<a href="#sortBindingGroups">sortBindingGroups</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>对绑定组排序并更新 <a href="NodeBuilder.html#bindingsIndexes">NodeBuilder#bindingsIndexes</a>。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/core/NodeBuilder.js" translate="no" target="_blank" rel="noopener">src/nodes/core/NodeBuilder.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

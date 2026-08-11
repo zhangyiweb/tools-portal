@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>IndexNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → </p>
+	<h1 translate="no">IndexNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类表示不同类型的着色器索引。以下预定义节点
+对象覆盖了常见用例：</p>
+<ul>
+<li><code>vertexIndex</code>：网格中顶点的索引。</li>
+<li><code>instanceIndex</code>：网格实例或计算着色器调用的索引。</li>
+<li><code>drawIndex</code>：绘制调用的索引。</li>
+<li><code>invocationLocalIndex</code>：工作组负载范围内计算调用的索引。</li>
+<li><code>invocationSubgroupIndex</code>：子组范围内计算调用的索引。</li>
+<li><code>subgroupIndex</code>：计算调用的子组在其工作组内的索引。</li>
+</ul></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="IndexNode" translate="no">new <a href="#IndexNode">IndexNode</a><span class="signature">( scope : <span class="param-type">'vertex' | 'instance' | 'subgroup' | 'invocationLocal' | 'invocationGlobal' | 'invocationSubgroup' | 'draw'</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的索引节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scope</strong>
+									</td>
+									<td class="description last">
+										<p>索引节点的作用域。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isIndexNode" translate="no">.<a href="#isIndexNode">isIndexNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scope" translate="no">.<a href="#scope">scope</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>索引节点的作用域。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/core/IndexNode.js" translate="no" target="_blank" rel="noopener">src/nodes/core/IndexNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

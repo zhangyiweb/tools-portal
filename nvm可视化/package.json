@@ -1,0 +1,46 @@
+{
+  "name": "nvm-gui",
+  "version": "1.0.0",
+  "description": "NVM 可视化管理工具",
+  "main": "main.js",
+  "author": "NVM GUI",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "dist": "electron-builder --win portable",
+    "dist:dir": "electron-builder --win dir"
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.nvmgui.desktop",
+    "productName": "NVM可视化管理",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "nvm-service.js",
+      "nvm-installer.js",
+      "src/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "${productName}-${version}-portable.${ext}"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}.${ext}"
+    },
+    "compression": "normal",
+    "asar": true
+  }
+}

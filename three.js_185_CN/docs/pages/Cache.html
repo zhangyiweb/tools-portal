@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Cache - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Cache</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>一个简单的缓存系统，由 <a href="FileLoader.html">FileLoader</a> 内部使用。
+要为所有使用 <a href="FileLoader.html">FileLoader</a> 的加载器启用缓存，请在应用中设置一次 <code>THREE.Cache.enabled = true.</code>。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id=".enabled" translate="no">.<a href="#.enabled">enabled</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否启用缓存。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id=".files" translate="no">.<a href="#.files">files</a><span class="type-signature"> : Object.&lt;string, Object></span> </h3>
+					<div class="description">
+						<p>保存已缓存文件的字典。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".add" translate="no">.<a href="#.add">add</a><span class="signature">( key : <span class="param-type">string</span>, file : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>添加一条缓存条目，并用键引用该文件。如果该键已
+持有文件，则会被覆盖。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">key</strong>
+									</td>
+									<td class="description last">
+										<p>用于引用已缓存文件的键。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">file</strong>
+									</td>
+									<td class="description last">
+										<p>要缓存的文件。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id=".clear" translate="no">.<a href="#.clear">clear</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>移除缓存中的所有值。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id=".get" translate="no">.<a href="#.get">get</a><span class="signature">( key : <span class="param-type">string</span> )</span><span class="type-signature"> : Object | undefined</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>获取给定键对应的缓存值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">key</strong>
+									</td>
+									<td class="description last">
+										<p>用于引用已缓存文件的键。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 已缓存的文件。若键不存在则返回 <code>undefined</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".remove" translate="no">.<a href="#.remove">remove</a><span class="signature">( key : <span class="param-type">string</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>移除与给定键关联的已缓存文件。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">key</strong>
+									</td>
+									<td class="description last">
+										<p>用于引用已缓存文件的键。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/Cache.js" translate="no" target="_blank" rel="noopener">src/loaders/Cache.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

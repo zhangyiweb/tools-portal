@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ConvexGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="BufferGeometry.html">BufferGeometry</a> → </p>
+	<h1 translate="no">ConvexGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类可用于为一组给定的三维点生成凸包。该任务的平均时间复杂度被认为是 O(nlog(n))。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const geometry = new ConvexGeometry( points );
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ConvexGeometry</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { ConvexGeometry } from 'three/addons/geometries/ConvexGeometry.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ConvexGeometry" translate="no">new <a href="#ConvexGeometry">ConvexGeometry</a><span class="signature">( points : <span class="param-type">Array.&lt;<a href="Vector3.html">Vector3</a>></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的凸包几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>应被凸包包围的三维空间中的点数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/geometries/ConvexGeometry.js" translate="no" target="_blank" rel="noopener">examples/jsm/geometries/ConvexGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TrackballControls - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Controls.html">Controls</a> → </p>
+	<h1 translate="no">TrackballControls</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类与 <a href="OrbitControls.html">OrbitControls</a> 类似。但它不会保持恒定的相机 <code>up</code> 向量。这意味着当相机绕过「北极」和「南极」时，不会翻转以保持「正立」。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TrackballControls</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TrackballControls } from 'three/addons/controls/TrackballControls.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TrackballControls" translate="no">new <a href="#TrackballControls">TrackballControls</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, domElement : <span class="param-type">HTMLElement</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的控制器实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>由控制器管理的对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">domElement</strong>
+									</td>
+									<td class="description last">
+										<p>用于事件监听的 HTML 元素。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="dynamicDampingFactor" translate="no">.<a href="#dynamicDampingFactor">dynamicDampingFactor</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>定义阻尼强度。仅在 <code>staticMoving</code> 设为 <code>false</code> 时生效。</p>
+						<p>默认值为 <code>0.2</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="keys" translate="no">.<a href="#keys">keys</a><span class="type-signature"> : Array.&lt;string></span> </h3>
+					<div class="description">
+						<p>此数组保存用于控制交互的键码。</p>
+<ul>
+<li>按下第一个定义的键时，所有鼠标交互（左、中、右）执行旋转。</li>
+<li>按下第二个定义的键时，所有鼠标交互（左、中、右）执行缩放。</li>
+<li>按下第三个定义的键时，所有鼠标交互（左、中、右）执行平移。</li>
+</ul>
+<p>默认值为 <em>KeyA, KeyS, KeyD</em>，分别对应 A、S、D。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Controls.html#keys">Controls#keys</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxDistance" translate="no">.<a href="#maxDistance">maxDistance</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>你能向外推拉多远（仅透视相机）。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="maxZoom" translate="no">.<a href="#maxZoom">maxZoom</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>你能缩小多远（仅正交相机）。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="minDistance" translate="no">.<a href="#minDistance">minDistance</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>你能向内推拉多近（仅透视相机）。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="minZoom" translate="no">.<a href="#minZoom">minZoom</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>你能放大多近（仅正交相机）。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mouseButtons" translate="no">.<a href="#mouseButtons">mouseButtons</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>此对象包含控制器所用鼠标操作的引用。</p>
+<pre><code class="language-js">controls.mouseButtons = {
+	LEFT: THREE.MOUSE.ROTATE,
+	MIDDLE: THREE.MOUSE.DOLLY,
+	RIGHT: THREE.MOUSE.PAN
+}
+</code></pre>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Controls.html#mouseButtons">Controls#mouseButtons</a></dt>
+						</dl>
+				</div>
+				<div class="member">
+					<h3 class="name" id="noPan" translate="no">.<a href="#noPan">noPan</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否禁用平移。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="noRotate" translate="no">.<a href="#noRotate">noRotate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否禁用旋转。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="noZoom" translate="no">.<a href="#noZoom">noZoom</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否禁用缩放。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="panSpeed" translate="no">.<a href="#panSpeed">panSpeed</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>平移速度。</p>
+						<p>默认值为 <code>0.3</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="rotateSpeed" translate="no">.<a href="#rotateSpeed">rotateSpeed</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>旋转速度。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="screen" translate="no">.<a href="#screen">screen</a><span class="type-signature"> : Object</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>表示屏幕属性。在调用 <code>handleResize()</code> 时自动设置。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="staticMoving" translate="no">.<a href="#staticMoving">staticMoving</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否禁用阻尼。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="target" translate="no">.<a href="#target">target</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>控制器的焦点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="zoomSpeed" translate="no">.<a href="#zoomSpeed">zoomSpeed</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>缩放速度。</p>
+						<p>默认值为 <code>1.2</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="handleResize" translate="no">.<a href="#handleResize">handleResize</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>应用程序窗口调整大小时必须调用。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="reset" translate="no">.<a href="#reset">reset</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将控制器重置为初始状态。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">事件</h2>
+					<h3 class="name name-method" id="event:change" translate="no">.<a href="#event:change">change</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当相机被控制器变换时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="event:end" translate="no">.<a href="#event:end">end</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当交互结束时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+					<h3 class="name name-method" id="event:start" translate="no">.<a href="#event:start">start</a> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当交互开始时触发。</p>
+						</div>
+						<h5>类型：</h5>
+						<ul>
+							<li>
+<span class="param-type">Object</span>
+							</li>
+						</ul>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/controls/TrackballControls.js" translate="no" target="_blank" rel="noopener">examples/jsm/controls/TrackballControls.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

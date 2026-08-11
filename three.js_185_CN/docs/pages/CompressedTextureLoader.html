@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>CompressedTextureLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">CompressedTextureLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载压缩纹理格式（S3TC、ASTC 或 ETC）的抽象基类。
+纹理在内部通过 <a href="FileLoader.html">FileLoader</a> 加载。</p>
+<p>派生类必须实现 <code>parse()</code> 方法，其中包含各自格式的
+解析逻辑。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="CompressedTextureLoader" translate="no">new <a href="#CompressedTextureLoader">CompressedTextureLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> <span class="type-signature">(abstract) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的压缩纹理加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span><span class="type-signature"> : <a href="CompressedTexture.html">CompressedTexture</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的压缩纹理
+传递给 <code>onLoad()</code> 回调。该方法还会返回一个新的纹理对象，可直接
+用于创建材质。若采用这种方式，当相应加载过程完成时，
+纹理可能会出现在场景中。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 压缩纹理。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~TexData" translate="no">.<a href="#~TexData">TexData</a> </h3>
+					<div class="description">
+						<p>表示 <code>parse()</code> 方法的结果对象类型。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>width</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>基础 mip 的宽度。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>height</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>基础 mip 的高度。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>isCubemap</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>数据是否表示立方体贴图。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>mipmapCount</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>mipmap 数量。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>mipmaps</strong>
+						<br>
+<span class="param-type">Array.&lt;{data:TypedArray, width:number, height:number}></span>
+				</td>
+			<td class="description last">
+				<p>保存 mipmap 的数组。
+每个条目包含对应级别的数据和尺寸。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>format</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理格式。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/CompressedTextureLoader.js" translate="no" target="_blank" rel="noopener">src/loaders/CompressedTextureLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

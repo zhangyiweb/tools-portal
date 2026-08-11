@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TileCreasedNormalsPlugin - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">TileCreasedNormalsPlugin</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><code>3d-tiles-renderer</code> 的插件，为每个已加载 tile 的几何体计算折痕顶点法线：
+除面之间夹角大于折痕角的位置外，其余位置使用平滑法线。适用于 Google Photorealistic 3D Tiles 等
+不含顶点法线的摄影测量 tile 集。</p>
+<p>法线在 Web Worker 中计算，tile 处理不会阻塞主线程。tile 的法线就绪后才会显示。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">tiles.registerPlugin( new TileCreasedNormalsPlugin( { creaseAngle: Math.PI / 6 } ) );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TileCreasedNormalsPlugin</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { TileCreasedNormalsPlugin } from 'three/addons/misc/TileCreasedNormalsPlugin.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TileCreasedNormalsPlugin" translate="no">new <a href="#TileCreasedNormalsPlugin">TileCreasedNormalsPlugin</a><span class="signature">( options : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的插件。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>配置选项。</p>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">creaseAngle</strong>
+									</td>
+									<td class="description last">
+										<p>折痕角（弧度）。</p>
+										<p>默认值为 <code>Math.PI/3</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="creaseAngle" translate="no">.<a href="#creaseAngle">creaseAngle</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>折痕角（弧度）。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>插件注销或 tiles 渲染器销毁时由 tiles 渲染器调用。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="processTileModel" translate="no">.<a href="#processTileModel">processTileModel</a><span class="signature">( scene : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span><span class="type-signature"> : Promise</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>tiles 渲染器为每个已加载的 tile 模型调用此方法。返回的 promise 解析后才会显示 tile。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scene</strong>
+									</td>
+									<td class="description last">
+										<p>tile 模型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 所有几何体完成折痕法线计算后解析的 promise。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/misc/TileCreasedNormalsPlugin.js" translate="no" target="_blank" rel="noopener">examples/jsm/misc/TileCreasedNormalsPlugin.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

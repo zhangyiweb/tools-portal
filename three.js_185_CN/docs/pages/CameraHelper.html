@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>CameraHelper - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Line.html">Line</a> → <a href="LineSegments.html">LineSegments</a> → </p>
+	<h1 translate="no">CameraHelper</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于可视化相机视锥体所包含的内容。它使用线段可视化相机的视锥体。</p>
+<p>基于 <a href="https://github.com/evanw/lightgl.js/blob/master/tests/shadowmap.html" target="_blank" rel="noopener">lightgl.js shadowmap example</a> 中的视锥体可视化。</p>
+<p><code>CameraHelper</code> 必须是场景的子对象。</p>
+<p>当相机发生变换或其投影矩阵更改时，需要调用相应辅助对象的 <code>update()</code> 方法。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const helper = new THREE.CameraHelper( camera );
+scene.add( helper );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="CameraHelper" translate="no">new <a href="#CameraHelper">CameraHelper</a><span class="signature">( camera : <span class="param-type"><a href="Camera.html">Camera</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的相机辅助对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+										<p>要可视化的相机。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="camera" translate="no">.<a href="#camera">camera</a><span class="type-signature"> : <a href="Camera.html">Camera</a></span> </h3>
+					<div class="description">
+						<p>正在可视化的相机。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="pointMap" translate="no">.<a href="#pointMap">pointMap</a><span class="type-signature"> : Object.&lt;string, Array.&lt;number>></span> </h3>
+					<div class="description">
+						<p>包含用于可视化相机的点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放该实例分配的 GPU 相关资源。当应用中不再使用该实例时，应调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="setColors" translate="no">.<a href="#setColors">setColors</a><span class="signature">( frustum : <span class="param-type"><a href="Color.html">Color</a></span>, cone : <span class="param-type"><a href="Color.html">Color</a></span>, up : <span class="param-type"><a href="Color.html">Color</a></span>, target : <span class="param-type"><a href="Color.html">Color</a></span>, cross : <span class="param-type"><a href="Color.html">Color</a></span> )</span><span class="type-signature"> : <a href="CameraHelper.html">CameraHelper</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义辅助对象的颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frustum</strong>
+									</td>
+									<td class="description last">
+										<p>视锥体线段颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">cone</strong>
+									</td>
+									<td class="description last">
+										<p>圆锥线段颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">up</strong>
+									</td>
+									<td class="description last">
+										<p>上方向线段颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>目标线段颜色。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">cross</strong>
+									</td>
+									<td class="description last">
+										<p>十字线段颜色。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该辅助对象的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据相机的投影矩阵更新辅助对象。</p>
+						</div>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/helpers/CameraHelper.js" translate="no" target="_blank" rel="noopener">src/helpers/CameraHelper.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

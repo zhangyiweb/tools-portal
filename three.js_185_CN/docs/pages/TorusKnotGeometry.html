@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TorusKnotGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="BufferGeometry.html">BufferGeometry</a> → </p>
+	<h1 translate="no">TorusKnotGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>创建圆环结，其具体形状由一对互质整数 p 和 q 定义。若 p 与 q 不互质，结果将为圆环链。</p></div>
+				<iframe id="viewer" src="../scenes/geometry-browser.html#TorusKnotGeometry"></iframe>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+const torusKnot = new THREE.Mesh( geometry, material );
+scene.add( torusKnot );
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TorusKnotGeometry" translate="no">new <a href="#TorusKnotGeometry">TorusKnotGeometry</a><span class="signature">( radius : <span class="param-type">number</span>, tube : <span class="param-type">number</span>, tubularSegments : <span class="param-type">number</span>, radialSegments : <span class="param-type">number</span>, p : <span class="param-type">number</span>, q : <span class="param-type">number</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的圆环结几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">radius</strong>
+									</td>
+									<td class="description last">
+										<p>圆环结的半径。</p>
+										<p>默认值为 <code>1</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tube</strong>
+									</td>
+									<td class="description last">
+										<p>管道半径。</p>
+										<p>默认值为 <code>0.4</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">tubularSegments</strong>
+									</td>
+									<td class="description last">
+										<p>管道方向分段数。</p>
+										<p>默认值为 <code>64</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">radialSegments</strong>
+									</td>
+									<td class="description last">
+										<p>径向分段数。</p>
+										<p>默认值为 <code>8</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>该值决定几何体绕其旋转对称轴缠绕的次数。</p>
+										<p>默认值为 <code>2</code>.</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">q</strong>
+									</td>
+									<td class="description last">
+										<p>该值决定几何体绕圆环内部一个圆缠绕的次数。</p>
+										<p>默认值为 <code>3</code>.</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="parameters" translate="no">.<a href="#parameters">parameters</a><span class="type-signature"> : Object</span> </h3>
+					<div class="description">
+						<p>保存用于生成该几何体的构造函数参数。实例化后的任何修改都不会改变几何体。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".fromJSON" translate="no">.<a href="#.fromJSON">fromJSON</a><span class="signature">( data : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="TorusKnotGeometry.html">TorusKnotGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>工厂方法，根据给定的 JSON 对象创建该类的实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>表示已序列化几何体的 JSON 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 新实例。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/geometries/TorusKnotGeometry.js" translate="no" target="_blank" rel="noopener">src/geometries/TorusKnotGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Object3DNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → </p>
+	<h1 translate="no">Object3DNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此节点可用于访问 3D 对象与变换相关的度量。
+根据所选作用域，着色器中以 uniform 形式表示不同的度量。支持以下作用域：</p>
+<ul>
+<li><code>POSITION</code>：对象在世界空间中的位置。</li>
+<li><code>VIEW_POSITION</code>：对象在视图/相机空间中的位置。</li>
+<li><code>DIRECTION</code>：对象在世界空间中的方向。</li>
+<li><code>SCALE</code>：对象在世界空间中的缩放。</li>
+<li><code>WORLD_MATRIX</code>：对象在世界空间中的矩阵。</li>
+</ul></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Object3DNode" translate="no">new <a href="#Object3DNode">Object3DNode</a><span class="signature">( scope : <span class="param-type">'position' | 'viewPosition' | 'direction' | 'scale' | 'worldMatrix'</span>, object3d : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 3D 对象节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">scope</strong>
+									</td>
+									<td class="description last">
+										<p>根据作用域的不同，该节点表示不同类型的变换。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">object3d</strong>
+									</td>
+									<td class="description last">
+										<p>3D 对象。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="object3d" translate="no">.<a href="#object3d">object3d</a><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="description">
+						<p>3D 对象。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="scope" translate="no">.<a href="#scope">scope</a><span class="type-signature"> : 'position' | 'viewPosition' | 'direction' | 'scale' | 'worldMatrix'</span> </h3>
+					<div class="description">
+						<p>根据作用域的不同，该节点报告不同类型的变换。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="uniformNode" translate="no">.<a href="#uniformNode">uniformNode</a><span class="type-signature"> : <a href="UniformNode.html">UniformNode</a></span> </h3>
+					<div class="description">
+						<p>以 uniform 形式保存节点的值。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="updateType" translate="no">.<a href="#updateType">updateType</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>已重写，因为此类节点按对象更新。</p>
+						<p>默认值为 <code>'object'</code>。</p>
+					</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#updateType">Node#updateType</a></dt>
+						</dl>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="generate" translate="no">.<a href="#generate">generate</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>生成 uniform 节点的代码片段。uniform 节点的节点类型也取决于所选作用域。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#generate">Node#generate</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 生成的代码片段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateNodeType" translate="no">.<a href="#generateNodeType">generateNodeType</a><span class="signature">()</span><span class="type-signature"> : 'mat4' | 'vec3' | 'float'</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>已重写，因为节点类型从作用域推断。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#generateNodeType">Node#generateNodeType</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="update" translate="no">.<a href="#update">update</a><span class="signature">( frame : <span class="param-type"><a href="NodeFrame.html">NodeFrame</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据作用域更新 uniform 值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">frame</strong>
+									</td>
+									<td class="description last">
+										<p>当前的节点帧。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Node.html#update">Node#update</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/accessors/Object3DNode.js" translate="no" target="_blank" rel="noopener">src/nodes/accessors/Object3DNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

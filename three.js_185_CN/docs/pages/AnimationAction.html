@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>AnimationAction - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">AnimationAction</h1>
+		<section>
+			<header>
+				<div class="class-description"><p><code>AnimationAction</code> 的实例用于调度存储在 <a href="AnimationClip.html">AnimationClip</a> 中的动画播放。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="AnimationAction" translate="no">new <a href="#AnimationAction">AnimationAction</a><span class="signature">( mixer : <span class="param-type"><a href="AnimationMixer.html">AnimationMixer</a></span>, clip : <span class="param-type"><a href="AnimationClip.html">AnimationClip</a></span>, localRoot : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, blendMode : <span class="param-type"><a href="global.html#NormalAnimationBlendMode">NormalAnimationBlendMode</a> | <a href="global.html#AdditiveAnimationBlendMode">AdditiveAnimationBlendMode</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的动画动作。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">mixer</strong>
+									</td>
+									<td class="description last">
+										<p>由该动作控制的混合器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">clip</strong>
+									</td>
+									<td class="description last">
+										<p>包含实际关键帧的动画片段。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">localRoot</strong>
+									</td>
+									<td class="description last">
+										<p>执行该动作的根对象。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">blendMode</strong>
+									</td>
+									<td class="description last">
+										<p>混合模式。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="blendMode" translate="no">.<a href="#blendMode">blendMode</a><span class="type-signature"> : <a href="global.html#NormalAnimationBlendMode">NormalAnimationBlendMode</a> | <a href="global.html#AdditiveAnimationBlendMode">AdditiveAnimationBlendMode</a></span> </h3>
+					<div class="description">
+						<p>定义当两个或多个动画同时播放时，动画如何混合/组合。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="clampWhenFinished" translate="no">.<a href="#clampWhenFinished">clampWhenFinished</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设置为 true，动画将在最后一帧自动暂停。</p>
+<p>若设置为 false，当动作的最后一次循环结束时，<a href="AnimationAction.html#enabled">AnimationAction#enabled</a> 将自动切换为
+<code>false</code>，从而使该动作不再产生影响。</p>
+<p>注意：如果动作被中断，此成员不会产生任何影响（仅在其最后一次循环真正完成时才会生效）。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="enabled" translate="no">.<a href="#enabled">enabled</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设置为 <code>false</code>，该动作将被禁用，不再产生影响。</p>
+<p>当动作重新启用时，动画会从当前时间继续播放（将 <code>enabled</code> 设置为 <code>false</code> 不会重置该动作）。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="loop" translate="no">.<a href="#loop">loop</a><span class="type-signature"> : <a href="global.html#LoopRepeat">LoopRepeat</a> | <a href="global.html#LoopOnce">LoopOnce</a> | <a href="global.html#LoopPingPong">LoopPingPong</a></span> </h3>
+					<div class="description">
+						<p>循环模式，通过 <a href="AnimationAction.html#setLoop">AnimationAction#setLoop</a> 设置。</p>
+						<p>默认值为 <code>LoopRepeat</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="paused" translate="no">.<a href="#paused">paused</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>若设置为 <code>true</code>，该动作的播放将被暂停。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="repetitions" translate="no">.<a href="#repetitions">repetitions</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>在该动作执行期间，所播放片段的重复次数。
+可通过 <a href="AnimationAction.html#setLoop">AnimationAction#setLoop</a> 设置。</p>
+<p>若 <a href="AnimationAction.html#loop">AnimationAction#loop</a> 设置为
+<code>THREE:LoopOnce</code>，则设置此数值无效。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="time" translate="no">.<a href="#time">time</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>该动作的本地时间（以秒为单位，从 <code>0</code> 开始）。</p>
+<p>该值会根据循环状态被钳制或包裹到 <code>[0,clip.duration]</code> 范围内。</p>
+						<p>默认值为 <code>Infinity</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="timeScale" translate="no">.<a href="#timeScale">timeScale</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p><a href="AnimationAction.html#time">AnimationAction#time</a> 的缩放因子。值为 <code>0</code> 时动画暂停，负值时动画倒放。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="weight" translate="no">.<a href="#weight">weight</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>该动作的影响程度（取值区间为 <code>[0, 1]</code>）。可使用 <code>0</code>（无影响）到 <code>1</code>（完全影响）之间的值在多个动作之间进行混合。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="zeroSlopeAtEnd" translate="no">.<a href="#zeroSlopeAtEnd">zeroSlopeAtEnd</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>无需为开始、循环和结束分别准备独立片段，即可实现平滑插值。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="zeroSlopeAtStart" translate="no">.<a href="#zeroSlopeAtStart">zeroSlopeAtStart</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>无需为开始、循环和结束分别准备独立片段，即可实现平滑插值。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="crossFadeFrom" translate="no">.<a href="#crossFadeFrom">crossFadeFrom</a><span class="signature">( fadeOutAction : <span class="param-type"><a href="AnimationAction.html">AnimationAction</a></span>, duration : <span class="param-type">number</span>, warp : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在指定的时间间隔内，使该动作淡入，并使给定动作淡出。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">fadeOutAction</strong>
+									</td>
+									<td class="description last">
+										<p>要淡出的动画动作。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>淡入淡出的持续时间。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">warp</strong>
+									</td>
+									<td class="description last">
+										<p>是否使用变形（warping）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="crossFadeTo" translate="no">.<a href="#crossFadeTo">crossFadeTo</a><span class="signature">( fadeInAction : <span class="param-type"><a href="AnimationAction.html">AnimationAction</a></span>, duration : <span class="param-type">number</span>, warp : <span class="param-type">boolean</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在指定的时间间隔内，使该动作淡出，并使给定动作淡入。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">fadeInAction</strong>
+									</td>
+									<td class="description last">
+										<p>要淡入的动画动作。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>淡入淡出的持续时间。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">warp</strong>
+									</td>
+									<td class="description last">
+										<p>是否使用变形（warping）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="fadeIn" translate="no">.<a href="#fadeIn">fadeIn</a><span class="signature">( duration : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在指定的时间间隔内，通过将权重从 <code>0</code> 逐渐增加到 <code>1</code> 来实现动画淡入。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>淡入的持续时间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="fadeOut" translate="no">.<a href="#fadeOut">fadeOut</a><span class="signature">( duration : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在指定的时间间隔内，通过将权重从 <code>1</code> 逐渐降低到 <code>0</code> 来实现动画淡出。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>淡出的持续时间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getClip" translate="no">.<a href="#getClip">getClip</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回该动画动作关联的动画片段。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 动画片段。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getEffectiveTimeScale" translate="no">.<a href="#getEffectiveTimeScale">getEffectiveTimeScale</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回该动作的有效时间缩放值。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 有效时间缩放值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getEffectiveWeight" translate="no">.<a href="#getEffectiveWeight">getEffectiveWeight</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回该动作的有效权重。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 有效权重。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMixer" translate="no">.<a href="#getMixer">getMixer</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationMixer.html">AnimationMixer</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回该动画动作关联的动画混合器。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 动画混合器。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getRoot" translate="no">.<a href="#getRoot">getRoot</a><span class="signature">()</span><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回该动画动作的根对象。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 根对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="halt" translate="no">.<a href="#halt">halt</a><span class="signature">( duration : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在指定的时间间隔内，将该动画的速度减速至 <code>0</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>持续时间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isRunning" translate="no">.<a href="#isRunning">isRunning</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>若动画正在运行，则返回 <code>true</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 动画是否正在运行。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isScheduled" translate="no">.<a href="#isScheduled">isScheduled</a><span class="signature">()</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>当已调用 <a href="AnimationAction.html#play">AnimationAction#play</a> 时，返回 <code>true</code>。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 动画是否已调度。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="play" translate="no">.<a href="#play">play</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>开始播放动画。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="reset" translate="no">.<a href="#reset">reset</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>重置动画播放。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setDuration" translate="no">.<a href="#setDuration">setDuration</a><span class="signature">( duration : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置该动作单次循环的持续时间。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的持续时间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setEffectiveTimeScale" translate="no">.<a href="#setEffectiveTimeScale">setEffectiveTimeScale</a><span class="signature">( timeScale : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置该动作的有效时间缩放值。</p>
+<p>当动作暂停时，它将不再产生影响，因此有效时间缩放值为零。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">timeScale</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的时间缩放值。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setEffectiveWeight" translate="no">.<a href="#setEffectiveWeight">setEffectiveWeight</a><span class="signature">( weight : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置该动作的有效权重。</p>
+<p>当动作被禁用时，它将不再产生影响，因此有效权重为零。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">weight</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的权重。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setLoop" translate="no">.<a href="#setLoop">setLoop</a><span class="signature">( mode : <span class="param-type"><a href="global.html#LoopRepeat">LoopRepeat</a> | <a href="global.html#LoopOnce">LoopOnce</a> | <a href="global.html#LoopPingPong">LoopPingPong</a></span>, repetitions : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>配置该动作的循环设置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">mode</strong>
+									</td>
+									<td class="description last">
+										<p>循环模式。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">repetitions</strong>
+									</td>
+									<td class="description last">
+										<p>重复次数。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="startAt" translate="no">.<a href="#startAt">startAt</a><span class="signature">( time : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义动画应开始播放的时间。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">time</strong>
+									</td>
+									<td class="description last">
+										<p>开始时间（秒）。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="stop" translate="no">.<a href="#stop">stop</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>停止播放动画。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="stopFading" translate="no">.<a href="#stopFading">stopFading</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>停止应用于该动作的任何淡入淡出效果。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="stopWarping" translate="no">.<a href="#stopWarping">stopWarping</a><span class="signature">()</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>停止应用于该动作的任何已调度变形（warping）。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="syncWith" translate="no">.<a href="#syncWith">syncWith</a><span class="signature">( action : <span class="param-type"><a href="AnimationAction.html">AnimationAction</a></span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将该动作与传入的另一个动作同步。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">action</strong>
+									</td>
+									<td class="description last">
+										<p>要同步的动作。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="warp" translate="no">.<a href="#warp">warp</a><span class="signature">( startTimeScale : <span class="param-type">number</span>, endTimeScale : <span class="param-type">number</span>, duration : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="AnimationAction.html">AnimationAction</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在指定的时间间隔内，通过将 <a href="AnimationAction.html#timeScale">AnimationAction#timeScale</a> 从 <code>startTimeScale</code> 逐渐变化到
+<code>endTimeScale</code> 来改变播放速度。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">startTimeScale</strong>
+									</td>
+									<td class="description last">
+										<p>起始时间缩放值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">endTimeScale</strong>
+									</td>
+									<td class="description last">
+										<p>结束时间缩放值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">duration</strong>
+									</td>
+									<td class="description last">
+										<p>持续时间。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该动画动作的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/animation/AnimationAction.js" translate="no" target="_blank" rel="noopener">src/animation/AnimationAction.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

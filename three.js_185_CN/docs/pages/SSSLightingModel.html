@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SSSLightingModel - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="LightingModel.html">LightingModel</a> → <a href="PhysicalLightingModel.html">PhysicalLightingModel</a> → </p>
+	<h1 translate="no">SSSLightingModel</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示 <a href="MeshSSSNodeMaterial.html">MeshSSSNodeMaterial</a> 的光照模型。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SSSLightingModel" translate="no">new <a href="#SSSLightingModel">SSSLightingModel</a><span class="signature">( clearcoat : <span class="param-type">boolean</span>, sheen : <span class="param-type">boolean</span>, iridescence : <span class="param-type">boolean</span>, anisotropy : <span class="param-type">boolean</span>, transmission : <span class="param-type">boolean</span>, dispersion : <span class="param-type">boolean</span>, sss : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的物理光照模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">clearcoat</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持清漆（clearcoat）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">sheen</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持光泽（sheen）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">iridescence</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持虹彩（iridescence）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">anisotropy</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持各向异性（anisotropy）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">transmission</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持透射（transmission）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">dispersion</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持色散（dispersion）。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">sss</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持 SSS。</p>
+										<p>默认值为 <code>false</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="useSSS" translate="no">.<a href="#useSSS">useSSS</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>光照模型是否应使用 SSS。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="direct" translate="no">.<a href="#direct">direct</a><span class="signature">( input : <span class="param-type">Object</span>, builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>在默认实现基础上扩展了 SSS 项。</p>
+<p>参考：<a href="https://colinbarrebrisebois.com/2011/03/07/gdc-2011-approximating-translucency-for-a-fast-cheap-and-convincing-subsurface-scattering-look/" target="_blank" rel="noopener">Approximating Translucency for a Fast, Cheap and Convincing Subsurface Scattering Look</a></p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">input</strong>
+									</td>
+									<td class="description last">
+										<p>输入数据。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="PhysicalLightingModel.html#direct">PhysicalLightingModel#direct</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/materials/nodes/MeshSSSNodeMaterial.js" translate="no" target="_blank" rel="noopener">src/materials/nodes/MeshSSSNodeMaterial.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

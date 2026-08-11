@@ -1,0 +1,23 @@
+.align-guides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  overflow: visible;
+}
+
+.align-guide {
+  position: absolute;
+  background: #f472b6;
+  box-shadow: 0 0 0 0.5px rgba(244, 114, 182, 0.4);
+}
+
+.align-guide--v {
+  width: 1px;
+  transform: translateX(-0.5px);
+}
+
+.align-guide--h {
+  height: 1px;
+  transform: translateY(-0.5px);
+}

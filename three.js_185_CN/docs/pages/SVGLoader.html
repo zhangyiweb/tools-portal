@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SVGLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">SVGLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载 SVG 格式的加载器。</p>
+<p>可缩放矢量图形（Scalable Vector Graphics）是一种基于 XML 的二维矢量图像格式，
+支持交互与动画。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const loader = new SVGLoader();
+const data = await loader.loadAsync( 'data/svgSample.svg' );
+const paths = data.paths;
+const group = new THREE.Group();
+for ( let i = 0; i &lt; paths.length; i ++ ) {
+	const path = paths[ i ];
+	const material = new THREE.MeshBasicMaterial( {
+		color: path.color,
+		side: THREE.DoubleSide,
+		depthWrite: false
+	} );
+	const shapes = SVGLoader.createShapes( path );
+	for ( let j = 0; j &lt; shapes.length; j ++ ) {
+		const shape = shapes[ j ];
+		const geometry = new THREE.ShapeGeometry( shape );
+		const mesh = new THREE.Mesh( geometry, material );
+		group.add( mesh );
+	}
+}
+scene.add( group );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">SVGLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SVGLoader" translate="no">new <a href="#SVGLoader">SVGLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 SVG 加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="defaultDPI" translate="no">.<a href="#defaultDPI">defaultDPI</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>默认每英寸点数。</p>
+						<p>默认值为 <code>90</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="defaultUnit" translate="no">.<a href="#defaultUnit">defaultUnit</a><span class="type-signature"> : 'mm' | 'cm' | 'in' | 'pt' | 'pc' | 'px'</span> </h3>
+					<div class="description">
+						<p>默认单位。</p>
+						<p>默认值为 <code>'px'</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的 SVG 资源
+传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( text : <span class="param-type">string</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 SVG 数据并返回生成的数据。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">text</strong>
+									</td>
+									<td class="description last">
+										<p>原始 SVG 数据字符串。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 包含形状路径数组和
+SVG XML 文档的对象。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".createFillMaterial" translate="no">.<a href="#.createFillMaterial">createFillMaterial</a><span class="signature">( shapePath : <span class="param-type"><a href="ShapePath.html">ShapePath</a></span> )</span><span class="type-signature"> : <a href="MeshBasicMaterial.html">MeshBasicMaterial</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定路径的填充渲染创建材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shapePath</strong>
+									</td>
+									<td class="description last">
+										<p>形状路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 填充材质。若路径无填充则为 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".createShapes" translate="no">.<a href="#.createShapes">createShapes</a><span class="signature">( shapePath : <span class="param-type"><a href="ShapePath.html">ShapePath</a></span> )</span><span class="type-signature"> : Array.&lt;<a href="Shape.html">Shape</a>></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定形状路径创建形状数组。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shapePath</strong>
+									</td>
+									<td class="description last">
+										<p>形状路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="important tag-deprecated"><strong>已弃用：</strong> 自 185 版本起。</dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 形状数组。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".createStrokeMaterial" translate="no">.<a href="#.createStrokeMaterial">createStrokeMaterial</a><span class="signature">( shapePath : <span class="param-type"><a href="ShapePath.html">ShapePath</a></span> )</span><span class="type-signature"> : <a href="MeshBasicMaterial.html">MeshBasicMaterial</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为给定路径的描边渲染创建材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">shapePath</strong>
+									</td>
+									<td class="description last">
+										<p>形状路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 描边材质。若路径无描边则为 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".getStrokeStyle" translate="no">.<a href="#.getStrokeStyle">getStrokeStyle</a><span class="signature">( width : <span class="param-type">number</span>, color : <span class="param-type">string</span>, lineJoin : <span class="param-type">'round' | 'bevel' | 'miter' | 'miter-limit'</span>, lineCap : <span class="param-type">'round' | 'square' | 'butt'</span>, miterLimit : <span class="param-type">number</span> )</span><span class="type-signature"> : Object</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定参数返回描边样式对象。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">width</strong>
+									</td>
+									<td class="description last">
+										<p>描边宽度。</p>
+										<p>默认值为 <code>1</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">color</strong>
+									</td>
+									<td class="description last">
+										<p>描边颜色，由 <a href="Color.html#getStyle">Color#getStyle</a> 返回的格式。</p>
+										<p>默认值为 <code>'#000'</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">lineJoin</strong>
+									</td>
+									<td class="description last">
+										<p>线段连接样式。</p>
+										<p>默认值为 <code>'miter'</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">lineCap</strong>
+									</td>
+									<td class="description last">
+										<p>线段端点样式。</p>
+										<p>默认值为 <code>'butt'</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">miterLimit</strong>
+									</td>
+									<td class="description last">
+										<p>最大连接长度，以 <code>width</code> 参数的倍数表示（超出该距离时连接将被截断）。</p>
+										<p>默认值为 <code>4</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 样式对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".pointsToStroke" translate="no">.<a href="#.pointsToStroke">pointsToStroke</a><span class="signature">( points : <span class="param-type">Array.&lt;<a href="Vector2.html">Vector2</a>></span>, style : <span class="param-type">Object</span>, arcDivisions : <span class="param-type">number</span>, minDistance : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从点数组创建描边。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>二维空间中的点。至少需要 2 个点。路径可以是开放的或闭合的（最后一个点等于第一个点）。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">style</strong>
+									</td>
+									<td class="description last">
+										<p>包含 SVG 属性的对象，由 <code>SVGLoader.getStrokeStyle()</code> 返回，或由 <code>SVGLoader.parse()</code> 写入 <code>path.userData.style</code> 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">arcDivisions</strong>
+									</td>
+									<td class="description last">
+										<p>圆角连接和端帽的圆弧分段数。</p>
+										<p>默认值为 <code>12</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">minDistance</strong>
+									</td>
+									<td class="description last">
+										<p>距离小于此值的点将被合并。</p>
+										<p>默认值为 <code>0.001</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 描边几何体。会生成 UV 坐标（'u' 沿路径方向，'v' 横跨路径，从左到右）。
+若未生成几何体则返回 <code>null</code>。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".pointsToStrokeWithBuffers" translate="no">.<a href="#.pointsToStrokeWithBuffers">pointsToStrokeWithBuffers</a><span class="signature">( points : <span class="param-type">Array.&lt;<a href="Vector2.html">Vector2</a>></span>, style : <span class="param-type">Object</span>, arcDivisions : <span class="param-type">number</span>, minDistance : <span class="param-type">number</span>, vertices : <span class="param-type">Array.&lt;number></span>, normals : <span class="param-type">Array.&lt;number></span>, uvs : <span class="param-type">Array.&lt;number></span>, vertexOffset : <span class="param-type">number</span> )</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从点数组创建描边。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>二维空间中的点。至少需要 2 个点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">style</strong>
+									</td>
+									<td class="description last">
+										<p>包含 SVG 属性的对象，由 <code>SVGLoader.getStrokeStyle()</code> 返回，或由 <code>SVGLoader.parse()</code> 写入 <code>path.userData.style</code> 对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">arcDivisions</strong>
+									</td>
+									<td class="description last">
+										<p>圆角连接和端帽的圆弧分段数。</p>
+										<p>默认值为 <code>12</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">minDistance</strong>
+									</td>
+									<td class="description last">
+										<p>距离小于此值的点将被合并。</p>
+										<p>默认值为 <code>0.001</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">vertices</strong>
+									</td>
+									<td class="description last">
+										<p>存储顶点的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">normals</strong>
+									</td>
+									<td class="description last">
+										<p>存储法线的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">uvs</strong>
+									</td>
+									<td class="description last">
+										<p>存储 UV 的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">vertexOffset</strong>
+									</td>
+									<td class="description last">
+										<p>顶点偏移量。</p>
+										<p>默认值为 <code>0</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 顶点数量。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/SVGLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/SVGLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

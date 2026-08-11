@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Triangle - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">Triangle</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>由三个向量定义其三个顶点的几何三角形。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="Triangle" translate="no">new <a href="#Triangle">Triangle</a><span class="signature">( a : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, b : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, c : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的三角形。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第一个顶点。</p>
+										<p>默认值为 <code>(0,0,0)</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第二个顶点。</p>
+										<p>默认值为 <code>(0,0,0)</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">c</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第三个顶点。</p>
+										<p>默认值为 <code>(0,0,0)</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="a" translate="no">.<a href="#a">a</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>三角形的第一个顶点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="b" translate="no">.<a href="#b">b</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>三角形的第二个顶点。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="c" translate="no">.<a href="#c">c</a><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="description">
+						<p>三角形的第三个顶点。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="clone" translate="no">.<a href="#clone">clone</a><span class="signature">()</span><span class="type-signature"> : <a href="Triangle.html">Triangle</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回一个新三角形，其值从本实例复制而来。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 本实例的克隆。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="closestPointToPoint" translate="no">.<a href="#closestPointToPoint">closestPointToPoint</a><span class="signature">( p : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回三角形上到给定点最近的点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">p</strong>
+									</td>
+									<td class="description last">
+										<p>要计算最近点的目标点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形上最近的点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="containsPoint" translate="no">.<a href="#containsPoint">containsPoint</a><span class="signature">( point : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果给定点投影到三角形所在平面后落在三角形内，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">point</strong>
+									</td>
+									<td class="description last">
+										<p>要测试的三维空间中的点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定点投影到三角形所在平面后是否落在三角形内。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="copy" translate="no">.<a href="#copy">copy</a><span class="signature">( triangle : <span class="param-type"><a href="Triangle.html">Triangle</a></span> )</span><span class="type-signature"> : <a href="Triangle.html">Triangle</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定三角形的值复制到本实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">triangle</strong>
+									</td>
+									<td class="description last">
+										<p>要复制的三角形。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此三角形的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="equals" translate="no">.<a href="#equals">equals</a><span class="signature">( triangle : <span class="param-type"><a href="Triangle.html">Triangle</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此三角形与给定三角形相等，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">triangle</strong>
+									</td>
+									<td class="description last">
+										<p>要测试相等性的三角形。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此三角形是否与给定三角形相等。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getArea" translate="no">.<a href="#getArea">getArea</a><span class="signature">()</span><span class="type-signature"> : number</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算三角形的面积。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形的面积。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getBarycoord" translate="no">.<a href="#getBarycoord">getBarycoord</a><span class="signature">( point : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定向量计算重心坐标。
+如果三角形退化则返回 <code>null</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">point</strong>
+									</td>
+									<td class="description last">
+										<p>三维空间中的点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定点的重心坐标</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getInterpolation" translate="no">.<a href="#getInterpolation">getInterpolation</a><span class="signature">( point : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v1 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v2 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v3 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算给定点在三角形上的重心坐标插值。
+如果三角形退化则返回 <code>null</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">point</strong>
+									</td>
+									<td class="description last">
+										<p>插值点的位置。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v1</strong>
+									</td>
+									<td class="description last">
+										<p>第一个顶点的插值量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v2</strong>
+									</td>
+									<td class="description last">
+										<p>第二个顶点的插值量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v3</strong>
+									</td>
+									<td class="description last">
+										<p>第三个顶点的插值量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 插值结果。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getMidpoint" translate="no">.<a href="#getMidpoint">getMidpoint</a><span class="signature">( target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算三角形的中点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形的中点。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getNormal" translate="no">.<a href="#getNormal">getNormal</a><span class="signature">( target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算三角形的法线。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形的法线。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="getPlane" translate="no">.<a href="#getPlane">getPlane</a><span class="signature">( target : <span class="param-type"><a href="Plane.html">Plane</a></span> )</span><span class="type-signature"> : <a href="Plane.html">Plane</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算三角形所在的平面。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形所在的平面。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="intersectsBox" translate="no">.<a href="#intersectsBox">intersectsBox</a><span class="signature">( box : <span class="param-type"><a href="Box3.html">Box3</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果此三角形与给定包围盒相交，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">box</strong>
+									</td>
+									<td class="description last">
+										<p>要相交检测的包围盒。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此三角形是否与给定包围盒相交。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="isFrontFacing" translate="no">.<a href="#isFrontFacing">isFrontFacing</a><span class="signature">( direction : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果三角形朝向给定方向，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">direction</strong>
+									</td>
+									<td class="description last">
+										<p>（已归一化的）方向向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形是否朝向给定方向。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="set" translate="no">.<a href="#set">set</a><span class="signature">( a : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, b : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, c : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Triangle.html">Triangle</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过复制给定值设置三角形的顶点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第一个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第二个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">c</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第三个顶点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此三角形的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFromAttributeAndIndices" translate="no">.<a href="#setFromAttributeAndIndices">setFromAttributeAndIndices</a><span class="signature">( attribute : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span>, i0 : <span class="param-type">number</span>, i1 : <span class="param-type">number</span>, i2 : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Triangle.html">Triangle</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过复制给定属性值设置三角形的顶点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attribute</strong>
+									</td>
+									<td class="description last">
+										<p>包含三维点数据的缓冲属性。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i0</strong>
+									</td>
+									<td class="description last">
+										<p>表示三角形第一个顶点的属性索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i1</strong>
+									</td>
+									<td class="description last">
+										<p>表示三角形第二个顶点的属性索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i2</strong>
+									</td>
+									<td class="description last">
+										<p>表示三角形第三个顶点的属性索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此三角形的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFromPointsAndIndices" translate="no">.<a href="#setFromPointsAndIndices">setFromPointsAndIndices</a><span class="signature">( points : <span class="param-type">Array.&lt;<a href="Vector3.html">Vector3</a>></span>, i0 : <span class="param-type">number</span>, i1 : <span class="param-type">number</span>, i2 : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="Triangle.html">Triangle</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>通过复制给定数组值设置三角形的顶点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>包含三维点的数组。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i0</strong>
+									</td>
+									<td class="description last">
+										<p>表示三角形第一个顶点的数组索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i1</strong>
+									</td>
+									<td class="description last">
+										<p>表示三角形第二个顶点的数组索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i2</strong>
+									</td>
+									<td class="description last">
+										<p>表示三角形第三个顶点的数组索引。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此三角形的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">静态方法</h2>
+					<h3 class="name name-method" id=".containsPoint" translate="no">.<a href="#.containsPoint">containsPoint</a><span class="signature">( point : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, a : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, b : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, c : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果给定点投影到三角形所在平面后落在三角形内，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">point</strong>
+									</td>
+									<td class="description last">
+										<p>要测试的三维空间中的点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第一个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第二个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">c</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第三个顶点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定点投影到三角形所在平面后是否落在三角形内。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".getBarycoord" translate="no">.<a href="#.getBarycoord">getBarycoord</a><span class="signature">( point : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, a : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, b : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, c : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定向量计算重心坐标。
+如果三角形退化则返回 <code>null</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">point</strong>
+									</td>
+									<td class="description last">
+										<p>三维空间中的点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第一个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第二个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">c</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第三个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 给定点的重心坐标</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".getInterpolatedAttribute" translate="no">.<a href="#.getInterpolatedAttribute">getInterpolatedAttribute</a><span class="signature">( attr : <span class="param-type"><a href="BufferAttribute.html">BufferAttribute</a></span>, i1 : <span class="param-type">number</span>, i2 : <span class="param-type">number</span>, i3 : <span class="param-type">number</span>, barycoord : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定属性和索引，计算重心坐标插值后的值。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">attr</strong>
+									</td>
+									<td class="description last">
+										<p>要插值的属性。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i1</strong>
+									</td>
+									<td class="description last">
+										<p>第一个顶点的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i2</strong>
+									</td>
+									<td class="description last">
+										<p>第二个顶点的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">i3</strong>
+									</td>
+									<td class="description last">
+										<p>第三个顶点的索引。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">barycoord</strong>
+									</td>
+									<td class="description last">
+										<p>用于插值的重心坐标值。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 插值后的属性值。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".getInterpolation" translate="no">.<a href="#.getInterpolation">getInterpolation</a><span class="signature">( point : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, p1 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, p2 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, p3 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v1 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v2 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, v3 : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算给定点在三角形上的重心坐标插值。
+如果三角形退化则返回 <code>null</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">point</strong>
+									</td>
+									<td class="description last">
+										<p>插值点的位置。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">p1</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第一个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">p2</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第二个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">p3</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第三个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v1</strong>
+									</td>
+									<td class="description last">
+										<p>第一个顶点的插值量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v2</strong>
+									</td>
+									<td class="description last">
+										<p>第二个顶点的插值量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">v3</strong>
+									</td>
+									<td class="description last">
+										<p>第三个顶点的插值量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 插值结果。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".getNormal" translate="no">.<a href="#.getNormal">getNormal</a><span class="signature">( a : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, b : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, c : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, target : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : <a href="Vector3.html">Vector3</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>计算三角形的法线向量。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第一个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第二个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">c</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第三个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>用于存储方法结果的目标向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形的法线。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id=".isFrontFacing" translate="no">.<a href="#.isFrontFacing">isFrontFacing</a><span class="signature">( a : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, b : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, c : <span class="param-type"><a href="Vector3.html">Vector3</a></span>, direction : <span class="param-type"><a href="Vector3.html">Vector3</a></span> )</span><span class="type-signature"> : boolean</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>如果三角形朝向给定方向，则返回 <code>true</code>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">a</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第一个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">b</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第二个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">c</strong>
+									</td>
+									<td class="description last">
+										<p>三角形的第三个顶点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">direction</strong>
+									</td>
+									<td class="description last">
+										<p>（已归一化的）方向向量。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 三角形是否朝向给定方向。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/math/Triangle.js" translate="no" target="_blank" rel="noopener">src/math/Triangle.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

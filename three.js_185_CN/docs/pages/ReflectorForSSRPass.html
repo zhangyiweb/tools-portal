@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ReflectorForSSRPass - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Object3D.html">Object3D</a> → <a href="Mesh.html">Mesh</a> → </p>
+	<h1 translate="no">ReflectorForSSRPass</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>专用于与 <a href="SSRPass.html">SSRPass</a> 配合使用的特殊版 <a href="Reflector.html">Reflector</a>。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">ReflectorForSSRPass</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { ReflectorForSSRPass } from 'three/addons/objects/ReflectorForSSRPass.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ReflectorForSSRPass" translate="no">new <a href="#ReflectorForSSRPass">ReflectorForSSRPass</a><span class="signature">( geometry : <span class="param-type"><a href="BufferGeometry.html">BufferGeometry</a></span>, options : <span class="param-type"><a href="ReflectorForSSRPass.html#~Options">ReflectorForSSRPass~Options</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的反射器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">geometry</strong>
+									</td>
+									<td class="description last">
+										<p>反射器的几何体。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>配置选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="dispose" translate="no">.<a href="#dispose">dispose</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>释放此实例分配的 GPU 相关资源。
+当应用中不再使用此实例时，请调用此方法。</p>
+						</div>
+					</div>
+					<h3 class="name name-method" id="getRenderTarget" translate="no">.<a href="#getRenderTarget">getRenderTarget</a><span class="signature">()</span><span class="type-signature"> : <a href="WebGLRenderTarget.html">WebGLRenderTarget</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>返回反射器的内部渲染目标。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 内部渲染目标</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~Options" translate="no">.<a href="#~Options">Options</a> </h3>
+					<div class="description">
+						<p><code>ReflectorForSSRPass</code> 的构造函数选项。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>color</strong>
+						<br>
+<span class="param-type">number</span>
+|
+<span class="param-type"><a href="Color.html">Color</a></span>
+|
+<span class="param-type">string</span>
+				</td>
+			<td class="description last">
+				<p>反射器的颜色。</p>
+						<p>默认值为 <code>0x7F7F7F</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>textureWidth</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理宽度。值越高，反射越清晰，但开销也更大。</p>
+						<p>默认值为 <code>512</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>textureHeight</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>纹理高度。值越高，反射越清晰，但开销也更大。</p>
+						<p>默认值为 <code>512</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>clipBias</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>裁剪偏置。</p>
+						<p>默认值为 <code>0</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>shader</strong>
+						<br>
+<span class="param-type">Object</span>
+				</td>
+			<td class="description last">
+				<p>可用于传入自定义着色器，以定义如何将反射视图投影到反射器的几何体上。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>useDepthTexture</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否将深度值存储到纹理中。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>resolution</strong>
+						<br>
+<span class="param-type"><a href="Vector2.html">Vector2</a></span>
+				</td>
+			<td class="description last">
+				<p>Reflector Pass 的分辨率。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/objects/ReflectorForSSRPass.js" translate="no" target="_blank" rel="noopener">examples/jsm/objects/ReflectorForSSRPass.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>PhongLightingModel - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="LightingModel.html">LightingModel</a> → <a href="BasicLightingModel.html">BasicLightingModel</a> → </p>
+	<h1 translate="no">PhongLightingModel</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>表示 Phong 材质的照明模型。用于 <a href="MeshPhongNodeMaterial.html">MeshPhongNodeMaterial</a>。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="PhongLightingModel" translate="no">new <a href="#PhongLightingModel">PhongLightingModel</a><span class="signature">( specular : <span class="param-type">boolean</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 Phong 照明模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">specular</strong>
+									</td>
+									<td class="description last">
+										<p>是否支持镜面反射。</p>
+										<p>默认值为 <code>true</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="specular" translate="no">.<a href="#specular">specular</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否支持镜面反射。若设为 <code>false</code>，则得到类似 Lambert 的材质，适用于非光泽表面，无镜面高光。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="direct" translate="no">.<a href="#direct">direct</a><span class="signature">( lightData : <span class="param-type">Object</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>实现直接光照。镜面反射部分为可选，可通过 <a href="PhongLightingModel.html#specular">PhongLightingModel#specular</a> 标志控制。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">lightData</strong>
+									</td>
+									<td class="description last">
+										<p>光照数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="BasicLightingModel.html#direct">BasicLightingModel#direct</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="indirect" translate="no">.<a href="#indirect">indirect</a><span class="signature">( builder : <span class="param-type"><a href="NodeBuilder.html">NodeBuilder</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>实现间接光照。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">builder</strong>
+									</td>
+									<td class="description last">
+										<p>当前节点构建器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="BasicLightingModel.html#indirect">BasicLightingModel#indirect</a></dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/functions/PhongLightingModel.js" translate="no" target="_blank" rel="noopener">src/nodes/functions/PhongLightingModel.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

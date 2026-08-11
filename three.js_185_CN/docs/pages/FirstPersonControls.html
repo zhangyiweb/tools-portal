@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>FirstPersonControls - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Controls.html">Controls</a> → </p>
+	<h1 translate="no">FirstPersonControls</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类是 <a href="FlyControls.html">FlyControls</a> 的另一种实现。</p></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">FirstPersonControls</span> 是一个附加组件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="FirstPersonControls" translate="no">new <a href="#FirstPersonControls">FirstPersonControls</a><span class="signature">( object : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, domElement : <span class="param-type">HTMLElement</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的控制器实例。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">object</strong>
+									</td>
+									<td class="description last">
+										<p>由控制器管理的对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">domElement</strong>
+									</td>
+									<td class="description last">
+										<p>用于事件监听的 HTML 元素。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="autoForward" translate="no">.<a href="#autoForward">autoForward</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>相机是否自动向前移动。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="constrainVertical" translate="no">.<a href="#constrainVertical">constrainVertical</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>环顾四周时是否在垂直方向上受 <code>verticalMin</code> 和 <code>verticalMax</code> 约束。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="dampingFactor" translate="no">.<a href="#dampingFactor">dampingFactor</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>移动与环顾速度追上输入的快慢。值越低手感越重（惯性越大），<code>1</code> 表示禁用阻尼。</p>
+						<p>默认值为 <code>0.1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="heightCoef" translate="no">.<a href="#heightCoef">heightCoef</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>决定当相机的 y 分量接近 <code>heightMax</code> 时，移动速度加快多少。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="heightMax" translate="no">.<a href="#heightMax">heightMax</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>用于调整移动速度的相机高度上限。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="heightMin" translate="no">.<a href="#heightMin">heightMin</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>用于调整移动速度的相机高度下限。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="heightSpeed" translate="no">.<a href="#heightSpeed">heightSpeed</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>相机高度是否影响向前移动速度。可使用属性 <code>heightCoef</code>、<code>heightMin</code> 和 <code>heightMax</code> 进行配置。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lookSpeed" translate="no">.<a href="#lookSpeed">lookSpeed</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>环顾四周的速度。</p>
+						<p>默认值为 <code>0.005</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="lookVertical" translate="no">.<a href="#lookVertical">lookVertical</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>是否可以在垂直方向上环顾四周。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mouseDragOn" translate="no">.<a href="#mouseDragOn">mouseDragOn</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>鼠标是否处于按下状态。</p>
+						<p>默认值为 <code>false</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="movementSpeed" translate="no">.<a href="#movementSpeed">movementSpeed</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>移动速度。</p>
+						<p>默认值为 <code>1</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="verticalMax" translate="no">.<a href="#verticalMax">verticalMax</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>垂直方向环顾的上限。范围以弧度为单位，从 <code>0</code> 到 <code>Math.PI</code>。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="verticalMin" translate="no">.<a href="#verticalMin">verticalMin</a><span class="type-signature"> : number</span> </h3>
+					<div class="description">
+						<p>垂直方向环顾的下限。范围以弧度为单位，从 <code>0</code> 到 <code>Math.PI</code>。</p>
+						<p>默认值为 <code>0</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="handleResize" translate="no">.<a href="#handleResize">handleResize</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+					<h3 class="name name-method" id="lookAt" translate="no">.<a href="#lookAt">lookAt</a><span class="signature">( x : <span class="param-type">number | <a href="Vector3.html">Vector3</a></span>, y : <span class="param-type">number</span>, z : <span class="param-type">number</span> )</span><span class="type-signature"> : <a href="FirstPersonControls.html">FirstPersonControls</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>将相机旋转朝向指定的目标位置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">x</strong>
+									</td>
+									<td class="description last">
+										<p>目标位置的 x 坐标，或者表示目标位置的向量。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">y</strong>
+									</td>
+									<td class="description last">
+										<p>目标位置的 y 坐标。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">z</strong>
+									</td>
+									<td class="description last">
+										<p>目标位置的 z 坐标。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对该控制器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/controls/FirstPersonControls.js" translate="no" target="_blank" rel="noopener">examples/jsm/controls/FirstPersonControls.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

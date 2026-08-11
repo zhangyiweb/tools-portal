@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>STLLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → </p>
+	<h1 translate="no">STLLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载 STL 格式的加载器，该格式由 Solidworks 等 CAD 程序创建。</p>
+<p>支持二进制和 ASCII 编码文件。加载器返回非索引 buffer geometry。</p>
+<p>限制：</p>
+<ul>
+<li>二进制解码支持 "Magics" 颜色格式（http://en.wikipedia.org/wiki/STL_(file_format)#Color_in_binary_STL）。</li>
+<li>始终假设小端字节序是否合理，或许存在疑问。</li>
+<li>ASCII 解码假定文件为 UTF-8 编码。</li>
+</ul>
+<pre><code class="language-js">const loader = new STLLoader();
+const geometry = await loader.loadAsync( './models/stl/slotted_disk.stl' )
+scene.add( new THREE.Mesh( geometry ) );
+</code></pre>
+<p>对于二进制 STL，几何体可能包含顶点颜色。使用方法：</p>
+<pre><code class="language-js">// use the same code to load STL as above
+if ( geometry.hasColors ) {
+	material = new THREE.MeshPhongMaterial( { opacity: geometry.alpha, vertexColors: true } );
+}
+const mesh = new THREE.Mesh( geometry, material );
+</code></pre>
+<p>对于包含多个实体的 ASCII STL，每个实体被分配到不同的组。
+可通过定义与 geometry.groups 长度相同的材质数组，
+并将其传递给 Mesh 构造函数，为各组指定不同颜色：</p>
+<pre><code class="language-js">const materials = [];
+const nGeometryGroups = geometry.groups.length;
+for ( let i = 0; i &lt; nGeometryGroups; i ++ ) {
+	const material = new THREE.MeshPhongMaterial( { color: colorMap[ i ], wireframe: false } );
+	materials.push( material );
+}
+const mesh = new THREE.Mesh(geometry, materials);
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">STLLoader</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { STLLoader } from 'three/addons/loaders/STLLoader.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="STLLoader" translate="no">new <a href="#STLLoader">STLLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 STL 加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="load" translate="no">.<a href="#load">load</a><span class="signature">( url : <span class="param-type">string</span>, onLoad : <span class="param-type">function</span>, onProgress : <span class="param-type"><a href="global.html#onProgressCallback">onProgressCallback</a></span>, onError : <span class="param-type"><a href="global.html#onErrorCallback">onErrorCallback</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从指定 URL 开始加载，并将加载完成的 STL 资源
+传递给 <code>onLoad()</code> 回调。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">url</strong>
+									</td>
+									<td class="description last">
+										<p>要加载的文件路径/URL，也可以是 data URI。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>加载完成时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onProgress</strong>
+									</td>
+									<td class="description last">
+										<p>加载进行中时执行。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onError</strong>
+									</td>
+									<td class="description last">
+										<p>发生错误时执行。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#load">Loader#load</a></dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( data : <span class="param-type">ArrayBuffer</span> )</span><span class="type-signature"> : <a href="BufferGeometry.html">BufferGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>解析给定的 STL 数据并返回生成的几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">data</strong>
+									</td>
+									<td class="description last">
+										<p>原始 STL 数据 ArrayBuffer。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="Loader.html#parse">Loader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的几何体。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/STLLoader.js" translate="no" target="_blank" rel="noopener">examples/jsm/loaders/STLLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

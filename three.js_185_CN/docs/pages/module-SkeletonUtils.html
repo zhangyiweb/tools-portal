@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SkeletonUtils - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">SkeletonUtils</h1>
+		<section>
+			<header>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">SkeletonUtils</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';</code></pre>
+				<div class="container-overview">
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="~clone" translate="no">.<a href="#~clone">clone</a><span class="signature">( source : <span class="param-type"><a href="Object3D.html">Object3D</a></span> )</span><span class="type-signature"> : <a href="Object3D.html">Object3D</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>克隆给定的 3D 对象及其后代，确保任何 <code>SkinnedMesh</code> 实例与其骨骼正确关联。骨骼也会被克隆，且必须是传入此方法的
+对象的后代。其他数据（如几何体和材质）通过引用复用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>要克隆的 3D 对象。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 克隆后的 3D 对象。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="~retarget" translate="no">.<a href="#~retarget">retarget</a><span class="signature">( target : <span class="param-type"><a href="Object3D.html">Object3D</a> | <a href="Skeleton.html">Skeleton</a></span>, source : <span class="param-type"><a href="Object3D.html">Object3D</a> | <a href="Skeleton.html">Skeleton</a></span>, options : <span class="param-type"><a href="module-SkeletonUtils.html#~RetargetOptions">module:SkeletonUtils~RetargetOptions</a></span> )</span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>将给定源的骨骼重定向到目标。</p>
+<p><code>target</code> 和 <code>source</code> 都可以是带有 skeleton 属性的 3D 对象（例如蒙皮网格），也可以直接是 <a href="Skeleton.html">Skeleton</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>目标对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>源对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<h3 class="name name-method" id="~retargetClip" translate="no">.<a href="#~retargetClip">retargetClip</a><span class="signature">( target : <span class="param-type"><a href="Object3D.html">Object3D</a></span>, source : <span class="param-type"><a href="Object3D.html">Object3D</a> | <a href="Skeleton.html">Skeleton</a></span>, clip : <span class="param-type"><a href="AnimationClip.html">AnimationClip</a></span>, options : <span class="param-type"><a href="module-SkeletonUtils.html#~RetargetOptions">module:SkeletonUtils~RetargetOptions</a></span> )</span><span class="type-signature"> : <a href="AnimationClip.html">AnimationClip</a></span> <span class="type-signature">(inner) </span></h3>
+					<div class="method">
+						<div class="description">
+							<p>将源的动画剪辑重定向到目标 3D 对象。</p>
+<p><code>source</code> 可以是带有 skeleton 属性的 3D 对象（例如蒙皮网格），也可以直接是 <a href="Skeleton.html">Skeleton</a>。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">target</strong>
+									</td>
+									<td class="description last">
+										<p>目标 3D 对象。必须具有 <code>skeleton</code> 属性。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+										<p>源对象。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">clip</strong>
+									</td>
+									<td class="description last">
+										<p>动画剪辑。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+										<p>选项。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 重定向后的动画剪辑。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">类型定义</h2>
+				<div class="member">
+					<h3 class="name" id="~RetargetOptions" translate="no">.<a href="#~RetargetOptions">RetargetOptions</a> </h3>
+					<div class="description">
+						<p><code>SkeletonUtils</code> 的重定向选项。</p>
+					</div>
+<table class="props">
+	<tbody>
+		<tr>
+				<td class="name">
+					<strong>useFirstFramePosition</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否使用第一帧的位置。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>fps</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>剪辑的帧率。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>names</strong>
+						<br>
+<span class="param-type">Object.&lt;string, string></span>
+				</td>
+			<td class="description last">
+				<p>用于映射目标到源骨骼名称的字典。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>getBoneName</strong>
+						<br>
+<span class="param-type">function</span>
+				</td>
+			<td class="description last">
+				<p>用于映射骨骼名称的函数。<code>names</code> 的替代方案。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>trim</strong>
+						<br>
+<span class="param-type">Array.&lt;number></span>
+				</td>
+			<td class="description last">
+				<p>是否裁剪剪辑。如果设置，数组应包含起始和结束两个值。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>preserveBoneMatrix</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否保留骨骼矩阵。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>preserveBonePositions</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否保留骨骼位置。</p>
+						<p>默认值为 <code>true</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>useTargetMatrix</strong>
+						<br>
+<span class="param-type">boolean</span>
+				</td>
+			<td class="description last">
+				<p>是否使用目标矩阵。</p>
+						<p>默认值为 <code>false</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>hip</strong>
+						<br>
+<span class="param-type">string</span>
+				</td>
+			<td class="description last">
+				<p>源对象髋部骨骼的名称。</p>
+						<p>默认值为 <code>'hip'</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>hipInfluence</strong>
+						<br>
+<span class="param-type"><a href="Vector3.html">Vector3</a></span>
+				</td>
+			<td class="description last">
+				<p>髋部影响。</p>
+						<p>默认值为 <code>(1,1,1)</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>scale</strong>
+						<br>
+<span class="param-type">number</span>
+				</td>
+			<td class="description last">
+				<p>缩放。</p>
+						<p>默认值为 <code>1</code>。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>localOffsets</strong>
+						<br>
+<span class="param-type">Object.&lt;string, <a href="Matrix4.html">Matrix4</a>></span>
+				</td>
+			<td class="description last">
+				<p>按骨骼名称索引的每骨骼局部偏移矩阵。</p>
+			</td>
+		</tr>
+		<tr>
+				<td class="name">
+					<strong>hipPosition</strong>
+						<br>
+<span class="param-type"><a href="Vector3.html">Vector3</a></span>
+				</td>
+			<td class="description last">
+				<p>应用于髋部骨骼的额外位置偏移。</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/utils/SkeletonUtils.js" translate="no" target="_blank" rel="noopener">examples/jsm/utils/SkeletonUtils.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

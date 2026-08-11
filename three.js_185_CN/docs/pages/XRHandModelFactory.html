@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>XRHandModelFactory - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">XRHandModelFactory</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>与 <a href="XRControllerModelFactory.html">XRControllerModelFactory</a> 类似，此类允许为 WebXR 控制器创建手部模型，可作为视觉表示添加到场景中。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const handModelFactory = new XRHandModelFactory();
+const hand = renderer.xr.getHand( 0 );
+hand.add( handModelFactory.createHandModel( hand ) );
+scene.add( hand );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">XRHandModelFactory</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { XRHandModelFactory } from 'three/addons/webxr/XRHandModelFactory.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="XRHandModelFactory" translate="no">new <a href="#XRHandModelFactory">XRHandModelFactory</a><span class="signature">( gltfLoader : <span class="param-type"><a href="GLTFLoader.html">GLTFLoader</a></span>, onLoad : <span class="param-type">function</span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的 XR 手部模型工厂。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">gltfLoader</strong>
+									</td>
+									<td class="description last">
+										<p>用于加载手部模型的 glTF 加载器。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">onLoad</strong>
+									</td>
+									<td class="description last">
+										<p>手部模型加载完成后执行的回调。</p>
+										<p>默认值为 <code>null</code>。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="gltfLoader" translate="no">.<a href="#gltfLoader">gltfLoader</a><span class="type-signature"> : <a href="GLTFLoader.html">GLTFLoader</a></span> </h3>
+					<div class="description">
+						<p>用于加载手部模型的 glTF 加载器。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="onLoad" translate="no">.<a href="#onLoad">onLoad</a><span class="type-signature"> : function</span> </h3>
+					<div class="description">
+						<p>手部模型加载完成后执行的回调。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="path" translate="no">.<a href="#path">path</a><span class="type-signature"> : string</span> </h3>
+					<div class="description">
+						<p>模型资源库的路径。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="createHandModel" translate="no">.<a href="#createHandModel">createHandModel</a><span class="signature">( controller : <span class="param-type"><a href="Group.html">Group</a></span>, profile : <span class="param-type">'spheres' | 'boxes' | 'mesh'</span> )</span><span class="type-signature"> : <a href="XRHandModel.html">XRHandModel</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为指定的 WebXR 手部控制器创建控制器模型。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">controller</strong>
+									</td>
+									<td class="description last">
+										<p>手部控制器。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">profile</strong>
+									</td>
+									<td class="description last">
+										<p>定义模型类型的模型配置文件。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> XR 手部模型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setPath" translate="no">.<a href="#setPath">setPath</a><span class="signature">( path : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="XRHandModelFactory.html">XRHandModelFactory</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>设置手部模型资源库的路径。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">path</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的路径。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此实例的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/webxr/XRHandModelFactory.js" translate="no" target="_blank" rel="noopener">examples/jsm/webxr/XRHandModelFactory.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

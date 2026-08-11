@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>TemporalReprojectNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="TempNode.html">TempNode</a> → </p>
+	<h1 translate="no">TemporalReprojectNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于对屏幕空间效果（SSGI、SSR 等）进行降噪的时域重投影通道。</p>
+<p>两种模式共享几何加权 4 点双线性历史采样与 YCoCg 方差裁剪。表面速度重投影始终优先采样。镜面（Specular）模式随后在该表面结果之上混合命中点视差历史。漫反射（Diffuse）模式则应用速度场散度以检测表面拉伸。</p>
+<p>与基于抖动的 TAA/TAAU 不同，此节点不应用相机亚像素抖动——仅使用运动向量重投影并累积历史帧。</p>
+<p>参考文献：</p>
+<ul>
+<li><a href="https://alextardif.com/TAA.html" target="_blank" rel="noopener">https://alextardif.com/TAA.html</a></li>
+<li><a href="https://www.elopezr.com/temporal-aa-and-the-quest-for-the-holy-trail/" target="_blank" rel="noopener">https://www.elopezr.com/temporal-aa-and-the-quest-for-the-holy-trail/</a></li>
+</ul></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">TemporalReprojectNode</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { temporalReproject } from 'three/addons/tsl/display/TemporalReprojectNode.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="TemporalReprojectNode" translate="no">new <a href="#TemporalReprojectNode">TemporalReprojectNode</a><span class="signature">( beautyNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, depthNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, normalNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, velocityNode : <span class="param-type"><a href="TextureNode.html">TextureNode</a></span>, camera : <span class="param-type"><a href="Camera.html">Camera</a></span>, options : <span class="param-type"><a href="global.html#TemporalReprojectNodeOptions">TemporalReprojectNodeOptions</a></span> )</span> </h3>
+					<div class="method">
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">beautyNode</strong>
+									</td>
+									<td class="description last">
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">depthNode</strong>
+									</td>
+									<td class="description last">
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">normalNode</strong>
+									</td>
+									<td class="description last">
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">velocityNode</strong>
+									</td>
+									<td class="description last">
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">camera</strong>
+									</td>
+									<td class="description last">
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">options</strong>
+									</td>
+									<td class="description last">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="accumulate" translate="no">.<a href="#accumulate">accumulate</a><span class="type-signature"> : boolean</span> </h3>
+					<div class="description">
+						<p>当为 <code>true</code> 时，每帧将解析输出复制到内部历史缓冲区。
+当为 <code>false</code> 时，历史帧通过 <a href="TemporalReprojectNode.html#setHistoryTexture">TemporalReprojectNode#setHistoryTexture</a> 从外部提供。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="mode" translate="no">.<a href="#mode">mode</a><span class="type-signature"> : <a href="global.html#TemporalReprojectMode">TemporalReprojectMode</a></span> </h3>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="setHistoryTexture" translate="no">.<a href="#setHistoryTexture">setHistoryTexture</a><span class="signature">( source : <span class="param-type">Object | <a href="Texture.html">Texture</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>提供外部历史源（例如 <a href="RecurrentDenoiseNode.html">RecurrentDenoiseNode</a> 或其纹理）。仅在 <a href="TemporalReprojectNode.html#accumulate">TemporalReprojectNode#accumulate</a> 为 <code>false</code> 时使用。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">source</strong>
+									</td>
+									<td class="description last">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/tsl/display/TemporalReprojectNode.js" translate="no" target="_blank" rel="noopener">examples/jsm/tsl/display/TemporalReprojectNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>SkyscraperGenerator - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+	<h1 translate="no">SkyscraperGenerator</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>根据少量参数生成精致的三段式「美术学院派 / 新哥特式」赤陶摩天楼。</p>
+<p>体量读作一个占地多边形（带一个倒角的矩形），拆成垂直立面，
+每个立面再分为三层——高大的拱廊基座、重复的中段与华丽的冠部——
+然后进一步拆成楼层与开间。少量预制构件（墩柱、窗户、檐口剖面、
+哥特拱）在整座塔楼上实例化，再与定制的基座拱廊一起烘焙进
+单个非索引 BufferGeometry，并用逐顶点 <code>partId</code>（PartId）标记，
+以便一种材质就能为每个区域着色。</p>
+<p>该生成器与材质无关——只产出几何体。传入单一材质
+（例如按 <code>partId</code> 分支的 TSL 节点材质）即可装扮。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const generator = new SkyscraperGenerator( { seed: 35, totalHeight: 140 }, material );
+scene.add( generator.build() ); // a single Mesh
+</code></pre></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="SkyscraperGenerator" translate="no">new <a href="#SkyscraperGenerator">SkyscraperGenerator</a><span class="signature">()</span> </h3>
+					<div class="method">
+					</div>
+				</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/generators/city/SkyscraperGenerator.js" translate="no" target="_blank" rel="noopener">examples/jsm/generators/city/SkyscraperGenerator.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>NodeMaterialLoader - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="Loader.html">Loader</a> → <a href="MaterialLoader.html">MaterialLoader</a> → </p>
+	<h1 translate="no">NodeMaterialLoader</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>用于加载节点材质的特殊类型材质加载器。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="NodeMaterialLoader" translate="no">new <a href="#NodeMaterialLoader">NodeMaterialLoader</a><span class="signature">( manager : <span class="param-type"><a href="LoadingManager.html">LoadingManager</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的节点材质加载器。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">manager</strong>
+									</td>
+									<td class="description last">
+										<p>加载管理器的引用。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="nodeMaterials" translate="no">.<a href="#nodeMaterials">nodeMaterials</a><span class="type-signature"> : Object.&lt;string, NodeMaterial.constructor></span> </h3>
+					<div class="description">
+						<p>表示节点材质类型的字典。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="nodes" translate="no">.<a href="#nodes">nodes</a><span class="type-signature"> : Object.&lt;string, Node.constructor></span> </h3>
+					<div class="description">
+						<p>表示节点类型的字典。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="createMaterialFromType" translate="no">.<a href="#createMaterialFromType">createMaterialFromType</a><span class="signature">( type : <span class="param-type">string</span> )</span><span class="type-signature"> : <a href="Node.html">Node</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定类型创建节点材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">type</strong>
+									</td>
+									<td class="description last">
+										<p>节点材质类型。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="MaterialLoader.html#createMaterialFromType">MaterialLoader#createMaterialFromType</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 创建的节点材质实例。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="parse" translate="no">.<a href="#parse">parse</a><span class="signature">( json : <span class="param-type">Object</span> )</span><span class="type-signature"> : <a href="NodeMaterial.html">NodeMaterial</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>从给定的 JSON 解析节点材质。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">json</strong>
+									</td>
+									<td class="description last">
+										<p>JSON 定义</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="MaterialLoader.html#parse">MaterialLoader#parse</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 解析后的材质。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setNodeMaterials" translate="no">.<a href="#setNodeMaterials">setNodeMaterials</a><span class="signature">( value : <span class="param-type">Object.&lt;string, NodeMaterial.constructor></span> )</span><span class="type-signature"> : <a href="NodeLoader.html">NodeLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义节点材质类型的字典。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>以 <code>&lt;classname,class&gt;</code> 形式定义的节点材质库。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setNodes" translate="no">.<a href="#setNodes">setNodes</a><span class="signature">( value : <span class="param-type">Object.&lt;string, Node.constructor></span> )</span><span class="type-signature"> : <a href="NodeLoader.html">NodeLoader</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>定义节点类型的字典。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">value</strong>
+									</td>
+									<td class="description last">
+										<p>以 <code>&lt;classname,class&gt;</code> 形式定义的节点库。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 此加载器的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/loaders/nodes/NodeMaterialLoader.js" translate="no" target="_blank" rel="noopener">src/loaders/nodes/NodeMaterialLoader.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

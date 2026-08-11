@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>ReferenceElementNode - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="EventDispatcher.html">EventDispatcher</a> → <a href="Node.html">Node</a> → <a href="ArrayElementNode.html">ArrayElementNode</a> → </p>
+	<h1 translate="no">ReferenceElementNode</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>此类仅在引用属性为类数组类型时相关。
+在此情况下，<code>ReferenceElementNode</code> 允许通过索引
+引用数据结构中的特定元素。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ReferenceElementNode" translate="no">new <a href="#ReferenceElementNode">ReferenceElementNode</a><span class="signature">( referenceNode : <span class="param-type"><a href="ReferenceBaseNode.html">ReferenceBaseNode</a></span>, indexNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的引用元素节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">referenceNode</strong>
+									</td>
+									<td class="description last">
+										<p>引用节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">indexNode</strong>
+									</td>
+									<td class="description last">
+										<p>定义元素访问的索引节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isReferenceElementNode" translate="no">.<a href="#isReferenceElementNode">isReferenceElementNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isReferenceElementNode" translate="no">.<a href="#isReferenceElementNode">isReferenceElementNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="referenceNode" translate="no">.<a href="#referenceNode">referenceNode</a><span class="type-signature"> : <a href="ReferenceBaseNode.html">ReferenceBaseNode</a></span> </h3>
+					<div class="description">
+						<p>类似于 <a href="ReferenceBaseNode.html#reference">ReferenceBaseNode#reference</a>，额外的
+属性指向当前节点。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="referenceNode" translate="no">.<a href="#referenceNode">referenceNode</a><span class="type-signature"> : <a href="ReferenceNode.html">ReferenceNode</a></span> </h3>
+					<div class="description">
+						<p>类似于 <a href="ReferenceNode.html#reference">ReferenceNode#reference</a>，额外的
+属性指向当前节点。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="generateNodeType" translate="no">.<a href="#generateNodeType">generateNodeType</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法已重写，因为节点类型从
+引用节点的 uniform 类型推断。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ArrayElementNode.html#generateNodeType">ArrayElementNode#generateNodeType</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateNodeType" translate="no">.<a href="#generateNodeType">generateNodeType</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法已重写，因为节点类型从
+引用节点的 uniform 类型推断。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ArrayElementNode.html#generateNodeType">ArrayElementNode#generateNodeType</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点类型。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/accessors/ReferenceBaseNode.js" translate="no" target="_blank" rel="noopener">src/nodes/accessors/ReferenceBaseNode.js</a>
+				</p>
+			</article>
+		</section>
+		<section>
+			<header>
+				<div class="class-description"><p>此类仅在引用属性为类数组类型时相关。
+在此情况下，<code>ReferenceElementNode</code> 允许通过索引
+引用数据结构中的特定元素。</p></div>
+			</header>
+			<article>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="ReferenceElementNode" translate="no">new <a href="#ReferenceElementNode">ReferenceElementNode</a><span class="signature">( referenceNode : <span class="param-type"><a href="ReferenceNode.html">ReferenceNode</a></span>, indexNode : <span class="param-type"><a href="Node.html">Node</a></span> )</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的引用元素节点。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">referenceNode</strong>
+									</td>
+									<td class="description last">
+										<p>引用节点。</p>
+									</td>
+								</tr>
+								<tr>
+									<td class="name">
+										<strong translate="no">indexNode</strong>
+									</td>
+									<td class="description last">
+										<p>定义元素访问的索引节点。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isReferenceElementNode" translate="no">.<a href="#isReferenceElementNode">isReferenceElementNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="isReferenceElementNode" translate="no">.<a href="#isReferenceElementNode">isReferenceElementNode</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="referenceNode" translate="no">.<a href="#referenceNode">referenceNode</a><span class="type-signature"> : <a href="ReferenceBaseNode.html">ReferenceBaseNode</a></span> </h3>
+					<div class="description">
+						<p>类似于 <a href="ReferenceBaseNode.html#reference">ReferenceBaseNode#reference</a>，额外的
+属性指向当前节点。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<div class="member">
+					<h3 class="name" id="referenceNode" translate="no">.<a href="#referenceNode">referenceNode</a><span class="type-signature"> : <a href="ReferenceNode.html">ReferenceNode</a></span> </h3>
+					<div class="description">
+						<p>类似于 <a href="ReferenceNode.html#reference">ReferenceNode#reference</a>，额外的
+属性指向当前节点。</p>
+						<p>默认值为 <code>null</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="generateNodeType" translate="no">.<a href="#generateNodeType">generateNodeType</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法已重写，因为节点类型从
+引用节点的 uniform 类型推断。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ArrayElementNode.html#generateNodeType">ArrayElementNode#generateNodeType</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点类型。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="generateNodeType" translate="no">.<a href="#generateNodeType">generateNodeType</a><span class="signature">()</span><span class="type-signature"> : string</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>此方法已重写，因为节点类型从
+引用节点的 uniform 类型推断。</p>
+						</div>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="ArrayElementNode.html#generateNodeType">ArrayElementNode#generateNodeType</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 节点类型。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/src/nodes/accessors/ReferenceNode.js" translate="no" target="_blank" rel="noopener">src/nodes/accessors/ReferenceNode.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>

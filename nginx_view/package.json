@@ -1,0 +1,29 @@
+{
+  "name": "nginx-visual-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Windows 本地 Nginx 可视化管理工具（MVP）",
+  "main": "src/main/main.js",
+  "scripts": {
+    "dev": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "electron": "^38.0.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "local.nginx.visual.manager",
+    "productName": "Nginx可视化工具",
+    "files": [
+      "src/**"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

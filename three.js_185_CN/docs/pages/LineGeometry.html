@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>LineGeometry - Three.js 文档</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<script src="../scripts/highlight.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="../styles/highlight-three.css">
+	<link type="text/css" rel="stylesheet" href="../styles/page.css">
+</head>
+<body>
+		<p class="inheritance" translate="no"><a href="InstancedBufferGeometry.html">InstancedBufferGeometry</a> → <a href="LineSegmentsGeometry.html">LineSegmentsGeometry</a> → </p>
+	<h1 translate="no">LineGeometry</h1>
+		<section>
+			<header>
+				<div class="class-description"><p>由一连串顶点组成的折线。</p>
+<p>在 <a href="Line2.html">Line2</a> 中用于描述形状。</p></div>
+				<h2>代码示例</h2>
+				<div translate="no"><pre><code class="language-js">const points = [
+	new THREE.Vector3( - 10, 0, 0 ),
+	new THREE.Vector3( 0, 5, 0 ),
+	new THREE.Vector3( 10, 0, 0 ),
+];
+const geometry = new LineGeometry();
+geometry.setFromPoints( points );
+</code></pre></div>
+			</header>
+			<article>
+				<h2 class="subsection-title">导入</h2>
+				<p><span translate="no">LineGeometry</span> 是一个插件，必须显式导入，参见 <a href="https://threejs.org/manual/#en/installation" target="_blank" rel="noopener">Installation#Addons</a>。</p>
+				<pre><code class="language-js">import { LineLineGeometry2 } from 'three/addons/lines/LineGeometry.js';</code></pre>
+				<div class="container-overview">
+					<h2>构造函数</h2>
+					<h3 class="name name-method" id="LineGeometry" translate="no">new <a href="#LineGeometry">LineGeometry</a><span class="signature">()</span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>构造一个新的线几何体。</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="subsection-title">属性</h2>
+				<div class="member">
+					<h3 class="name" id="isLineGeometry" translate="no">.<a href="#isLineGeometry">isLineGeometry</a><span class="type-signature"> : boolean</span> <span class="type-signature">(readonly) </span></h3>
+					<div class="description">
+						<p>此标志可用于类型检测。</p>
+						<p>默认值为 <code>true</code>。</p>
+					</div>
+				</div>
+				<h2 class="subsection-title">方法</h2>
+					<h3 class="name name-method" id="fromLine" translate="no">.<a href="#fromLine">fromLine</a><span class="signature">( line : <span class="param-type"><a href="Line.html">Line</a></span> )</span><span class="type-signature"> : <a href="LineGeometry.html">LineGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的线设置此线段几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">line</strong>
+									</td>
+									<td class="description last">
+										<p>应作为此几何体数据源的线。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此几何体的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setColors" translate="no">.<a href="#setColors">setColors</a><span class="signature">( array : <span class="param-type">Float32Array | Array.&lt;number></span> )</span><span class="type-signature"> : <a href="LineGeometry.html">LineGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为此几何体设置给定的线颜色。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的位置数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LineSegmentsGeometry.html#setColors">LineSegmentsGeometry#setColors</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此几何体的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setFromPoints" translate="no">.<a href="#setFromPoints">setFromPoints</a><span class="signature">( points : <span class="param-type">Array.&lt;(<a href="Vector3.html">Vector3</a>|<a href="Vector2.html">Vector2</a>)></span> )</span><span class="type-signature"> : <a href="LineGeometry.html">LineGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>根据给定的点序列设置此线段几何体。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">points</strong>
+									</td>
+									<td class="description last">
+										<p>二维或三维空间中的点数组。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此几何体的引用。</dt>
+						</dl>
+					</div>
+					<h3 class="name name-method" id="setPositions" translate="no">.<a href="#setPositions">setPositions</a><span class="signature">( array : <span class="param-type">Float32Array | Array.&lt;number></span> )</span><span class="type-signature"> : <a href="LineGeometry.html">LineGeometry</a></span> </h3>
+					<div class="method">
+						<div class="description">
+							<p>为此几何体设置给定的线位置。</p>
+						</div>
+						<table class="params">
+							<tbody>
+								<tr>
+									<td class="name">
+										<strong translate="no">array</strong>
+									</td>
+									<td class="description last">
+										<p>要设置的位置数据。</p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<dl class="details">
+							<dt class="tag-overrides"><strong>重写：</strong> <a href="LineSegmentsGeometry.html#setPositions">LineSegmentsGeometry#setPositions</a></dt>
+						</dl>
+						<dl class="details">
+							<dt class="tag-returns"><strong>返回值：</strong> 对此几何体的引用。</dt>
+						</dl>
+					</div>
+				<h2 class="subsection-title">源码</h2>
+				<p>
+					<a href="https://github.com/mrdoob/three.js/blob/master/examples/jsm/lines/LineGeometry.js" translate="no" target="_blank" rel="noopener">examples/jsm/lines/LineGeometry.js</a>
+				</p>
+			</article>
+		</section>
+<script src="../scripts/linenumber.js"></script>
+<script src="../scripts/page.js"></script>
+</body>
+</html>
