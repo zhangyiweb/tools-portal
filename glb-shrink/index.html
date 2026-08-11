@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GLB Shrink — 压缩 3D 模型</title>
+    <meta name="description" content="拖放 GLB 文件，在 3D 中对比压缩前后效果，下载 Draco 压缩后的资源，适用于游戏、应用、AR/VR 或网页。" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="hero" id="hero" hidden>
+        <div class="hero-inner">
+          <div class="hero-label">文件大小</div>
+          <div class="hero-sizes">
+            <span class="size-before" id="size-before">—</span>
+            <span class="hero-arrow" aria-hidden="true">→</span>
+            <span class="size-after" id="size-after">—</span>
+          </div>
+          <div class="hero-badge" id="savings-badge">—</div>
+          <div class="hero-sub" id="hero-sub"></div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="panel">
+          <div class="brand">
+            <div class="brand-mark">◆</div>
+            <div>
+              <h1>GLB Shrink</h1>
+              <p>Draco + WebP 实时 3D 压缩</p>
+            </div>
+          </div>
+
+          <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="将 GLB 文件拖放到此处">
+            <input type="file" id="file-input" accept=".glb" hidden />
+            <div class="dropzone-icon">⬆</div>
+            <p class="dropzone-title">将 GLB 拖放到这里</p>
+            <p class="dropzone-hint">或点击浏览</p>
+          </div>
+
+          <div class="file-meta" id="file-meta" hidden>
+            <span class="file-name" id="file-name"></span>
+            <span class="file-tris" id="file-tris"></span>
+          </div>
+
+          <section class="controls" id="controls" hidden>
+            <div class="quality-section">
+              <p class="quality-question">希望多清晰？</p>
+              <div class="preset-cards" id="preset-cards" role="radiogroup" aria-label="压缩质量">
+                <button type="button" class="preset-card" data-quality="0">
+                  <span class="preset-icon">📦</span>
+                  <span class="preset-label">最小文件</span>
+                  <span class="preset-hint">远景小物体</span>
+                </button>
+                <button type="button" class="preset-card active" data-quality="50">
+                  <span class="preset-icon">⚖️</span>
+                  <span class="preset-label">平衡</span>
+                  <span class="preset-hint">大多数项目</span>
+                </button>
+                <button type="button" class="preset-card" data-quality="100">
+                  <span class="preset-icon">✨</span>
+                  <span class="preset-label">最清晰</span>
+                  <span class="preset-hint">近距离观看</span>
+                </button>
+              </div>
+
+              <label class="field tune-field">
+                <div class="tune-labels">
+                  <span>更小文件</span>
+                  <span>更清晰</span>
+                </div>
+                <input type="range" id="quality" min="0" max="100" step="1" value="50" />
+                <p class="quality-hint" id="quality-hint">平衡 — 大多数项目的最佳选择。</p>
+              </label>
+            </div>
+
+            <button class="btn-primary" id="compress-btn">
+              <span class="btn-label">压缩模型</span>
+              <span class="btn-spinner" hidden></span>
+            </button>
+
+            <button class="btn-secondary" id="download-btn" hidden>
+              下载压缩后的 GLB
+            </button>
+          </section>
+
+          <footer class="panel-footer">
+            <a href="https://github.com/boona13/glb-shrink" target="_blank" rel="noopener">开源</a>
+            <span>·</span>
+            <span>兼容 Three.js</span>
+          </footer>
+        </aside>
+
+        <section class="viewers">
+          <div class="viewer-card">
+            <div class="viewer-header">
+              <span class="viewer-tag before">压缩前</span>
+              <span class="viewer-stat" id="before-stat">—</span>
+            </div>
+            <canvas id="canvas-before" aria-label="原始模型预览"></canvas>
+            <div class="viewer-empty" id="empty-before">
+              <span>原始模型</span>
+            </div>
+          </div>
+
+          <div class="viewer-divider" aria-hidden="true"></div>
+
+          <div class="viewer-card">
+            <div class="viewer-header">
+              <span class="viewer-tag after">压缩后</span>
+              <span class="viewer-stat" id="after-stat">—</span>
+            </div>
+            <canvas id="canvas-after" aria-label="压缩后模型预览"></canvas>
+            <div class="viewer-empty" id="empty-after">
+              <span>压缩预览</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

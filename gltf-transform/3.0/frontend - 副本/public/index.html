@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 资源工具箱</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/layui/2.12.0/css/layui.css" media="all">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>3D 资源工具箱</h1>
+                    <p>模型压缩 · 贴图转换 · 更多工具</p>
+                </div>
+            </div>
+            <nav class="tab-nav" id="tabNav" role="tablist">
+                <button class="tab-btn active" data-tab="compress" role="tab" aria-selected="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    模型压缩
+                </button>
+                <button class="tab-btn" data-tab="hdr" role="tab" aria-selected="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    HDR 转 KTX2
+                </button>
+                <button class="tab-btn" data-tab="skybox" role="tab" aria-selected="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+                    HDR 转天空盒
+                </button>
+            </nav>
+        </header>
+
+        <div class="app-body">
+            <aside class="sidebar" id="sidebar" data-visible-for="compress">
+                <div class="sidebar-header">
+                    <h2>模型结构</h2>
+                    <span class="sidebar-badge">GLB</span>
+                </div>
+                <div id="modelTree" class="model-tree-container hidden"></div>
+                <div id="sidebarPlaceholder" class="sidebar-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    <p>上传 GLB 模型后<br>在此查看节点树</p>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <!-- 模型压缩 -->
+                <section id="panel-compress" class="tab-panel active" role="tabpanel">
+                    <div class="panel-header">
+                        <h2>GLB 模型压缩</h2>
+                        <p>上传 GLB 模型，选择压缩选项，一键优化 3D 资源体积</p>
+                    </div>
+
+                    <div class="upload-section">
+                        <div id="dropZone" class="drop-zone">
+                            <div class="drop-zone-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            </div>
+                            <p class="drop-zone-title">拖拽 GLB 文件到此处</p>
+                            <p class="drop-zone-sub">或点击下方按钮选择文件</p>
+                            <input type="file" id="fileInput" accept=".glb" />
+                            <label for="fileInput" class="file-label">选择 GLB 文件</label>
+                        </div>
+                    </div>
+
+                    <div id="modelInfo" class="card hidden">
+                        <h3>原始模型信息</h3>
+                        <div id="originalModelDetails"></div>
+                    </div>
+
+                    <div id="compressionOptions" class="card hidden">
+                        <h3>压缩选项</h3>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="checkbox" id="ktx2Option" checked>
+                                <span class="option-card-body">
+                                    <span class="option-title">WebP 纹理压缩</span>
+                                    <span class="option-desc">将纹理转为 WebP，显著减小体积</span>
+                                </span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" id="dracoOption" checked>
+                                <span class="option-card-body">
+                                    <span class="option-title">Draco 网格压缩</span>
+                                    <span class="option-desc">压缩几何数据，减少顶点信息体积</span>
+                                </span>
+                            </label>
+                            <label class="option-card">
+                                <input type="checkbox" id="optimizeOption" checked>
+                                <span class="option-card-body">
+                                    <span class="option-title">GLB 优化</span>
+                                    <span class="option-desc">去除冗余数据，整体优化模型结构</span>
+                                </span>
+                            </label>
+                        </div>
+                        <button id="compressBtn" class="primary-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            开始压缩
+                        </button>
+                    </div>
+
+                    <div id="resultSection" class="card hidden">
+                        <h3>压缩结果对比</h3>
+                        <div class="table-wrap">
+                            <table class="result-table">
+                                <thead>
+                                    <tr>
+                                        <th>属性</th>
+                                        <th>原始模型</th>
+                                        <th>压缩模型</th>
+                                        <th>减少量</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="download-section">
+                            <a id="downloadLink" class="download-btn hidden">下载压缩后的模型</a>
+                        </div>
+                    </div>
+
+                    <div id="loadingIndicator" class="loading-indicator hidden">
+                        <div class="spinner"></div>
+                        <p>正在压缩模型，请稍候...</p>
+                    </div>
+                </section>
+
+                <!-- HDR 转 KTX2 -->
+                <section id="panel-hdr" class="tab-panel" role="tabpanel">
+                    <div class="panel-header">
+                        <h2>HDR 转 KTX2</h2>
+                        <p>将 HDR 环境贴图转换为 KTX2 格式，适用于 WebGL / Three.js 渲染</p>
+                    </div>
+
+                    <div class="upload-section">
+                        <div id="hdrDropZone" class="drop-zone drop-zone-hdr">
+                            <div class="drop-zone-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                            </div>
+                            <p class="drop-zone-title">拖拽 HDR / EXR 文件到此处</p>
+                            <p class="drop-zone-sub">支持 .hdr、.exr 等 HDR 格式</p>
+                            <input type="file" id="hdrFileInput" accept=".hdr,.exr,.HDR,.EXR" />
+                            <label for="hdrFileInput" class="file-label file-label-hdr">选择 HDR 文件</label>
+                        </div>
+                    </div>
+
+                    <div id="hdrFileInfo" class="card hidden">
+                        <h3>文件信息</h3>
+                        <div id="hdrFileDetails"></div>
+                    </div>
+
+                    <div id="hdrConvertOptions" class="card hidden">
+                        <h3>转换选项</h3>
+                        <div class="options-grid options-grid-compact">
+                            <div class="form-field">
+                                <label for="hdrEncodeOption">编码格式</label>
+                                <select id="hdrEncodeOption" class="select-input">
+                                    <option value="uastc-hdr-4x4" selected>UASTC HDR 4×4（推荐，高质量）</option>
+                                    <option value="uastc-hdr-6x6i">UASTC HDR 6×6i（更高压缩率）</option>
+                                </select>
+                            </div>
+                            <label class="option-card option-card-inline">
+                                <input type="checkbox" id="hdrMipmapOption" checked>
+                                <span class="option-card-body">
+                                    <span class="option-title">生成 Mipmap</span>
+                                    <span class="option-desc">为多级分辨率生成 mip 链</span>
+                                </span>
+                            </label>
+                            <label class="option-card option-card-inline">
+                                <input type="checkbox" id="hdrZstdOption" checked>
+                                <span class="option-card-body">
+                                    <span class="option-title">Zstd 超级压缩</span>
+                                    <span class="option-desc">进一步减小 KTX2 文件体积</span>
+                                </span>
+                            </label>
+                        </div>
+                        <button id="hdrConvertBtn" class="primary-btn primary-btn-hdr">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                            开始转换
+                        </button>
+                    </div>
+
+                    <div id="hdrResultSection" class="card hidden">
+                        <h3>转换结果</h3>
+                        <div class="table-wrap">
+                            <table class="result-table">
+                                <thead>
+                                    <tr>
+                                        <th>属性</th>
+                                        <th>原始文件</th>
+                                        <th>KTX2 文件</th>
+                                        <th>变化</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="hdrResultTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="download-section">
+                            <a id="hdrDownloadLink" class="download-btn download-btn-hdr hidden">下载 KTX2 文件</a>
+                        </div>
+                    </div>
+
+                    <div id="hdrLoadingIndicator" class="loading-indicator hidden">
+                        <div class="spinner spinner-hdr"></div>
+                        <p>正在转换 HDR 贴图，请稍候...</p>
+                    </div>
+
+                    <div class="info-banner">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        <span>基于 <code>ktx2-encoder</code> npm 包（Basis Universal WASM）在服务端完成转换，无需额外安装系统工具。</span>
+                    </div>
+                </section>
+
+                <!-- HDR 转天空盒 -->
+                <section id="panel-skybox" class="tab-panel" role="tabpanel">
+                    <div class="panel-header">
+                        <h2>HDR 转天空盒</h2>
+                        <p>将 HDR 全景环境贴图转换为 6 张立方体贴图，适用于 Three.js CubeTexture 等天空盒方案</p>
+                    </div>
+
+                    <div class="upload-section">
+                        <div id="skyboxDropZone" class="drop-zone drop-zone-skybox">
+                            <div class="drop-zone-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+                            </div>
+                            <p class="drop-zone-title">拖拽 HDR / EXR 全景图到此处</p>
+                            <p class="drop-zone-sub">支持等距柱状投影（Equirectangular）环境贴图</p>
+                            <input type="file" id="skyboxFileInput" accept=".hdr,.exr,.HDR,.EXR" />
+                            <label for="skyboxFileInput" class="file-label file-label-skybox">选择 HDR 文件</label>
+                        </div>
+                    </div>
+
+                    <div id="skyboxFileInfo" class="card hidden">
+                        <h3>文件信息</h3>
+                        <div id="skyboxFileDetails"></div>
+                    </div>
+
+                    <div id="skyboxConvertOptions" class="card hidden">
+                        <h3>转换选项</h3>
+                        <div class="options-grid options-grid-compact">
+                            <div class="form-field">
+                                <label for="skyboxFaceSizeOption">单面分辨率</label>
+                                <select id="skyboxFaceSizeOption" class="select-input">
+                                    <option value="512">512 × 512</option>
+                                    <option value="1024" selected>1024 × 1024（推荐）</option>
+                                    <option value="2048">2048 × 2048</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="skyboxFormatOption">输出格式</label>
+                                <select id="skyboxFormatOption" class="select-input">
+                                    <option value="png" selected>PNG（LDR，推荐）</option>
+                                    <option value="hdr">HDR（保留高动态范围）</option>
+                                    <option value="jpeg">JPEG（体积更小）</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="skyboxToneOption">色调映射</label>
+                                <select id="skyboxToneOption" class="select-input">
+                                    <option value="aces" selected>ACES（电影感）</option>
+                                    <option value="reinhard">Reinhard（自然）</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="skyboxExposureOption">曝光值</label>
+                                <input type="number" id="skyboxExposureOption" class="select-input" value="1" min="0.1" max="8" step="0.1" />
+                            </div>
+                        </div>
+                        <button id="skyboxConvertBtn" class="primary-btn primary-btn-skybox">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            生成天空盒
+                        </button>
+                    </div>
+
+                    <div id="skyboxResultSection" class="card hidden">
+                        <h3>转换结果</h3>
+                        <div id="skyboxFacePreview" class="face-preview-grid"></div>
+                        <div class="table-wrap">
+                            <table class="result-table">
+                                <thead>
+                                    <tr>
+                                        <th>属性</th>
+                                        <th>原始文件</th>
+                                        <th>输出 ZIP</th>
+                                        <th>说明</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="skyboxResultTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="download-section">
+                            <a id="skyboxDownloadLink" class="download-btn download-btn-skybox hidden">下载天空盒 ZIP</a>
+                        </div>
+                    </div>
+
+                    <div id="skyboxLoadingIndicator" class="loading-indicator hidden">
+                        <div class="spinner spinner-skybox"></div>
+                        <p>正在生成 6 张天空盒贴图，请稍候...</p>
+                    </div>
+
+                    <div class="info-banner info-banner-skybox">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        <span>输出文件命名：<code>px</code> <code>nx</code> <code>py</code> <code>ny</code> <code>pz</code> <code>nz</code>，兼容 Three.js <code>CubeTexture</code> 加载顺序。</span>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/layui/2.12.0/layui.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/compress.js"></script>
+    <script src="js/hdr.js"></script>
+    <script src="js/skybox.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

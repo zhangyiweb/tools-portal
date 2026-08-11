@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLB模型压缩工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>GLB模型压缩工具</h1>
+        
+        <div class="upload-section">
+            <div id="dropZone" class="drop-zone">
+                <p>拖拽GLB模型文件到此处</p>
+                <p>或</p>
+                <input type="file" id="fileInput" accept=".glb" />
+                <label for="fileInput" class="file-label">选择文件</label>
+            </div>
+        </div>
+
+        <div id="modelInfo" class="model-info hidden">
+            <h2>原始模型信息</h2>
+            <div id="originalModelDetails"></div>
+        </div>
+
+        <div id="compressionOptions" class="compression-options hidden">
+            <h2>压缩选项</h2>
+            <div class="option">
+                <input type="checkbox" id="ktx2Option" checked>
+                <label for="ktx2Option">压缩纹理为 KTX2 (etc1s)</label>
+            </div>
+            <div class="option">
+                <input type="checkbox" id="dracoOption" checked>
+                <label for="dracoOption">Draco 压缩网格</label>
+            </div>
+            <div class="option">
+                <input type="checkbox" id="optimizeOption" checked>
+                <label for="optimizeOption">优化 GLB</label>
+            </div>
+            
+            <button id="compressBtn" class="compress-btn">开始压缩</button>
+        </div>
+
+        <div id="resultSection" class="result-section hidden">
+            <h2>压缩结果对比</h2>
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>原始模型</th>
+                        <th>压缩模型</th>
+                        <th>减少量</th>
+                    </tr>
+                </thead>
+                <tbody id="resultTableBody">
+                </tbody>
+            </table>
+            
+            <div class="download-section">
+                <a id="downloadLink" class="download-btn hidden">下载压缩后的模型</a>
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="loading-indicator hidden">
+            <p>正在处理中...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -409,6 +409,30 @@
       flex: 1;
     }
 
+    .card-start {
+      margin-top: 2px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px dashed rgba(0, 229, 255, 0.28);
+      background: rgba(0, 229, 255, 0.05);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: #9edff0;
+      letter-spacing: 0.01em;
+    }
+
+    .card-start strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--amber);
+      text-transform: uppercase;
+    }
+
     .tags {
       display: flex;
       flex-wrap: wrap;
@@ -692,7 +716,7 @@
       <div class="brand-block">
         <div class="eyebrow">LOCAL TOOLKIT // 0xDEV</div>
         <h1 class="brand">工具门户</h1>
-        <p class="tagline">本地开发工具集合 · 预览与说明一览</p>
+        <p class="tagline">本地开发工具集合 · 预览说明与启动方式</p>
       </div>
       <div class="hud">
         <div class="hud-chip" id="clockChip">--:--:--</div>
@@ -719,7 +743,7 @@
 
     <footer>
       <span>DEV ARSENAL · PORTAL v1.0</span>
-      <span>点击项目截图可放大预览</span>
+      <span>点击截图放大 · 卡片内含启动提示</span>
     </footer>
   </div>
 
@@ -739,7 +763,8 @@
         image: 'hdr预览器/界面.png',
         category: 'web',
         tags: ['Three.js', 'HDRI', '材质'],
-        desc: '浏览 Poly Haven HDRI，实时预览环境光照，支持导入 GLB 编辑材质并导出。',
+        desc: '用途：挑选 Poly Haven HDRI，在真实环境光照下预览并调 GLB 材质，再导出轻量模型。',
+        start: 'cd hdr预览器 → npm install → npm run dev',
       },
       {
         id: 'linux',
@@ -747,7 +772,8 @@
         image: 'linux可视化/界面.png',
         category: 'web',
         tags: ['SSH', 'Docker', '运维'],
-        desc: '浏览器内通过 SSH 管理远程 Linux：Docker、部署、数据库与文件编辑。',
+        desc: '用途：浏览器里 SSH 管远程 Linux，可视化 Docker / 部署 / 数据库，少敲命令。',
+        start: '双击 start.bat，或 npm install → npm run dev',
       },
       {
         id: 'linux-client',
@@ -755,7 +781,8 @@
         image: 'linux客户端/linux客户端.png',
         category: 'electron',
         tags: ['Java', 'Swing', 'SSH'],
-        desc: '按钮式服务器管理桌面端：系统监控、文件管理、容器操作与一键部署。',
+        desc: '用途：Windows 桌面端服务器管理，监控、文件、容器与一键部署，独立窗口使用。',
+        start: '双击 run.bat，或 java -jar target\\easy-ssh-1.0.0.jar',
       },
       {
         id: 'nginx',
@@ -763,7 +790,8 @@
         image: 'nginx_view/界面.png',
         category: 'electron',
         tags: ['Nginx', 'Electron', '本地站点'],
-        desc: 'Windows 本地 Nginx 管理：导入 dist、分配端口、一键启停与自动配置。',
+        desc: '用途：本机把多个前端 dist 挂到 Nginx，自动端口与 SPA 配置，方便本地/局域网预览。',
+        start: 'cd nginx_view → npm install → npm run dev',
       },
       {
         id: 'nvm',
@@ -771,7 +799,26 @@
         image: 'nvm可视化/界面.png',
         category: 'electron',
         tags: ['Node', 'NVM', '版本管理'],
-        desc: 'nvm-windows 图形界面：查看、安装、切换与卸载 Node.js 版本。',
+        desc: '用途：图形化管理 Windows Node 多版本，安装 / 切换 / 卸载，少敲 nvm 命令。',
+        start: '双击 启动.bat，或 npm install → npm start',
+      },
+      {
+        id: 'glb-shrink',
+        name: 'GLB Shrink',
+        image: 'glb-shrink/界面.png',
+        category: 'web',
+        tags: ['GLB', '压缩', 'Three.js'],
+        desc: '用途：拖放压缩臃肿 GLB（Draco + WebP），左右对比预览后下载，适合网页/游戏上线。',
+        start: 'cd glb-shrink → npm install → npm run dev',
+      },
+      {
+        id: 'gltf-transform',
+        name: 'glTF Transform',
+        image: 'gltf-transform/界面.png',
+        category: 'web',
+        tags: ['glTF', '转换', '工具'],
+        desc: '用途：本地 glTF/GLB 处理与转换相关工具入口（按版本目录使用）。',
+        start: '进入版本目录后执行：node service.js',
       },
       {
         id: 'three',
@@ -779,7 +826,8 @@
         image: 'three.js_185_CN/界面.png',
         category: 'docs',
         tags: ['Three.js', 'r185', 'API'],
-        desc: 'Three.js r185 简体中文 API 文档与示例，本地或在线查阅。',
+        desc: '用途：查阅 Three.js r185 简体中文 API，边查边写 3D 代码。',
+        start: 'cd three.js_185_CN → npm install → npm run dev',
       },
       {
         id: 'uieditor',
@@ -787,7 +835,8 @@
         image: 'UI编辑器/界面.png',
         category: 'web',
         tags: ['React', 'Figma', '导出'],
-        desc: '可视化拖拽搭建界面，支持 Figma 导入，一键导出 HTML / React / Vue。',
+        desc: '用途：拖拽搭界面原型，支持 Figma 导入，导出 HTML / React / Vue 代码。',
+        start: '根目录 npm install 后，再装 apps/web 与 server，最后 npm run dev',
       },
     ];
 
@@ -811,6 +860,7 @@
           !q ||
           p.name.toLowerCase().includes(q) ||
           p.desc.toLowerCase().includes(q) ||
+          (p.start && p.start.toLowerCase().includes(q)) ||
           p.tags.some((t) => t.toLowerCase().includes(q));
         return byCat && byQ;
       });
@@ -833,6 +883,7 @@
             <div class="card-body">
               <h2 class="card-title">${p.name}</h2>
               <p class="card-desc">${p.desc}</p>
+              <div class="card-start"><strong>如何启动</strong>${p.start}</div>
               <div class="tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join('')}</div>
             </div>
           </article>`;
