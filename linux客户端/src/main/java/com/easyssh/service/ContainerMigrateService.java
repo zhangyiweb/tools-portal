@@ -76,14 +76,24 @@ public class ContainerMigrateService {
             step("准备打包目录...");
             bash(source, "rm -rf " + q(workDir) + " && mkdir -p " + q(workDir + "/volumes"));
 
-            String migratedImage = "easyssh-mig/" + meta.getName() + ":" + jobId;
-            meta.setImage(migratedImage);
+            boolean useTargetImage = options.useTargetImage();
+            String migratedImage = null;
 
-            step("提交容器为镜像：" + migratedImage);
-            docker(source, "commit " + q(containerIdOrName) + " " + q(migratedImage), LONG_TIMEOUT);
-
-            step("导出镜像（可能较久）...");
-            docker(source, "save -o " + q(workDir + "/image.tar") + " " + q(migratedImage), LONG_TIMEOUT);
+            if (useTargetImage) {
+                String chosen = options.getTargetImage() == null ? "" : options.getTargetImage().trim();
+                if (chosen.isBlank()) {
+                    throw new IllegalArgumentException("请选择目标服务器上的镜像");
+                }
+                meta.setImage(chosen);
+                step("镜像策略：使用目标已有镜像 " + chosen + "（不传输源机整包镜像）");
+            } else {
+                migratedImage = "easyssh-mig/" + meta.getName() + ":" + jobId;
+                meta.setImage(migratedImage);
+                step("提交容器为镜像：" + migratedImage);
+                docker(source, "commit " + q(containerIdOrName) + " " + q(migratedImage), LONG_TIMEOUT);
+                step("导出镜像（可能较久）...");
+                docker(source, "save -o " + q(workDir + "/image.tar") + " " + q(migratedImage), LONG_TIMEOUT);
+            }
 
             if (options.isIncludeVolumes()) {
                 step("备份数据卷与挂载目录...");
@@ -97,7 +107,11 @@ public class ContainerMigrateService {
             writeRemoteFile(source, workDir + "/meta.json", GSON.toJson(meta));
 
             step("打包迁移包...");
-            bash(source, "tar -C " + q(workDir) + " -cf " + q(packageRemote) + " image.tar meta.json volumes");
+            if (useTargetImage) {
+                bash(source, "tar -C " + q(workDir) + " -cf " + q(packageRemote) + " meta.json volumes");
+            } else {
+                bash(source, "tar -C " + q(workDir) + " -cf " + q(packageRemote) + " image.tar meta.json volumes");
+            }
 
             long size = source.fileSize(packageRemote);
             step("迁移包大小：" + humanSize(size) + "，开始下载到本机...");
@@ -111,12 +125,17 @@ public class ContainerMigrateService {
             step("目标服务器已接收，开始解包并恢复...");
 
             bash(target, "tar -C " + q(targetWork) + " -xf " + q(targetPackage));
-            docker(target, "load -i " + q(targetWork + "/image.tar"), LONG_TIMEOUT);
 
             ContainerMigrateMeta targetMeta = GSON.fromJson(
                     readRemoteText(target, targetWork + "/meta.json"),
                     ContainerMigrateMeta.class
             );
+
+            if (useTargetImage) {
+                ensureTargetImage(target, targetMeta.getImage(), options.isPullIfMissing());
+            } else {
+                docker(target, "load -i " + q(targetWork + "/image.tar"), LONG_TIMEOUT);
+            }
 
             if (options.isIncludeVolumes()) {
                 step("恢复数据卷...");
@@ -131,7 +150,7 @@ public class ContainerMigrateService {
             }
 
             String runCmd = buildRunCommand(targetMeta, options.isStartAfterMigrate());
-            step("在目标服务器创建容器...");
+            step("在目标服务器用镜像「" + targetMeta.getImage() + "」创建容器...");
             docker(target, runCmd, 180);
 
             if (options.isRemoveSourceAfterSuccess()) {
@@ -149,14 +168,17 @@ public class ContainerMigrateService {
             step("清理临时文件...");
             bash(source, "rm -rf " + q(workDir));
             bash(target, "rm -rf " + q(targetWork));
-            try {
-                docker(source, "rmi " + q(migratedImage), 120);
-            } catch (Exception ignored) {
+            if (migratedImage != null) {
+                try {
+                    docker(source, "rmi " + q(migratedImage), 120);
+                } catch (Exception ignored) {
+                }
             }
 
             report.append('\n').append("迁移成功！\n");
             report.append("目标容器名：").append(targetMeta.getName()).append('\n');
             report.append("目标镜像：").append(targetMeta.getImage()).append('\n');
+            report.append("镜像策略：").append(useTargetImage ? "使用目标已有镜像" : "完整传输源容器镜像").append('\n');
             report.append("挂载项数量：").append(targetMeta.getMounts().size()).append('\n');
             report.append("端口映射数量：").append(targetMeta.getPorts().size()).append('\n');
             if (!options.isStartAfterMigrate()) {
@@ -170,6 +192,25 @@ public class ContainerMigrateService {
             } catch (Exception ignored) {
             }
         }
+    }
+
+    private void ensureTargetImage(SshClient target, String image, boolean pullIfMissing) throws Exception {
+        String img = image == null ? "" : image.trim();
+        if (img.isBlank()) {
+            throw new IllegalArgumentException("目标镜像为空");
+        }
+        step("检查目标镜像是否存在：" + img);
+        SshClient.CommandResult inspect = dockerRaw(target, "image inspect " + q(img));
+        if (inspect.ok()) {
+            step("目标已有镜像，跳过拉取：" + img);
+            return;
+        }
+        if (!pullIfMissing) {
+            throw new IllegalStateException("目标服务器没有镜像「" + img + "」。\n"
+                    + "请先在目标机「镜像」页拉取，或勾选「目标没有所选镜像时自动拉取」，或改用完整打包源容器镜像。");
+        }
+        step("目标缺少镜像，开始拉取：" + img);
+        docker(target, "pull " + q(img), LONG_TIMEOUT);
     }
 
     private void backupMounts(SshClient client, ContainerMigrateMeta meta, String workDir) throws Exception {

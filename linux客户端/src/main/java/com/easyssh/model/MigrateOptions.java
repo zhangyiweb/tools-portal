@@ -1,11 +1,21 @@
 package com.easyssh.model;
 
 public class MigrateOptions {
+    public enum ImageMode {
+        /** 使用目标服务器已有镜像重建容器（只迁配置与数据） */
+        USE_TARGET_IMAGE,
+        /** 提交源容器并整包传输镜像（体积大，最一致） */
+        TRANSFER_COMMITTED
+    }
+
     private String targetName;
-    private boolean stopSource = true;
+    private boolean stopSource = false;
     private boolean includeVolumes = true;
     private boolean startAfterMigrate = true;
     private boolean removeSourceAfterSuccess = false;
+    private ImageMode imageMode = ImageMode.USE_TARGET_IMAGE;
+    private String targetImage = "";
+    private boolean pullIfMissing = false;
 
     public String getTargetName() {
         return targetName;
@@ -45,5 +55,33 @@ public class MigrateOptions {
 
     public void setRemoveSourceAfterSuccess(boolean removeSourceAfterSuccess) {
         this.removeSourceAfterSuccess = removeSourceAfterSuccess;
+    }
+
+    public ImageMode getImageMode() {
+        return imageMode == null ? ImageMode.USE_TARGET_IMAGE : imageMode;
+    }
+
+    public void setImageMode(ImageMode imageMode) {
+        this.imageMode = imageMode;
+    }
+
+    public String getTargetImage() {
+        return targetImage;
+    }
+
+    public void setTargetImage(String targetImage) {
+        this.targetImage = targetImage;
+    }
+
+    public boolean isPullIfMissing() {
+        return pullIfMissing;
+    }
+
+    public void setPullIfMissing(boolean pullIfMissing) {
+        this.pullIfMissing = pullIfMissing;
+    }
+
+    public boolean useTargetImage() {
+        return getImageMode() == ImageMode.USE_TARGET_IMAGE;
     }
 }

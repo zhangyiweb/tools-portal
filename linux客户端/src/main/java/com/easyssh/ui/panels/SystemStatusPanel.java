@@ -200,7 +200,6 @@ public class SystemStatusPanel extends JPanel {
         Toolkit.getDefaultToolkit()
                 .getSystemClipboard()
                 .setContents(new StringSelection(currentIp), null);
-        UiSupport.showInfo(this, "已复制", "IP 地址已复制：\n" + currentIp);
     }
 
     private static JPanel gaugeRow(String name, JProgressBar bar, JLabel value) {

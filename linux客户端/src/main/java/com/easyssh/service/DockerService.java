@@ -105,6 +105,11 @@ public class DockerService {
     }
 
     public String runImage(String image, String name, String ports, String volumeName, String mountPath, String extraArgs) throws Exception {
+        return runImage(image, name, ports, volumeName, mountPath, extraArgs, null);
+    }
+
+    public String runImage(String image, String name, String ports, String volumeName, String mountPath,
+                           String extraArgs, String commandAfterImage) throws Exception {
         String img = require(image, "镜像名");
         StringBuilder cmd = new StringBuilder("run -d");
         if (name != null && !name.isBlank()) {
@@ -125,6 +130,9 @@ public class DockerService {
             cmd.append(' ').append(extraArgs.trim());
         }
         cmd.append(' ').append(quote(img));
+        if (commandAfterImage != null && !commandAfterImage.isBlank()) {
+            cmd.append(' ').append(commandAfterImage.trim());
+        }
         SshClient.CommandResult result = docker(cmd.toString());
         if (!result.ok()) {
             throw new IllegalStateException(blankToDefault(result.combined(), "启动容器失败"));
@@ -260,6 +268,185 @@ public class DockerService {
         return "静态站点已部署\n容器：" + name + "\n镜像：" + img
                 + "\n端口映射：主机 " + hostPort + " -> 容器 80\n数据卷：" + vol
                 + " -> " + mountPath + "\n\n" + result;
+    }
+
+    /**
+     * 一键部署后端：按镜像拉取并运行容器，映射端口，可选环境变量。
+     */
+    public String deployBackend(String appName, String image, int hostPort, int containerPort,
+                                java.util.Map<String, String> env,
+                                java.util.function.Consumer<String> progress) throws Exception {
+        String name = require(appName, "应用名称");
+        if (!name.matches("[a-zA-Z0-9][a-zA-Z0-9_.-]{0,62}")) {
+            throw new IllegalArgumentException("应用名称只能包含字母、数字、下划线、点和短横线，并以字母或数字开头");
+        }
+        if (hostPort < 1 || hostPort > 65535 || containerPort < 1 || containerPort > 65535) {
+            throw new IllegalArgumentException("端口需在 1~65535 之间");
+        }
+        String img = require(image, "镜像");
+        step(progress, "1/3 停止旧容器（如有）...");
+        docker("rm -f " + quote(name), 60);
+        step(progress, "2/3 准备镜像 " + img + " ...");
+        ensureImage(img, progress);
+        step(progress, "3/3 启动容器并映射端口 " + hostPort + ":" + containerPort + " ...");
+        StringBuilder extra = new StringBuilder("--restart unless-stopped");
+        appendEnvFlags(extra, env);
+        String ports = hostPort + ":" + containerPort;
+        String result = runImage(img, name, ports, null, null, extra.toString());
+        return "后端已部署\n容器：" + name + "\n镜像：" + img
+                + "\n端口映射：主机 " + hostPort + " -> 容器 " + containerPort + "\n\n" + result;
+    }
+
+    /**
+     * 上传 JAR 并用 Java 镜像运行：挂载 jar → java -jar。
+     */
+    public String deployBackendJar(String appName, java.nio.file.Path localJar, int hostPort,
+                                   String javaImage, java.util.Map<String, String> env,
+                                   java.util.function.Consumer<String> progress) throws Exception {
+        String name = require(appName, "应用名称");
+        if (!name.matches("[a-zA-Z0-9][a-zA-Z0-9_.-]{0,62}")) {
+            throw new IllegalArgumentException("应用名称只能包含字母、数字、下划线、点和短横线，并以字母或数字开头");
+        }
+        if (hostPort < 1 || hostPort > 65535) {
+            throw new IllegalArgumentException("端口需在 1~65535 之间");
+        }
+        if (localJar == null || !java.nio.file.Files.isRegularFile(localJar)) {
+            throw new IllegalArgumentException("请选择 JAR 文件");
+        }
+        String fileName = localJar.getFileName().toString().toLowerCase(Locale.ROOT);
+        if (!fileName.endsWith(".jar")) {
+            throw new IllegalArgumentException("请选择 .jar 包");
+        }
+        String img = (javaImage == null || javaImage.isBlank()) ? "eclipse-temurin:17-jre" : javaImage.trim();
+        String remoteDir = "/opt/easyssh-backends/" + name;
+        String remoteJar = remoteDir + "/app.jar";
+
+        step(progress, "1/4 停止旧容器（如有）...");
+        docker("rm -f " + quote(name), 60);
+
+        step(progress, "2/4 上传 JAR 到服务器 " + remoteJar + " ...");
+        client.exec("mkdir -p " + quote(remoteDir), 60);
+        client.upload(localJar, remoteJar);
+
+        step(progress, "3/4 准备 Java 镜像 " + img + " ...");
+        ensureImage(img, progress);
+
+        step(progress, "4/4 启动容器并映射端口 " + hostPort + ":" + hostPort + " ...");
+        StringBuilder extra = new StringBuilder("--restart unless-stopped");
+        extra.append(" -v ").append(quote(remoteJar + ":/app/app.jar:ro"));
+        java.util.Map<String, String> merged = new java.util.LinkedHashMap<>();
+        if (env != null) {
+            merged.putAll(env);
+        }
+        merged.putIfAbsent("SERVER_PORT", String.valueOf(hostPort));
+        merged.putIfAbsent("PORT", String.valueOf(hostPort));
+        appendEnvFlags(extra, merged);
+        String ports = hostPort + ":" + hostPort;
+        String command = "java -jar /app/app.jar";
+        String result = runImage(img, name, ports, null, null, extra.toString(), command);
+        return "后端 JAR 已部署\n容器：" + name + "\nJAR：" + localJar.getFileName()
+                + "\n远程路径：" + remoteJar + "\nJava 镜像：" + img
+                + "\n端口映射：主机 " + hostPort + " -> 容器 " + hostPort + "\n\n" + result;
+    }
+
+    /**
+     * 上传 Node 项目 ZIP：解压后用 Node 镜像安装依赖并启动。
+     */
+    public String deployNodeZip(String appName, java.nio.file.Path localZip, int hostPort,
+                                String nodeImage, String startCommand,
+                                java.util.Map<String, String> env,
+                                java.util.function.Consumer<String> progress) throws Exception {
+        String name = require(appName, "应用名称");
+        if (!name.matches("[a-zA-Z0-9][a-zA-Z0-9_.-]{0,62}")) {
+            throw new IllegalArgumentException("应用名称只能包含字母、数字、下划线、点和短横线，并以字母或数字开头");
+        }
+        if (hostPort < 1 || hostPort > 65535) {
+            throw new IllegalArgumentException("端口需在 1~65535 之间");
+        }
+        if (localZip == null || !java.nio.file.Files.isRegularFile(localZip)) {
+            throw new IllegalArgumentException("请选择 ZIP 文件");
+        }
+        String fileName = localZip.getFileName().toString().toLowerCase(Locale.ROOT);
+        if (!fileName.endsWith(".zip")) {
+            throw new IllegalArgumentException("请选择 .zip 压缩包（内含 package.json 的 Node 项目）");
+        }
+        String img = (nodeImage == null || nodeImage.isBlank()) ? "node:20" : nodeImage.trim();
+        String start = (startCommand == null || startCommand.isBlank()) ? "npm start" : startCommand.trim();
+        String remoteDir = "/opt/easyssh-node/" + name;
+        String remoteZipDir = "/tmp/easyssh-node-" + java.util.UUID.randomUUID().toString().substring(0, 8);
+        String remoteZip = remoteZipDir + "/" + localZip.getFileName();
+
+        step(progress, "1/5 停止旧容器（如有）...");
+        docker("rm -f " + quote(name), 60);
+
+        step(progress, "2/5 上传并解压 Node 项目 ZIP ...");
+        client.exec("mkdir -p " + quote(remoteZipDir) + " " + quote(remoteDir), 60);
+        try {
+            client.upload(localZip, remoteZip);
+            String script = "set -e"
+                    + " && apk add --no-cache unzip >/dev/null"
+                    + " && rm -rf /work && mkdir -p /work"
+                    + " && unzip -o /upload/" + localZip.getFileName() + " -d /work"
+                    + " && SRC=/work"
+                    + " && if [ ! -f /work/package.json ]; then"
+                    + "   SRC=$(find /work -mindepth 1 -maxdepth 1 -type d | head -n 1);"
+                    + "   if [ -z \"$SRC\" ] || [ ! -f \"$SRC/package.json\" ]; then"
+                    + "     echo 'ZIP 中未找到 package.json' >&2; exit 1;"
+                    + "   fi;"
+                    + " fi"
+                    + " && find /data -mindepth 1 -maxdepth 1 -exec rm -rf {} +"
+                    + " && cp -a \"$SRC\"/. /data/"
+                    + " && ls -lah /data";
+            String cmd = "run --rm"
+                    + " -v " + quote(remoteDir + ":/data")
+                    + " -v " + quote(remoteZipDir + ":/upload:ro")
+                    + " alpine:3.20 sh -c " + quote(script);
+            SshClient.CommandResult unzip = docker(cmd, 600);
+            if (!unzip.ok()) {
+                throw new IllegalStateException(blankToDefault(unzip.combined(), "解压 Node 项目失败"));
+            }
+            step(progress, blankToDefault(unzip.combined(), "解压完成"));
+        } finally {
+            client.exec("rm -rf " + quote(remoteZipDir), 60);
+        }
+
+        step(progress, "3/5 准备 Node 镜像 " + img + " ...");
+        ensureImage(img, progress);
+
+        step(progress, "4/5 启动容器（npm install + 启动命令）...");
+        StringBuilder extra = new StringBuilder("--restart unless-stopped -w /app");
+        extra.append(" -v ").append(quote(remoteDir + ":/app"));
+        java.util.Map<String, String> merged = new java.util.LinkedHashMap<>();
+        if (env != null) {
+            merged.putAll(env);
+        }
+        merged.putIfAbsent("PORT", String.valueOf(hostPort));
+        merged.putIfAbsent("NODE_ENV", "production");
+        appendEnvFlags(extra, merged);
+        String ports = hostPort + ":" + hostPort;
+        String shellCmd = "if [ -f package.json ]; then npm install --omit=dev; fi; exec " + start;
+        String command = "sh -c " + quote(shellCmd);
+        String result = runImage(img, name, ports, null, null, extra.toString(), command);
+
+        step(progress, "5/5 完成");
+        return "Node 项目已部署\n容器：" + name + "\nZIP：" + localZip.getFileName()
+                + "\n远程目录：" + remoteDir + "\nNode 镜像：" + img
+                + "\n启动命令：" + start
+                + "\n端口映射：主机 " + hostPort + " -> 容器 " + hostPort + "\n\n" + result;
+    }
+
+    private static void appendEnvFlags(StringBuilder extra, java.util.Map<String, String> env) {
+        if (env == null || extra == null) {
+            return;
+        }
+        for (var entry : env.entrySet()) {
+            String key = entry.getKey() == null ? "" : entry.getKey().trim();
+            if (key.isEmpty()) {
+                continue;
+            }
+            String value = entry.getValue() == null ? "" : entry.getValue();
+            extra.append(" -e ").append(quote(key + "=" + value));
+        }
     }
 
     private static String webRootForImage(String image) {

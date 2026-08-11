@@ -63,7 +63,7 @@ public class SshClient implements AutoCloseable {
         return exec(command, 300);
     }
 
-    public CommandResult exec(String command, int timeoutSeconds) throws Exception {
+    public synchronized CommandResult exec(String command, int timeoutSeconds) throws Exception {
         ensureConnected();
         ChannelExec channel = (ChannelExec) session.openChannel("exec");
         channel.setCommand(command);
@@ -86,7 +86,7 @@ public class SshClient implements AutoCloseable {
         return new CommandResult(exit, stdout.toString(StandardCharsets.UTF_8), stderr.toString(StandardCharsets.UTF_8));
     }
 
-    public long fileSize(String remotePath) throws Exception {
+    public synchronized long fileSize(String remotePath) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -97,7 +97,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    public void mkdir(String remotePath) throws Exception {
+    public synchronized void mkdir(String remotePath) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -134,7 +134,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    public List<RemoteFile> listFiles(String remotePath) throws Exception {
+    public synchronized List<RemoteFile> listFiles(String remotePath) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -163,7 +163,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    public void download(String remotePath, Path localPath) throws Exception {
+    public synchronized void download(String remotePath, Path localPath) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -174,7 +174,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    public void upload(Path localPath, String remotePath) throws Exception {
+    public synchronized void upload(Path localPath, String remotePath) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -212,7 +212,7 @@ public class SshClient implements AutoCloseable {
         upload(localPath, remote);
     }
 
-    public void delete(String remotePath) throws Exception {
+    public synchronized void delete(String remotePath) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -227,7 +227,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    public void readFileTo(String remotePath, OutputStream out) throws Exception {
+    public synchronized void readFileTo(String remotePath, OutputStream out) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -238,7 +238,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    public String readText(String remotePath, long maxBytes) throws Exception {
+    public synchronized String readText(String remotePath, long maxBytes) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -262,7 +262,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    public void writeText(String remotePath, String content) throws Exception {
+    public synchronized void writeText(String remotePath, String content) throws Exception {
         ensureConnected();
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
         sftp.connect(10000);
@@ -277,7 +277,7 @@ public class SshClient implements AutoCloseable {
         }
     }
 
-    private void ensureConnected() throws Exception {
+    private synchronized void ensureConnected() throws Exception {
         if (!isConnected()) {
             connect();
         }

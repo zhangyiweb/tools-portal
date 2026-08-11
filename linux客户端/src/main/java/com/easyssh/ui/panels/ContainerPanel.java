@@ -297,7 +297,7 @@ public class ContainerPanel extends JPanel {
         }
         List<ServerProfile> profiles = profilesSupplier.get();
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        MigrateDialog dialog = new MigrateDialog(frame, selected.getName(), sourceProfile, profiles);
+        MigrateDialog dialog = new MigrateDialog(frame, selected.getName(), selected.getImage(), sourceProfile, profiles);
         dialog.setVisible(true);
         MigrateDialog.Result result = dialog.getResult();
         if (result == null) {
