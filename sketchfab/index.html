@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sketchfab 模型库</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">Sketchfab 模型库</div>
+      <form class="search" id="searchForm">
+        <input id="q" type="search" placeholder="搜索模型" value="" autocomplete="off">
+        <button class="btn" type="submit">搜索</button>
+      </form>
+      <button class="text-btn" id="openSettings" type="button">设置</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="toolbar">
+      <select id="category">
+        <option value="">全部分类</option>
+        <option value="furniture-home">家具家居</option>
+        <option value="cars-vehicles">交通工具</option>
+        <option value="characters-creatures">角色生物</option>
+        <option value="architecture">建筑</option>
+        <option value="animals-pets">动物宠物</option>
+        <option value="electronics-gadgets">电子产品</option>
+        <option value="nature-plants">自然植物</option>
+        <option value="science-technology">科学技术</option>
+        <option value="art-abstract">艺术抽象</option>
+      </select>
+      <select id="sort">
+        <option value="-likeCount">按热度</option>
+        <option value="-publishedAt">最新发布</option>
+        <option value="-viewCount">按浏览</option>
+      </select>
+      <label class="check">
+        <input id="downloadable" type="checkbox" checked>
+        <span>只看可下载</span>
+      </label>
+      <p class="status" id="status">正在加载</p>
+    </div>
+
+    <section class="grid" id="grid"></section>
+    <p class="load-hint" id="loadHint">向下滚动加载更多</p>
+    <div id="sentinel"></div>
+  </main>
+
+  <div class="overlay" id="modal">
+    <div class="sheet">
+      <div class="sheet-bar">
+        <div class="sheet-info">
+          <h2 id="modalTitle">模型</h2>
+          <p>
+            <span id="modalAuthor"></span>
+            <a class="source-link" id="openBtn" href="#" target="_blank" rel="noopener">在 Sketchfab 打开</a>
+          </p>
+        </div>
+        <div class="sheet-actions">
+          <button class="btn" id="downloadBtn" type="button">下载模型</button>
+          <a class="btn" id="fileLink" hidden target="_blank" rel="noopener">保存文件</a>
+          <button class="btn btn-light" id="closeModal" type="button">关闭</button>
+        </div>
+      </div>
+      <div class="viewer-wrap">
+        <iframe
+          id="viewer"
+          title="Sketchfab 3D 预览"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="settings">
+    <div class="panel">
+      <h3>接口密钥</h3>
+      <p>下载模型需要 Sketchfab 接口密钥。当前已填入你提供的密钥，一般无需再改。</p>
+      <input id="tokenInput" type="password" placeholder="请输入接口密钥">
+      <div class="sheet-actions">
+        <button class="btn" id="saveToken" type="button">保存</button>
+        <button class="btn btn-light" id="closeSettings" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

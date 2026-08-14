@@ -10,12 +10,12 @@
 
 从 Poly Haven 浏览海量 HDRI，在 Three.js 场景里实时看环境光照与背景效果；可导入 GLB/GLTF 模型，改 PBR 材质与贴图后再导出。适合选图、看光照、调材质，不必先搭一整套 3D 工程。
 
-**如何启动：**
+**如何启动：** 双击 `启动.bat`，会自动安装依赖（如需要）并打开 http://127.0.0.1:5101/ 。
 
 ```bash
 cd hdr预览器
 npm install
-npm run dev
+npm run dev -- --port 5101
 ```
 
 ### [Linux 可视化](./linux可视化) · Web
@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-Windows 也可双击 `linux可视化/start.bat`。前端默认 `http://localhost:5173`，API 默认 `http://localhost:3789`。
+Windows 双击 `启动.bat` 会自动打开 http://127.0.0.1:5173/ 。API 默认 `http://localhost:3789`。
 
 ### [Linux 客户端](./linux客户端) · Desktop（Java）
 
@@ -47,7 +47,7 @@ cd linux客户端
 java -jar target\easy-ssh-1.0.0.jar
 ```
 
-或双击 `run.bat`。
+或双击 `启动.bat`。
 
 ### [Nginx 可视化](./nginx_view) · Desktop（Electron）
 
@@ -55,7 +55,7 @@ java -jar target\easy-ssh-1.0.0.jar
 
 导入带 `index.html` 的构建目录后自动分配端口并生成 SPA 友好配置（`try_files`），一键启停 Nginx，开关项目会自动 reload。适合同时预览多个前端包、给同事看本地效果。
 
-**如何启动：**
+**如何启动：** 双击 `启动.bat`（会打开 Electron 窗口）。
 
 ```bash
 cd nginx_view
@@ -77,7 +77,7 @@ npm install
 npm start
 ```
 
-或双击 `启动.bat`。
+或双击 `启动.bat`（会打开 Electron 窗口）。
 
 ### [GLB Shrink](./glb-shrink) · Web
 
@@ -85,7 +85,7 @@ npm start
 
 拖放 `.glb` 后左右对比压缩前后效果，支持 Draco 几何与 WebP 纹理等，按质量档位一键压缩并下载。无需 Blender、无需命令行调参。
 
-**如何启动：**
+**如何启动：** 双击 `启动.bat`，浏览器会打开 http://127.0.0.1:5201/ 。
 
 ```bash
 cd glb-shrink
@@ -97,7 +97,7 @@ npm run dev
 
 **用途：** 本地 glTF/GLB 处理与转换相关工具（按版本目录组织）。
 
-**如何启动：**
+**如何启动：** 双击 `启动.bat`，浏览器会打开 http://127.0.0.1:3000/ 。
 
 ```bash
 cd gltf-transform/3.0/frontend
@@ -105,13 +105,19 @@ npm install
 node server.js
 ```
 
+### [Sketchfab 模型库](./sketchfab) · Web
+
+**用途：** 在本地网页里搜索、筛选 Sketchfab 上的 3D 模型，预览并查找可下载素材。
+
+**如何启动：** 双击 `启动.bat`，浏览器会打开 http://127.0.0.1:8090/ 。
+
 ### [Three.js 中文文档](./three.js_185_CN) · Docs
 
 **用途：** 查阅 Three.js r185 的简体中文 API，降低英文文档门槛，方便边查边写 3D 代码。
 
 本目录为中文文档相关源码与资源（体积很大的 examples/manual 等未全部纳入本仓库）。
 
-**如何启动：**
+**如何启动：** 双击 `启动.bat`，浏览器会打开 http://127.0.0.1:8081/docs/ 。
 
 ```bash
 cd three.js_185_CN
@@ -125,7 +131,7 @@ npm run dev
 
 三栏编辑器（组件/画布/属性），支持多分辨率画布、多页面、Ant Design / Element Plus 预览组件；可从 Figma 导入，或贴蓝湖 CSS、叠参考图对照。一键导出 HTML/CSS、React、Vue（原生结构，不绑死 UI 库）。适合出原型、切页面、快速交付静态/组件稿。
 
-**如何启动：**
+**如何启动：** 双击 `启动.bat`，浏览器会打开 http://127.0.0.1:5202/ 。
 
 ```bash
 cd UI编辑器
@@ -135,8 +141,6 @@ npm install --prefix server
 npm run dev
 ```
 
-浏览器打开提示的本地地址（通常为 `http://localhost:5173`）。
-
 ## 快速开始
 
 ### 浏览门户
@@ -145,7 +149,7 @@ npm run dev
 start index.html
 ```
 
-多数 Web / Electron 项目需要 **Node.js 18+**；Linux 客户端需要 **Java**。更细的功能说明见各子目录 `README.md`。
+每个项目目录里都有一个 **`启动.bat`**，双击即可。Web 项目会自动打开浏览器。需要 **Node.js 18+**；Linux 客户端需要 **Java**；Sketchfab 需要 Python。更细的功能说明见各子目录 `README.md`。
 
 ## 说明
 
