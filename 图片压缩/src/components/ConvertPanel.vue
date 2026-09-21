@@ -5,7 +5,7 @@
       <p>转换为 JPG / PNG / WebP / AVIF · 批量处理 · 本地完成</p>
     </div>
 
-    <div class="workspace">
+    <div class="workspace workspace-list">
       <div class="panel-card scrollable">
         <div
           class="upload-zone"

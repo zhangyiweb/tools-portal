@@ -5,7 +5,7 @@
       <p>保持画质的同时减小体积 · JPG / PNG / WebP / AVIF · 本地 WASM</p>
     </div>
 
-    <div class="workspace">
+    <div class="workspace workspace-list">
       <div class="panel-card scrollable">
         <div
           class="upload-zone"

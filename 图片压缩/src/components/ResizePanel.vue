@@ -5,7 +5,7 @@
       <p>按像素或百分比调整尺寸，支持旋转翻转 · 本地处理</p>
     </div>
 
-    <div class="workspace">
+    <div class="workspace workspace-resize">
       <div class="panel-card scrollable">
         <div
           class="upload-zone"

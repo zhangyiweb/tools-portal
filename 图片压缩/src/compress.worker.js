@@ -288,11 +288,166 @@ async function resizeTransform(buffer, mime, options) {
   };
 }
 
+/** 按像素区域裁剪后编码（保持或指定格式） */
+async function cropTransform(buffer, mime, options) {
+  const {
+    x = 0,
+    y = 0,
+    width: cropW,
+    height: cropH,
+    format,
+    quality = 92,
+  } = options;
+
+  if (!cropW || !cropH) throw new Error("请指定裁剪区域");
+
+  const blob = new Blob([buffer], { type: mime });
+  let bitmap;
+  try {
+    bitmap = await createImageBitmap(blob);
+  } catch (err) {
+    if (mime === "image/avif") {
+      await ensureAvif();
+      const imageData = await avifDecode(buffer);
+      const c = new OffscreenCanvas(imageData.width, imageData.height);
+      c.getContext("2d").putImageData(imageData, 0, 0);
+      bitmap = await createImageBitmap(c);
+    } else {
+      throw err;
+    }
+  }
+
+  const sx = Math.max(0, Math.round(x));
+  const sy = Math.max(0, Math.round(y));
+  const sw = Math.min(Math.round(cropW), bitmap.width - sx);
+  const sh = Math.min(Math.round(cropH), bitmap.height - sy);
+  if (sw <= 0 || sh <= 0) {
+    bitmap.close();
+    throw new Error("裁剪区域无效");
+  }
+
+  const outFormat = normalizeFormat(format);
+  const out = new OffscreenCanvas(sw, sh);
+  const ctx = out.getContext("2d");
+  if (outFormat === "jpeg") {
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, sw, sh);
+  }
+  ctx.drawImage(bitmap, sx, sy, sw, sh, 0, 0, sw, sh);
+  bitmap.close();
+
+  const imageData = ctx.getImageData(0, 0, sw, sh);
+  const result = await encodeByFormat(imageData, outFormat, quality, { lossyPng: false });
+  return { ...result, width: sw, height: sh };
+}
+
+/** 按行列网格分割，返回多块编码结果 */
+async function splitTransform(buffer, mime, options) {
+  const {
+    rows = 3,
+    cols = 3,
+    format,
+    quality = 92,
+  } = options;
+
+  const rowCount = Math.round(rows);
+  const colCount = Math.round(cols);
+  if (rowCount < 1 || colCount < 1 || rowCount > 20 || colCount > 20) {
+    throw new Error("分割行列需在 1～20 之间");
+  }
+
+  const blob = new Blob([buffer], { type: mime });
+  let bitmap;
+  try {
+    bitmap = await createImageBitmap(blob);
+  } catch (err) {
+    if (mime === "image/avif") {
+      await ensureAvif();
+      const imageData = await avifDecode(buffer);
+      const c = new OffscreenCanvas(imageData.width, imageData.height);
+      c.getContext("2d").putImageData(imageData, 0, 0);
+      bitmap = await createImageBitmap(c);
+    } else {
+      throw err;
+    }
+  }
+
+  const srcW = bitmap.width;
+  const srcH = bitmap.height;
+  const outFormat = normalizeFormat(format);
+  const pieces = [];
+
+  for (let r = 0; r < rowCount; r += 1) {
+    const y0 = Math.round((srcH * r) / rowCount);
+    const y1 = Math.round((srcH * (r + 1)) / rowCount);
+    const h = y1 - y0;
+    for (let c = 0; c < colCount; c += 1) {
+      const x0 = Math.round((srcW * c) / colCount);
+      const x1 = Math.round((srcW * (c + 1)) / colCount);
+      const w = x1 - x0;
+      if (w <= 0 || h <= 0) continue;
+
+      const out = new OffscreenCanvas(w, h);
+      const ctx = out.getContext("2d");
+      if (outFormat === "jpeg") {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, w, h);
+      }
+      ctx.drawImage(bitmap, x0, y0, w, h, 0, 0, w, h);
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const encoded = await encodeByFormat(imageData, outFormat, quality, { lossyPng: false });
+      pieces.push({
+        ...encoded,
+        width: w,
+        height: h,
+        row: r + 1,
+        col: c + 1,
+      });
+    }
+  }
+
+  bitmap.close();
+  if (!pieces.length) throw new Error("分割失败");
+  return { pieces, srcWidth: srcW, srcHeight: srcH, rows: rowCount, cols: colCount };
+}
+
 self.addEventListener("message", async (event) => {
   const { id, action = "compress", buffer, mime, format, options = {} } = event.data || {};
 
   try {
     if (!buffer) throw new Error("缺少图片数据");
+
+    if (action === "split") {
+      const outFormat = normalizeFormat(options.format || format);
+      const splitResult = await splitTransform(buffer, mime || mimeOf(format), {
+        ...options,
+        format: outFormat,
+        quality: Math.round(options.quality ?? 92),
+      });
+      const transfer = splitResult.pieces.map((p) => p.buffer);
+      self.postMessage(
+        {
+          id,
+          ok: true,
+          multi: true,
+          pieces: splitResult.pieces.map((p) => ({
+            buffer: p.buffer,
+            mime: p.mime,
+            ext: p.ext,
+            width: p.width,
+            height: p.height,
+            row: p.row,
+            col: p.col,
+          })),
+          srcWidth: splitResult.srcWidth,
+          srcHeight: splitResult.srcHeight,
+          rows: splitResult.rows,
+          cols: splitResult.cols,
+        },
+        transfer
+      );
+      return;
+    }
 
     let result;
 
@@ -313,6 +468,13 @@ self.addEventListener("message", async (event) => {
         ...options,
         format: outFormat,
         quality: Math.round(options.quality ?? 90),
+      });
+    } else if (action === "crop") {
+      const outFormat = normalizeFormat(options.format || format);
+      result = await cropTransform(buffer, mime || mimeOf(format), {
+        ...options,
+        format: outFormat,
+        quality: Math.round(options.quality ?? 92),
       });
     } else {
       // compress：保持原格式
