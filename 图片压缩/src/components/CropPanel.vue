@@ -327,12 +327,12 @@ async function runCrop() {
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(215, 235, 231, 0.9);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(15, 118, 110, 0.06);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.06);
   overflow: hidden;
 }
 
 .crop-stage.is-dragover {
-  outline: 2px dashed var(--mint);
+  outline: 2px dashed var(--brand);
   outline-offset: -6px;
 }
 
@@ -344,7 +344,7 @@ async function runCrop() {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  background: linear-gradient(180deg, #f0fdfa, #e6f7f4);
+  background: linear-gradient(180deg, #eff6ff, #f8fafc);
   color: var(--muted);
   text-align: center;
   padding: 32px;
@@ -352,7 +352,7 @@ async function runCrop() {
 
 .crop-empty .el-icon {
   font-size: 52px;
-  color: var(--mint);
+  color: var(--brand);
 }
 
 .crop-empty h3 {
@@ -371,7 +371,7 @@ async function runCrop() {
   min-width: 0;
   min-height: 0;
   height: 100%;
-  background: #0f2f2c;
+  background: #0f172a;
 }
 
 .crop-img {
@@ -387,7 +387,7 @@ async function runCrop() {
   gap: 10px;
   padding: 14px;
   border-left: 1px solid var(--line);
-  background: #f8fffd;
+  background: #f8fafc;
   overflow: auto;
 }
 

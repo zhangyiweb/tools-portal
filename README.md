@@ -18,25 +18,9 @@ npm install
 npm run dev -- --port 5101
 ```
 
-### [Linux 可视化](./linux可视化) · Web
-
-**用途：** 让不熟悉 Linux 命令的前端也能管远程服务器——部署站点、管 Docker、装数据库，主要靠界面点选完成。
-
-浏览器里 SSH 连上机器后，可看 CPU/内存/磁盘，管理容器/镜像/数据卷，在线改站点与卷文件，按向导部署前后端（含 Compose）或安装 MySQL / PostgreSQL / Redis。适合个人或内网开发机的日常运维。
-
-**如何启动：**
-
-```bash
-cd linux可视化
-npm install
-npm run dev
-```
-
-Windows 双击 `启动.bat` 会自动打开 http://127.0.0.1:5173/ 。API 默认 `http://localhost:3789`。
-
 ### [Linux 客户端](./linux客户端) · Desktop（Java）
 
-**用途：** 和「Linux 可视化」目标类似，但是 Windows 桌面端，适合想独立窗口、少开浏览器的场景。
+**用途：** Windows 桌面端服务器管理，适合想独立窗口、少开浏览器的场景。
 
 基于 Java Swing：管理多台服务器连接，左侧看系统状态与进程磁盘，支持文件上传下载、容器启停/日志/迁移，以及一键装 Docker/Nginx、部署静态站或拉镜像跑容器。配置保存在本机 `~/.easy-ssh/`。
 

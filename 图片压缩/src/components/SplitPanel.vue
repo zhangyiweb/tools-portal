@@ -335,12 +335,12 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(215, 235, 231, 0.9);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(15, 118, 110, 0.06);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.06);
   overflow: hidden;
 }
 
 .split-stage.is-dragover {
-  outline: 2px dashed var(--mint);
+  outline: 2px dashed var(--brand);
   outline-offset: -6px;
 }
 
@@ -352,7 +352,7 @@ onUnmounted(() => {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  background: linear-gradient(180deg, #f0fdfa, #e6f7f4);
+  background: linear-gradient(180deg, #eff6ff, #f8fafc);
   color: var(--muted);
   text-align: center;
   padding: 32px;
@@ -360,7 +360,7 @@ onUnmounted(() => {
 
 .split-empty .el-icon {
   font-size: 52px;
-  color: var(--mint);
+  color: var(--brand);
 }
 
 .split-empty h3 {
@@ -381,7 +381,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0f2f2c;
+  background: #0f172a;
   padding: 16px;
   overflow: hidden;
 }
@@ -413,7 +413,7 @@ onUnmounted(() => {
 
 .split-cell {
   border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: inset 0 0 0 1px rgba(13, 148, 136, 0.25);
+  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.25);
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
@@ -445,7 +445,7 @@ onUnmounted(() => {
 .tile {
   appearance: none;
   border: 1px solid var(--line);
-  background: #f8fffd;
+  background: #f8fafc;
   border-radius: 12px;
   padding: 8px;
   cursor: pointer;
@@ -454,7 +454,7 @@ onUnmounted(() => {
 }
 
 .tile:hover {
-  border-color: var(--mint);
+  border-color: var(--brand);
   transform: translateY(-1px);
 }
 
