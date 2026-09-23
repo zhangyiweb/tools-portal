@@ -10,7 +10,6 @@ export default defineConfig({
       "@jsquash/oxipng",
       "@jsquash/webp",
       "@jsquash/avif",
-      "ktx2-encoder",
     ],
   },
   worker: {

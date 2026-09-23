@@ -14,7 +14,7 @@
       <el-menu
         class="side-menu"
         :default-active="active"
-        :default-openeds="['image', 'hdr']"
+        :default-openeds="['image']"
         @select="onSelect"
       >
         <el-sub-menu index="image">
@@ -38,19 +38,6 @@
             <span>图片分割</span>
           </el-menu-item>
         </el-sub-menu>
-
-        <el-sub-menu index="hdr">
-          <template #title>
-            <el-icon><Sunny /></el-icon>
-            <span>关于 HDR 图</span>
-          </template>
-          <el-menu-item index="hdr-ktx2">
-            <span>HDR 转 KTX2</span>
-          </el-menu-item>
-          <el-menu-item index="hdr-skybox">
-            <span>HDR 转天空盒</span>
-          </el-menu-item>
-        </el-sub-menu>
       </el-menu>
     </aside>
 
@@ -62,22 +49,18 @@
       <ConvertPanel v-else-if="active === 'convert'" />
       <CropPanel v-else-if="active === 'crop'" />
       <SplitPanel v-else-if="active === 'split'" />
-      <HdrKtx2Panel v-else-if="active === 'hdr-ktx2'" />
-      <HdrSkyboxPanel v-else-if="active === 'hdr-skybox'" />
     </main>
   </div>
 </template>
 
 <script setup>
 import { computed, ref, watch } from "vue";
-import { Menu, Picture, Sunny } from "@element-plus/icons-vue";
+import { Menu, Picture } from "@element-plus/icons-vue";
 import CompressPanel from "./components/CompressPanel.vue";
 import ResizePanel from "./components/ResizePanel.vue";
 import ConvertPanel from "./components/ConvertPanel.vue";
 import CropPanel from "./components/CropPanel.vue";
 import SplitPanel from "./components/SplitPanel.vue";
-import HdrKtx2Panel from "./components/HdrKtx2Panel.vue";
-import HdrSkyboxPanel from "./components/HdrSkyboxPanel.vue";
 
 const titles = {
   compress: "图片压缩",
@@ -85,8 +68,6 @@ const titles = {
   convert: "格式转换",
   crop: "图片裁剪",
   split: "图片分割",
-  "hdr-ktx2": "HDR 转 KTX2",
-  "hdr-skybox": "HDR 转天空盒",
 };
 
 const active = ref("compress");
